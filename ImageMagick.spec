@@ -15,7 +15,7 @@ Release:	3
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
-Source0:	ftp://ftp.simplesystems.org/pub/%{name}/%{name}-%{version}-%{subver}.tar.bz2
+Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{version}-%{subver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 URL:		http://www.imagemagick.org/
