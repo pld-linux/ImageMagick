@@ -10,7 +10,7 @@ Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Summary(uk):	ðÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ð¦Ä X Windows
 Name:		ImageMagick
 Version:	5.4.3
-Release:	2
+Release:	3
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -47,7 +47,7 @@ BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool
-BuildRequires:	libwmf-devel >= 0.2.0
+BuildRequires:	libwmf-devel >= 0.2.2
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	mpeg2dec-devel
 BuildRequires:	perl-devel >= 5.6.1
