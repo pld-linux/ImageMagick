@@ -136,8 +136,10 @@ Summary(uk):	Хедери та б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}
 Requires:	XFree86-devel
+Requires:	bzip2-devel
 Requires:	freetype-devel
 Requires:	lcms-devel
+Requires:	libltdl-devel
 Requires:	zlib-devel
 
 %description devel
