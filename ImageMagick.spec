@@ -1,7 +1,7 @@
 #
 # Conditional build:
 # _with_fpx	- with FlashPIX support through fpx library
-# _with_gs	- with PostScript support through ghostscript library
+# _with_gs	- with PostScript support through ghostscript library (warning: breaks jpeg!)
 # _with_hdf	- with HDF support through hdf library
 # _with_jasper	- with JPEG2000 support through jasper library
 #
@@ -16,12 +16,12 @@ Summary(ru):	Просмотр, конвертирование, обработка изображений под X Windows
 Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Windows
 Name:		ImageMagick
-Version:	5.4.7
+Version:	5.4.8
 Release:	1
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
-Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{version}.tar.bz2
+Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{version}-2.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-ac.patch
@@ -411,6 +411,7 @@ CPPFLAGS="$CPPFLAGS -I/usr/include/g++"
 	--enable-shared \
 	%{!?_with_fpx:--without-fpx} \
 	%{!?_with_gs:--without-gslib} \
+	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	%{?_with_hdf:--with-hdf} \
 	%{!?_with_jasper:--without-jp2} \
 	--with-magick_plus_plus \
