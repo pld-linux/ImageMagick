@@ -1,11 +1,12 @@
---- PerlMagick/Makefile.PL.in.org	Mon Oct 30 17:36:54 2000
-+++ PerlMagick/Makefile.PL.in	Mon Oct 30 17:37:51 2000
+diff -Nru ImageMagick-5.2.7/PerlMagick/Makefile.PL.in ImageMagick-5.2.7.new/PerlMagick/Makefile.PL.in
+--- ImageMagick-5.2.7/PerlMagick/Makefile.PL.in	Wed Jan 24 01:16:51 2001
++++ ImageMagick-5.2.7.new/PerlMagick/Makefile.PL.in	Wed Jan 24 01:26:11 2001
 @@ -6,7 +6,7 @@
  WriteMakefile(
      'NAME'	=> 'Image::Magick',
      'VERSION_FROM' => 'Magick.pm', # finds $VERSION
--    'LIBS'	=> ['@LDFLAGS@ @MAGICKLIB@ @LIB_JBIG@ @LIB_HDF@ @LIB_LCMS@ @LIB_TIFF@ @LIB_TTF@ @LIB_JPEG@ @LIB_PNG@ @LIB_FPX@ @LIB_DPS@ @LIB_XEXT@ @LIB_XT@ @LIB_X11@ @LIB_BZLIB@ @LIB_XML@ @LIB_ZLIB@ @LIB_SFIO@ @LIB_THREAD@ @LIB_LF@ @LIB_MATH@'],
-+    'LIBS'	=> ['-L@top_srcdir@/magick/.libs @LDFLAGS@ @MAGICKLIB@ @LIB_JBIG@ @LIB_HDF@ @LIB_LCMS@ @LIB_TIFF@ @LIB_TTF@ @LIB_JPEG@ @LIB_PNG@ @LIB_FPX@ @LIB_DPS@ @LIB_XEXT@ @LIB_XT@ @LIB_X11@ @LIB_BZLIB@ @LIB_XML@ @LIB_ZLIB@ @LIB_SFIO@ @LIB_THREAD@ @LIB_LF@ @LIB_MATH@'],
+-    'LIBS'	=> ['@LDFLAGS@ @MAGICKLIB@ @LIB_JBIG@ @LIB_HDF@ @LIB_LCMS@ @LIB_TIFF@ @LIB_TTF@ @LIB_JPEG@ @LIB_PNG@ @LIB_FPX@ @LIB_DPS@ @LIB_XEXT@ @LIB_XT@ @LIB_X11@ @LIB_BZLIB@ @LIB_XML@ @LIB_ZLIB@ @LIB_THREAD@ @LIB_LF@ @LIB_MATH@'],
++    'LIBS'	=> ['-L@top_srcdir@/magick/.libs @LDFLAGS@ @MAGICKLIB@ @LIB_JBIG@ @LIB_HDF@ @LIB_LCMS@ @LIB_TIFF@ @LIB_TTF@ @LIB_JPEG@ @LIB_PNG@ @LIB_FPX@ @LIB_DPS@ @LIB_XEXT@ @LIB_XT@ @LIB_X11@ @LIB_BZLIB@ @LIB_XML@ @LIB_ZLIB@ @LIB_THREAD@ @LIB_LF@ @LIB_MATH@'],
      'DEFINE'	=> '@DEFS@',     # e.g., '-DHAVE_SOMETHING' 
      'INC'	=> '-I../ -I@top_srcdir@ @CPPFLAGS@',
      ($Config{'archname'} =~ /-object$/i ? ('CAPI' => 'TRUE') : ()),
