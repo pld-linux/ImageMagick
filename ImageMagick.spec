@@ -6,7 +6,7 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altında resim gösterme, çevirme ve değişiklik yapma
 Name:		ImageMagick
 Version:	5.4.0
-Release:	2
+Release:	3
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -21,24 +21,25 @@ Patch3:		%{name}-amfix.patch
 Patch4:		%{name}-libwmf.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	rpm-perlprov >= 3.0.3-18
-BuildRequires:	XFree86-devel
-BuildRequires:	XFree86-DPS-devel
 BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.0.2-2
+BuildRequires:	jbigkit-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	libtiff-devel
+BuildRequires:	libplot-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libstdc++-devel
-BuildRequires:	libwmf-devel >= 0.2.0
+BuildRequires:	libtiff-devel
 BuildRequires:	libtool
-BuildRequires:	perl-devel >= 5.6.1
+BuildRequires:	libwmf-devel >= 0.2.0
 BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	mpeg2dec-devel
+BuildRequires:	perl-devel >= 5.6.1
+BuildRequires:	XFree86-devel
+BuildRequires:	XFree86-DPS-devel
 #BuildRequires:	fpx-devel
 #BuildRequires:	hdf5-devel
-#BuildRequires:	jbigkit-devel
 #BuildRequires:	jasper-devel
 #BuildRequires:	lcms-devel
-#BuildRequires:	mpeg2dec-devel
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4d
 Requires:	%{name}-libs = %{version}
@@ -92,6 +93,7 @@ Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
 Group(ru):	X11/òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
 Group(uk):	X11/òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
+Requires:	jbigkit-devel
 
 %description devel
 This is the ImageMagick development package. It includes header files
