@@ -157,6 +157,8 @@ Requires:	bzip2-devel
 Requires:	freetype-devel
 Requires:	lcms-devel
 Requires:	libltdl-devel
+Requires:	libjpeg-devel
+Requires:	libtiff-devel
 Requires:	zlib-devel
 
 %description devel
