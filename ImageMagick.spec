@@ -5,16 +5,15 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X.
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
-Version:	4.2.9
-Release:	4
+Version:	5.1.1
+Release:	1
 Copyright:	freeware
 Serial:		1
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
 Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		ImageMagick-libpath.patch
-Patch1:		ImageMagick-pgm.patch
-Patch2:		ImageMagick-perlpaths.patch
+Patch1:		ImageMagick-perlpaths.patch
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
 BuildRequires:	perl => 5.005_03-14
 BuildRequires:	rpm-perlprov >= 3.0.3-18
@@ -139,10 +138,11 @@ Biblioteki ImageMagick.
 %prep
 %setup  -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p0
+%patch1 -p0
 
 %build
+aclocal
+autoconf
 LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-shared \
@@ -195,7 +195,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/import
 %attr(755,root,root) %{_bindir}/mogrify
 %attr(755,root,root) %{_bindir}/montage
-%attr(755,root,root) %{_bindir}/xtp
 
 %{_mandir}/man[145]/*
 
