@@ -65,8 +65,8 @@ capacité d'édition des images. Il peut aussi gérer de nombreux formats
 différents.
 
 %description -l pl
-ImageMagick jest narzêdziem do manipulacji, konwersji i wy¶wietlania. W
-sk³ad pakietu wchodz± zarówno narzêdzia X Window jak i do u¿ywania z
+ImageMagick jest narzêdziem do manipulacji, konwersji i wy¶wietlania.
+W sk³ad pakietu wchodz± zarówno narzêdzia X Window jak i do u¿ywania z
 linii poleceñ umo¿liwiaj±ce edycjê plików graficznych. Narzêdzia z
 pakietu ImageMagick potrafi± obs³u¿yæ wiele ró¿nych formatów
 graficznych.
@@ -91,8 +91,9 @@ for use in developing your own applications that make use of the
 ImageMagick code and/or APIs.
 
 %description -l de devel
-Dies ist das ImageMagick-Entwicklerpaket. Es enthält Header-Dateien zum
-Entwickeln von Anwendungen, die ImageMagick-Code und/oder -APIs nutzen.
+Dies ist das ImageMagick-Entwicklerpaket. Es enthält Header-Dateien
+zum Entwickeln von Anwendungen, die ImageMagick-Code und/oder -APIs
+nutzen.
 
 %description -l fr devel
 Paquetage de développement ImageMagick. Contient les bibliothèques
@@ -101,9 +102,9 @@ utilisant le code d'ImageMagick et/ou ses APIs.
 
 %description -l pl devel
 Pakiet ten zawieraja pliki potrzebne przy kompilowaniu programów
-wykorzystuj±cych blibliotekê ImageMagick takie jak pliki nag³ówkowe
-i dokumentacjê niezbêdn± przy pisaniu w³asnych programów
-z wykorzystaniem API jakie udostêpnia ImageMagick.
+wykorzystuj±cych blibliotekê ImageMagick takie jak pliki nag³ówkowe i
+dokumentacjê niezbêdn± przy pisaniu w³asnych programów z
+wykorzystaniem API jakie udostêpnia ImageMagick.
 
 %description -l tr devel
 Bu paket, ImageMagick uygulama arayüzünü kullanan programlar
@@ -137,14 +138,16 @@ support files for access to ImageMagick library from perl without
 unuseful forking or such.
 
 %description -l pl perl
-Biblioteki i modu³y umo¿liwiaj±ce korzystanie z ImageMagick z
-poziomu perla.
+Biblioteki i modu³y umo¿liwiaj±ce korzystanie z ImageMagick z poziomu
+perla.
 
 %package libs
 Summary:	ImageMagick libraries
 Summary(pl):	Biblioteki ImageMagick
 Group:		X11/Libraries
 Group(de):	X11/Libraries
+Group(es):	X11/Bibliotecas
+Group(fr):	X11/Librairies
 Group(pl):	X11/Biblioteki
 
 %description libs
@@ -158,6 +161,8 @@ Summary:	ImageMagick Magick++ library
 Summary(pl):	Biblioteka Magick++
 Group:		X11/Libraries
 Group(de):	X11/Libraries
+Group(es):	X11/Bibliotecas
+Group(fr):	X11/Librairies
 Group(pl):	X11/Biblioteki
 Requires:	%{name}-libs = %{version}
 
@@ -170,8 +175,8 @@ Magick++.
 
 %description -l pl c++
 Pakiet zawiera bibliotekê Magick++ - interfejs w C++ do biblioteki
-ImageMagick. Jest potrzebny do uruchamiania programów korzystaj±cych
-z Magick++.
+ImageMagick. Jest potrzebny do uruchamiania programów korzystaj±cych z
+Magick++.
 
 %package c++-devel
 Summary:	C++ bindings for the ImageMagick library
@@ -323,8 +328,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/Magick++-config
 %attr(755,root,root) %{_libdir}/libMagick++.la
 %attr(755,root,root) %{_libdir}/libMagick++.so
-%{_prefix}/include/Magick++
-%{_prefix}/include/Magick++.h
+%{_includedir}/Magick++
+%{_includedir}/Magick++.h
 %{_mandir}/man1/Magick++-config.1*
 
 %files c++-static
