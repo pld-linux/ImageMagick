@@ -26,6 +26,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	zlib-devel
 BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	freetype-devel
+BuildRequires:	libwmf-devel
 Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
