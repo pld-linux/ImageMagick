@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	4.2.2
-Release:	1
+Release:	2
 Copyright:	freeware
 Serial:		1
 Group:		X11/Applications/Graphics
@@ -94,7 +94,7 @@ Summary(pl):	Biblioteki i modu³y perl dla ImageMagick'a
 Group:		Development/Languages/Perl  
 Group(pl):	Programowanie/Jêzyki/Perl
 Requires:	%{name} = %{version}
-Requires:	perl >= 5.005
+%requires_pkg	perl
 
 %description perl
 This is the ImageMagick perl support package.  It perl modules and support
@@ -124,14 +124,15 @@ make
 
 %install
 rm -fr $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/{man/man3,lib/perl5/%{buildarch}-linux-thread/5.00502/}
+install -d $RPM_BUILD_ROOT/usr/man/man3
+install -d $RPM_BUILD_ROOT/%{perl_sitearch}
 
 make install DESTDIR=$RPM_BUILD_ROOT \
 	PREFIX=$RPM_BUILD_ROOT/usr \
 	INSTALLMAN3DIR=$RPM_BUILD_ROOT/usr/man/man3
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
-strip --strip-debug $RPM_BUILD_ROOT/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
+strip --strip-debug $RPM_BUILD_ROOT/%{perl_sitearch}/auto/Image/Magick/Magick.so
 
 gzip -9nf $RPM_BUILD_ROOT/usr/{X11R6/man/man*/*,man/man3/*} \
 	README.txt
@@ -170,16 +171,17 @@ rm -rf $RPM_BUILD_ROOT
 /usr/X11R6/include/X11/magick
 
 %files static
-%attr(644,root,root) /usr/X11R6/lib/lib*.a
+%defattr(644,root,root,755)
+/usr/X11R6/lib/lib*.a
 
 %files perl
 %defattr(644,root,root,755)
-/usr/lib/perl5/site_perl/*/*/Image
-%dir /usr/lib/perl5/site_perl/*/*/auto/Image
-%dir /usr/lib/perl5/site_perl/*/*/auto/Image/Magick
-/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/autosplit.ix
-/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.bs
-%attr(755,root,root) /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
+%{perl_sitearch}/Image
+%dir %{perl_sitearch}/auto/Image
+%dir %{perl_sitearch}/auto/Image/Magick
+%{perl_sitearch}/auto/Image/Magick/autosplit.ix
+%{perl_sitearch}/auto/Image/Magick/Magick.bs
+%attr(755,root,root) %{perl_sitearch}/auto/Image/Magick/Magick.so
 /usr/man/man3/Image::Magick.3.gz
 
 %changelog
