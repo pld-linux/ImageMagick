@@ -12,6 +12,7 @@ Source:      ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar
 URL:         http://www.wizards.dupont.com/cristy/ImageMagick.html
 Requires:    freetype >= 1.1
 Buildroot:   /tmp/%{name}-%{version}-root
+
 %description
 ImageMagick is an image display, conversion, and manipulation tool.
 It runs under X windows.  It is very powerful in terms of it's 
@@ -52,6 +53,7 @@ Summary:     static libraries and header files for ImageMagick development
 Summary(pl): Biblioteki statyczne i pliki nag³ówkowe dla ImageMagick'a
 Group:       X11/Libraries
 Requires:    %{name} = %{version}
+
 %description devel
 This is the ImageMagick development package.  It includes the static
 libraries and header files for use in developing your own applications
@@ -82,6 +84,7 @@ Summary:     header files for ImageMagick development
 Summary(pl): Pliki nag³ówkowe dla ImageMagick'a
 Group:       X11/Libraries
 Requires:    %{name}-devel = %{version}
+
 %description static
 This package contains header files for use in developing your own
 applications that make use of the ImageMagick code and/or APIs.
@@ -95,6 +98,7 @@ Summary:     libraries and modules for access to ImageMagick from perl
 Summary(pl): Biblioteki i modu³y umo¿liwiaj±ce korzystanie z ImageMagick'a z poziomu perl'a
 Group:       Development/Libraries/Perl
 Requires:    %{name} = %{version}
+
 %description perl
 This is the ImageMagick perl support package.  It perl modules and support
 files for access to ImageMagick library from perl without unuseful forking
@@ -140,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644, root, root, 755)
 %doc README.txt mpeglib.*
 /usr/X11R6/lib/lib*.so.*.*
-%attr(755, root, root) /usr/bin/*
+%attr(711, root, root) /usr/bin/*
 %attr(644, root,  man) /usr/man/man1/*
 
 %files devel
@@ -167,6 +171,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644, root, man) /usr/lib/perl5/man/man3/*
 
 %changelog
+* Mon Sep  7 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.0.8-2]
+- changed permission on binaries to 711.
+
 * Sat Aug  1 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.0.8-1]
 - added rest pl translations in subpackages,
