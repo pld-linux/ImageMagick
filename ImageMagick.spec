@@ -134,7 +134,7 @@ make install \
 	INSTALLMAN3DIR=$RPM_BUILD_ROOT/usr/man/man3
 
 strip $RPM_BUILD_ROOT/usr/{X11R6/lib/lib*.so.*.*,bin/*}
-strip --strip-debug $RPM_BUILD_ROOT/usr/lib/perl5/site_perl/5.005/%{buildarch}-linux-thread/auto/Image/Magick/Magick.so
+strip --strip-debug $RPM_BUILD_ROOT/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
