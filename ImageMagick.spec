@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	4.1.8
-Release:	1d
+Release:	1
 Copyright:	freeware
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/grafika
@@ -182,7 +182,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Sun Jan 24 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [4.1.8-1d]
+  [4.1.8-1]
 - added Group(pl),
 - fixed permission on lib*.so* files (must be 755),
 - changed Requires for freetype (= 1.2),
