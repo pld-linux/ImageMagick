@@ -9,7 +9,8 @@ Release:	1d
 Copyright:	freeware
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/grafika
-Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
+#########	ftp://ftp.wizards.dupont.com/pub/ImageMagick
+Source:		%{name}-%{version}.tar.gz
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
 Requires:	freetype = 1.2
 Buildroot:	/tmp/%{name}-%{version}-root
@@ -42,7 +43,7 @@ Window pencereleme sistemi altýnda çalýþýr. Kullanýcýya resimler üzerinde
 deðiþiklik yapma açýsýndan pek çok olanak sunar. Bir çok resim biçimini
 rahatlýkla kullanabilir.
 
-%package  devel
+%package	devel
 Summary:	Libraries and header files for ImageMagick development
 Summary(pl):	Biblioteki i pliki nag³ówkowe dla ImageMagick'a
 Group:		X11/Libraries/Development
@@ -74,7 +75,7 @@ programów z wykorzystaniem API jakie udostêpnia ImageMagick.
 Bu paket, ImageMagick uygulama arayüzünü kullanan programlar geliþtirmek
 için gereken baþlýk dosyalarýný ve kitaplýklarý içerir.
 
-%package static
+%package	static
 Summary:	ImageMagick static libraries
 Summary(pl): 	Biblioteki statyczne ImageMagick
 Group:		X11/Libraries/Development
@@ -87,11 +88,13 @@ ImageMagick static libraries.
 %description -l pl devel
 ImageMagick static libraries.
 
-%package  perl
-Summary:     libraries and modules for access to ImageMagick from perl
-Summary(pl): Biblioteki i modu³y umo¿liwiaj±ce korzystanie z ImageMagick'a z poziomu perl'a
-Group:       Development/Libraries/Perl
-Requires:    %{name} = %{version}, perl >= 5.005
+%package	perl
+Summary:	libraries and modules for access to ImageMagick from perl
+Summary(pl):	Biblioteki i modu³y perl dla ImageMagick'a
+Group:		Development/Libraries/Perl
+Group(pl):	Programowanie/Biblioteki/Perl
+Requires:	%{name} = %{version}
+Requires:	perl >= 5.005
 
 %description perl
 This is the ImageMagick perl support package.  It perl modules and support
@@ -131,6 +134,7 @@ make install \
 	includedir=$RPM_BUILD_ROOT/usr/X11R6/include/X11/magick \
 	INSTALLMAN3DIR=$RPM_BUILD_ROOT/usr/man/man3
 
+chmod 755 $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
 strip --strip-debug $RPM_BUILD_ROOT/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
 
@@ -157,13 +161,16 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /usr/bin/mogrify
 %attr(755,root,root) /usr/bin/montage
 %attr(755,root,root) /usr/bin/xtp
+
 %attr(644,root, man) /usr/man/man[145]/*
 
 %files devel
 %defattr(644,root,root,755)
 %doc www ImageMagick.html README.txt
+
 %attr(755,root,root) /usr/bin/Magick-config
 %attr(755,root,root) /usr/X11R6/lib/lib*.so
+
 %dir /usr/X11R6/include/X11/magick
 /usr/X11R6/include/X11/magick/*.h
 
@@ -209,7 +216,8 @@ rm -rf $RPM_BUILD_ROOT
 
 * Fri Jul 17 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
   [4.0.7-2]
-- added some pl translatiin.
+- added pl translation,
+- build against GNU libc-2.1.
 
 * Sun Jun 14 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.0.7-1]
