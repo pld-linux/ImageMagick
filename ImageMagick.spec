@@ -19,7 +19,7 @@ Summary(tr):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk):	ğÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ğ¦Ä X Windows
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -28,6 +28,7 @@ Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-ac.patch
 Patch3:		%{name}-system-libltdl.patch
+Patch4:		%{name}-new-jasper.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
@@ -554,6 +555,7 @@ Modu³ kodera dla plików WMF.
 %patch1 -p0
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 rm -f missing
