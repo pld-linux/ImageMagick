@@ -379,7 +379,7 @@ perl -pi -e 's@lcms/lcms\.h@lcms.h@' configure.ac
 
 %build
 rm -f missing
-libtoolize --copy --force
+%{__libtoolize}
 aclocal
 %{__autoconf}
 %{__automake}
