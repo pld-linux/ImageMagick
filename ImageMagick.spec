@@ -328,8 +328,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/Magick++-config
 %attr(755,root,root) %{_libdir}/libMagick++.la
 %attr(755,root,root) %{_libdir}/libMagick++.so
-%{_includedir}/Magick++
-%{_includedir}/Magick++.h
+%{_prefix}/include/Magick++
+%{_prefix}/include/Magick++.h
 %{_mandir}/man1/Magick++-config.1*
 
 %files c++-static
