@@ -6,9 +6,10 @@
 # _without_cxx          - without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 5.5.4
-%define		pver	2
-%define		iver 5.5.4-Q16
+%define		ver 5.5.5
+#%%define		pver	2
+%define		QuantumDepth	16
+%define		iver %{ver}-Q%{QuantumDepth}
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -20,7 +21,7 @@ Summary(tr):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk):	ğÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ğ¦Ä X Windows
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -549,7 +550,7 @@ rm -f missing
 CPPFLAGS="-I/usr/include/g++"
 %configure \
 	CPPFLAGS="$CPPFLAGS" \
-	--enable-16bit-pixel \
+	--with-quantum-depth=%{QuantumDepth} \
 	--enable-lzw \
 	--enable-shared \
 	--enable-fast-install \
