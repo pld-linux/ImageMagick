@@ -5,7 +5,7 @@
  
     # Library specification
 -   'LIBS'	=> ['@LDFLAGS@ @MAGICKLIB@ @MAGICK_DEP_LIBS@'],
-+   'LIBS'	=> ['-L@top_srcdir@/magick/.libs @LDFLAGS@ @MAGICKLIB@ @AGICK_DEP_LIBS@'],
++   'LIBS'	=> ['-L@top_srcdir@/magick/.libs @LDFLAGS@ @MAGICKLIB@ @MAGICK_DEP_LIBS@'],
  
     # Perl binary name (if a Perl binary is built)
     'MAP_TARGET'	=> 'PerlMagick',
