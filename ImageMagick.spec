@@ -4,8 +4,8 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X.
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
-Version:	4.2.3
-Release:	2
+Version:	4.2.4
+Release:	1
 Copyright:	freeware
 Serial:		1
 Group:		X11/Applications/Graphics
@@ -147,18 +147,18 @@ make
 
 %install
 rm -fr $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/man/man3
+install -d $RPM_BUILD_ROOT/usr/share/man//man3
 install -d $RPM_BUILD_ROOT/%{perl_sitearch}
 
 make install DESTDIR=$RPM_BUILD_ROOT \
 	PREFIX=$RPM_BUILD_ROOT/usr \
-	INSTALLMAN3DIR=$RPM_BUILD_ROOT/usr/man/man3
+	INSTALLMAN3DIR=$RPM_BUILD_ROOT/usr/share/man/man3
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
 strip --strip-unneeded \
 	$RPM_BUILD_ROOT/%{perl_sitearch}/auto/Image/Magick/Magick.so
 
-gzip -9nf $RPM_BUILD_ROOT/usr/{X11R6/man/man*/*,man/man3/*} \
+gzip -9nf $RPM_BUILD_ROOT/usr/{X11R6/share/man/man*/*,share/man/man3/*} \
 	README.txt
 
 %post   -p /sbin/ldconfig
@@ -185,7 +185,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /usr/X11R6/bin/montage
 %attr(755,root,root) /usr/X11R6/bin/xtp
 
-/usr/X11R6/man/man[145]/*
+/usr/X11R6/share/man/man[145]/*
 
 %files devel
 %defattr(644,root,root,755)
@@ -208,9 +208,13 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_sitearch}/auto/Image/Magick/autosplit.ix
 %{perl_sitearch}/auto/Image/Magick/Magick.bs
 %attr(755,root,root) %{perl_sitearch}/auto/Image/Magick/Magick.so
-/usr/man/man3/Image::Magick.*
+/usr/share/man/man3/Image::Magick.*
 
 %changelog
+* Fri May  7 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.2.4-1]
+- now package is FHS 2.0 compiliat.
+
 * Thu Apr 22 1999 Artur Frysiak <wiget@pld.org.pl>
   [4.2.3-1]
 - separated libs to subpackage
