@@ -1,0 +1,2 @@
+- Execution of ldconfig moved to %%post and %%postun sections of '-libs'
+  package.
