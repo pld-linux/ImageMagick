@@ -1,11 +1,11 @@
---- ImageMagick-5.4.3/PerlMagick/Makefile.PL.in.orig	Sat Nov 10 16:24:59 2001
-+++ ImageMagick-5.4.3/PerlMagick/Makefile.PL.in	Sun Feb 17 16:55:55 2002
+--- ImageMagick-5.4.3/PerlMagick/Makefile.PL.in~	Sat Nov 10 16:24:59 2001
++++ ImageMagick-5.4.3/PerlMagick/Makefile.PL.in	Tue Mar  5 17:48:44 2002
 @@ -58,7 +58,7 @@
     'INSTALLBIN'	=> '@bindir@',
  
     # Library specification
 -   'LIBS'	=> ['@LDFLAGS@ @MAGICKLIB@ @MAGICK_DEP_LIBS@'],
-+   'LIBS'	=> ['-L@top_srcdir@/magick/.libs @LDFLAGS@ @MAGICKLIB@ @MAGICK_DEP_LIBS@'],
++   'LIBS'	=> ['-L@top_srcdir@/magick/.libs @LDFLAGS@ @MAGICKLIB@ @AGICK_DEP_LIBS@'],
  
     # Perl binary name (if a Perl binary is built)
     'MAP_TARGET'	=> 'PerlMagick',
