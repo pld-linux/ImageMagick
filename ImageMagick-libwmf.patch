@@ -1,0 +1,10 @@
+--- ImageMagick-5.4.0/coders/wmf.c.orig	Sun Oct 21 19:12:40 2001
++++ ImageMagick-5.4.0/coders/wmf.c	Fri Oct 26 19:46:06 2001
+@@ -59,7 +59,6 @@
+ #include "define.h"
+ 
+ #if defined(HasWMF)
+-#include <wmfapi.h>
+ 
+ /* defines extracted from libwmf's "wmfdefs.h" */
+ #ifndef PI

@@ -6,7 +6,7 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	5.4.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -18,6 +18,7 @@ Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-DESTDIR.patch
 Patch3:		%{name}-amfix.patch
+Patch4:		%{name}-libwmf.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
@@ -28,15 +29,16 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libstdc++-devel
-BuildRequires:	libwmf-devel
+BuildRequires:	libwmf-devel >= 0.2.0
 BuildRequires:	libtool
 BuildRequires:	perl-devel >= 5.6.1
 BuildRequires:	libxml2-devel >= 2.0
-#BuildRequires:	lcms-devel
 #BuildRequires:	fpx-devel
-#BuildRequires:	hdf-devel
+#BuildRequires:	hdf5-devel
 #BuildRequires:	jbigkit-devel
 #BuildRequires:	jasper-devel
+#BuildRequires:	lcms-devel
+#BuildRequires:	mpeg2dec-devel
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4d
 Requires:	%{name}-libs = %{version}
@@ -250,9 +252,11 @@ Biblioteka Magick++ w wersji statycznej.
 %patch1 -p0
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 # fix lcms.h include path
 perl -pi -e 's@lcms/lcms\.h@lcms.h@' magick/transform.c
+perl -pi -e 's@lcms/lcms\.h@lcms.h@' configure.ac
 
 %build
 libtoolize --copy --force
@@ -266,6 +270,7 @@ automake -a -c
 	--with-perl \
 	--with-ttf \
 	--with-x \
+	--with-hdf \
 	--with-threads \
 	--with-magick_plus_plus
 
