@@ -18,7 +18,6 @@ Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-delegates-destdir.patch
 Patch3:		%{name}-libwmf.patch
 Patch4:		%{name}-perl-link.patch
-Patch5:		%{name}-ia64bug.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
@@ -220,7 +219,6 @@ Biblioteka Magick++ w wersji statycznej.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 # fix typo
 perl -pi -e 's@htmlc\.@html.c@' coders/Makefile.am
