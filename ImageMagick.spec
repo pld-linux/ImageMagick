@@ -12,14 +12,14 @@ Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
 Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
-BuildPrereq:	perl
-BuildPrereq:	XFree86-devel
-BuildPrereq:	libjpeg-devel
-BuildPrereq:	libtiff-devel
-BuildPrereq:	libpng-devel
-BuildPrereq:	zlib-devel
-BuildPrereq:	bzip2-devel
-BuildPrereq:	freetype-devel
+BuildRequires:	perl
+BuildRequires:	XFree86-devel
+BuildRequires:	libjpeg-devel
+BuildRequires:	libtiff-devel
+BuildRequires:	libpng-devel
+BuildRequires:	zlib-devel
+BuildRequires:	bzip2-devel
+BuildRequires:	freetype-devel
 Requires:	%{name}-libs = %{version}
 Buildroot:	/tmp/%{name}-%{version}-root
 
