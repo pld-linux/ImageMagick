@@ -19,13 +19,14 @@ URL:		http://www.simplesystems.org/ImageMagick/
 BuildRequires:	perl => 5.6
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
+BuildRequires:	XFree86-DPS-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libstdc++-devel
 BuildRequires:	zlib-devel
 BuildRequires:	bzip2-devel >= 1.0.1
-BuildRequires:	freetype-devel
+BuildRequires:	freetype2-devel
 BuildRequires:	libwmf-devel
 Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
