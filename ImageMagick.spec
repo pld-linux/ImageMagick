@@ -147,12 +147,12 @@ make
 
 %install
 rm -fr $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/share/man/man3
+install -d $RPM_BUILD_ROOT%{_mandir}/man3
 install -d $RPM_BUILD_ROOT/%{perl_sitearch}
 
 make install DESTDIR=$RPM_BUILD_ROOT \
 	PREFIX=$RPM_BUILD_ROOT/usr \
-	INSTALLMAN3DIR=$RPM_BUILD_ROOT/usr/share/man/man3
+	INSTALLMAN3DIR=$RPM_BUILD_ROOT%{_mandir}/man3
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
 strip --strip-unneeded \
@@ -208,7 +208,7 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_sitearch}/auto/Image/Magick/autosplit.ix
 %{perl_sitearch}/auto/Image/Magick/Magick.bs
 %attr(755,root,root) %{perl_sitearch}/auto/Image/Magick/Magick.so
-/usr/share/man/man3/Image::Magick.*
+%{_mandir}/man3/Image::Magick.*
 
 %changelog
 * Fri May  7 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
@@ -255,7 +255,7 @@ rm -rf $RPM_BUILD_ROOT
 * Sun Nov  1 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.1.3-2]
 - simplification in perl subpackage,
-- man pages in perl subpackage moved to /usr/man/man3,
+- man pages in perl subpackage moved to %{_mandir}/man3,
 - build against perl 5.005 (added also "Requires: perl >= 5.005" in perl).
 
 * Sat Aug  1 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
