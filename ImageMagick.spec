@@ -56,10 +56,11 @@ BuildRequires:	libwmf-devel >= 2:0.2.2
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
-BuildRequires:	txt2html
+# only checked for, but only supplied scripts/txt2html is used
+#BuildRequires:	txt2html
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Obsoletes:	ImageMagick-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Obsoletes:	%{name}-coder-mpeg
 
 # we don't want "-s" here, because it would be added to `Magick*-config --ldflags`
 %define		rpmldflags	%{nil}
@@ -565,6 +566,9 @@ Modu³ kodera dla plików WMF.
 %patch3 -p1
 
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
+
+# avoid rebuilding (broken paths in scripts/Makefile.am)
+touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 
 %build
 %{__libtoolize}
