@@ -1,16 +1,16 @@
-Summary:     image display, conversion, and manipulation under X
+Summary:     Image display, conversion, and manipulation under X
 Summary(de): Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(fr): Visualisation, conversion, et manipulation d'images sous X.
 Summary(pl): Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr): X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:        ImageMagick
-Version:     4.1.6
+Version:     4.1.7
 Release:     1
 Copyright:   freeware
 Group:       X11/Applications/Graphics
 Source:      ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
 URL:         http://www.wizards.dupont.com/cristy/ImageMagick.html
-Requires:    freetype >= 1.1
+Requires:    freetype >= 1.2
 Buildroot:   /tmp/%{name}-%{version}-root
 
 %description
@@ -31,12 +31,6 @@ d'images. Il tourne sous X Window et est très puissant en termes
 de capacité d'édition des images. Il peut aussi gérer de nombreux
 formats différents.
 
-%description -l fr
-ImageMagick est un outil d'affichage, de conversion et de manipulation
-d'images. Il tourne sous X Window et est très puissant en termes
-de capacité d'édition des images. Il peut aussi gérer de nombreux
-formats différents.
-
 %description -l pl
 ImageMagic jest narzêdziem do manipulacji, konwersji i wy¶wietlania.
 W skk³ad pakietu wchod¿a zarówno narzêdzia X'ami. Jest to narzêdzie potê¿ne ;)
@@ -49,7 +43,7 @@ deðiþiklik yapma açýsýndan pek çok olanak sunar. Bir çok resim biçimini
 rahatlýkla kullanabilir.
 
 %package  devel
-Summary:     static libraries and header files for ImageMagick development
+Summary:     Static libraries and header files for ImageMagick development
 Summary(pl): Biblioteki statyczne i pliki nag³ówkowe dla ImageMagick'a
 Group:       X11/Libraries
 Requires:    %{name} = %{version}
@@ -80,8 +74,8 @@ Bu paket, ImageMagick uygulama arayüzünü kullanan programlar geliþtirmek
 için gereken baþlýk dosyalarýný ve kitaplýklarý içerir.
 
 %package  static
-Summary:     header files for ImageMagick development
-Summary(pl): Pliki nag³ówkowe dla ImageMagick'a
+Summary:     Header files for ImageMagick development
+Summary(pl): Pliki nag³ówkowe dla biblioteki ImageMagick
 Group:       X11/Libraries
 Requires:    %{name}-devel = %{version}
 
@@ -90,8 +84,8 @@ This package contains header files for use in developing your own
 applications that make use of the ImageMagick code and/or APIs.
 
 %description -l pl devel
-Pakiet ten zawiera pliki nag³owkowe i dokumentacjê niezbêddn± przy pisaniu
-w³±snych programów z wykorzystaniem API jakie udostêpnia ImageMagick.
+Pakiet ten zawiera pliki nag³owkowe i dokumentacjê niezbêdn± przy pisaniu
+w³asnych programów z wykorzystaniem API jakie udostêpnia ImageMagick.
 
 %package  perl
 Summary:     libraries and modules for access to ImageMagick from perl
@@ -122,6 +116,7 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 	--enable-lzw \
 	--enable-16bit-pixel \
 	--with-perl \
+	--with-ttf \
 	--with-x
 make 
 
