@@ -58,6 +58,9 @@ Requires:	%{name}-libs = %{version}
 Obsoletes:	%{name}-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# we don't want "-s" here, because it would be added to `Magick*-config --ldflags`
+%define		rpmldflags	%{nil}
+
 %description
 ImageMagick is an image display, conversion, and manipulation tool. It
 runs under X windows. It is very powerful in terms of it's ability to
