@@ -34,7 +34,7 @@ d'édition des images. Il peut aussi gérer de nombreux formats différents.
 %description -l pl
 ImageMagic jest narzêdziem do manipulacji, konwersji i wy¶wietlania. W sk³ad
 pakietu wchodz± zarówno narzêdzia X Window jak i do u¿ywania z linii poleceñ
-umozliwiaj±ce edycjê plików graficznych. Narzêdzia z pakietu ImageMagic
+umo¿liwiaj±ce edycjê plików graficznych. Narzêdzia z pakietu ImageMagic
 potrafi± obs³u¿yæ wiele ró¿ncyh formatów graficznych.
 
 %description -l tr
@@ -67,7 +67,7 @@ code d'ImageMagick et/ou ses APIs.
 
 %description -l pl devel
 Pakiet ten zawieraja pliki potrzebne przy kompilowaniu programów
-wykorzystuj±cyh blibliotekê ImageMagick takie ja pliki nag³ówkowe,
+wykorzystuj±cych blibliotekê ImageMagick takie jak pliki nag³ówkowe,
 biblioteki statyczne i dokumentacjê niezbêdn± przy pisaniu w³asnych
 programów z wykorzystaniem API jakie udostêpnia ImageMagick.
 
