@@ -1,13 +1,13 @@
 #
 # Conditional build:
-# _without_fpx		- without FlashPIX module (which uses fpx library)
-# _with_gs		- with PostScript support through ghostscript library (warning: breaks jpeg!)
-# _without_jasper	- without JPEG2000 module (which uses jasper library)
-# _without_cxx          - without Magick++
+%bcond_without fpx    # without FlashPIX module (which uses fpx library)
+%bcond_with    gs     # with PostScript support through ghostscript library (warning: breaks jpeg!)
+%bcond_without jasper # without JPEG2000 module (which uses jasper library)
+%bcond_without cxx    # without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
 %define		ver 5.5.7
-%define		pver	11
+%define		pver	12
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -25,7 +25,7 @@ Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
 Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	8edfa9a91d6e939f1311717f4bf1591a
+# Source0-md5:	f071e774a1dc104a36fbee708a487ff3
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
@@ -38,12 +38,12 @@ BuildRequires:	autoconf >= 2.56
 BuildRequires:	automake >= 1.7
 BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.0.2-2
-%{?_with_gs:BuildRequires:	ghostscript-devel}
-%{!?_without_jasper:BuildRequires:	jasper-devel >= 1.700.2}
+%{?with_gs:BuildRequires:	ghostscript-devel}
+%{?with_jasper:BuildRequires:	jasper-devel >= 1.700.2}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
 BuildRequires:	libexif-devel
-%{!?_without_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
+%{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libplot-devel
@@ -561,10 +561,10 @@ rm -f missing
 	--enable-fast-install \
 	--enable-lzw \
 	--enable-shared \
-	%{?_without_fpx:--without-fpx} \
-	%{!?_with_gs:--without-gslib} \
-	%{?_without_jasper:--without-jp2} \
-	--with%{?_without_cxx:out}-magick_plus_plus \
+	--with%{!?with_fpx:out}-fpx \
+	--with%{!?with_gs:out}-gslib \
+	--with%{!?with_jasper:out}-jp2 \
+	--with%{!?with_cxx:out}-magick_plus_plus \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-modules \
 	--with-perl=%{__perl} \
@@ -780,7 +780,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/dps.so
 %{modulesdir}/coders/dps.la
 
-%if %{?_without_fpx:0}%{!?_without_fpx:1}
+%if %{with fpx}
 %files coder-fpx
 %defattr(644,root,root,755)
 # R: fpx
@@ -800,7 +800,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/jpeg.so
 %{modulesdir}/coders/jpeg.la
 
-%if %{?_without_jasper:0}%{!?_without_jasper:1}
+%if %{with jasper}
 %files coder-jpeg2
 %defattr(644,root,root,755)
 # R: jasper, libjpeg
@@ -893,7 +893,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Image::Magick.*
 %{_examplesdir}/%{name}-perl
 
-%if %{?_without_cxx:0}%{!?_without_cxx:1}
+%if %{with cxx}
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++.so.*.*.*
