@@ -1,0 +1,12 @@
+diff -Nru ImageMagick-5.5.1.orig/coders/jp2.c ImageMagick-5.5.1/coders/jp2.c
+--- ImageMagick-5.5.1.orig/coders/jp2.c	Sat Oct 12 18:41:32 2002
++++ ImageMagick-5.5.1/coders/jp2.c	Fri Nov  8 22:17:39 2002
+@@ -598,7 +598,7 @@
+     component_info[i].prec=(unsigned int) image->depth <= 8 ? 8 : 16;
+   }
+   jp2_image=jas_image_create((short) number_components,component_info,
+-    number_components == 1 ? JAS_IMAGE_CM_GRAY : JAS_IMAGE_CM_RGB);
++    number_components == 1 ? JAS_IMAGE_CS_GRAY : JAS_IMAGE_CS_RGB);
+   if (jp2_image == (jas_image_t *) NULL)
+     ThrowWriterException(FileOpenError,"Unable to create image",image);
+   /*
