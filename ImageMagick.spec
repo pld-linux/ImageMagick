@@ -410,8 +410,6 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
-gzip -9nf README.txt
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -447,7 +445,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc images www ImageMagick.html README.txt.gz
+%doc images www ImageMagick.html README.txt
 
 %attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_libdir}/libMagick.so
