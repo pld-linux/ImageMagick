@@ -6,7 +6,7 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	5.3.1
-Release:	2
+Release:	3
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
