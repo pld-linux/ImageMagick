@@ -1,5 +1,5 @@
---- ImageMagick-5.4.9/magick/utility.c.orig	Sun Sep  8 01:53:34 2002
-+++ ImageMagick-5.4.9/magick/utility.c	Mon Jul  7 20:20:54 2003
+--- ImageMagick-5.4.9/magick/utility.c.orig	Tue Jul  8 22:20:32 2003
++++ ImageMagick-5.4.9/magick/utility.c	Tue Jul  8 22:25:48 2003
 @@ -2678,6 +2678,39 @@
    geometry->width=image->columns;
    geometry->height=image->rows;
@@ -45,7 +45,7 @@
  %
  */
 -MagickExport void TemporaryFilename(char *filename)
-+static void TemporaryFilename(char *filename)
++static void TemporaryFilenameHelper(char *filename)
  {
    assert(filename != (char *) NULL);
    (void) strcpy(filename,"magic");
