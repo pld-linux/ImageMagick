@@ -7,7 +7,7 @@
 #
 %include	/usr/lib/rpm/macros.perl
 %define		ver 5.5.5
-#%%define		pver	2
+%define		pver	1
 %define		QuantumDepth	16
 %define		iver %{ver}-Q%{QuantumDepth}
 Summary:	Image display, conversion, and manipulation under X
@@ -21,7 +21,7 @@ Summary(tr):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk):	ğÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ğ¦Ä X Windows
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	3
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -559,7 +559,8 @@ CPPFLAGS="-I/usr/include/g++"
 	%{!?_with_gs:--without-gslib} \
 	%{?_without_jasper:--without-jp2} \
 	--with%{?_without_cxx:out}-magick_plus_plus \
-	--with-perl \
+	--with-perl=%{__perl} \
+	--with-perl-options="INSTALLDIRS=vendor" \
 	--with-threads \
 	--with-ttf \
 	--with-modules \
@@ -873,12 +874,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files perl
 %defattr(644,root,root,755)
-%{perl_sitearch}/Image
-%dir %{perl_sitearch}/auto/Image
-%dir %{perl_sitearch}/auto/Image/Magick
-%{perl_sitearch}/auto/Image/Magick/autosplit.ix
-%{perl_sitearch}/auto/Image/Magick/Magick.bs
-%attr(755,root,root) %{perl_sitearch}/auto/Image/Magick/Magick.so
+%{perl_vendorarch}/Image
+%dir %{perl_vendorarch}/auto/Image
+%dir %{perl_vendorarch}/auto/Image/Magick
+%{perl_vendorarch}/auto/Image/Magick/autosplit.ix
+%{perl_vendorarch}/auto/Image/Magick/Magick.bs
+%attr(755,root,root) %{perl_vendorarch}/auto/Image/Magick/Magick.so
 %{_mandir}/man3/Image::Magick.*
 %{_examplesdir}/%{name}-perl
 
