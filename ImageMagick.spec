@@ -27,9 +27,8 @@ Group:		X11/Applications/Graphics
 Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}%{?pver:-%{pver}}.tar.bz2
 # Source0-md5:	ae9e708a6f5dc8b77220b00a0f2ae65a
 Patch0:		%{name}-libpath.patch
-Patch1:		%{name}-perlpaths.patch
-Patch2:		%{name}-ac.patch
-Patch3:		%{name}-system-libltdl.patch
+Patch1:		%{name}-ac.patch
+Patch2:		%{name}-system-libltdl.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
@@ -38,7 +37,7 @@ BuildRequires:	automake >= 1.7
 BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.0.2-2
 %{?_with_gs:BuildRequires:	ghostscript-devel}
-%{!?_without_jasper:BuildRequires:	jasper-devel}
+%{!?_without_jasper:BuildRequires:	jasper-devel >= 1.700.2}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
 BuildRequires:	libexif-devel
@@ -546,7 +545,8 @@ Modu³ kodera dla plików WMF.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+
+find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
 
 %build
 rm -f missing
