@@ -15,6 +15,7 @@ Group(pl):	X11/Aplikacje/Grafika
 Source0:	ftp://ftp.simplesystems.org/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
+Patch2:		%{name}-delegates-destdir.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	perl => 5.6
 BuildRequires:	rpm-perlprov >= 3.0.3-18
@@ -26,8 +27,14 @@ BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libstdc++-devel
 BuildRequires:	zlib-devel
 BuildRequires:	bzip2-devel >= 1.0.1
-BuildRequires:	freetype-devel >= 2.0.0
+BuildRequires:	freetype-devel >= 2.0.2-2
 BuildRequires:	libwmf-devel
+#BuildRequires:	lcms-devel
+#BuildRequires:	fpx-devel
+#BuildRequires:	hdf-devel
+#BuildRequires:	jbigkit-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
 Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -55,10 +62,10 @@ capacité d'édition des images. Il peut aussi gérer de nombreux formats
 différents.
 
 %description -l pl
-ImageMagic jest narzêdziem do manipulacji, konwersji i wy¶wietlania. W
+ImageMagick jest narzêdziem do manipulacji, konwersji i wy¶wietlania. W
 sk³ad pakietu wchodz± zarówno narzêdzia X Window jak i do u¿ywania z
 linii poleceñ umo¿liwiaj±ce edycjê plików graficznych. Narzêdzia z
-pakietu ImageMagic potrafi± obs³u¿yæ wiele ró¿ncyh formatów
+pakietu ImageMagick potrafi± obs³u¿yæ wiele ró¿nych formatów
 graficznych.
 
 %description -l tr
@@ -69,21 +76,20 @@ resimler üzerinde deðiþiklik yapma açýsýndan pek çok olanak sunar. Bir
 
 %package devel
 Summary:	Libraries and header files for ImageMagick development
-Summary(pl):	Biblioteki i pliki nag³ówkowe dla ImageMagick'a
+Summary(pl):	Biblioteki i pliki nag³ówkowe dla ImageMagick
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
 %description devel
-This is the ImageMagick development package. It includes the static
-libraries and header files for use in developing your own applications
-that make use of the ImageMagick code and/or APIs.
+This is the ImageMagick development package. It includes header files
+for use in developing your own applications that make use of the
+ImageMagick code and/or APIs.
 
 %description -l de devel
-Dies ist das ImageMagick-Entwicklerpaket. Es enthält die statischen
-Libraries und Header-Dateien zum Entwickeln von Anwendungen, die
-ImageMagick-Code und/oder -APIs nutzen.
+Dies ist das ImageMagick-Entwicklerpaket. Es enthält Header-Dateien zum
+Entwickeln von Anwendungen, die ImageMagick-Code und/oder -APIs nutzen.
 
 %description -l fr devel
 Paquetage de développement ImageMagick. Contient les bibliothèques
@@ -92,9 +98,9 @@ utilisant le code d'ImageMagick et/ou ses APIs.
 
 %description -l pl devel
 Pakiet ten zawieraja pliki potrzebne przy kompilowaniu programów
-wykorzystuj±cych blibliotekê ImageMagick takie jak pliki nag³ówkowe,
-biblioteki statyczne i dokumentacjê niezbêdn± przy pisaniu w³asnych
-programów z wykorzystaniem API jakie udostêpnia ImageMagick.
+wykorzystuj±cych blibliotekê ImageMagick takie jak pliki nag³ówkowe
+i dokumentacjê niezbêdn± przy pisaniu w³asnych programów
+z wykorzystaniem API jakie udostêpnia ImageMagick.
 
 %description -l tr devel
 Bu paket, ImageMagick uygulama arayüzünü kullanan programlar
@@ -116,7 +122,7 @@ Biblioteki statyczne ImageMagick.
 
 %package perl
 Summary:	libraries and modules for access to ImageMagick from perl
-Summary(pl):	Biblioteki i modu³y perl dla ImageMagick'a
+Summary(pl):	Biblioteki i modu³y perl dla ImageMagick
 Group:		Development/Languages/Perl
 Group(de):	Entwicklung/Sprachen/Perl
 Group(pl):	Programowanie/Jêzyki/Perl
@@ -130,7 +136,7 @@ support files for access to ImageMagick library from perl without
 unuseful forking or such.
 
 %description -l pl perl
-Biblioteki i modu³y umo¿liwiaj±ce korzystanie z ImageMagick'a z
+Biblioteki i modu³y umo¿liwiaj±ce korzystanie z ImageMagick z
 poziomu perla.
 
 %package libs
@@ -148,6 +154,7 @@ Biblioteki ImageMagick.
 
 %package c++
 Summary:	ImageMagick Magick++ library
+Summary(pl):	Biblioteka Magick++
 Group:		X11/Libraries
 Group(de):	X11/Libraries
 Group(pl):	X11/Biblioteki
@@ -160,8 +167,14 @@ ImageMagick graphics manipulation library.
 Install ImageMagick-c++ if you want to use any applications that use
 Magick++.
 
+%description -l pl c++
+Pakiet zawiera bibliotekê Magick++ - interfejs w C++ do biblioteki
+ImageMagick. Jest potrzebny do uruchamiania programów korzystaj±cych
+z Magick++.
+
 %package c++-devel
 Summary:	C++ bindings for the ImageMagick library
+Summary(pl):	Pliki nag³ówkowe z interfejsem C++ do ImageMagick
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
@@ -169,9 +182,9 @@ Requires:	%{name}-c++ = %{version}
 Requires:	%{name}-devel = %{version}
 
 %description c++-devel
-ImageMagick-devel contains the static libraries and header files
-you'll need to develop ImageMagick applications using the Magick++ C++
-bindings. ImageMagick is an image manipulation program.
+ImageMagick-c++-devel contains header files you'll need to develop
+ImageMagick applications using the Magick++ C++ bindings. ImageMagick
+is an image manipulation program.
 
 If you want to create applications that will use Magick++ code or
 APIs, you'll need to install ImageMagick-c++-devel, ImageMagick-devel
@@ -179,8 +192,13 @@ and ImageMagick. You don't need to install it if you just want to use
 ImageMagick, or if you want to develop/compile applications using the
 ImageMagick C interface, however.
 
+%description -l pl c++-devel
+Pakiet zawiera pliki nag³ówkowe potrzebne do kompilowania programów
+korzystaj±cych z Magick++.
+
 %package c++-static
 Summary:	C++ bindings for the ImageMagick - static library
+Summary(pl):	Interfejs C++ do ImageMagick - biblioteka statyczna
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
@@ -190,28 +208,25 @@ Requires:	%{name}-devel = %{version}
 %description c++-static
 C++ bindings for the ImageMagick - static library.
 
+%description -l pl c++-static
+Biblioteka Magick++ w wersji statycznej.
+
 %prep
 %setup  -q
 %patch0 -p1
 %patch1 -p0
+%patch2 -p1
+
+# fix typo
+perl -pi -e 's@htmlc\.@html.c@' coders/Makefile.am
+# fix lcms.h include path
+perl -pi -e 's@lcms/lcms\.h@lcms.h@' magick/transform.c
 
 %build
-LDFLAGS="%{!?debug: -s}" ; export LDFLAGS
-CFLAGS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"; export CFLAGS
-CXXFLAGS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"; export CXXFLAGS
-./configure \
-        --prefix=%{_prefix} \
-        --exec-prefix=%{_exec_prefix} \
-        --bindir=%{_bindir} \
-        --sbindir=%{_sbindir} \
-        --sysconfdir=%{_sysconfdir} \
-        --datadir=%{_datadir} \
-        --includedir=%{_includedir} \
-        --libdir=%{_libdir} \
-        --libexecdir=%{_libexecdir} \
-        --localstatedir=%{_localstatedir} \
-        --sharedstatedir=%{_sharedstatedir} \
-        --mandir=%{_mandir} \
+aclocal
+autoconf
+automake -a -c
+%configure \
 	--enable-shared \
 	--enable-lzw \
 	--enable-16bit-pixel \

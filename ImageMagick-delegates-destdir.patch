@@ -1,0 +1,14 @@
+diff -Nur ImageMagick-5.3.0.orig/delegates/Makefile.am ImageMagick-5.3.0/delegates/Makefile.am
+--- ImageMagick-5.3.0.orig/delegates/Makefile.am	Sun Feb 11 21:39:38 2001
++++ ImageMagick-5.3.0/delegates/Makefile.am	Tue Mar 27 15:04:34 2001
+@@ -39,8 +39,8 @@
+ 
+ # Install delegates files
+ install-data-delegates:
+-	$(mkinstalldirs) $(pkglibdir)
+-	$(INSTALL_DATA) delegates.mgk $(pkglibdir)
++	$(mkinstalldirs) $(DESTDIR)$(pkglibdir)
++	$(INSTALL_DATA) delegates.mgk $(DESTDIR)$(pkglibdir)
+ 
+ # Uninstall delegates files
+ uninstall-data-delegates:
