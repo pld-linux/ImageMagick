@@ -33,25 +33,3 @@
  
  # Subdirectories to build
  if WITH_MAGICK_PLUS_PLUS
---- ImageMagick-5.3.7/utilities/Makefile.am.orig	Wed Jul 25 22:58:53 2001
-+++ ImageMagick-5.3.7/utilities/Makefile.am	Sun Aug  5 13:18:35 2001
-@@ -50,7 +50,7 @@
- X11PROGRAMS =
- MANPAGES = $(STDMANPAGES)
- endif
--bin_PROGRAMS = composite convert identify iptcutil mogrify montage $(X11PROGRAMS)
-+bin_PROGRAMS = composite convert identify mogrify montage $(X11PROGRAMS)
- 
- # Libtool libraries, dependencies, and linker flags used by most executables
- if WITH_MODULES
-@@ -85,10 +85,6 @@
- import_LDFLAGS    = $(COMMONLDFLAGS)
- import_SOURCES    = import.c
- 
--iptcutil_LDADD    = # Don't use ImageMagick LIBS
--iptcutil_LDFLAGS  = # Don't use ImageMagick LDFLAGS
--iptcutil_SOURCES  = iptcutil.c
--
- mogrify_LDADD     = $(COMMONLDADD)
- mogrify_LDFLAGS   = $(COMMONLDFLAGS)
- mogrify_SOURCES   = mogrify.c

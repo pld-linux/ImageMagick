@@ -5,13 +5,14 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X
 Summary(pl):	NarzЙdzie do wy╤wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Name:		ImageMagick
-Version:	5.3.7
+Version:	5.3.9
 Release:	1
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
 Group(de):	X11/Applikationen/Grafik
 Group(pl):	X11/Aplikacje/Grafika
+Group(pt):	X11/AplicaГУes/GrАficos
 Source0:	ftp://ftp.simplesystems.org/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
@@ -36,6 +37,7 @@ BuildRequires:	libxml2-devel >= 2.0
 #BuildRequires:	fpx-devel
 #BuildRequires:	hdf-devel
 #BuildRequires:	jbigkit-devel
+#BuildRequires:	jasper-devel
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4d
 Requires:	%{name}-libs = %{version}
@@ -82,7 +84,12 @@ Summary:	Libraries and header files for ImageMagick development
 Summary(pl):	Biblioteki i pliki nagЁСwkowe dla ImageMagick
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(ru):	X11/Разработка/Библиотеки
+Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -115,18 +122,23 @@ Summary:	ImageMagick static libraries
 Summary(pl):	Biblioteki statyczne ImageMagick
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(ru):	X11/Разработка/Библиотеки
+Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
 ImageMagick static libraries.
 
-%description -l pl devel
+%description -l pl static
 Biblioteki statyczne ImageMagick.
 
 %package perl
-Summary:	libraries and modules for access to ImageMagick from perl
-Summary(pl):	Biblioteki i moduЁy perl dla ImageMagick
+Summary:	Libraries and modules for access to ImageMagick from perl
+Summary(pl):	Biblioteki i moduЁy perla dla ImageMagick
 Group:		Development/Languages/Perl
 Group(de):	Entwicklung/Sprachen/Perl
 Group(pl):	Programowanie/JЙzyki/Perl
@@ -149,6 +161,9 @@ Group(de):	X11/Libraries
 Group(es):	X11/Bibliotecas
 Group(fr):	X11/Librairies
 Group(pl):	X11/Biblioteki
+Group(pt_BR):	X11/Bibliotecas
+Group(ru):	X11/Библиотеки
+Group(uk):	X11/Б╕бл╕отеки
 
 %description libs
 ImageMagick libraries.
@@ -164,6 +179,9 @@ Group(de):	X11/Libraries
 Group(es):	X11/Bibliotecas
 Group(fr):	X11/Librairies
 Group(pl):	X11/Biblioteki
+Group(pt_BR):	X11/Bibliotecas
+Group(ru):	X11/Библиотеки
+Group(uk):	X11/Б╕бл╕отеки
 Requires:	%{name}-libs = %{version}
 
 %description c++
@@ -183,7 +201,12 @@ Summary:	C++ bindings for the ImageMagick library
 Summary(pl):	Pliki nagЁСwkowe z interfejsem C++ do ImageMagick
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(ru):	X11/Разработка/Библиотеки
+Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-c++ = %{version}
 Requires:	%{name}-devel = %{version}
 
@@ -207,7 +230,12 @@ Summary:	C++ bindings for the ImageMagick - static library
 Summary(pl):	Interfejs C++ do ImageMagick - biblioteka statyczna
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(ru):	X11/Разработка/Библиотеки
+Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-c++-devel = %{version}
 Requires:	%{name}-devel = %{version}
 
@@ -257,14 +285,14 @@ install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
 gzip -9nf README.txt
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post   libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
 
 %post   c++ -p /sbin/ldconfig
 %postun c++ -p /sbin/ldconfig
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
