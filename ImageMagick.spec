@@ -27,6 +27,7 @@ Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{ver}%{?pver:-%{pver}}
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-ac.patch
+Patch3:		%{name}-system-libltdl.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
@@ -41,6 +42,7 @@ BuildRequires:	freetype-devel >= 2.0.2-2
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
 BuildRequires:	libjpeg-devel
+BuildRequires:	libltdl-devel
 BuildRequires:	libplot-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libstdc++-devel
@@ -112,6 +114,21 @@ ImageMagick - √≈ ’‘…Ã¶‘¡ ƒÃ— –≈“≈«Ã—ƒ’, ÀœŒ◊≈“‘’◊¡ŒŒ— ‘¡ œ¬“œ¬À…
 ⁄œ¬“¡÷≈Œÿ. ˜œŒ¡ –“¡√¿§ –¶ƒ X Windows. ImageMagick ƒ¡§ Àœ“…”‘’◊¡ﬁ’
 €…“œÀ¶ Õœ÷Ã…◊œ”‘¶ –œ œ¬“œ¬√¶ ⁄œ¬“¡÷≈Œÿ ◊ “¶⁄ŒœÕ¡Œ¶‘Œ…» ∆œ“Õ¡‘¡».
 
+%package libs
+Summary:	ImageMagick libraries
+Summary(pl):	Biblioteki ImageMagick
+Summary(pt_BR):	Bibliotecas din‚micas do ImageMagick
+Group:		X11/Libraries
+
+%description libs
+ImageMagick libraries.
+
+%description libs -l pl
+Biblioteki ImageMagick.
+
+%description libs -l pt_BR
+Bibliotecas din‚micas do ImageMagick.
+
 %package devel
 Summary:	Libraries and header files for ImageMagick development
 Summary(es):	Biblioteca est·tica y archivos de inclusiÛn para desarrollo con libMagick
@@ -173,7 +190,6 @@ ImageMagick.
 
 %package static
 Summary:	ImageMagick static libraries
-Summary(es):	Static libraries for libMagick development
 Summary(pl):	Biblioteki statyczne ImageMagick
 Summary(pt_BR):	Bibliotecas est·ticas para desenvolvimento com libMagick
 Summary(ru):	Û‘¡‘…ﬁ≈”À…≈ ¬…¬Ã…œ‘≈À… ƒÃ— –“œ«“¡ÕÕ…“œ◊¡Œ…— ” ImageMagick
@@ -183,9 +199,6 @@ Requires:	%{name}-devel = %{version}
 
 %description static
 ImageMagick static libraries.
-
-%description static -l es
-Static libraries for libMagick development.
 
 %description static -l pl
 Biblioteki statyczne ImageMagick.
@@ -203,7 +216,6 @@ Bibliotecas est·ticas para desenvolvimento com libMagick.
 
 %package perl
 Summary:	Libraries and modules for access to ImageMagick from perl
-Summary(es):	Perl Module to use ImageMagick
 Summary(pl):	Biblioteki i modu≥y perla dla ImageMagick
 Summary(pt_BR):	MÛdulo perl para uso com o ImageMagick
 Summary(ru):	‚…¬Ã…œ‘≈À… … Õœƒ’Ã… ƒÃ— ƒœ”‘’–¡ À ImageMagick …⁄ perl
@@ -215,10 +227,6 @@ Requires:	%{name}-libs = %{version}
 This is the ImageMagick perl support package. It perl modules and
 support files for access to ImageMagick library from perl without
 unuseful forking or such.
-
-%description perl -l es
-This packages provides a perl module to access ImagickMagick functions
-from perl scripts.
 
 %description perl -l pl
 Biblioteki i modu≥y umoøliwiaj±ce korzystanie z ImageMagick z poziomu
@@ -236,28 +244,8 @@ em scripts perl.
 „≈ –¡À≈‘ ImageMagick ƒÃ— –¶ƒ‘“…ÕÀ… Perl. ˜¶Œ Õ¶”‘…‘ÿ Õœƒ’Ã¶ Perl ‘¡
 ƒœƒ¡‘Àœ◊¶ ∆¡ Ã… ƒÃ— ƒœ”‘’–’ ƒœ ¬¶¬Ã¶œ‘≈À… ImageMagick ⁄ Perl.
 
-%package libs
-Summary:	ImageMagick libraries
-Summary(es):	ImageMagick dynamic libraries
-Summary(pl):	Biblioteki ImageMagick
-Summary(pt_BR):	Bibliotecas din‚micas do ImageMagick
-Group:		X11/Libraries
-
-%description libs
-ImageMagick libraries.
-
-%description libs -l es
-ImageMagick dynamic libraries.
-
-%description libs -l pl
-Biblioteki ImageMagick.
-
-%description libs -l pt_BR
-Bibliotecas din‚micas do ImageMagick.
-
 %package c++
 Summary:	ImageMagick Magick++ library
-Summary(es):	ImageMagick dynamic libraries
 Summary(pl):	Biblioteka Magick++
 Summary(pt_BR):	Bibliotecas din‚micas do ImageMagick
 Summary(ru):	‚…¬Ã…œ‘≈À¡ Magick++ (C++ …Œ‘≈“∆≈ ” ƒÃ— ImageMagick'¡)
@@ -271,9 +259,6 @@ ImageMagick graphics manipulation library.
 
 Install ImageMagick-c++ if you want to use any applications that use
 Magick++.
-
-%description c++ -l es
-ImageMagick C++ dynamic libraries.
 
 %description c++ -l pl
 Pakiet zawiera bibliotekÍ Magick++ - interfejs w C++ do biblioteki
@@ -341,7 +326,6 @@ Magick++ (¶Œ‘≈“∆≈ ” C++ ƒÃ— ImageMagick).
 
 %package c++-static
 Summary:	C++ bindings for the ImageMagick - static library
-Summary(es):	Static libraries for libMagick development
 Summary(pl):	Interfejs C++ do ImageMagick - biblioteka statyczna
 Summary(pt_BR):	Bibliotecas est·ticas para desenvolvimento com libMagick
 Summary(ru):	Û‘¡‘…ﬁ≈”À…≈ ¬…¬Ã…œ‘≈À… C++ ƒÃ— –“œ«“¡ÕÕ…“œ◊¡Œ…— ” ImageMagick
@@ -353,14 +337,11 @@ Requires:	%{name}-devel = %{version}
 %description c++-static
 C++ bindings for the ImageMagick - static library.
 
-%description c++-static -l es
-Static libraries for libMagick++ development
-
 %description c++-static -l pl
 Biblioteka Magick++ w wersji statycznej.
 
 %description c++-static -l pt_BR
-Bibliotecas est·ticas para desenvolvimento com libMagick++
+Bibliotecas est·ticas para desenvolvimento com libMagick++.
 
 %description c++-static -l ru
 ¸‘œ œ‘ƒ≈ÃÿŒŸ  –¡À≈‘ ”œ ”‘¡‘…ﬁ≈”À…Õ… ¬…¬Ã…œ‘≈À¡Õ…, Àœ‘œ“Ÿ≈ ¬œÃÿ€≈ Œ≈
@@ -371,147 +352,213 @@ Bibliotecas est·ticas para desenvolvimento com libMagick++
 ”ÀÃ¡ƒ’ ImageMagick-c++-devel.
 
 %package coder-dps
-Summary: coder-dps
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for Postscript files using DPS extension
+Summary(pl):	Modu≥ kodera dla plikÛw Postscript uøywaj±cy rozszerzenia DPS
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-dps
+Coder module for Postcript files using DPS (Display PostScript)
+extension.
 
+%description coder-dps -l pl
+Modu≥ kodera dla plikÛw Postscript uøywaj±cy rozszerzenia DPS (Display
+PostScript).
 
 %package coder-fpx
-Summary: coder-fpx
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for FlashPIX (FPX) files
+Summary(pl):	Modu≥ kodera dla plikÛw FlashPIX (FPX)
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-fpx
+Coder module for FlashPIX (FPX) files.
 
+%description coder-fpx -l pl
+Modu≥ kodera dla plikÛw FlashPIX (FPX).
 
 %package coder-hdf
-Summary: coder-hdf
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for HDF files
+Summary(pl):	Modu≥ kodera dla plikÛw HDF
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-hdf
+Coder module for HDF files.
 
+%description coder-hdf -l pl
+Modu≥ kodera dla plikÛw HDF.
 
 %package coder-jbig
-Summary: coder-jbig
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for JBIG files
+Summary(pl):	Modu≥ kodera dla plikÛw JBIG
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-jbig
+Coder module for JBIG files.
 
+%description coder-jbig -l pl
+Modu≥ kodera dla plikÛw JBIG.
 
 %package coder-jpeg
-Summary: coder-jpeg
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for JPEG files
+Summary(pl):	Modu≥ kodera dla plikÛw JPEG
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-jpeg
+Coder module for JPEG files.
 
+%description coder-jpeg -l pl
+Modu≥ kodera dla plikÛw JPEG.
 
 %package coder-jpeg2
-Summary: coder-jpeg2
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for JPEG-2000 (JP2/JPC) files using JasPer library
+Summary(pl):	Modu≥ kodera dla plikÛw JPEG-2000 (JP2/JPC) uøywaj±cy biblioteki JasPer
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-jpeg2
+Coder module for JPEG-2000 (JP2/JPC) files using JasPer library.
 
+%description coder-jpeg2 -l pl
+Modu≥ kodera dla plikÛw JPEG-2000 (JP2/JPC) uøywajacy biblioteki
+JasPer.
 
 %package coder-miff
-Summary: coder-miff
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for MIFF files
+Summary(pl):	Modu≥ kodera dla plikÛw MIFF
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-miff
+Coder module for MIFF files.
 
+%description coder-miff -l pl
+Modu≥ kodera dla plikÛw MIFF.
 
 %package coder-mpeg
-Summary: coder-mpeg
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for MPEG files
+Summary(pl):	Modu≥ kodera dla plikÛw MPEG
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-mpeg
+Coder module for MPEG files.
 
+%description coder-mpeg -l pl
+Modu≥ kodera dla plikÛw MPEG.
 
 %package coder-mpr
-Summary: coder-mpr
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for ImageMagick MPR and MSL files
+Summary(pl):	Modu≥ kodera dla plikÛw MPR i MSL ImageMagick
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-mpr
+Coder module for Magick Persistent Registry (MPR) and Magick Scripting
+Language (MSL) files.
 
+%description coder-mpr -l pl
+Modu≥ kodera dla plikÛw Magick Persistent Registry (MPR) i Magick
+Scripting Language (MSL).
 
 %package coder-pdf
-Summary: coder-pdf
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for PDF files
+Summary(pl):	Modu≥ kodera dla plikÛw PDF
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-pdf
+Coder module for PDF files.
 
+%description coder-pdf -l pl
+Modu≥ kodera dla plikÛw PDF.
 
 %package coder-png
-Summary: coder-png
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for PNG files
+Summary(pl):	Modul kodera dla plikÛw PNG
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-png
+Coder module for PNG files.
 
+%description coder-png -l pl
+Modu≥ kodera dla plikÛw PNG.
 
 %package coder-ps2
-Summary: coder-ps2
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for Postscript Level II & III (PS2/PS3) files
+Summary(pl):	Modu≥ kodera dla plikÛw Postscript Level II i III (PS2/PS3)
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-ps2
+Coder module for Postscript Level II & III (PS2/PS3) files.
 
+%description coder-ps2 -l pl
+Modu≥ kodera dla plikÛw Postscript Level II i III (PS2/PS3).
 
 %package coder-svg
-Summary: coder-svg
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for SVG (Scalable Vector Graphics) files
+Summary(pl):	Modu≥ kodera dla plikÛw SVG (Scalable Vector Graphics)
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-svg
+Coder module for SVG (Scalable Vector Graphics) files.
 
+%description coder-svg -l pl
+Modu≥ kodera dla plikÛw SVG (Scalable Vector Graphics).
 
 %package coder-tiff
-Summary: coder-tiff
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for TIFF files
+Summary(pl):	Modu≥ kodera dla plikÛw TIFF
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-tiff
+Coder module for TIFF files.
 
+%description coder-tiff -l pl
+Modu≥ kodera dla plikÛw TIFF.
 
 %package coder-url
-Summary: coder-url
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for retrieving files via URL
+Summary(pl):	Modu≥ kodera ∂ci±gaj±cy pliki o podanym URL
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-url
+Coder module for retrieving files via URL.
 
+%description coder-url -l pl
+Modu≥ kodera ∂ci±gaj±cy pliki o podanym URL.
 
 %package coder-wmf
-Summary: coder-wmf
-Group: X11/Applications/Graphics
-Requires: %{name}-%{version}
+Summary:	Coder module for WMF files
+Summary(pl):	Modu≥ kodera dla plikÛw WMF
+Group:		X11/Applications/Graphics
+Requires:	%{name}-%{version}
 
 %description coder-wmf
+Coder module for WMF files.
 
+%description coder-wmf -l pl
+Modu≥ kodera dla plikÛw WMF.
 
 %prep
 %setup  -q -n %{name}-%{ver}
 %patch0 -p1
 %patch1 -p0
 %patch2 -p1
-
-# fix lcms.h include path
-perl -pi -e 's@lcms/lcms\.h@lcms.h@' magick/transform.c
-perl -pi -e 's@lcms/lcms\.h@lcms.h@' configure.ac
+%patch3 -p1
 
 %build
 rm -f missing
-%{__libtoolize} --ltdl
-aclocal -I /usr/share/libtool/libltdl
+%{__libtoolize}
+%{__aclocal} -I /usr/share/libtool/libltdl
 %{__autoconf}
 %{__automake}
 CPPFLAGS="-I/usr/include/g++"
@@ -552,10 +599,8 @@ rm -rf $RPM_BUILD_ROOT
 %post   libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
 
-%if %{?_without_cxx:0}%{!?_without_cxx:1}
 %post   c++ -p /sbin/ldconfig
 %postun c++ -p /sbin/ldconfig
-%endif
 
 %files libs
 %defattr(644,root,root,755)
@@ -564,8 +609,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-#%dir %{_datadir}/ImageMagick
-#%{_datadir}/ImageMagick/*.mgk
 %dir %{_libdir}/ImageMagick-%{ver}
 %{_libdir}/ImageMagick-%{ver}/*.mgk
 %dir %{_libdir}/ImageMagick-%{ver}/modules
@@ -590,7 +633,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/dcm.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/dib.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/dib.so
-
 %{_libdir}/ImageMagick-%{ver}/modules/coders/dpx.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/dpx.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/ept.la
@@ -599,7 +641,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/fax.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/fits.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/fits.so
-# FIXME: test gif coder (this not depend on lib(un)gif ???)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/gif.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/gif.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/gradient.la
@@ -722,115 +763,120 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ImageMagick-%{ver}/modules/coders/*.mgk
 
 %attr(755,root,root) %{_bindir}/animate
-#%attr(755,root,root) %{_bindir}/cgimagick
 %attr(755,root,root) %{_bindir}/composite
 %attr(755,root,root) %{_bindir}/convert
 %attr(755,root,root) %{_bindir}/conjure
 %attr(755,root,root) %{_bindir}/display
 %attr(755,root,root) %{_bindir}/identify
 %attr(755,root,root) %{_bindir}/import
-#%attr(755,root,root) %{_bindir}/iptcutil
 %attr(755,root,root) %{_bindir}/mogrify
 %attr(755,root,root) %{_bindir}/montage
 
 %{_mandir}/man1/[Iacdim]*
 
 %files coder-dps
-# R: libdps
 %defattr(644,root,root,755)
+# R: XFree86-DPS (libdps.so)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/dps.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/dps.so
 
+%if %{?_without_fpx:0}%{!?_without_fpx:1}
 %files coder-fpx
-# R: fpx
 %defattr(644,root,root,755)
+# R: fpx
 %{_libdir}/ImageMagick-%{ver}/modules/coders/fpx.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/fpx.so
+%endif
 
+%if %{?_without_hdf:0}%{!?_without_hdf:1}
 %files coder-hdf
-# R: hdf, libjpeg
 %defattr(644,root,root,755)
+# R: hdf, libjpeg
 %{_libdir}/ImageMagick-%{ver}/modules/coders/hdf.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/hdf.so
+%endif
 
 %files coder-jbig
-# R: libjbig
 %defattr(644,root,root,755)
+# R: jbigkit (libjbig.so)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/jbig.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/jbig.so
 
 %files coder-jpeg
-# R: libjpeg
 %defattr(644,root,root,755)
+# R: libjpeg
 %{_libdir}/ImageMagick-%{ver}/modules/coders/jpeg.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/jpeg.so
 
+%if %{?_without_jasper:0}%{!?_without_jasper:1}
 %files coder-jpeg2
-# R: jasper, libjpeg
 %defattr(644,root,root,755)
+# R: jasper, libjpeg
 %{_libdir}/ImageMagick-%{ver}/modules/coders/jp2.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/jp2.so
+%endif
 
 %files coder-miff
-# R: libjpeg, zlib, libbz2
 %defattr(644,root,root,755)
+# R: libjpeg, zlib, libbz2
 %{_libdir}/ImageMagick-%{ver}/modules/coders/miff.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/miff.so
 
 %files coder-mpeg
-# R: libmpeg2
 %defattr(644,root,root,755)
+# R: mpeg2dec (libmpeg2.so)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/mpeg.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/mpeg.so
 
 %files coder-mpr
-# R: libxml2
 %defattr(644,root,root,755)
+# R: libxml2
 %{_libdir}/ImageMagick-%{ver}/modules/coders/mpr.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/mpr.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/msl.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/msl.so
 
 %files coder-pdf
-# R: libtiff, libjpeg
 %defattr(644,root,root,755)
+# R: libtiff, libjpeg
 %{_libdir}/ImageMagick-%{ver}/modules/coders/pdf.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/pdf.so
 
 %files coder-png
 %defattr(644,root,root,755)
+# R: libpng
 %{_libdir}/ImageMagick-%{ver}/modules/coders/png.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/png.so
 
 %files coder-ps2
-# R: libtiff, libjpeg
 %defattr(644,root,root,755)
+# R: libtiff, libjpeg
 %{_libdir}/ImageMagick-%{ver}/modules/coders/ps2.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/ps2.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/ps3.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/ps3.so
 
 %files coder-svg
-# R: libxml2
 %defattr(644,root,root,755)
+# R: libxml2
 %{_libdir}/ImageMagick-%{ver}/modules/coders/svg.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/svg.so
 
 %files coder-tiff
-# R: libtiff, libjpeg
 %defattr(644,root,root,755)
+# R: libtiff, libjpeg
 %{_libdir}/ImageMagick-%{ver}/modules/coders/tiff.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/tiff.so
 
 %files coder-url
-# R: libxml2
 %defattr(644,root,root,755)
+# R: libxml2
 %{_libdir}/ImageMagick-%{ver}/modules/coders/url.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/url.so
 
 %files coder-wmf
-# R: libwmf, libexpat, libjpeg, libpng
 %defattr(644,root,root,755)
+# R: libwmf, expat, libjpeg, libpng
 %{_libdir}/ImageMagick-%{ver}/modules/coders/wmf.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/wmf.so
 
