@@ -129,8 +129,6 @@ Group:		Development/Languages/Perl
 Group(de):	Entwicklung/Sprachen/Perl
 Group(pl):	Programowanie/Jêzyki/Perl
 Requires:	%{name}-libs = %{version}
-Requires:	%{perl_sitearch}
-%requires_eq	perl
 
 %description perl
 This is the ImageMagick perl support package. It perl modules and
