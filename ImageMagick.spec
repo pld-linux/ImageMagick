@@ -1,3 +1,10 @@
+#
+# Conditional build:
+# _with_fpx	- with FlashPIX support through fpx library
+# _with_gs	- with PostScript support through ghostscript library
+# _with_hdf	- with HDF support through hdf library
+# _with_jasper	- with JPEG2000 support through jasper library
+#
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -10,7 +17,7 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Windows
 Name:		ImageMagick
 Version:	5.4.5
-Release:	1
+Release:	2
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -23,8 +30,13 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.4d
 BuildRequires:	bzip2-devel >= 1.0.1
+%{?_with_fpx:BuildRequires:	fpx-devel}
 BuildRequires:	freetype-devel >= 2.0.2-2
+%{?_with_gs:BuildRequires:	ghostscript-devel}
+%{?_with_hdf:BuildRequires:	hdf-devel}
+%{?_with_jasper:BuildRequires:	jasper-devel}
 BuildRequires:	jbigkit-devel
+BuildRequires:	lcms-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libplot-devel
 BuildRequires:	libpng >= 1.0.8
@@ -36,10 +48,6 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	mpeg2dec-devel
 BuildRequires:	perl-devel >= 5.6.1
 BuildRequires:	rpm-perlprov >= 3.0.3-18
-#BuildRequires:	fpx-devel
-#BuildRequires:	hdf5-devel
-#BuildRequires:	jasper-devel
-#BuildRequires:	lcms-devel
 Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -111,8 +119,13 @@ Summary(uk):	Хедери та б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}
 Requires:	expat-devel
+%{?_with_fpx:Requires:	fpx-devel}
 Requires:	freetype-devel
+%{?_with_gs:Requires:	ghostscript-devel}
+%{?_with_hdf:Requires:	hdf-devel}
+%{?_with_jasper:Requires:	jasper-devel}
 Requires:	jbigkit-devel
+Requires:	lcms-devel
 Requires:	libjpeg-devel
 Requires:	libplot-devel
 Requires:	libwmf-devel
@@ -388,15 +401,18 @@ if [ -f %{_pkgconfigdir}/libpng12.pc ] ; then
 fi
 %configure \
 	CPPFLAGS="$CPPFLAGS" \
-	--enable-shared \
-	--enable-lzw \
 	--enable-16bit-pixel \
+	--enable-lzw \
+	--enable-shared \
+	%{!?_with_fpx:--without-fpx} \
+	%{!?_with_gs:--without-gslib} \
+	%{?_with_hdf:--with-hdf} \
+	%{!?_with_jasper:--without-jp2} \
+	--with-magick_plus_plus \
 	--with-perl \
-	--with-ttf \
-	--with-x \
-	--with-hdf \
 	--with-threads \
-	--with-magick_plus_plus
+	--with-ttf \
+	--with-x
 
 %{__make} 
 %{__make} -C Magick++
