@@ -1,9 +1,9 @@
 #
 # Conditional build:
-# _with_fpx	- with FlashPIX support through fpx library
-# _with_gs	- with PostScript support through ghostscript library (warning: breaks jpeg!)
-# _with_hdf	- with HDF support through hdf library
-# _with_jasper	- with JPEG2000 support through jasper library
+# _without_fpx		- without FlashPIX module (which uses fpx library)
+# _with_gs		- with PostScript support through ghostscript library (warning: breaks jpeg!)
+# _without_hdf		- without HDF module (which uses hdf library)
+# _without_jasper	- without JPEG2000 module (which uses jasper library)
 #
 %include	/usr/lib/rpm/macros.perl
 %define		ver 5.5.1
@@ -33,11 +33,11 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake >= 1.7
 BuildRequires:	bzip2-devel >= 1.0.1
-%{?_with_fpx:BuildRequires:	fpx-devel}
+%{!?_without_fpx:BuildRequires:	fpx-devel}
 BuildRequires:	freetype-devel >= 2.0.2-2
 %{?_with_gs:BuildRequires:	ghostscript-devel}
-%{?_with_hdf:BuildRequires:	hdf-devel}
-%{?_with_jasper:BuildRequires:	jasper-devel}
+%{!?_without_hdf:BuildRequires:	hdf-devel}
+%{!?_without_jasper:BuildRequires:	jasper-devel}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
 BuildRequires:	libjpeg-devel
@@ -121,24 +121,10 @@ Summary(ru):	Хедеры и библиотеки для программирования с ImageMagick
 Summary(uk):	Хедери та б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}
-Requires:	expat-devel
-%{?_with_fpx:Requires:	fpx-devel}
-Requires:	freetype-devel
-%{?_with_gs:Requires:	ghostscript-devel}
-%{?_with_hdf:Requires:	hdf-devel}
-%{?_with_jasper:Requires:	jasper-devel}
-Requires:	jbigkit-devel
-Requires:	lcms-devel
-Requires:	libjpeg-devel
-Requires:	libplot-devel
-Requires:	libwmf-devel
-Requires:	libxml2-devel
-Requires:	mpeg2dec-devel
-Requires:	XFree86-DPS-devel
-Requires:	libtiff-devel
-Requires:	libpng-devel
 Requires:	XFree86-devel
-Requires:	bzip2-devel
+Requires:	freetype-devel
+Requires:	lcms-devel
+Requires:	zlib-devel
 
 %description devel
 This is the ImageMagick development package. It includes header files
@@ -392,6 +378,14 @@ Requires: %{name}-%{version}
 %description coder-dps
 
 
+%package coder-fpx
+Summary: coder-fpx
+Group: X11/Applications/Graphics
+Requires: %{name}-%{version}
+
+%description coder-fpx
+
+
 %package coder-hdf
 Summary: coder-hdf
 Group: X11/Applications/Graphics
@@ -414,6 +408,14 @@ Group: X11/Applications/Graphics
 Requires: %{name}-%{version}
 
 %description coder-jpeg
+
+
+%package coder-jpeg2
+Summary: coder-jpeg2
+Group: X11/Applications/Graphics
+Requires: %{name}-%{version}
+
+%description coder-jpeg2
 
 
 %package coder-miff
@@ -519,10 +521,10 @@ CPPFLAGS="-I/usr/include/g++"
 	--enable-lzw \
 	--enable-shared \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
-	%{!?_with_fpx:--without-fpx} \
+	%{?_without_fpx:--without-fpx} \
 	%{!?_with_gs:--without-gslib} \
-	%{?_with_hdf:--with-hdf} \
-	%{!?_with_jasper:--without-jp2} \
+	%{!?_without_hdf:--with-hdf} \
+	%{?_without_jasper:--without-jp2} \
 	--with%{?_without_cxx:out}-magick_plus_plus \
 	--with-perl \
 	--with-threads \
@@ -556,8 +558,8 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %files libs
-%doc Copyright.txt
 %defattr(644,root,root,755)
+%doc Copyright.txt
 %attr(755,root,root) %{_libdir}/libMagick-%{ver}.so
 
 %files
@@ -597,8 +599,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/fax.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/fits.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/fits.so
-%{_libdir}/ImageMagick-%{ver}/modules/coders/fpx.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/fpx.so
 # FIXME: test gif coder (this not depend on lib(un)gif ???)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/gif.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/gif.so
@@ -626,7 +626,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/matte.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/meta.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/meta.so
-%{_libdir}/ImageMagick-%{ver}/modules/coders/modules.mgk
 %{_libdir}/ImageMagick-%{ver}/modules/coders/mono.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/mono.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/mpc.la
@@ -738,38 +737,55 @@ rm -rf $RPM_BUILD_ROOT
 
 %files coder-dps
 # R: libdps
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/dps.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/dps.so
 
+%files coder-fpx
+# R: fpx
+%defattr(644,root,root,755)
+%{_libdir}/ImageMagick-%{ver}/modules/coders/fpx.la
+%attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/fpx.so
+
 %files coder-hdf
-# R: libjpeg
+# R: hdf, libjpeg
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/hdf.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/hdf.so
 
 %files coder-jbig
 # R: libjbig
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/jbig.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/jbig.so
 
 %files coder-jpeg
 # R: libjpeg
-%{_libdir}/ImageMagick-%{ver}/modules/coders/jp2.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/jp2.so
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/jpeg.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/jpeg.so
 
+%files coder-jpeg2
+# R: jasper, libjpeg
+%defattr(644,root,root,755)
+%{_libdir}/ImageMagick-%{ver}/modules/coders/jp2.la
+%attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/jp2.so
+
 %files coder-miff
 # R: libjpeg, zlib, libbz2
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/miff.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/miff.so
 
 %files coder-mpeg
 # R: libmpeg2
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/mpeg.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/mpeg.so
 
 %files coder-mpr
 # R: libxml2
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/mpr.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/mpr.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/msl.la
@@ -777,15 +793,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %files coder-pdf
 # R: libtiff, libjpeg
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/pdf.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/pdf.so
 
 %files coder-png
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/png.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/png.so
 
 %files coder-ps2
 # R: libtiff, libjpeg
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/ps2.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/ps2.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/ps3.la
@@ -793,24 +812,27 @@ rm -rf $RPM_BUILD_ROOT
 
 %files coder-svg
 # R: libxml2
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/svg.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/svg.so
 
 %files coder-tiff
 # R: libtiff, libjpeg
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/tiff.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/tiff.so
 
 %files coder-url
 # R: libxml2
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/url.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/url.so
 
 %files coder-wmf
 # R: libwmf, libexpat, libjpeg, libpng
+%defattr(644,root,root,755)
 %{_libdir}/ImageMagick-%{ver}/modules/coders/wmf.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/wmf.so
-
 
 %files devel
 %defattr(644,root,root,755)
@@ -843,7 +865,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{?_without_cxx:0}%{!?_without_cxx:1}
 %files c++
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libMagick++.so.*.*
+%attr(755,root,root) %{_libdir}/libMagick++-%{ver}.so
 
 %files c++-devel
 %defattr(644,root,root,755)
