@@ -22,6 +22,7 @@ BuildRequires:	XFree86-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libpng >= 1.0.8
+BuildRequires:	libstdc++-devel
 BuildRequires:	zlib-devel
 BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	freetype-devel
@@ -29,7 +30,7 @@ Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
-%define		_mandir		/usr/X11R6/man
+%define		_mandir		%{_prefix}/man
 %define		_includedir	%{_prefix}/include/X11
 %define		_perlmandir	/usr/share/man
 
@@ -143,6 +144,50 @@ ImageMagick libraries.
 %description -l pl libs
 Biblioteki ImageMagick.
 
+%package c++
+Summary:	ImageMagick Magick++ library
+Group:		X11/Libraries
+Group(de):	X11/Libraries
+Group(pl):	X11/Biblioteki
+Requires:	%{name}-libs = %{version}
+
+%description c++
+This package contains the Magick++ library, a C++ binding to the
+ImageMagick graphics manipulation library.
+
+Install ImageMagick-c++ if you want to use any applications that use
+Magick++.
+
+%package c++-devel
+Summary:	C++ bindings for the ImageMagick library
+Group:		X11/Development/Libraries
+Group(de):	X11/Entwicklung/Libraries
+Group(pl):	X11/Programowanie/Biblioteki
+Requires:	%{name}-c++ = %{version}
+Requires:	%{name}-devel = %{version}
+
+%description c++-devel
+ImageMagick-devel contains the static libraries and header files
+you'll need to develop ImageMagick applications using the Magick++ C++
+bindings. ImageMagick is an image manipulation program.
+
+If you want to create applications that will use Magick++ code or
+APIs, you'll need to install ImageMagick-c++-devel, ImageMagick-devel
+and ImageMagick. You don't need to install it if you just want to use
+ImageMagick, or if you want to develop/compile applications using the
+ImageMagick C interface, however.
+
+%package c++-static
+Summary:	C++ bindings for the ImageMagick - static library
+Group:		X11/Development/Libraries
+Group(de):	X11/Entwicklung/Libraries
+Group(pl):	X11/Programowanie/Biblioteki
+Requires:	%{name}-c++-devel = %{version}
+Requires:	%{name}-devel = %{version}
+
+%description c++-static
+C++ bindings for the ImageMagick - static library.
+
 %prep
 %setup  -q
 %patch0 -p0
@@ -150,7 +195,8 @@ Biblioteki ImageMagick.
 
 %build
 LDFLAGS="%{!?debug: -s}" ; export LDFLAGS
-CFLAGS="%optflags%{?debug: -g -O}"; export CFLAGS
+CFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"; export CFLAGS
+CXXFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}"; export CXXFLAGS
 ./configure \
         --prefix=%{_prefix} \
         --exec-prefix=%{_exec_prefix} \
@@ -169,21 +215,31 @@ CFLAGS="%optflags%{?debug: -g -O}"; export CFLAGS
 	--enable-16bit-pixel \
 	--with-perl \
 	--with-ttf \
-	--with-x
+	--with-x \
+	--with-threads \
+	--with-magick_plus_plus
 
 %{__make} 
+%{__make} -C Magick++
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/src/examples/%{name}-perl
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT 
-install PerlMagick/demo/* $RPM_BUILD_ROOT/usr/src/examples/%{name}-perl
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT 
+%{__make} -C Magick++ \
+	DESTDIR=$RPM_BUILD_ROOT
+
+install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
 gzip -9nf README.txt
 
 %post   libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
+
+%post   c++ -p /sbin/ldconfig
+%postun c++ -p /sbin/ldconfig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -214,7 +270,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
-
 %{_includedir}/magick
 
 %files static
@@ -230,4 +285,19 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_sitearch}/auto/Image/Magick/Magick.bs
 %attr(755,root,root) %{perl_sitearch}/auto/Image/Magick/Magick.so
 %{_perlmandir}/man3/Image::Magick.*
-/usr/src/examples/%{name}-perl
+%{_examplesdir}/%{name}-perl
+
+%files c++
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libMagick++.so.*.*
+
+%files c++-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/Magick++-config
+%attr(755,root,root) %{_libdir}/libMagick++.la
+%attr(755,root,root) %{_libdir}/libMagick++.so
+%{_prefix}/include/Magick++
+%{_prefix}/include/Magick++.h
+
+%files c++-static
+%defattr(644,root,root,755)
