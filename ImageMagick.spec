@@ -55,7 +55,7 @@ BuildRequires:	libwmf-devel >= 0.2.2
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	perl-devel >= 5.6.1
 BuildRequires:	rpm-perlprov >= 3.0.3-18
-Requires:	%{name}-libs = %{version}
+Requires:	%{name}-libs = %{epoch}:%{version}
 Obsoletes:	%{name}-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -138,7 +138,7 @@ Summary(pt_BR):	Biblioteca e arquivos de inclusЦo para desenvolvimento com libMa
 Summary(ru):	Хедеры и библиотеки для программирования с ImageMagick
 Summary(uk):	Хедери та б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Requires:	%{name}-libs = %{version}
+Requires:	%{name}-libs = %{epoch}:%{version}
 Requires:	XFree86-devel
 Requires:	bzip2-devel
 Requires:	freetype-devel
@@ -198,7 +198,7 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com libMagick
 Summary(ru):	Статические библиотеки для программирования с ImageMagick
 Summary(uk):	Статичн╕ б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 ImageMagick static libraries.
@@ -224,7 +224,7 @@ Summary(pt_BR):	MСdulo perl para uso com o ImageMagick
 Summary(ru):	Библиотеки и модули для доступа к ImageMagick из perl
 Summary(uk):	Б╕бл╕отеки та модул╕ для доступу до ImageMagick з Perl
 Group:		Development/Languages/Perl
-Requires:	%{name}-libs = %{version}
+Requires:	%{name}-libs = %{epoch}:%{version}
 
 %description perl
 This is the ImageMagick perl support package. It perl modules and
@@ -254,7 +254,7 @@ Summary(pt_BR):	Bibliotecas dinБmicas do ImageMagick
 Summary(ru):	Библиотека Magick++ (C++ интерфейс для ImageMagick'а)
 Summary(uk):	Б╕бл╕отека Magick++ (╕нтерфейс C++ для ImageMagick)
 Group:		X11/Libraries
-Requires:	%{name}-libs = %{version}
+Requires:	%{name}-libs = %{epoch}:%{version}
 
 %description c++
 This package contains the Magick++ library, a C++ binding to the
@@ -289,8 +289,8 @@ Summary(pt_BR):	Biblioteca e arquivos de inclusЦo para desenvolvimento com libMa
 Summary(ru):	Хедеры и библиотеки для разработок с использованием Magick++ (C++ интерфейс для ImageMagick'а)
 Summary(uk):	Хедери та б╕бл╕отеки для розробок з використанням Magick++ (╕нтерфейсу C++ для ImageMagick)
 Group:		X11/Development/Libraries
-Requires:	%{name}-c++ = %{version}
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-c++ = %{epoch}:%{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description c++-devel
 ImageMagick-c++-devel contains header files you'll need to develop
@@ -334,8 +334,8 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com libMagick
 Summary(ru):	Статические библиотеки C++ для программирования с ImageMagick
 Summary(uk):	Статичн╕ б╕бл╕отеки C++ для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Requires:	%{name}-c++-devel = %{version}
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-c++-devel = %{epoch}:%{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description c++-static
 C++ bindings for the ImageMagick - static library.
@@ -358,7 +358,7 @@ Bibliotecas estАticas para desenvolvimento com libMagick++.
 Summary:	Coder module for Postscript files using DPS extension
 Summary(pl):	ModuЁ kodera dla plikСw Postscript u©ywaj╠cy rozszerzenia DPS
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-dps
 Coder module for Postcript files using DPS (Display PostScript)
@@ -372,7 +372,7 @@ PostScript).
 Summary:	Coder module for FlashPIX (FPX) files
 Summary(pl):	ModuЁ kodera dla plikСw FlashPIX (FPX)
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-fpx
 Coder module for FlashPIX (FPX) files.
@@ -384,7 +384,7 @@ ModuЁ kodera dla plikСw FlashPIX (FPX).
 Summary:	Coder module for JBIG files
 Summary(pl):	ModuЁ kodera dla plikСw JBIG
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-jbig
 Coder module for JBIG files.
@@ -396,7 +396,7 @@ ModuЁ kodera dla plikСw JBIG.
 Summary:	Coder module for JPEG files
 Summary(pl):	ModuЁ kodera dla plikСw JPEG
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-jpeg
 Coder module for JPEG files.
@@ -408,7 +408,7 @@ ModuЁ kodera dla plikСw JPEG.
 Summary:	Coder module for JPEG-2000 (JP2/JPC) files using JasPer library
 Summary(pl):	ModuЁ kodera dla plikСw JPEG-2000 (JP2/JPC) u©ywaj╠cy biblioteki JasPer
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-jpeg2
 Coder module for JPEG-2000 (JP2/JPC) files using JasPer library.
@@ -421,7 +421,7 @@ JasPer.
 Summary:	Coder module for MIFF files
 Summary(pl):	ModuЁ kodera dla plikСw MIFF
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-miff
 Coder module for MIFF files.
@@ -433,7 +433,7 @@ ModuЁ kodera dla plikСw MIFF.
 Summary:	Coder module for MPEG files
 Summary(pl):	ModuЁ kodera dla plikСw MPEG
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-mpeg
 Coder module for MPEG files.
@@ -445,7 +445,7 @@ ModuЁ kodera dla plikСw MPEG.
 Summary:	Coder module for ImageMagick MPR and MSL files
 Summary(pl):	ModuЁ kodera dla plikСw MPR i MSL ImageMagick
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-mpr
 Coder module for Magick Persistent Registry (MPR) and Magick Scripting
@@ -459,7 +459,7 @@ Scripting Language (MSL).
 Summary:	Coder module for PDF files
 Summary(pl):	ModuЁ kodera dla plikСw PDF
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-pdf
 Coder module for PDF files.
@@ -471,7 +471,7 @@ ModuЁ kodera dla plikСw PDF.
 Summary:	Coder module for PNG files
 Summary(pl):	Modul kodera dla plikСw PNG
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-png
 Coder module for PNG files.
@@ -483,7 +483,7 @@ ModuЁ kodera dla plikСw PNG.
 Summary:	Coder module for Postscript Level II & III (PS2/PS3) files
 Summary(pl):	ModuЁ kodera dla plikСw Postscript Level II i III (PS2/PS3)
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-ps2
 Coder module for Postscript Level II & III (PS2/PS3) files.
@@ -495,7 +495,7 @@ ModuЁ kodera dla plikСw Postscript Level II i III (PS2/PS3).
 Summary:	Coder module for SVG (Scalable Vector Graphics) files
 Summary(pl):	ModuЁ kodera dla plikСw SVG (Scalable Vector Graphics)
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-svg
 Coder module for SVG (Scalable Vector Graphics) files.
@@ -507,7 +507,7 @@ ModuЁ kodera dla plikСw SVG (Scalable Vector Graphics).
 Summary:	Coder module for TIFF files
 Summary(pl):	ModuЁ kodera dla plikСw TIFF
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-tiff
 Coder module for TIFF files.
@@ -519,7 +519,7 @@ ModuЁ kodera dla plikСw TIFF.
 Summary:	Coder module for retrieving files via URL
 Summary(pl):	ModuЁ kodera ╤ci╠gaj╠cy pliki o podanym URL
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-url
 Coder module for retrieving files via URL.
@@ -531,7 +531,7 @@ ModuЁ kodera ╤ci╠gaj╠cy pliki o podanym URL.
 Summary:	Coder module for WMF files
 Summary(pl):	ModuЁ kodera dla plikСw WMF
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description coder-wmf
 Coder module for WMF files.
