@@ -10,7 +10,7 @@ Summary(tr):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk):	ğÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ğ¦Ä X Windows
 Name:		ImageMagick
 Version:	5.4.3
-Release:	1
+Release:	2
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -34,7 +34,10 @@ Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 URL:		http://www.imagemagick.org/
-BuildRequires:	rpm-perlprov >= 3.0.3-18
+BuildRequires:	XFree86-DPS-devel
+BuildRequires:	XFree86-devel
+BuildRequires:	autoconf
+BuildRequires:	automake >= 1.4d
 BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.0.2-2
 BuildRequires:	jbigkit-devel
@@ -48,14 +51,11 @@ BuildRequires:	libwmf-devel >= 0.2.0
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	mpeg2dec-devel
 BuildRequires:	perl-devel >= 5.6.1
-BuildRequires:	XFree86-devel
-BuildRequires:	XFree86-DPS-devel
+BuildRequires:	rpm-perlprov >= 3.0.3-18
 #BuildRequires:	fpx-devel
 #BuildRequires:	hdf5-devel
 #BuildRequires:	jasper-devel
 #BuildRequires:	lcms-devel
-BuildRequires:	autoconf
-BuildRequires:	automake >= 1.4d
 Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -142,7 +142,14 @@ Group(sl):	X11/Razvoj/Knji¾nice
 Group(sv):	X11/Utveckling/Bibliotek
 Group(uk):	X11/òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
+Requires:	expat-devel
+Requires:	freetype-devel
 Requires:	jbigkit-devel
+Requires:	libjpeg-devel
+Requires:	libplot-devel
+Requires:	libwmf-devel
+Requires:	libxml2-devel
+Requires:	mpeg2dec-devel
 
 %description devel
 This is the ImageMagick development package. It includes header files
