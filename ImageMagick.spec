@@ -221,8 +221,8 @@ Bibliotecas estАticas para desenvolvimento com libMagick.
 складу ImageMagick-devel.
 
 %package perl
-Summary:	Libraries and modules for access to ImageMagick from perl
-Summary(pl):	Biblioteki i moduЁy perla dla ImageMagick
+Summary:	Libraries and modules for access to ImageMagick from Perl
+Summary(pl):	Biblioteki i moduЁy Perla dla ImageMagick
 Summary(pt_BR):	MСdulo perl para uso com o ImageMagick
 Summary(ru):	Библиотеки и модули для доступа к ImageMagick из perl
 Summary(uk):	Б╕бл╕отеки та модул╕ для доступу до ImageMagick з Perl
@@ -230,21 +230,21 @@ Group:		Development/Languages/Perl
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description perl
-This is the ImageMagick perl support package. It perl modules and
+This is the ImageMagick Perl support package. It perl modules and
 support files for access to ImageMagick library from perl without
 unuseful forking or such.
 
 %description perl -l pl
 Biblioteki i moduЁy umo©liwiaj╠ce korzystanie z ImageMagick z poziomu
-perla.
+Perla.
 
 %description perl -l pt_BR
 Este pacote fornece um mСdulo perl para acessar funГУes do ImageMagick
-em scripts perl.
+em scripts Perl.
 
 %description perl -l ru
 Это пакет ImageMagick для поддержки perl. Он включает модули perl и
-вспомогательные файлы для доступа к библиотеке ImageMagick из perl.
+вспомогательные файлы для доступа к библиотеке ImageMagick из Perl.
 
 %description perl -l uk
 Це пакет ImageMagick для п╕дтримки Perl. В╕н м╕стить модул╕ Perl та
