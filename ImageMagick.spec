@@ -6,8 +6,8 @@
 # _without_cxx          - without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 5.5.2
-%define		pver	5
+%define		ver 5.5.3
+#%%define		pver
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -47,7 +47,7 @@ BuildRequires:	libplot-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	libtool >= 2:1.4e
+BuildRequires:	libtool >= 2:1.4e-0.20021218.3
 BuildRequires:	libwmf-devel >= 0.2.2
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	perl-devel >= 5.6.1
@@ -532,7 +532,7 @@ Coder module for WMF files.
 Modu³ kodera dla plików WMF.
 
 %prep
-%setup  -q -n %{name}-%{ver}
+%setup -q -n %{name}-%{ver}
 %patch0 -p1
 %patch1 -p0
 %patch2 -p1
@@ -883,7 +883,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{?_without_cxx:0}%{!?_without_cxx:1}
 %files c++
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libMagick++-%{ver}.so
+%attr(755,root,root) %{_libdir}/libMagick++-%{ver}.so.*.*
 
 %files c++-devel
 %defattr(644,root,root,755)
