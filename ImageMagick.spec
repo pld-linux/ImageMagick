@@ -20,7 +20,7 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	3
 Epoch:		1
 License:	Apache-style License
 Group:		X11/Applications/Graphics
