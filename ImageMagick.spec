@@ -6,8 +6,8 @@
 %bcond_without	cxx	# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.1.1
-%define		pver	2
+%define		ver 6.1.4
+%define		pver	1
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -25,7 +25,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	0855b4b03aa566a2121d4d12ef810419
+# Source0-md5:	02f83d6a77a0cc8a13d9646e3bbdda2b
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
@@ -613,13 +613,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config
-%{_libdir}/ImageMagick-%{ver}/config/*.mgk
+%{_libdir}/ImageMagick-%{ver}/config/*.xml
 %dir %{modulesdir}
 %dir %{modulesdir}/coders
 %dir %{modulesdir}/filters
 %dir %{_datadir}/ImageMagick-%{ver}
 %dir %{_datadir}/ImageMagick-%{ver}/config
-%{_datadir}/ImageMagick-%{ver}/config/*.mgk
+%{_datadir}/ImageMagick-%{ver}/config/*.xml
 
 # ========= coders without additional deps
 %attr(755,root,root) %{modulesdir}/coders/art.so
