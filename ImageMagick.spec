@@ -30,7 +30,7 @@ Group(ru):	X11/Приложения/Графика
 Group(sl):	X11/Programi/Grafika
 Group(sv):	X11/TillДmpningar/Grafik
 Group(uk):	X11/Прикладн╕ Програми/Граф╕ка
-Source0:	ftp://ftp.simplesystems.org/pub/ImageMagick/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 URL:		http://www.imagemagick.org/
