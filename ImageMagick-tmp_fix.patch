@@ -1,17 +1,8 @@
---- ImageMagick-5.5.5/magick/utility.c.orig	Thu Feb 27 21:10:51 2003
-+++ ImageMagick-5.5.5/magick/utility.c	Tue Jul  1 20:09:46 2003
-@@ -2644,7 +2644,7 @@
- %      name is returned in this array.
- %
- */
--MagickExport void TemporaryFilename(char *path)
-+static void TemporaryFilenameHelper(char *path)
- {
- #define RandomKeyExtent  6
- 
-@@ -2706,6 +2706,39 @@
-     (void) strncat(path,".tmp",MaxTextExtent-strlen(path)-1);
-   } while (IsAccessible(path));
+--- ImageMagick-5.4.9/magick/utility.c.orig	Sun Sep  8 01:53:34 2002
++++ ImageMagick-5.4.9/magick/utility.c	Mon Jul  7 20:20:54 2003
+@@ -2678,6 +2678,39 @@
+   geometry->width=image->columns;
+   geometry->height=image->rows;
  }
 +
 + MagickExport void TemporaryFilename(char *path)
@@ -49,3 +40,12 @@
  
  /*
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@@ -3215,7 +3248,7 @@
+ %      file name is returned in this array.
+ %
+ */
+-MagickExport void TemporaryFilename(char *filename)
++static void TemporaryFilename(char *filename)
+ {
+   assert(filename != (char *) NULL);
+   (void) strcpy(filename,"magic");
