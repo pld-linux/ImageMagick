@@ -195,8 +195,8 @@ C++ bindings for the ImageMagick - static library.
 
 %build
 LDFLAGS="%{!?debug: -s}" ; export LDFLAGS
-CFLAGS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"; export CFLAGS
-CXXFLAGS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}"; export CXXFLAGS
+CFLAGS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"; export CFLAGS
+CXXFLAGS="%{?debug:-O0 -g}%{!?debug:$RPM_OPT_FLAGS}"; export CXXFLAGS
 ./configure \
         --prefix=%{_prefix} \
         --exec-prefix=%{_exec_prefix} \
