@@ -1,9 +1,10 @@
 #
 # Conditional build:
-%bcond_without	fpx	# without FlashPIX module (which uses fpx library)
-%bcond_with	gs	# with PostScript support through ghostscript library (warning: breaks jpeg!)
-%bcond_without	jasper	# without JPEG2000 module (which uses jasper library)
-%bcond_without	cxx	# without Magick++
+%bcond_without	fpx		# without FlashPIX module (which uses fpx library)
+%bcond_without	graphviz	# without Graphviz support
+%bcond_with	gs		# with PostScript support through ghostscript library (warning: breaks jpeg!)
+%bcond_without	jasper		# without JPEG2000 module (which uses jasper library)
+%bcond_without	cxx		# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
 %define		ver 6.2.1
@@ -42,7 +43,7 @@ BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	freetype-devel >= 2.0.2-2
 BuildRequires:	gd-devel >= 2.0.15
 %{?with_gs:BuildRequires:	ghostscript-devel}
-BuildRequires:	graphviz-devel >= 1.12
+%{?with_graphviz:BuildRequires:	graphviz-devel >= 1.12}
 %{?with_jasper:BuildRequires:	jasper-devel >= 1.700.5}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
@@ -583,6 +584,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--enable-lzw \
 	--enable-shared \
 	--disable-ltdl-install \
+	--with%{!?with_graphviz:out}-dot \
 	--with%{!?with_fpx:out}-fpx \
 	--with%{!?with_gs:out}-gslib \
 	--with%{!?with_jasper:out}-jp2 \
