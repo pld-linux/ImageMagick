@@ -5,17 +5,17 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
-Version:	5.2.5
-Release:	2
+Version:	5.2.7
+Release:	3
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
 Group(de):	X11/Applikationen/Grafik
 Group(pl):	X11/Aplikacje/Grafika
-Source0:	ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.simplesystems.org/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
-URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
+URL:		http://www.simplesystems.org/ImageMagick/
 BuildRequires:	perl => 5.6
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
@@ -118,7 +118,7 @@ Summary(pl):	Biblioteki i modu³y perl dla ImageMagick'a
 Group:		Development/Languages/Perl
 Group(de):	Entwicklung/Sprachen/Perl
 Group(pl):	Programowanie/Jêzyki/Perl
-Requires:	%{name} = %{version}
+Requires:	%{name}-libs = %{version}
 Requires:	%{perl_sitearch}
 %requires_eq	perl
 
@@ -190,7 +190,7 @@ C++ bindings for the ImageMagick - static library.
 
 %prep
 %setup  -q
-%patch0 -p0
+%patch0 -p1
 %patch1 -p0
 
 %build
