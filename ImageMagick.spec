@@ -14,22 +14,6 @@ Release:	3
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
-Group(cs):	X11/Aplikace/Grafika
-Group(da):	X11/Programmer/Grafik
-Group(de):	X11/Applikationen/Grafik
-Group(es):	X11/Aplicaciones/GrАficos
-Group(fr):	X11/Applications/Graphiques
-Group(id):	X11/Aplikasi/Grafik
-Group(is):	X11/Forrit/Myndvinnsla
-Group(it):	X11/Applicazioni/Immagini
-Group(ja):	X11/╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╟╔И╔у╔ё╔ц╔╞╔╧
-Group(no):	X11/Applikasjoner/Grafikk
-Group(pl):	X11/Aplikacje/Grafika
-Group(pt):	X11/AplicaГУes/GrАficos
-Group(ru):	X11/Приложения/Графика
-Group(sl):	X11/Programi/Grafika
-Group(sv):	X11/TillДmpningar/Grafik
-Group(uk):	X11/Прикладн╕ Програми/Граф╕ка
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
@@ -125,22 +109,6 @@ Summary(pt_BR):	Biblioteca e arquivos de inclusЦo para desenvolvimento com libMa
 Summary(ru):	Хедеры и библиотеки для программирования с ImageMagick
 Summary(uk):	Хедери та б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Group(cs):	X11/VЩvojovИ prostЬedky/Knihovny
-Group(da):	X11/Udvikling/Biblioteker
-Group(de):	X11/Entwicklung/Bibliotheken
-Group(es):	X11/Desarrollo/Bibliotecas
-Group(fr):	X11/Development/Librairies
-Group(is):	X11/чrСunartСl/AПgerПasЖfn
-Group(it):	X11/Sviluppo/Librerie
-Group(ja):	X11/Ё╚х╞/╔И╔╓╔ж╔И╔Й
-Group(no):	X11/Applikasjoner/Biblioteker
-Group(pl):	X11/Programowanie/Biblioteki
-Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
-Group(pt):	X11/Desenvolvimento/Bibliotecas
-Group(ru):	X11/Разработка/Библиотеки
-Group(sl):	X11/Razvoj/Knji╬nice
-Group(sv):	X11/Utveckling/Bibliotek
-Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 Requires:	expat-devel
 Requires:	freetype-devel
@@ -204,22 +172,6 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com libMagick
 Summary(ru):	Статические библиотеки для программирования с ImageMagick
 Summary(uk):	Статичн╕ б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Group(cs):	X11/VЩvojovИ prostЬedky/Knihovny
-Group(da):	X11/Udvikling/Biblioteker
-Group(de):	X11/Entwicklung/Bibliotheken
-Group(es):	X11/Desarrollo/Bibliotecas
-Group(fr):	X11/Development/Librairies
-Group(is):	X11/чrСunartСl/AПgerПasЖfn
-Group(it):	X11/Sviluppo/Librerie
-Group(ja):	X11/Ё╚х╞/╔И╔╓╔ж╔И╔Й
-Group(no):	X11/Applikasjoner/Biblioteker
-Group(pl):	X11/Programowanie/Biblioteki
-Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
-Group(pt):	X11/Desenvolvimento/Bibliotecas
-Group(ru):	X11/Разработка/Библиотеки
-Group(sl):	X11/Razvoj/Knji╬nice
-Group(sv):	X11/Utveckling/Bibliotek
-Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -250,21 +202,6 @@ Summary(pt_BR):	MСdulo perl para uso com o ImageMagick
 Summary(ru):	Библиотеки и модули для доступа к ImageMagick из perl
 Summary(uk):	Б╕бл╕отеки та модул╕ для доступу до ImageMagick з Perl
 Group:		Development/Languages/Perl
-Group(cs):	VЩvojovИ prostЬedky/ProgramovacМ jazyky/Perl
-Group(da):	Udvikling/Sprog/Perl
-Group(de):	Entwicklung/Sprachen/Perl
-Group(es):	Desarrollo/Lenguajes/Perl
-Group(fr):	Development/Langues/Perl
-Group(is):	чrСunartСl/ForritunarmАl/Perl
-Group(it):	Sviluppo/Linguaggi/Perl
-Group(ja):	Ё╚х╞/╦ю╦Л/Perl
-Group(no):	Utvikling/ProgrammeringssprЕk/Perl
-Group(pl):	Programowanie/JЙzyki/Perl
-Group(pt):	Desenvolvimento/Linguagens/Perl
-Group(ru):	Разработка/Языки/Perl
-Group(sl):	Razvoj/Jeziki/Perl
-Group(sv):	Utveckling/SprЕk/Perl
-Group(uk):	Розробка/Мови/Perl
 Requires:	%{name}-libs = %{version}
 
 %description perl
@@ -298,22 +235,6 @@ Summary(es):	ImageMagick dynamic libraries
 Summary(pl):	Biblioteki ImageMagick
 Summary(pt_BR):	Bibliotecas dinБmicas do ImageMagick
 Group:		X11/Libraries
-Group(cs):	X11/Knihovny
-Group(da):	X11/Biblioteker
-Group(de):	X11/Bibliotheken
-Group(es):	X11/Bibliotecas
-Group(fr):	X11/Librairies
-Group(is):	X11/AПgerПasЖfn
-Group(it):	X11/Librerie
-Group(ja):	X11/╔И╔╓╔ж╔И╔Й
-Group(no):	X11/Biblioteker
-Group(pl):	X11/Biblioteki
-Group(pt_BR):	X11/Bibliotecas
-Group(pt):	X11/Bibliotecas
-Group(ru):	X11/Библиотеки
-Group(sl):	X11/Knji╬nice
-Group(sv):	X11/Bibliotek
-Group(uk):	X11/Б╕бл╕отеки
 
 %description libs
 ImageMagick libraries.
@@ -335,22 +256,6 @@ Summary(pt_BR):	Bibliotecas dinБmicas do ImageMagick
 Summary(ru):	Библиотека Magick++ (C++ интерфейс для ImageMagick'а)
 Summary(uk):	Б╕бл╕отека Magick++ (╕нтерфейс C++ для ImageMagick)
 Group:		X11/Libraries
-Group(cs):	X11/Knihovny
-Group(da):	X11/Biblioteker
-Group(de):	X11/Bibliotheken
-Group(es):	X11/Bibliotecas
-Group(fr):	X11/Librairies
-Group(is):	X11/AПgerПasЖfn
-Group(it):	X11/Librerie
-Group(ja):	X11/╔И╔╓╔ж╔И╔Й
-Group(no):	X11/Biblioteker
-Group(pl):	X11/Biblioteki
-Group(pt_BR):	X11/Bibliotecas
-Group(pt):	X11/Bibliotecas
-Group(ru):	X11/Библиотеки
-Group(sl):	X11/Knji╬nice
-Group(sv):	X11/Bibliotek
-Group(uk):	X11/Б╕бл╕отеки
 Requires:	%{name}-libs = %{version}
 
 %description c++
@@ -389,22 +294,6 @@ Summary(pt_BR):	Biblioteca e arquivos de inclusЦo para desenvolvimento com libMa
 Summary(ru):	Хедеры и библиотеки для разработок с использованием Magick++ (C++ интерфейс для ImageMagick'а)
 Summary(uk):	Хедери та б╕бл╕отеки для розробок з використанням Magick++ (╕нтерфейсу C++ для ImageMagick)
 Group:		X11/Development/Libraries
-Group(cs):	X11/VЩvojovИ prostЬedky/Knihovny
-Group(da):	X11/Udvikling/Biblioteker
-Group(de):	X11/Entwicklung/Bibliotheken
-Group(es):	X11/Desarrollo/Bibliotecas
-Group(fr):	X11/Development/Librairies
-Group(is):	X11/чrСunartСl/AПgerПasЖfn
-Group(it):	X11/Sviluppo/Librerie
-Group(ja):	X11/Ё╚х╞/╔И╔╓╔ж╔И╔Й
-Group(no):	X11/Applikasjoner/Biblioteker
-Group(pl):	X11/Programowanie/Biblioteki
-Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
-Group(pt):	X11/Desenvolvimento/Bibliotecas
-Group(ru):	X11/Разработка/Библиотеки
-Group(sl):	X11/Razvoj/Knji╬nice
-Group(sv):	X11/Utveckling/Bibliotek
-Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-c++ = %{version}
 Requires:	%{name}-devel = %{version}
 
@@ -451,22 +340,6 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com libMagick
 Summary(ru):	Статические библиотеки C++ для программирования с ImageMagick
 Summary(uk):	Статичн╕ б╕бл╕отеки C++ для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Group(cs):	X11/VЩvojovИ prostЬedky/Knihovny
-Group(da):	X11/Udvikling/Biblioteker
-Group(de):	X11/Entwicklung/Bibliotheken
-Group(es):	X11/Desarrollo/Bibliotecas
-Group(fr):	X11/Development/Librairies
-Group(is):	X11/чrСunartСl/AПgerПasЖfn
-Group(it):	X11/Sviluppo/Librerie
-Group(ja):	X11/Ё╚х╞/╔И╔╓╔ж╔И╔Й
-Group(no):	X11/Applikasjoner/Biblioteker
-Group(pl):	X11/Programowanie/Biblioteki
-Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
-Group(pt):	X11/Desenvolvimento/Bibliotecas
-Group(ru):	X11/Разработка/Библиотеки
-Group(sl):	X11/Razvoj/Knji╬nice
-Group(sv):	X11/Utveckling/Bibliotek
-Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-c++-devel = %{version}
 Requires:	%{name}-devel = %{version}
 
