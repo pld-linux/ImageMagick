@@ -6,7 +6,7 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	5.2.8
-Release:	2
+Release:	3
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -247,7 +247,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libMagick.so.*.*
 
 %files
 %defattr(644,root,root,755)
@@ -269,13 +269,13 @@ rm -rf $RPM_BUILD_ROOT
 %doc www ImageMagick.html README.txt.gz
 
 %attr(755,root,root) %{_bindir}/Magick-config
-%attr(755,root,root) %{_libdir}/lib*.so
-%attr(755,root,root) %{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libMagick.so
+%attr(755,root,root) %{_libdir}/libMagick.la
 %{_includedir}/magick
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libMagick.a
 
 %files perl
 %defattr(644,root,root,755)
@@ -302,3 +302,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files c++-static
 %defattr(644,root,root,755)
+%{_libdir}/libMagick++.a
