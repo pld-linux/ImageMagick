@@ -21,7 +21,7 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Windows
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -542,7 +542,7 @@ ModuЁ kodera dla plikСw WMF.
 %prep
 %setup -q -n %{name}-%{ver}
 %patch0 -p1
-%patch1 -p0
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
