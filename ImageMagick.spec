@@ -586,7 +586,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 	pkgdocdir=%{_defaultdocdir}/%{name}-devel-%{version}/
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
-rm -f $RPM_BUILD_ROOT/%{_libdir}/ImageMagick-%{iver}/modules/coders/*.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/ImageMagick-%{iver}/modules/coders/*.a
 
 %clean
 rm -rf $RPM_BUILD_ROOT
