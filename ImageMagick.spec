@@ -5,8 +5,8 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
-Version:	5.3.1
-Release:	4
+Version:	5.3.3
+Release:	2
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -18,19 +18,20 @@ Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-delegates-destdir.patch
 Patch3:		%{name}-libwmf.patch
 Patch4:		%{name}-perl-link.patch
+Patch5:		%{name}-ia64bug.patch
 URL:		http://www.imagemagick.org/
-BuildRequires:	perl => 5.6.1
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-DPS-devel
+BuildRequires:	bzip2-devel >= 1.0.1
+BuildRequires:	freetype-devel >= 2.0.2-2
 BuildRequires:	libjpeg-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libstdc++-devel
-BuildRequires:	zlib-devel
-BuildRequires:	bzip2-devel >= 1.0.1
-BuildRequires:	freetype-devel >= 2.0.2-2
 BuildRequires:	libwmf-devel
+BuildRequires:	libtool
+BuildRequires:	perl-devel >= 5.6.1
 #BuildRequires:	libxml2-devel >= 2.0
 #BuildRequires:	lcms-devel
 #BuildRequires:	fpx-devel
@@ -219,6 +220,7 @@ Biblioteka Magick++ w wersji statycznej.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 # fix typo
 perl -pi -e 's@htmlc\.@html.c@' coders/Makefile.am
@@ -226,6 +228,7 @@ perl -pi -e 's@htmlc\.@html.c@' coders/Makefile.am
 perl -pi -e 's@lcms/lcms\.h@lcms.h@' magick/transform.c
 
 %build
+libtoolize --copy --force
 aclocal
 autoconf
 automake -a -c
@@ -274,11 +277,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ImageMagick/*.mgk
 
 %attr(755,root,root) %{_bindir}/animate
-%attr(755,root,root) %{_bindir}/combine
+%attr(755,root,root) %{_bindir}/cgimagick
+%attr(755,root,root) %{_bindir}/composite
 %attr(755,root,root) %{_bindir}/convert
 %attr(755,root,root) %{_bindir}/display
 %attr(755,root,root) %{_bindir}/identify
 %attr(755,root,root) %{_bindir}/import
+%attr(755,root,root) %{_bindir}/iptcutil
 %attr(755,root,root) %{_bindir}/mogrify
 %attr(755,root,root) %{_bindir}/montage
 
