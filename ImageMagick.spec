@@ -5,7 +5,7 @@ Summary(pl): Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr): X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:        ImageMagick
 Version:     4.1.3
-Release:     1
+Release:     2
 Copyright:   freeware
 Group:       X11/Applications/Graphics
 Source:      ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
@@ -97,7 +97,7 @@ w³±snych programów z wykorzystaniem API jakie udostêpnia ImageMagick.
 Summary:     libraries and modules for access to ImageMagick from perl
 Summary(pl): Biblioteki i modu³y umo¿liwiaj±ce korzystanie z ImageMagick'a z poziomu perl'a
 Group:       Development/Libraries/Perl
-Requires:    %{name} = %{version}
+Requires:    %{name} = %{version}, perl >= 5.005
 
 %description perl
 This is the ImageMagick perl support package.  It perl modules and support
@@ -130,9 +130,11 @@ make install \
 	prefix=$RPM_BUILD_ROOT/usr \
 	PREFIX=$RPM_BUILD_ROOT/usr \
 	libdir=$RPM_BUILD_ROOT/usr/X11R6/lib \
-	includedir=$RPM_BUILD_ROOT/usr/X11R6/include/X11/magick
+	includedir=$RPM_BUILD_ROOT/usr/X11R6/include/X11/magick \
+	INSTALLMAN3DIR=$RPM_BUILD_ROOT/usr/man/man3
 
 strip $RPM_BUILD_ROOT/usr/{X11R6/lib/lib*.so.*.*,bin/*}
+strip --strip-debug $RPM_BUILD_ROOT/usr/lib/perl5/site_perl/5.005/%{buildarch}-linux-thread/auto/Image/Magick/Magick.so
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -142,14 +144,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644, root, root, 755)
-%doc README.txt mpeglib.*
 /usr/X11R6/lib/lib*.so.*.*
 %attr(755, root, root) /usr/bin/*
 %attr(644, root,  man) /usr/man/man1/*
 
 %files devel
 %defattr(644, root, root, 755)
-%doc www ImageMagick.html
+%doc www ImageMagick.html README.txt
 %dir /usr/X11R6/include/X11/magick
 /usr/X11R6/include/X11/magick/*.h
 /usr/X11R6/lib/lib*.so
@@ -159,18 +160,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %files perl
 %defattr(644, root, root, 755)
-%dir /usr/lib/perl5/site_perl/Image
-/usr/lib/perl5/site_perl/Image/Magick.pm
-%dir /usr/lib/perl5/site_perl/auto/Image
-%dir /usr/lib/perl5/site_perl/auto/Image/Magick
-/usr/lib/perl5/site_perl/auto/Image/Magick/autosplit.ix
-%dir /usr/lib/perl5/site_perl/%{buildarch}-linux/auto/Image
-%dir /usr/lib/perl5/site_perl/%{buildarch}-linux/auto/Image/Magick
-/usr/lib/perl5/site_perl/%{buildarch}-linux/auto/Image/Magick/Magick.bs
-/usr/lib/perl5/site_perl/%{buildarch}-linux/auto/Image/Magick/Magick.so
-%attr(644, root, man) /usr/lib/perl5/man/man3/*
+/usr/lib/perl5/site_perl/*/*/Image
+%dir /usr/lib/perl5/site_perl/*/*/auto/Image
+%dir /usr/lib/perl5/site_perl/*/*/auto/Image/Magick
+/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/autosplit.ix
+/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.bs
+%attr(755, root, root) /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
+%attr(644, root,  man) /usr/man/man3/*
 
 %changelog
+* Sun Nov  1 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.1.3-2]
+- simplification in perl subpackage,
+- man pages in perl subpackage moved to /usr/man/man3,
+- build against perl 5.005 (added also "Requires: perl >= 5.005" in perl).
+
 * Sat Aug  1 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.0.8-1]
 - added rest pl translations in subpackages,
