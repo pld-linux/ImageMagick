@@ -6,7 +6,7 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	5.1.1
-Release:	2
+Release:	3
 Copyright:	freeware
 Serial:		1
 Group:		X11/Applications/Graphics
@@ -22,7 +22,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libpng-devel
 BuildRequires:	zlib-devel
-BuildRequires:	bzip2-devel
+BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	freetype-devel
 Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
