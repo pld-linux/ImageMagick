@@ -173,8 +173,8 @@ strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* \
 gzip -9nf $RPM_BUILD_ROOT{%{_mandir}/man*/*,%{_perlmandir}/man3/*} \
 	README.txt
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post libs  -p /sbin/ldconfig
+%postun libs -p /sbin/ldconfig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
