@@ -1,0 +1,57 @@
+--- ImageMagick-5.3.2/magick/animate.c.ia64	Tue Apr  3 12:10:28 2001
++++ ImageMagick-5.3.2/magick/animate.c	Sun Apr 15 14:35:19 2001
+@@ -57,6 +57,16 @@
+ #if defined(HasX11)
+ #include "xwindows.h"
+ #include "animate.h"
++#ifdef __ia64__
++#ifndef _SIGNAL_H
++#define _SIGNAL_H //HACK
++#define FAKED_SIGNAL_H
++#endif
++#endif
++#include <bits/sigcontext.h>
++#ifdef FAKED_SIGNAL_H
++#undef _SIGNAL_H
++#endif
+ #include <signal.h>
+ 
+ /*
+--- ImageMagick-5.3.2/magick/blob.c.ia64	Sun Apr 15 15:32:34 2001
++++ ImageMagick-5.3.2/magick/blob.c	Sun Apr 15 15:32:52 2001
+@@ -55,6 +55,16 @@
+ */
+ #include "magick.h"
+ #include "defines.h"
++#ifdef __ia64__
++#ifndef _SIGNAL_H
++#define _SIGNAL_H //HACK
++#define FAKED_SIGNAL_H
++#endif
++#endif
++#include <bits/sigcontext.h>
++#ifdef FAKED_SIGNAL_H
++#undef _SIGNAL_H
++#endif
+ #include <signal.h>
+ 
+ #if !defined(BlobQuantum)
+--- ImageMagick-5.3.2/magick/display.c.ia64	Sun Apr 15 15:33:05 2001
++++ ImageMagick-5.3.2/magick/display.c	Sun Apr 15 15:33:16 2001
+@@ -57,6 +57,16 @@
+ #if defined(HasX11)
+ #include "xwindows.h"
+ #include "display.h"
++#ifdef __ia64__
++#ifndef _SIGNAL_H
++#define _SIGNAL_H //HACK
++#define FAKED_SIGNAL_H
++#endif
++#endif
++#include <bits/sigcontext.h>
++#ifdef FAKED_SIGNAL_H
++#undef _SIGNAL_H
++#endif
+ #include <signal.h>
+ 
+ /*
