@@ -4,7 +4,7 @@ Summary(fr): Visualisation, conversion, et manipulation d'images sous X.
 Summary(pl): Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr): X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:        ImageMagick
-Version:     4.0.9
+Version:     4.1.0
 Release:     1
 Copyright:   freeware
 Group:       X11/Applications/Graphics
@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644, root, root, 755)
 %doc README.txt mpeglib.*
 /usr/X11R6/lib/lib*.so.*.*
-%attr(711, root, root) /usr/bin/*
+%attr(755, root, root) /usr/bin/*
 %attr(644, root,  man) /usr/man/man1/*
 
 %files devel
@@ -171,10 +171,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644, root, man) /usr/lib/perl5/man/man3/*
 
 %changelog
-* Mon Sep  7 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [4.0.8-2]
-- changed permission on binaries to 711.
-
 * Sat Aug  1 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.0.8-1]
 - added rest pl translations in subpackages,
