@@ -21,7 +21,7 @@ Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Summary(uk):	ðÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ð¦Ä X Windows
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -37,7 +37,7 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf >= 2.56
 BuildRequires:	automake >= 1.7
 BuildRequires:	bzip2-devel >= 1.0.1
-%{!?_without_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-2}
+%{!?_without_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 BuildRequires:	freetype-devel >= 2.0.2-2
 %{?_with_gs:BuildRequires:	ghostscript-devel}
 %{!?_without_jasper:BuildRequires:	jasper-devel}
