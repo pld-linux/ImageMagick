@@ -29,6 +29,7 @@ BuildRequires:	zlib-devel
 BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.0.2-2
 BuildRequires:	libwmf-devel
+#BuildRequires:	libxml2-devel >= 2.0
 #BuildRequires:	lcms-devel
 #BuildRequires:	fpx-devel
 #BuildRequires:	hdf-devel
@@ -245,8 +246,6 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT 
-%{__make} -C Magick++ \
-	DESTDIR=$RPM_BUILD_ROOT
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
@@ -267,7 +266,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_datadir}/ImageMagick
+%dir %{_datadir}/ImageMagick
+%{_datadir}/ImageMagick/*.mgk
+%dir %{_libdir}/ImageMagick
+%{_libdir}/ImageMagick/*.mgk
 
 %attr(755,root,root) %{_bindir}/animate
 %attr(755,root,root) %{_bindir}/combine
@@ -282,7 +284,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc www ImageMagick.html README.txt.gz
+%doc images www ImageMagick.html README.txt.gz
 
 %attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_libdir}/libMagick.so
