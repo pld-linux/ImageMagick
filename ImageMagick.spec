@@ -112,9 +112,11 @@ perla.
 %setup -q
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" ./configure \
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+./configure \
 	--prefix=/usr \
 	--libdir=/usr/X11R6/lib \
+	--datadir=/usr/X11R6/share \
 	--includedir=/usr/X11R6/include/X11/magick \
 	--enable-shared \
 	--enable-lzw \
@@ -129,12 +131,15 @@ install -d $RPM_BUILD_ROOT/usr/lib/perl5/%{buildarch}-linux/5.00404/
 make install \
 	prefix=$RPM_BUILD_ROOT/usr \
 	PREFIX=$RPM_BUILD_ROOT/usr \
+	datadir=$RPM_BUILD_ROOT/usr/X11R6/share \
 	libdir=$RPM_BUILD_ROOT/usr/X11R6/lib \
 	includedir=$RPM_BUILD_ROOT/usr/X11R6/include/X11/magick \
 	INSTALLMAN3DIR=$RPM_BUILD_ROOT/usr/man/man3
 
-strip $RPM_BUILD_ROOT/usr/{X11R6/lib/lib*.so.*.*,bin/*}
+strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
 strip --strip-debug $RPM_BUILD_ROOT/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
+
+gzip $RPM_BUILD_ROOT/usr/man/man{1,3,4,5}/*
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -145,12 +150,22 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644, root, root, 755)
 /usr/X11R6/lib/lib*.so.*.*
-%attr(755, root, root) /usr/bin/*
-%attr(644, root,  man) /usr/man/man1/*
+/usr/X11R6/share/ImageMagick
+%attr(755, root, root) /usr/bin/animate
+%attr(755, root, root) /usr/bin/combine
+%attr(755, root, root) /usr/bin/convert
+%attr(755, root, root) /usr/bin/display
+%attr(755, root, root) /usr/bin/identify
+%attr(755, root, root) /usr/bin/import
+%attr(755, root, root) /usr/bin/mogrify
+%attr(755, root, root) /usr/bin/montage
+%attr(755, root, root) /usr/bin/xtp
+%attr(644, root,  man) /usr/man/man[145]/*
 
 %files devel
 %defattr(644, root, root, 755)
 %doc www ImageMagick.html README.txt
+%attr(755, root, root) /usr/bin/Magick-config
 %dir /usr/X11R6/include/X11/magick
 /usr/X11R6/include/X11/magick/*.h
 /usr/X11R6/lib/lib*.so
@@ -166,9 +181,17 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/autosplit.ix
 /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.bs
 %attr(755, root, root) /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
-%attr(644, root,  man) /usr/man/man3/*
+%attr(644, root,  man) /usr/man/man3/Image::Magick.3.gz
 
 %changelog
+* Sat Dec  7 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.1.5-1]
+- added gzipping man pages,
+- /usr/bin/Magick-config moved to devel,
+- added /usr/X11R6/share/ImageMagick/delegates.mgk file to main,
+- more man pages on levels 3, 4 and 5,
+- added LDFLAGS="-s" in ./configure enviroment.
+
 * Sun Nov  1 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.1.3-2]
 - simplification in perl subpackage,
