@@ -6,7 +6,7 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	4.2.9
-Release:	3
+Release:	4
 Copyright:	freeware
 Serial:		1
 Group:		X11/Applications/Graphics
@@ -14,8 +14,10 @@ Group(pl):	X11/Aplikacje/Grafika
 Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		ImageMagick-libpath.patch
 Patch1:		ImageMagick-pgm.patch
+Patch2:		ImageMagick-perlpaths.patch
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
-BuildRequires:	perl => 5.005_03-10
+BuildRequires:	perl => 5.005_03-14
+BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libtiff-devel
@@ -110,6 +112,7 @@ Summary(pl):	Biblioteki i modu³y perl dla ImageMagick'a
 Group:		Development/Languages/Perl  
 Group(pl):	Programowanie/Jêzyki/Perl
 Requires:	%{name} = %{version}
+Requires:	%{perl_sitearch}
 %requires_eq	perl
 
 %description perl
@@ -137,6 +140,7 @@ Biblioteki ImageMagick.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p0
 
 %build
 LDFLAGS="-s"; export LDFLAGS
@@ -152,12 +156,19 @@ make
 
 %install
 rm -fr $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/%{perl_archlib}
+install -d $RPM_BUILD_ROOT/usr/src/examples/%{name}-perl
 
 make install DESTDIR=$RPM_BUILD_ROOT 
+install PerlMagick/demo/* $RPM_BUILD_ROOT/usr/src/examples/%{name}-perl
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* \
 	$RPM_BUILD_ROOT/%{perl_sitearch}/auto/Image/Magick/Magick.so
+
+(
+  cd $RPM_BUILD_ROOT%{perl_sitearch}/auto/Image/Magick
+  sed -e "s#$RPM_BUILD_ROOT##" .packlist >.packlist.new
+  mv .packlist.new .packlist
+)
 
 gzip -9nf $RPM_BUILD_ROOT{%{_mandir}/man*/*,%{_perlmandir}/man3/*} \
 	README.txt
@@ -207,7 +218,9 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_sitearch}/Image
 %dir %{perl_sitearch}/auto/Image
 %dir %{perl_sitearch}/auto/Image/Magick
+%{perl_sitearch}/auto/Image/Magick/.packlist
 %{perl_sitearch}/auto/Image/Magick/autosplit.ix
 %{perl_sitearch}/auto/Image/Magick/Magick.bs
 %attr(755,root,root) %{perl_sitearch}/auto/Image/Magick/Magick.so
 %{_perlmandir}/man3/Image::Magick.*
+/usr/src/examples/%{name}-perl
