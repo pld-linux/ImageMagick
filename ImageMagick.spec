@@ -138,7 +138,7 @@ Summary(pt_BR):	Biblioteca e arquivos de inclusЦo para desenvolvimento com libMa
 Summary(ru):	Хедеры и библиотеки для программирования с ImageMagick
 Summary(uk):	Хедери та б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name}-libs = %{version}
 Requires:	XFree86-devel
 Requires:	bzip2-devel
 Requires:	freetype-devel
