@@ -17,7 +17,7 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Windows
 Name:		ImageMagick
 Version:	5.4.5
-Release:	3
+Release:	4
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
