@@ -187,7 +187,6 @@ ImageMagick.
 
 %package static
 Summary:	ImageMagick static libraries
-Summary(es):	Static libraries for libMagick development
 Summary(pl):	Biblioteki statyczne ImageMagick
 Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com libMagick
 Summary(ru):	Статические библиотеки для программирования с ImageMagick
@@ -197,9 +196,6 @@ Requires:	%{name}-devel = %{version}
 
 %description static
 ImageMagick static libraries.
-
-%description static -l es
-Static libraries for libMagick development.
 
 %description static -l pl
 Biblioteki statyczne ImageMagick.
@@ -217,7 +213,6 @@ Bibliotecas estАticas para desenvolvimento com libMagick.
 
 %package perl
 Summary:	Libraries and modules for access to ImageMagick from perl
-Summary(es):	Perl Module to use ImageMagick
 Summary(pl):	Biblioteki i moduЁy perla dla ImageMagick
 Summary(pt_BR):	MСdulo perl para uso com o ImageMagick
 Summary(ru):	Библиотеки и модули для доступа к ImageMagick из perl
@@ -229,10 +224,6 @@ Requires:	%{name}-libs = %{version}
 This is the ImageMagick perl support package. It perl modules and
 support files for access to ImageMagick library from perl without
 unuseful forking or such.
-
-%description perl -l es
-This packages provides a perl module to access ImagickMagick functions
-from perl scripts.
 
 %description perl -l pl
 Biblioteki i moduЁy umo©liwiaj╠ce korzystanie z ImageMagick z poziomu
@@ -252,16 +243,12 @@ em scripts perl.
 
 %package libs
 Summary:	ImageMagick libraries
-Summary(es):	ImageMagick dynamic libraries
 Summary(pl):	Biblioteki ImageMagick
 Summary(pt_BR):	Bibliotecas dinБmicas do ImageMagick
 Group:		X11/Libraries
 
 %description libs
 ImageMagick libraries.
-
-%description libs -l es
-ImageMagick dynamic libraries.
 
 %description libs -l pl
 Biblioteki ImageMagick.
@@ -271,7 +258,6 @@ Bibliotecas dinБmicas do ImageMagick.
 
 %package c++
 Summary:	ImageMagick Magick++ library
-Summary(es):	ImageMagick dynamic libraries
 Summary(pl):	Biblioteka Magick++
 Summary(pt_BR):	Bibliotecas dinБmicas do ImageMagick
 Summary(ru):	Библиотека Magick++ (C++ интерфейс для ImageMagick'а)
@@ -285,9 +271,6 @@ ImageMagick graphics manipulation library.
 
 Install ImageMagick-c++ if you want to use any applications that use
 Magick++.
-
-%description c++ -l es
-ImageMagick C++ dynamic libraries.
 
 %description c++ -l pl
 Pakiet zawiera bibliotekЙ Magick++ - interfejs w C++ do biblioteki
@@ -355,7 +338,6 @@ Magick++ (╕нтерфейс C++ для ImageMagick).
 
 %package c++-static
 Summary:	C++ bindings for the ImageMagick - static library
-Summary(es):	Static libraries for libMagick development
 Summary(pl):	Interfejs C++ do ImageMagick - biblioteka statyczna
 Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com libMagick
 Summary(ru):	Статические библиотеки C++ для программирования с ImageMagick
@@ -367,14 +349,11 @@ Requires:	%{name}-devel = %{version}
 %description c++-static
 C++ bindings for the ImageMagick - static library.
 
-%description c++-static -l es
-Static libraries for libMagick++ development
-
 %description c++-static -l pl
 Biblioteka Magick++ w wersji statycznej.
 
 %description c++-static -l pt_BR
-Bibliotecas estАticas para desenvolvimento com libMagick++
+Bibliotecas estАticas para desenvolvimento com libMagick++.
 
 %description c++-static -l ru
 Это отдельный пакет со статическими библиотеками, которые больше не
