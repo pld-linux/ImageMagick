@@ -18,7 +18,7 @@ Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-delegates-destdir.patch
 Patch3:		%{name}-libwmf.patch
 URL:		http://www.imagemagick.org/
-BuildRequires:	perl => 5.6
+BuildRequires:	perl => 5.6.1
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-DPS-devel
