@@ -10,11 +10,12 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Windows
 Name:		ImageMagick
 Version:	5.4.3
+%define 	subver		10
 Release:	3
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
-Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.simplesystems.org/pub/%{name}/%{name}-%{version}-%{subver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 URL:		http://www.imagemagick.org/
