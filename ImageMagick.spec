@@ -6,7 +6,7 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	5.3.1
-Release:	3
+Release:	4
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -17,6 +17,7 @@ Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-delegates-destdir.patch
 Patch3:		%{name}-libwmf.patch
+Patch4:		%{name}-perl-link.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	perl => 5.6.1
 BuildRequires:	rpm-perlprov >= 3.0.3-18
@@ -217,6 +218,7 @@ Biblioteka Magick++ w wersji statycznej.
 %patch1 -p0
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 # fix typo
 perl -pi -e 's@htmlc\.@html.c@' coders/Makefile.am
