@@ -6,14 +6,15 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	5.2.4
-Release: 	1
-Copyright:	freeware
-Serial:		1
+Release:	1
+Epoch:		1
+License:	Freeware
 Group:		X11/Applications/Graphics
+Group(de):	X11/Applikationen/Grafik
 Group(pl):	X11/Aplikacje/Grafika
 Source0:	ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
-Patch0:		ImageMagick-libpath.patch
-Patch1:		ImageMagick-perlpaths.patch
+Patch0:		%{name}-libpath.patch
+Patch1:		%{name}-perlpaths.patch
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
 BuildRequires:	perl => 5.005_03-14
 BuildRequires:	rpm-perlprov >= 3.0.3-18
@@ -40,10 +41,9 @@ well.
 
 %description -l de
 ImageMagick ist ein Tool zur Bildanzeige, -konvertierung und
-manipulation,
-- -das unter X-Windows läuft. Es ist enorm leitungsfähig in Bezug auf
-  die Grafikmanipulationsfunktionen, die es dem Anwender bietet, und auf
-  die Vielfalt der unterstützten Formate.
+manipulation, -das unter X-Windows läuft. Es ist enorm leitungsfähig
+in Bezug auf die Grafikmanipulationsfunktionen, die es dem Anwender
+bietet, und auf die Vielfalt der unterstützten Formate.
 
 %description -l fr
 ImageMagick est un outil d'affichage, de conversion et de manipulation
@@ -68,6 +68,7 @@ resimler üzerinde deðiþiklik yapma açýsýndan pek çok olanak sunar. Bir
 Summary:	Libraries and header files for ImageMagick development
 Summary(pl):	Biblioteki i pliki nag³ówkowe dla ImageMagick'a
 Group:		X11/Development/Libraries
+Group(de):	X11/Entwicklung/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
@@ -100,6 +101,7 @@ geliþtirmek için gereken baþlýk dosyalarýný ve kitaplýklarý içerir.
 Summary:	ImageMagick static libraries
 Summary(pl):	Biblioteki statyczne ImageMagick
 Group:		X11/Development/Libraries
+Group(de):	X11/Entwicklung/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
@@ -112,7 +114,8 @@ Biblioteki statyczne ImageMagick.
 %package perl
 Summary:	libraries and modules for access to ImageMagick from perl
 Summary(pl):	Biblioteki i modu³y perl dla ImageMagick'a
-Group:		Development/Languages/Perl  
+Group:		Development/Languages/Perl
+Group(de):	Entwicklung/Sprachen/Perl
 Group(pl):	Programowanie/Jêzyki/Perl
 Requires:	%{name} = %{version}
 Requires:	%{perl_sitearch}
@@ -131,6 +134,7 @@ poziomu perla.
 Summary:	ImageMagick libraries
 Summary(pl):	Biblioteki ImageMagick
 Group:		X11/Libraries
+Group(de):	X11/Libraries
 Group(pl):	X11/Biblioteki
 
 %description libs
@@ -145,10 +149,21 @@ Biblioteki ImageMagick.
 %patch1 -p0
 
 %build
-aclocal
-autoconf
-LDFLAGS="-s"; export LDFLAGS
-%configure \
+LDFLAGS="%{!?debug: -s}" ; export LDFLAGS
+CFLAGS="%optflags%{?debug: -g -O}"; export CFLAGS
+./configure \
+        --prefix=%{_prefix} \
+        --exec-prefix=%{_exec_prefix} \
+        --bindir=%{_bindir} \
+        --sbindir=%{_sbindir} \
+        --sysconfdir=%{_sysconfdir} \
+        --datadir=%{_datadir} \
+        --includedir=%{_includedir} \
+        --libdir=%{_libdir} \
+        --libexecdir=%{_libexecdir} \
+        --localstatedir=%{_localstatedir} \
+        --sharedstatedir=%{_sharedstatedir} \
+        --mandir=%{_mandir} \
 	--enable-shared \
 	--enable-lzw \
 	--enable-16bit-pixel \
@@ -165,17 +180,13 @@ install -d $RPM_BUILD_ROOT/usr/src/examples/%{name}-perl
 %{__make} install DESTDIR=$RPM_BUILD_ROOT 
 install PerlMagick/demo/* $RPM_BUILD_ROOT/usr/src/examples/%{name}-perl
 
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* \
-	$RPM_BUILD_ROOT/%{perl_sitearch}/auto/Image/Magick/Magick.so
-
 (
   cd $RPM_BUILD_ROOT%{perl_sitearch}/auto/Image/Magick
   sed -e "s#$RPM_BUILD_ROOT##" .packlist >.packlist.new
-  mv .packlist.new .packlist
+  mv -f .packlist.new .packlist
 )
 
-gzip -9nf $RPM_BUILD_ROOT{%{_mandir}/man*/*,%{_perlmandir}/man3/*} \
-	README.txt
+gzip -9nf README.txt
 
 %post   libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
