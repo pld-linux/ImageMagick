@@ -156,13 +156,13 @@ LDFLAGS="-s"; export LDFLAGS
 	--with-ttf \
 	--with-x
 
-make 
+%{__make} 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/src/examples/%{name}-perl
 
-make install DESTDIR=$RPM_BUILD_ROOT 
+%{__make} install DESTDIR=$RPM_BUILD_ROOT 
 install PerlMagick/demo/* $RPM_BUILD_ROOT/usr/src/examples/%{name}-perl
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* \
