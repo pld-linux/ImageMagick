@@ -1,3 +1,5 @@
+# TODO:
+# - SECURITY (?): http://securitytracker.com/alerts/2004/Aug/1011103.html
 #
 # Conditional build:
 # _with_fpx	- with FlashPIX support through fpx library
