@@ -133,7 +133,7 @@ Biblioteki ImageMagick.
 %build
 autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure  %{_target} \
+./configure  %{_target_platform} \
 	--prefix=/usr/X11R6 \
 	--includedir=/usr/X11R6/include/X11 \
 	--enable-shared \
