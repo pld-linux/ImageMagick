@@ -11,6 +11,7 @@ Serial:		1
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
 Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
+Patch:		ImageMagick-libpath.patch
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
 Buildroot:	/tmp/%{name}-%{version}-root
 
