@@ -6,7 +6,7 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	5.2.9
-Release:	1
+Release:	2
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -15,7 +15,7 @@ Group(pl):	X11/Aplikacje/Grafika
 Source0:	ftp://ftp.simplesystems.org/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
-URL:		http://www.simplesystems.org/ImageMagick/
+URL:		http://www.imagemagick.org/
 BuildRequires:	perl => 5.6
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
@@ -26,7 +26,7 @@ BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libstdc++-devel
 BuildRequires:	zlib-devel
 BuildRequires:	bzip2-devel >= 1.0.1
-BuildRequires:	freetype2-devel
+BuildRequires:	freetype-devel >= 2.0.0
 BuildRequires:	libwmf-devel
 Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
