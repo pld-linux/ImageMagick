@@ -5,14 +5,14 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	4.2.8
-Release:	1
+Release:	2
 Copyright:	freeware
 Serial:		1
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
 Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
-BuildRequires:	perl
+BuildRequires:	perl => 5.005_61
 BuildRequires:	XFree86-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libtiff-devel
@@ -145,12 +145,10 @@ make
 
 %install
 rm -fr $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_mandir}/man3
-install -d $RPM_BUILD_ROOT/%{perl_sitearch}
+install -d $RPM_BUILD_ROOT/%{perl_archlib}
 
-make install DESTDIR=$RPM_BUILD_ROOT \
-	PREFIX=$RPM_BUILD_ROOT/usr \
-	INSTALLMAN3DIR=$RPM_BUILD_ROOT%{_mandir}/man3
+make install \
+	DESTDIR=$RPM_BUILD_ROOT 
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
 strip --strip-unneeded \
