@@ -1,13 +1,13 @@
 #
 # Conditional build:
-# _without_fpx		- without FlashPIX module (which uses fpx library)
-# _with_gs		- with PostScript support through ghostscript library (warning: breaks jpeg!)
-# _without_jasper	- without JPEG2000 module (which uses jasper library)
-# _without_cxx          - without Magick++
+%bcond_without	fpx	# without FlashPIX module (which uses fpx library)
+%bcond_with	gs	# with PostScript support through ghostscript library (warning: breaks jpeg!)
+%bcond_without	jasper	# without JPEG2000 module (which uses jasper library)
+%bcond_without	cxx	# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 5.5.7
-%define		pver	10
+%define		ver 6.0.7
+%define		pver	1
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -15,46 +15,48 @@ Summary(es):	Exhibidor, convertidor y manipulador de imАgenes bajo X
 Summary(fr):	Visualisation, conversion, et manipulation d'images sous X
 Summary(pl):	NarzЙdzie do wy╤wietlania, konwersji i manipulacji grafikami
 Summary(pt_BR):	Exibidor, conversor e manipulador de imagens sob X
-Summary(ru):	Просмотр, конвертирование, обработка изображений под X Windows
+Summary(ru):	Просмотр, конвертирование, обработка изображений под X Window
 Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
-Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Windows
+Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	3
 Epoch:		1
-License:	Freeware
+License:	Apache-style License
 Group:		X11/Applications/Graphics
-Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}%{?pver:-%{pver}}.tar.bz2
-# Source0-md5:	ae9e708a6f5dc8b77220b00a0f2ae65a
+Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
+# Source0-md5:	6c9f5bd9afa95b747480040abd456784
+#Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
-Patch1:		%{name}-perlpaths.patch
-Patch2:		%{name}-ac.patch
-Patch3:		%{name}-system-libltdl.patch
+Patch1:		%{name}-ac.patch
+Patch2:		%{name}-system-libltdl.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
-BuildRequires:	autoconf >= 2.56
-BuildRequires:	automake >= 1.7
+BuildRequires:	autoconf >= 2.59
+BuildRequires:	automake >= 1.8.2
 BuildRequires:	bzip2-devel >= 1.0.1
+BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	freetype-devel >= 2.0.2-2
-%{?_with_gs:BuildRequires:	ghostscript-devel}
-%{!?_without_jasper:BuildRequires:	jasper-devel}
+BuildRequires:	gd-devel >= 2.0.15
+%{?with_gs:BuildRequires:	ghostscript-devel}
+BuildRequires:	graphviz-devel >= 1.12
+%{?with_jasper:BuildRequires:	jasper-devel >= 1.700.5}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
-BuildRequires:	libexif-devel
-%{!?_without_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
+%{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libltdl-devel
-BuildRequires:	libplot-devel
-BuildRequires:	libpng >= 1.0.8
+BuildRequires:	libpng-devel >= 1.0.8
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	libtool >= 2:1.4e-0.20021218.3
+BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libwmf-devel >= 0.2.2
 BuildRequires:	libxml2-devel >= 2.0
-BuildRequires:	perl-devel >= 5.6.1
-BuildRequires:	rpm-perlprov >= 3.0.3-18
-Requires:	%{name}-libs = %{epoch}:%{version}
+BuildRequires:	perl-devel >= 1:5.8.0
+BuildRequires:	rpm-perlprov >= 4.1-13
+BuildRequires:	txt2html
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	%{name}-coder-mpeg
 
@@ -64,13 +66,13 @@ Obsoletes:	%{name}-coder-mpeg
 
 %description
 ImageMagick is an image display, conversion, and manipulation tool. It
-runs under X windows. It is very powerful in terms of it's ability to
+runs under X Window. It is very powerful in terms of it's ability to
 allow the user to edit images. It can handle many different formats as
 well.
 
 %description -l de
 ImageMagick ist ein Tool zur Bildanzeige, -konvertierung und
-manipulation, -das unter X-Windows lДuft. Es ist enorm leitungsfДhig
+manipulation, -das unter X-Window lДuft. Es ist enorm leitungsfДhig
 in Bezug auf die Grafikmanipulationsfunktionen, die es dem Anwender
 bietet, und auf die Vielfalt der unterstЭtzten Formate.
 
@@ -100,7 +102,7 @@ permite editar imagens, podendo tratar vАrios formatos diferentes.
 
 %description -l ru
 ImageMagick - это утилита для просмотра, конвертирования и обработки
-изображений. Она работает под X Windows. ImageMagick предоставляет
+изображений. Она работает под X Window. ImageMagick предоставляет
 пользователю широкие возможности по обработке изображений в самых
 разнообразных форматах.
 
@@ -112,8 +114,19 @@ resimler Эzerinde deПiЧiklik yapma aГЩsЩndan pek Гok olanak sunar. Bir
 
 %description -l uk
 ImageMagick - це утил╕та для перегляду, конвертування та обробки
-зображень. Вона працю╓ п╕д X Windows. ImageMagick да╓ користувачу
+зображень. Вона працю╓ п╕д X Window. ImageMagick да╓ користувачу
 широк╕ можливост╕ по обробц╕ зображень в р╕зноман╕тних форматах.
+
+%package doc
+Summary:	ImageMagick documentation
+Summary(pl):	Dokumentacja ImageMagick
+Group:		Documentation
+
+%description doc
+Documentation and user guide for ImageMagick 6.x.
+
+%description doc -l pl
+Dokumentacja i podrЙcznik u©ytkownika ImageMagick 6.x.
 
 %package libs
 Summary:	ImageMagick libraries
@@ -138,13 +151,14 @@ Summary(pt_BR):	Biblioteca e arquivos de inclusЦo para desenvolvimento com libMa
 Summary(ru):	Хедеры и библиотеки для программирования с ImageMagick
 Summary(uk):	Хедери та б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Requires:	%{name}-libs = %{epoch}:%{version}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	XFree86-devel
 Requires:	bzip2-devel
 Requires:	freetype-devel
 Requires:	lcms-devel
-Requires:	libexif-devel
 Requires:	libltdl-devel
+Requires:	libjpeg-devel
+Requires:	libtiff-devel
 Requires:	zlib-devel
 
 %description devel
@@ -199,7 +213,7 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com libMagick
 Summary(ru):	Статические библиотеки для программирования с ImageMagick
 Summary(uk):	Статичн╕ б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 ImageMagick static libraries.
@@ -219,30 +233,31 @@ Bibliotecas estАticas para desenvolvimento com libMagick.
 складу ImageMagick-devel.
 
 %package perl
-Summary:	Libraries and modules for access to ImageMagick from perl
-Summary(pl):	Biblioteki i moduЁy perla dla ImageMagick
+Summary:	Libraries and modules for access to ImageMagick from Perl
+Summary(pl):	Biblioteki i moduЁy Perla dla ImageMagick
 Summary(pt_BR):	MСdulo perl para uso com o ImageMagick
 Summary(ru):	Библиотеки и модули для доступа к ImageMagick из perl
 Summary(uk):	Б╕бл╕отеки та модул╕ для доступу до ImageMagick з Perl
 Group:		Development/Languages/Perl
-Requires:	%{name}-libs = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description perl
-This is the ImageMagick perl support package. It perl modules and
+This is the ImageMagick Perl support package. It perl modules and
 support files for access to ImageMagick library from perl without
 unuseful forking or such.
 
 %description perl -l pl
 Biblioteki i moduЁy umo©liwiaj╠ce korzystanie z ImageMagick z poziomu
-perla.
+Perla.
 
 %description perl -l pt_BR
 Este pacote fornece um mСdulo perl para acessar funГУes do ImageMagick
-em scripts perl.
+em scripts Perl.
 
 %description perl -l ru
 Это пакет ImageMagick для поддержки perl. Он включает модули perl и
-вспомогательные файлы для доступа к библиотеке ImageMagick из perl.
+вспомогательные файлы для доступа к библиотеке ImageMagick из Perl.
 
 %description perl -l uk
 Це пакет ImageMagick для п╕дтримки Perl. В╕н м╕стить модул╕ Perl та
@@ -255,7 +270,7 @@ Summary(pt_BR):	Bibliotecas dinБmicas do ImageMagick
 Summary(ru):	Библиотека Magick++ (C++ интерфейс для ImageMagick'а)
 Summary(uk):	Б╕бл╕отека Magick++ (╕нтерфейс C++ для ImageMagick)
 Group:		X11/Libraries
-Requires:	%{name}-libs = %{epoch}:%{version}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description c++
 This package contains the Magick++ library, a C++ binding to the
@@ -290,8 +305,8 @@ Summary(pt_BR):	Biblioteca e arquivos de inclusЦo para desenvolvimento com libMa
 Summary(ru):	Хедеры и библиотеки для разработок с использованием Magick++ (C++ интерфейс для ImageMagick'а)
 Summary(uk):	Хедери та б╕бл╕отеки для розробок з використанням Magick++ (╕нтерфейсу C++ для ImageMagick)
 Group:		X11/Development/Libraries
-Requires:	%{name}-c++ = %{epoch}:%{version}
-Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	%{name}-c++ = %{epoch}:%{version}-%{release}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	libstdc++-devel
 
 %description c++-devel
@@ -336,8 +351,8 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com libMagick
 Summary(ru):	Статические библиотеки C++ для программирования с ImageMagick
 Summary(uk):	Статичн╕ б╕бл╕отеки C++ для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Requires:	%{name}-c++-devel = %{epoch}:%{version}
-Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	%{name}-c++-devel = %{epoch}:%{version}-%{release}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description c++-static
 C++ bindings for the ImageMagick - static library.
@@ -356,11 +371,23 @@ Bibliotecas estАticas para desenvolvimento com libMagick++.
 Це окремий пакет з╕ статичними б╕бл╕отеками, як╕ б╕льше не входять до
 складу ImageMagick-c++-devel.
 
+%package coder-dot
+Summary:	Coder module for GraphViz DOT files
+Summary(pl):	ModuЁ kodera dla plikСw GraphViz DOT
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-dot
+Coder module for GraphViz DOT files.
+
+%description coder-dot -l pl
+ModuЁ kodera dla plikСw GraphViz DOT.
+
 %package coder-dps
 Summary:	Coder module for Postscript files using DPS extension
 Summary(pl):	ModuЁ kodera dla plikСw Postscript u©ywaj╠cy rozszerzenia DPS
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-dps
 Coder module for Postcript files using DPS (Display PostScript)
@@ -374,7 +401,7 @@ PostScript).
 Summary:	Coder module for FlashPIX (FPX) files
 Summary(pl):	ModuЁ kodera dla plikСw FlashPIX (FPX)
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-fpx
 Coder module for FlashPIX (FPX) files.
@@ -386,7 +413,7 @@ ModuЁ kodera dla plikСw FlashPIX (FPX).
 Summary:	Coder module for JBIG files
 Summary(pl):	ModuЁ kodera dla plikСw JBIG
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-jbig
 Coder module for JBIG files.
@@ -398,7 +425,7 @@ ModuЁ kodera dla plikСw JBIG.
 Summary:	Coder module for JPEG files
 Summary(pl):	ModuЁ kodera dla plikСw JPEG
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-jpeg
 Coder module for JPEG files.
@@ -410,7 +437,7 @@ ModuЁ kodera dla plikСw JPEG.
 Summary:	Coder module for JPEG-2000 (JP2/JPC) files using JasPer library
 Summary(pl):	ModuЁ kodera dla plikСw JPEG-2000 (JP2/JPC) u©ywaj╠cy biblioteki JasPer
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-jpeg2
 Coder module for JPEG-2000 (JP2/JPC) files using JasPer library.
@@ -423,7 +450,7 @@ JasPer.
 Summary:	Coder module for MIFF files
 Summary(pl):	ModuЁ kodera dla plikСw MIFF
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-miff
 Coder module for MIFF files.
@@ -431,23 +458,11 @@ Coder module for MIFF files.
 %description coder-miff -l pl
 ModuЁ kodera dla plikСw MIFF.
 
-%package coder-mpeg
-Summary:	Coder module for MPEG files
-Summary(pl):	ModuЁ kodera dla plikСw MPEG
-Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
-
-%description coder-mpeg
-Coder module for MPEG files.
-
-%description coder-mpeg -l pl
-ModuЁ kodera dla plikСw MPEG.
-
 %package coder-mpr
 Summary:	Coder module for ImageMagick MPR and MSL files
 Summary(pl):	ModuЁ kodera dla plikСw MPR i MSL ImageMagick
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-mpr
 Coder module for Magick Persistent Registry (MPR) and Magick Scripting
@@ -461,7 +476,7 @@ Scripting Language (MSL).
 Summary:	Coder module for PDF files
 Summary(pl):	ModuЁ kodera dla plikСw PDF
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-pdf
 Coder module for PDF files.
@@ -473,7 +488,7 @@ ModuЁ kodera dla plikСw PDF.
 Summary:	Coder module for PNG files
 Summary(pl):	Modul kodera dla plikСw PNG
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-png
 Coder module for PNG files.
@@ -485,7 +500,7 @@ ModuЁ kodera dla plikСw PNG.
 Summary:	Coder module for Postscript Level II & III (PS2/PS3) files
 Summary(pl):	ModuЁ kodera dla plikСw Postscript Level II i III (PS2/PS3)
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-ps2
 Coder module for Postscript Level II & III (PS2/PS3) files.
@@ -497,7 +512,7 @@ ModuЁ kodera dla plikСw Postscript Level II i III (PS2/PS3).
 Summary:	Coder module for SVG (Scalable Vector Graphics) files
 Summary(pl):	ModuЁ kodera dla plikСw SVG (Scalable Vector Graphics)
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-svg
 Coder module for SVG (Scalable Vector Graphics) files.
@@ -509,7 +524,7 @@ ModuЁ kodera dla plikСw SVG (Scalable Vector Graphics).
 Summary:	Coder module for TIFF files
 Summary(pl):	ModuЁ kodera dla plikСw TIFF
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-tiff
 Coder module for TIFF files.
@@ -521,7 +536,7 @@ ModuЁ kodera dla plikСw TIFF.
 Summary:	Coder module for retrieving files via URL
 Summary(pl):	ModuЁ kodera ╤ci╠gaj╠cy pliki o podanym URL
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-url
 Coder module for retrieving files via URL.
@@ -533,7 +548,7 @@ ModuЁ kodera ╤ci╠gaj╠cy pliki o podanym URL.
 Summary:	Coder module for WMF files
 Summary(pl):	ModuЁ kodera dla plikСw WMF
 Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-wmf
 Coder module for WMF files.
@@ -546,7 +561,8 @@ ModuЁ kodera dla plikСw WMF.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+
+find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
 
 %build
 rm -f missing
@@ -558,10 +574,10 @@ rm -f missing
 	--enable-fast-install \
 	--enable-lzw \
 	--enable-shared \
-	%{?_without_fpx:--without-fpx} \
-	%{!?_with_gs:--without-gslib} \
-	%{?_without_jasper:--without-jp2} \
-	--with%{?_without_cxx:out}-magick_plus_plus \
+	--with%{!?with_fpx:out}-fpx \
+	--with%{!?with_gs:out}-gslib \
+	--with%{!?with_jasper:out}-jp2 \
+	--with%{!?with_cxx:out}-magick_plus_plus \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-modules \
 	--with-perl=%{__perl} \
@@ -593,20 +609,17 @@ rm -rf $RPM_BUILD_ROOT
 %post   c++ -p /sbin/ldconfig
 %postun c++ -p /sbin/ldconfig
 
-%files libs
-%defattr(644,root,root,755)
-%doc Copyright.txt
-%attr(755,root,root) %{_libdir}/libMagick.so.*.*.*
-
 %files
 %defattr(644,root,root,755)
 %dir %{_libdir}/ImageMagick-%{ver}
-%{_libdir}/ImageMagick-%{ver}/*.mgk
+%dir %{_libdir}/ImageMagick-%{ver}/config
+%{_libdir}/ImageMagick-%{ver}/config/*.mgk
 %dir %{modulesdir}
-%{_libdir}/ImageMagick-%{ver}/*.mgk
 %dir %{modulesdir}/coders
-%{modulesdir}/coders/modules.mgk
 %dir %{modulesdir}/filters
+%dir %{_datadir}/ImageMagick-%{ver}
+%dir %{_datadir}/ImageMagick-%{ver}/config
+%{_datadir}/ImageMagick-%{ver}/config/*.mgk
 
 # ========= coders without additional deps
 %attr(755,root,root) %{modulesdir}/coders/art.so
@@ -619,6 +632,14 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/bmp.la
 %attr(755,root,root) %{modulesdir}/coders/caption.so
 %{modulesdir}/coders/caption.la
+%attr(755,root,root) %{modulesdir}/coders/cin.so
+%{modulesdir}/coders/cin.la
+%attr(755,root,root) %{modulesdir}/coders/cip.so
+%{modulesdir}/coders/cip.la
+%attr(755,root,root) %{modulesdir}/coders/clip.so
+%{modulesdir}/coders/clip.la
+%attr(755,root,root) %{modulesdir}/coders/clipboard.so
+%{modulesdir}/coders/clipboard.la
 %attr(755,root,root) %{modulesdir}/coders/cmyk.so
 %{modulesdir}/coders/cmyk.la
 %attr(755,root,root) %{modulesdir}/coders/cut.so
@@ -701,12 +722,16 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/ps.la
 %attr(755,root,root) %{modulesdir}/coders/pwp.so
 %{modulesdir}/coders/pwp.la
+%attr(755,root,root) %{modulesdir}/coders/raw.so
+%{modulesdir}/coders/raw.la
 %attr(755,root,root) %{modulesdir}/coders/rgb.so
 %{modulesdir}/coders/rgb.la
 %attr(755,root,root) %{modulesdir}/coders/rla.so
 %{modulesdir}/coders/rla.la
 %attr(755,root,root) %{modulesdir}/coders/rle.so
 %{modulesdir}/coders/rle.la
+%attr(755,root,root) %{modulesdir}/coders/scr.so
+%{modulesdir}/coders/scr.la
 %attr(755,root,root) %{modulesdir}/coders/sct.so
 %{modulesdir}/coders/sct.la
 %attr(755,root,root) %{modulesdir}/coders/sfw.so
@@ -753,6 +778,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/x.la
 %attr(755,root,root) %{modulesdir}/coders/xwd.so
 %{modulesdir}/coders/xwd.la
+%attr(755,root,root) %{modulesdir}/coders/ycbcr.so
+%{modulesdir}/coders/ycbcr.la
 %attr(755,root,root) %{modulesdir}/coders/yuv.so
 %{modulesdir}/coders/yuv.la
 
@@ -760,6 +787,7 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/filters/analyze.la
 
 %attr(755,root,root) %{_bindir}/animate
+%attr(755,root,root) %{_bindir}/compare
 %attr(755,root,root) %{_bindir}/composite
 %attr(755,root,root) %{_bindir}/convert
 %attr(755,root,root) %{_bindir}/conjure
@@ -771,13 +799,28 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_mandir}/man1/[Iacdim]*
 
+%files doc
+%defattr(644,root,root,755)
+%doc AUTHORS ChangeLog LICENSE NEWS Magick.pdf
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libMagick.so.*.*.*
+%attr(755,root,root) %{_libdir}/libWand.so.*.*.*
+
+%files coder-dot
+%defattr(644,root,root,755)
+# R: graphviz, gd
+%attr(755,root,root) %{modulesdir}/coders/dot.so
+%{modulesdir}/coders/dot.la
+
 %files coder-dps
 %defattr(644,root,root,755)
 # R: XFree86-DPS (libdps.so)
 %attr(755,root,root) %{modulesdir}/coders/dps.so
 %{modulesdir}/coders/dps.la
 
-%if %{?_without_fpx:0}%{!?_without_fpx:1}
+%if %{with fpx}
 %files coder-fpx
 %defattr(644,root,root,755)
 # R: fpx
@@ -797,7 +840,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/jpeg.so
 %{modulesdir}/coders/jpeg.la
 
-%if %{?_without_jasper:0}%{!?_without_jasper:1}
+%if %{with jasper}
 %files coder-jpeg2
 %defattr(644,root,root,755)
 # R: jasper, libjpeg
@@ -865,19 +908,25 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-#%%doc README.txt
 %doc %{_defaultdocdir}/%{name}-devel-%{version}
 %attr(755,root,root) %{_bindir}/Magick-config
+%attr(755,root,root) %{_bindir}/Wand-config
 %attr(755,root,root) %{_libdir}/libMagick.so
+%attr(755,root,root) %{_libdir}/libWand.so
 %{_libdir}/libMagick.la
+%{_libdir}/libWand.la
 %{_includedir}/magick
+%{_includedir}/wand
 %{_pkgconfigdir}/ImageMagick.pc
+%{_pkgconfigdir}/Wand.pc
 %{_mandir}/man[45]/*
 %{_mandir}/man1/Magick-config.1*
+%{_mandir}/man1/Wand-config.1*
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libMagick.a
+%{_libdir}/libWand.a
 
 %files perl
 %defattr(644,root,root,755)
@@ -890,7 +939,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Image::Magick.*
 %{_examplesdir}/%{name}-perl
 
-%if %{?_without_cxx:0}%{!?_without_cxx:1}
+%if %{with cxx}
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++.so.*.*.*
