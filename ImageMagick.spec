@@ -39,12 +39,12 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf >= 2.56
 BuildRequires:	automake >= 1.7
 BuildRequires:	bzip2-devel >= 1.0.1
-%{!?_without_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 BuildRequires:	freetype-devel >= 2.0.2-2
 %{?_with_gs:BuildRequires:	ghostscript-devel}
 %{!?_without_jasper:BuildRequires:	jasper-devel}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
+%{!?_without_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libplot-devel
@@ -57,8 +57,8 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	perl-devel >= 5.6.1
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 Requires:	%{name}-libs = %{epoch}:%{version}
-Obsoletes:	%{name}-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	%{name}-coder-mpeg
 
 # we don't want "-s" here, because it would be added to `Magick*-config --ldflags`
 %define		rpmldflags	%{nil}
@@ -558,20 +558,20 @@ rm -f missing
 CPPFLAGS="-I/usr/include/g++"
 %configure \
 	CPPFLAGS="$CPPFLAGS" \
-	--with-quantum-depth=%{QuantumDepth} \
+	--enable-fast-install \
 	--enable-lzw \
 	--enable-shared \
-	--enable-fast-install \
-	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	%{?_without_fpx:--without-fpx} \
 	%{!?_with_gs:--without-gslib} \
 	%{?_without_jasper:--without-jp2} \
 	--with%{?_without_cxx:out}-magick_plus_plus \
+	--with-gs-font-dir=%{_fontsdir}/Type1 \
+	--with-modules \
 	--with-perl=%{__perl} \
 	--with-perl-options="INSTALLDIRS=vendor" \
+	--with-quantum-depth=%{QuantumDepth} \
 	--with-threads \
 	--with-ttf \
-	--with-modules \
 	--with-x
 
 %{__make}
