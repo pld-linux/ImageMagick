@@ -1,0 +1,2 @@
+- fixed ImageMagick-libpath.patch,
+-- changed "%%patch0" option from -p1 to -p0
