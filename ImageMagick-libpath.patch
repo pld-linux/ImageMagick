@@ -1,11 +1,11 @@
---- ImageMagick-5.3.7/PerlMagick/Makefile.PL.in.orig	Tue May 15 23:04:15 2001
-+++ ImageMagick-5.3.7/PerlMagick/Makefile.PL.in	Sat Jun  2 19:44:42 2001
-@@ -6,7 +6,7 @@
- WriteMakefile(
-     'NAME'	=> 'Image::Magick',
-     'VERSION_FROM' => 'Magick.pm', # finds $VERSION
--    'LIBS'	=> ['@LDFLAGS@ @MAGICKLIB@ @LIB_JBIG@ @LIB_HDF@ @LIB_LCMS@ @LIB_TIFF@ @LIB_TTF@ @LIB_JPEG@ @LIB_JP2@ @LIB_GS@ @LIB_PNG@ @LIB_FPX@ @LIB_DPS@ @LIB_XEXT@ @LIB_XT@ @LIB_X11@ @LIB_BZLIB@ @LIB_XML@ @LIB_ZLIB@ @LIB_THREAD@ @LIB_LF@ @LIB_MATH@'],
-+    'LIBS'	=> ['-L@top_srcdir@/magick/.libs @LDFLAGS@ @MAGICKLIB@ @LIB_JBIG@ @LIB_HDF@ @LIB_LCMS@ @LIB_TIFF@ @LIB_TTF@ @LIB_JPEG@ @LIB_JP2@ @LIB_GS@ @LIB_PNG@ @LIB_FPX@ @LIB_DPS@ @LIB_XEXT@ @LIB_XT@ @LIB_X11@ @LIB_BZLIB@ @LIB_XML@ @LIB_ZLIB@ @LIB_THREAD@ @LIB_LF@ @LIB_MATH@ @LIB_WMF@'],
-     'DEFINE'	=> '@DEFS@',     # e.g., '-DHAVE_SOMETHING' 
-     'INC'	=> '-I../ -I@top_srcdir@ @CPPFLAGS@',
-     ($Config{'archname'} =~ /-object$/i ? ('CAPI' => 'TRUE') : ()),
+--- ImageMagick-5.4.3/PerlMagick/Makefile.PL.in.orig	Sat Nov 10 16:24:59 2001
++++ ImageMagick-5.4.3/PerlMagick/Makefile.PL.in	Sun Feb 17 16:55:55 2002
+@@ -58,7 +58,7 @@
+    'INSTALLBIN'	=> '@bindir@',
+ 
+    # Library specification
+-   'LIBS'	=> ['@LDFLAGS@ @MAGICKLIB@ @MAGICK_DEP_LIBS@'],
++   'LIBS'	=> ['-L@top_srcdir@/magick/.libs @LDFLAGS@ @MAGICKLIB@ @MAGICK_DEP_LIBS@'],
+ 
+    # Perl binary name (if a Perl binary is built)
+    'MAP_TARGET'	=> 'PerlMagick',
