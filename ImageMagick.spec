@@ -17,13 +17,14 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Windows
 Name:		ImageMagick
 Version:	5.4.5
-Release:	2
+Release:	3
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
 Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
+Patch2:		%{name}-ac.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
@@ -385,6 +386,7 @@ Bibliotecas estАticas para desenvolvimento com libMagick++
 %setup  -q
 %patch0 -p1
 %patch1 -p0
+%patch2 -p1
 
 # fix lcms.h include path
 perl -pi -e 's@lcms/lcms\.h@lcms.h@' magick/transform.c
@@ -399,6 +401,7 @@ aclocal
 if [ -f %{_pkgconfigdir}/libpng12.pc ] ; then
 	CPPFLAGS="`pkg-config libpng12 --cflags`"
 fi
+CPPFLAGS="$CPPFLAGS -I/usr/include/g++"
 %configure \
 	CPPFLAGS="$CPPFLAGS" \
 	--enable-16bit-pixel \
@@ -414,7 +417,7 @@ fi
 	--with-ttf \
 	--with-x
 
-%{__make} 
+%{__make}
 %{__make} -C Magick++
 
 %install
