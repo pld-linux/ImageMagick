@@ -1,0 +1,29 @@
+--- ImageMagick-5.4.5/configure.ac.old	Mon Jul  1 22:29:23 2002
++++ ImageMagick-5.4.5/configure.ac	Mon Jul  1 22:30:03 2002
+@@ -737,16 +737,16 @@
+ #
+ have_fpx='no'
+ LIB_FPX=''
++AC_LANG_PUSH(C++)
++AC_REQUIRE_CPP
+ if test "$with_fpx" != 'no'
+ then
+     AC_MSG_CHECKING(for FlashPIX components )
+     AC_MSG_RESULT()
+     failed=0;
+     passed=0;
+-    AC_LANG_PUSH(C++)
+     AC_CHECK_HEADER(fpxlib.h,passed=`expr $passed + 1`,failed=`expr $failed + 1`)
+     AC_CHECK_LIB(fpx,FPX_OpenImageByFilename,passed=`expr $passed + 1`,failed=`expr $failed + 1`,)
+-    AC_LANG_POP
+     AC_MSG_CHECKING(if FlashPIX package is complete)
+     if test $passed -gt 0
+     then
+@@ -765,6 +765,7 @@
+         AC_MSG_RESULT(no)
+     fi
+ fi
++AC_LANG_POP
+ AM_CONDITIONAL(HasFPX, test "$have_fpx" = 'yes')
+ AC_SUBST(LIB_FPX)
+ 
