@@ -2,12 +2,12 @@
 # Conditional build:
 # _without_fpx		- without FlashPIX module (which uses fpx library)
 # _with_gs		- with PostScript support through ghostscript library (warning: breaks jpeg!)
-# _without_hdf		- without HDF module (which uses hdf library)
 # _without_jasper	- without JPEG2000 module (which uses jasper library)
+# _without_cxx          - without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 5.5.1
-%define		pver	4
+%define		ver 5.5.2
+%define		pver	5
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -19,7 +19,7 @@ Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Summary(uk):	ðÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ð¦Ä X Windows
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -28,17 +28,16 @@ Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-ac.patch
 Patch3:		%{name}-system-libltdl.patch
-Patch4:		%{name}-new-jasper.patch
+Patch4:		%{name}-dps.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.56
 BuildRequires:	automake >= 1.7
 BuildRequires:	bzip2-devel >= 1.0.1
-%{!?_without_fpx:BuildRequires:	fpx-devel}
+%{!?_without_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-2}
 BuildRequires:	freetype-devel >= 2.0.2-2
 %{?_with_gs:BuildRequires:	ghostscript-devel}
-%{!?_without_hdf:BuildRequires:	hdf-devel}
 %{!?_without_jasper:BuildRequires:	jasper-devel}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
@@ -48,19 +47,14 @@ BuildRequires:	libplot-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:1.4e
 BuildRequires:	libwmf-devel >= 0.2.2
 BuildRequires:	libxml2-devel >= 2.0
-BuildRequires:	mpeg2dec-devel
 BuildRequires:	perl-devel >= 5.6.1
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 Requires:	%{name}-libs = %{version}
+Obsoletes:	%{name}-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
-%define		_includedir	%{_prefix}/include/X11
-%define		_perlmandir	/usr/share/man
 
 %description
 ImageMagick is an image display, conversion, and manipulation tool. It
@@ -378,18 +372,6 @@ Coder module for FlashPIX (FPX) files.
 %description coder-fpx -l pl
 Modu³ kodera dla plików FlashPIX (FPX).
 
-%package coder-hdf
-Summary:	Coder module for HDF files
-Summary(pl):	Modu³ kodera dla plików HDF
-Group:		X11/Applications/Graphics
-Requires:	%{name} = %{version}
-
-%description coder-hdf
-Coder module for HDF files.
-
-%description coder-hdf -l pl
-Modu³ kodera dla plików HDF.
-
 %package coder-jbig
 Summary:	Coder module for JBIG files
 Summary(pl):	Modu³ kodera dla plików JBIG
@@ -569,10 +551,10 @@ CPPFLAGS="-I/usr/include/g++"
 	--enable-16bit-pixel \
 	--enable-lzw \
 	--enable-shared \
+	--enable-fast-install \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	%{?_without_fpx:--without-fpx} \
 	%{!?_with_gs:--without-gslib} \
-	%{!?_without_hdf:--with-hdf} \
 	%{?_without_jasper:--without-jp2} \
 	--with%{?_without_cxx:out}-magick_plus_plus \
 	--with-perl \
@@ -607,7 +589,7 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %doc Copyright.txt
-%attr(755,root,root) %{_libdir}/libMagick-%{ver}.so
+%attr(755,root,root) %{_libdir}/libMagick-%{ver}.so.*.*
 
 %files
 %defattr(644,root,root,755)
@@ -673,6 +655,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/mono.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/mpc.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/mpc.so
+%{_libdir}/ImageMagick-%{ver}/modules/coders/mpeg.la
+%attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/mpeg.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/mtv.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/mtv.so
 %{_libdir}/ImageMagick-%{ver}/modules/coders/mvg.la
@@ -790,14 +774,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/fpx.so
 %endif
 
-%if %{?_without_hdf:0}%{!?_without_hdf:1}
-%files coder-hdf
-%defattr(644,root,root,755)
-# R: hdf, libjpeg
-%{_libdir}/ImageMagick-%{ver}/modules/coders/hdf.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/hdf.so
-%endif
-
 %files coder-jbig
 %defattr(644,root,root,755)
 # R: jbigkit (libjbig.so)
@@ -823,12 +799,6 @@ rm -rf $RPM_BUILD_ROOT
 # R: libjpeg, zlib, libbz2
 %{_libdir}/ImageMagick-%{ver}/modules/coders/miff.la
 %attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/miff.so
-
-%files coder-mpeg
-%defattr(644,root,root,755)
-# R: mpeg2dec (libmpeg2.so)
-%{_libdir}/ImageMagick-%{ver}/modules/coders/mpeg.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/mpeg.so
 
 %files coder-mpr
 %defattr(644,root,root,755)
@@ -907,7 +877,7 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_sitearch}/auto/Image/Magick/autosplit.ix
 %{perl_sitearch}/auto/Image/Magick/Magick.bs
 %attr(755,root,root) %{perl_sitearch}/auto/Image/Magick/Magick.so
-%{_perlmandir}/man3/Image::Magick.*
+%{_mandir}/man3/Image::Magick.*
 %{_examplesdir}/%{name}-perl
 
 %if %{?_without_cxx:0}%{!?_without_cxx:1}
