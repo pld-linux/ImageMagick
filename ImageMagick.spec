@@ -11,7 +11,7 @@ Copyright:	freeware
 Serial:		1
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
-Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		ImageMagick-libpath.patch
 Patch1:		ImageMagick-perlpaths.patch
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
@@ -33,32 +33,36 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_perlmandir	/usr/share/man
 
 %description
-ImageMagick is an image display, conversion, and manipulation tool. It runs
-under X windows. It is very powerful in terms of it's ability to allow the
-user to edit images.  It can handle many different formats as well.
+ImageMagick is an image display, conversion, and manipulation tool. It
+runs under X windows. It is very powerful in terms of it's ability to
+allow the user to edit images. It can handle many different formats as
+well.
 
 %description -l de
-ImageMagick ist ein Tool zur Bildanzeige, -konvertierung und manipulation,
--das unter X-Windows läuft. Es ist enorm leitungsfähig in Bezug auf die
-Grafikmanipulationsfunktionen, die es dem Anwender bietet, und auf die
-Vielfalt der unterstützten Formate.
+ImageMagick ist ein Tool zur Bildanzeige, -konvertierung und
+manipulation,
+- -das unter X-Windows läuft. Es ist enorm leitungsfähig in Bezug auf
+  die Grafikmanipulationsfunktionen, die es dem Anwender bietet, und auf
+  die Vielfalt der unterstützten Formate.
 
 %description -l fr
 ImageMagick est un outil d'affichage, de conversion et de manipulation
-d'images. Il tourne sous X Window et est très puissant en termes de capacité
-d'édition des images. Il peut aussi gérer de nombreux formats différents.
+d'images. Il tourne sous X Window et est très puissant en termes de
+capacité d'édition des images. Il peut aussi gérer de nombreux formats
+différents.
 
 %description -l pl
-ImageMagic jest narzêdziem do manipulacji, konwersji i wy¶wietlania. W sk³ad
-pakietu wchodz± zarówno narzêdzia X Window jak i do u¿ywania z linii poleceñ
-umo¿liwiaj±ce edycjê plików graficznych. Narzêdzia z pakietu ImageMagic
-potrafi± obs³u¿yæ wiele ró¿ncyh formatów graficznych.
+ImageMagic jest narzêdziem do manipulacji, konwersji i wy¶wietlania. W
+sk³ad pakietu wchodz± zarówno narzêdzia X Window jak i do u¿ywania z
+linii poleceñ umo¿liwiaj±ce edycjê plików graficznych. Narzêdzia z
+pakietu ImageMagic potrafi± obs³u¿yæ wiele ró¿ncyh formatów
+graficznych.
 
 %description -l tr
-ImageMagick bir resim gösterme, çevirme ve deðiþiklik yapma programýdýr. X
-Window pencereleme sistemi altýnda çalýþýr. Kullanýcýya resimler üzerinde
-deðiþiklik yapma açýsýndan pek çok olanak sunar. Bir çok resim biçimini
-rahatlýkla kullanabilir.
+ImageMagick bir resim gösterme, çevirme ve deðiþiklik yapma
+programýdýr. X Window pencereleme sistemi altýnda çalýþýr. Kullanýcýya
+resimler üzerinde deðiþiklik yapma açýsýndan pek çok olanak sunar. Bir
+çok resim biçimini rahatlýkla kullanabilir.
 
 %package devel
 Summary:	Libraries and header files for ImageMagick development
@@ -68,9 +72,9 @@ Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
 %description devel
-This is the ImageMagick development package.  It includes the static
-libraries and header files for use in developing your own applications that
-make use of the ImageMagick code and/or APIs.
+This is the ImageMagick development package. It includes the static
+libraries and header files for use in developing your own applications
+that make use of the ImageMagick code and/or APIs.
 
 %description -l de devel
 Dies ist das ImageMagick-Entwicklerpaket. Es enthält die statischen
@@ -78,9 +82,9 @@ Libraries und Header-Dateien zum Entwickeln von Anwendungen, die
 ImageMagick-Code und/oder -APIs nutzen.
 
 %description -l fr devel
-Paquetage de développement ImageMagick. Contient les bibliothèques statiques
-et les en-têtes utilisés pour créer vos propres applications utilisant le
-code d'ImageMagick et/ou ses APIs.
+Paquetage de développement ImageMagick. Contient les bibliothèques
+statiques et les en-têtes utilisés pour créer vos propres applications
+utilisant le code d'ImageMagick et/ou ses APIs.
 
 %description -l pl devel
 Pakiet ten zawieraja pliki potrzebne przy kompilowaniu programów
@@ -89,12 +93,12 @@ biblioteki statyczne i dokumentacjê niezbêdn± przy pisaniu w³asnych
 programów z wykorzystaniem API jakie udostêpnia ImageMagick.
 
 %description -l tr devel
-Bu paket, ImageMagick uygulama arayüzünü kullanan programlar geliþtirmek
-için gereken baþlýk dosyalarýný ve kitaplýklarý içerir.
+Bu paket, ImageMagick uygulama arayüzünü kullanan programlar
+geliþtirmek için gereken baþlýk dosyalarýný ve kitaplýklarý içerir.
 
 %package static
 Summary:	ImageMagick static libraries
-Summary(pl): 	Biblioteki statyczne ImageMagick
+Summary(pl):	Biblioteki statyczne ImageMagick
 Group:		X11/Development/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
@@ -115,19 +119,19 @@ Requires:	%{perl_sitearch}
 %requires_eq	perl
 
 %description perl
-This is the ImageMagick perl support package.  It perl modules and support
-files for access to ImageMagick library from perl without unuseful forking
-or such.
+This is the ImageMagick perl support package. It perl modules and
+support files for access to ImageMagick library from perl without
+unuseful forking or such.
 
 %description -l pl perl
-Biblioteki i modu³y umo¿liwiaj±ce korzystanie z ImageMagick'a z poziomu
-perla. 
+Biblioteki i modu³y umo¿liwiaj±ce korzystanie z ImageMagick'a z
+poziomu perla.
 
 %package libs
-Summary:        ImageMagick libraries
-Summary(pl):    Biblioteki ImageMagick
-Group:          X11/Libraries
-Group(pl):      X11/Biblioteki
+Summary:	ImageMagick libraries
+Summary(pl):	Biblioteki ImageMagick
+Group:		X11/Libraries
+Group(pl):	X11/Biblioteki
 
 %description libs
 ImageMagick libraries.
@@ -155,7 +159,7 @@ LDFLAGS="-s"; export LDFLAGS
 make 
 
 %install
-rm -fr $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/src/examples/%{name}-perl
 
 make install DESTDIR=$RPM_BUILD_ROOT 
