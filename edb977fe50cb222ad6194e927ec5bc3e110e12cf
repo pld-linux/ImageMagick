@@ -1,0 +1,4 @@
+- updated to 5.4.3 (new stable version),
+- removed outdated amfix, libwmf patches,
+- merge translations from KSI and Conectiva,
+- added missing "rm -f missing" on top %%build.
