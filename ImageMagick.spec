@@ -131,8 +131,9 @@ Biblioteki ImageMagick.
 %patch -p1
 
 %build
+autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure  \
+./configure  %{_target} \
 	--prefix=/usr/X11R6 \
 	--includedir=/usr/X11R6/include/X11 \
 	--enable-shared \
