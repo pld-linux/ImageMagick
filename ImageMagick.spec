@@ -1,7 +1,7 @@
 #
 # Conditional build:
 # _with_fpx	- with FlashPIX support through fpx library
-# _with_gs	- with PostScript support through ghostscript library
+# _with_gs	- with PostScript support through ghostscript library (warning: breaks jpeg!)
 # _with_hdf	- with HDF support through hdf library
 # _with_jasper	- with JPEG2000 support through jasper library
 #
@@ -16,8 +16,8 @@ Summary(ru):	ðÒÏÓÍÏÔÒ, ËÏÎ×ÅÒÔÉÒÏ×ÁÎÉÅ, ÏÂÒÁÂÏÔËÁ ÉÚÏÂÒÁÖÅÎÉÊ ÐÏÄ X Windows
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Summary(uk):	ðÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ð¦Ä X Windows
 Name:		ImageMagick
-Version:	5.4.5
-Release:	4
+Version:	5.4.9
+Release:	1
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -25,11 +25,12 @@ Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-ac.patch
+Patch3:		%{name}-old_am.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
-BuildRequires:	automake >= 1.4d
+BuildRequires:	automake >= 1.6
 BuildRequires:	bzip2-devel >= 1.0.1
 %{?_with_fpx:BuildRequires:	fpx-devel}
 BuildRequires:	freetype-devel >= 2.0.2-2
@@ -387,6 +388,7 @@ Bibliotecas estáticas para desenvolvimento com libMagick++
 %patch0 -p1
 %patch1 -p0
 %patch2 -p1
+%patch3 -p1
 
 # fix lcms.h include path
 perl -pi -e 's@lcms/lcms\.h@lcms.h@' magick/transform.c
@@ -407,6 +409,7 @@ CPPFLAGS="$CPPFLAGS -I/usr/include/g++"
 	--enable-16bit-pixel \
 	--enable-lzw \
 	--enable-shared \
+	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	%{!?_with_fpx:--without-fpx} \
 	%{!?_with_gs:--without-gslib} \
 	%{?_with_hdf:--with-hdf} \
@@ -425,7 +428,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT 
+	DESTDIR=$RPM_BUILD_ROOT
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
@@ -444,8 +447,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%dir %{_datadir}/ImageMagick
-%{_datadir}/ImageMagick/*.mgk
 %dir %{_libdir}/ImageMagick
 %{_libdir}/ImageMagick/*.mgk
 
