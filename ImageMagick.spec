@@ -4,19 +4,14 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X.
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
-Version:	4.1.8
-Release:	2d
+Version:	4.1.0
+Release:	5
 Copyright:	freeware
+Serial:		1
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
-#########	ftp://ftp.wizards.dupont.com/pub/ImageMagick
-Source:		%{name}-%{version}.tar.gz
+Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
-Requires:	freetype = 1.2
-Requires:	libtiff
-Requires:	libpng
-Requires:	libjpeg
-Requires:	XFree86-libs
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -50,8 +45,8 @@ rahatlýkla kullanabilir.
 %package	devel
 Summary:	Libraries and header files for ImageMagick development
 Summary(pl):	Biblioteki i pliki nag³ówkowe dla ImageMagick'a
-Group:		X11/Libraries/Development
-Group(pl):	X11/Biblioteki/Programowanie
+Group:		X11/Development/Libraries
+Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
 %description devel
@@ -82,8 +77,8 @@ için gereken baþlýk dosyalarýný ve kitaplýklarý içerir.
 %package	static
 Summary:	ImageMagick static libraries
 Summary(pl): 	Biblioteki statyczne ImageMagick
-Group:		X11/Libraries/Development
-Group(pl):	X11/Biblioteki/Programowanie
+Group:		X11/Development/Libraries
+Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -95,8 +90,8 @@ Biblioteki statyczne ImageMagick.
 %package	perl
 Summary:	libraries and modules for access to ImageMagick from perl
 Summary(pl):	Biblioteki i modu³y perl dla ImageMagick'a
-Group:		Development/Libraries/Perl
-Group(pl):	Programowanie/Biblioteki/Perl
+Group:		Development/Languages/Perl  
+Group(pl):	Programowanie/Jêzyki/Perl
 Requires:	%{name} = %{version}
 Requires:	perl >= 5.005
 
@@ -115,35 +110,31 @@ perla.
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure \
-	--prefix=/usr \
-	--libdir=/usr/X11R6/lib \
-	--datadir=/usr/X11R6/share \
-	--includedir=/usr/X11R6/include/X11/magick \
+	--prefix=/usr/X11R6 \
+	--includedir=/usr/X11R6/include/X11 \
 	--enable-shared \
 	--enable-lzw \
 	--enable-16bit-pixel \
 	--with-perl \
 	--with-ttf \
 	--with-x
+
 make 
 
 %install
 rm -fr $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/lib/perl5/%{buildarch}-linux/5.00404/
+install -d $RPM_BUILD_ROOT/usr/{man/man3,lib/perl5/%{buildarch}-linux-thread/5.00502/}
 
-make install \
-	prefix=$RPM_BUILD_ROOT/usr \
+make install DESTDIR=$RPM_BUILD_ROOT \
 	PREFIX=$RPM_BUILD_ROOT/usr \
-	datadir=$RPM_BUILD_ROOT/usr/X11R6/share \
-	libdir=$RPM_BUILD_ROOT/usr/X11R6/lib \
-	includedir=$RPM_BUILD_ROOT/usr/X11R6/include/X11/magick \
 	INSTALLMAN3DIR=$RPM_BUILD_ROOT/usr/man/man3
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
 strip --strip-debug $RPM_BUILD_ROOT/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
 
-gzip -9nf $RPM_BUILD_ROOT/usr/man/man{1,3,4,5}/*
-gzip -9nf www/* ImageMagick.html README.txt
+gzip -9nf $RPM_BUILD_ROOT/usr/{X11R6/man/man*/*,man/man3/*}
+
+gzip -9nf ImageMagick.html README.txt
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -155,25 +146,31 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
 
-/usr/X11R6/share/ImageMagick
+#/usr/X11R6/share/ImageMagick
 
-%attr(755, root, root) /usr/bin/*
+%attr(755,root,root) /usr/X11R6/bin/animate
+%attr(755,root,root) /usr/X11R6/bin/combine
+%attr(755,root,root) /usr/X11R6/bin/convert
+%attr(755,root,root) /usr/X11R6/bin/display
+%attr(755,root,root) /usr/X11R6/bin/identify
+%attr(755,root,root) /usr/X11R6/bin/import
+%attr(755,root,root) /usr/X11R6/bin/mogrify
+%attr(755,root,root) /usr/X11R6/bin/montage
+%attr(755,root,root) /usr/X11R6/bin/xtp
 
-%attr(644,root, man) /usr/man/man[145]/*
+/usr/X11R6/man/man[145]/*
 
 %files devel
 %defattr(644,root,root,755)
 %doc www ImageMagick.html.gz README.txt.gz
 
-%attr(755,root,root) /usr/bin/Magick-config
+#%attr(755,root,root) /usr/X11R6/bin/Magick-config
 %attr(755,root,root) /usr/X11R6/lib/lib*.so
 
-%dir /usr/X11R6/include/X11/magick
-/usr/X11R6/include/X11/magick/*.h
+/usr/X11R6/include/X11/magick
 
 %files static
-%defattr(644,root,root,755)
-/usr/X11R6/lib/lib*.a
+%attr(644,root,root) /usr/X11R6/lib/lib*.a
 
 %files perl
 %defattr(644,root,root,755)
@@ -183,9 +180,17 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/autosplit.ix
 /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.bs
 %attr(755,root,root) /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
-%attr(644,root, man) /usr/man/man3/Image::Magick.3.gz
+/usr/man/man3/Image::Magick.3.gz
 
 %changelog
+* Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.1.0-5]
+- removed man group from man pages,
+- "make install" with using DESTDIR,
+- changed Group in devel and static,
+- downgrade to 4.1.0 - all above versions have buggy conversions tga->gif
+  (maybe more).
+
 * Tue Feb  9 1999 Micha³ Kuratczyk <kurkens@polbox.com
   [4.1.8-2d]
 - added gzipping documentation
