@@ -1,0 +1,4 @@
+- updated to 5.3.3,
+- merge ia64bug rawhide patch,
+- BuildRequires for perl changed to perl-devel >= 5.6.1,
+- updated %%files lists.
