@@ -187,7 +187,7 @@ rm -rf $RPM_BUILD_ROOT
 * Sun Jun 14 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.0.7-1]
 - added Khimenko Victor <khim@sch57.msk.ru> style modyfication for making
-  separated subpackage perl stuff and all my old modyfication witch was
+  separated subpackage perl stuff and all my old modyfication which was
   prepared and uploaded to contrib before RH 5.1,
 - added "Requires: freetype >= 1.1" for main package.
 
