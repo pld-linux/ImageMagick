@@ -4,7 +4,7 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X.
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
-Version:	4.2.2
+Version:	4.2.3
 Release:	2
 Copyright:	freeware
 Serial:		1
@@ -13,6 +13,15 @@ Group(pl):	X11/Aplikacje/Grafika
 Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch:		ImageMagick-libpath.patch
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
+BuildPrereq:	perl
+BuildPrereq:	XFree86-devel
+BuildPrereq:	libjpeg-devel
+BuildPrereq:	libtiff-devel
+BuildPrereq:	libpng-devel
+BuildPrereq:	zlib-devel
+BuildPrereq:	bzip2-devel
+BuildPrereq:	freetype-devel
+Requires:	%{name}-libs = %{version}
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -94,7 +103,7 @@ Summary(pl):	Biblioteki i modu³y perl dla ImageMagick'a
 Group:		Development/Languages/Perl  
 Group(pl):	Programowanie/Jêzyki/Perl
 Requires:	%{name} = %{version}
-%requires_pkg	perl
+%requires_eq	perl
 
 %description perl
 This is the ImageMagick perl support package.  It perl modules and support
@@ -105,12 +114,24 @@ or such.
 Biblioteki i modu³y umo¿liwiaj±ce korzystanie z ImageMagick'a z poziomu
 perla. 
 
+%package libs
+Summary:        ImageMagick libraries
+Summary(pl):    Biblioteki ImageMagick
+Group:          X11/Libraries
+Group(pl):      X11/Biblioteki
+
+%description libs
+ImageMagick libraries.
+
+%description -l pl libs
+Biblioteki ImageMagick.
+
 %prep
 %setup -q
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target} \
+./configure  \
 	--prefix=/usr/X11R6 \
 	--includedir=/usr/X11R6/include/X11 \
 	--enable-shared \
@@ -132,7 +153,8 @@ make install DESTDIR=$RPM_BUILD_ROOT \
 	INSTALLMAN3DIR=$RPM_BUILD_ROOT/usr/man/man3
 
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
-strip --strip-debug $RPM_BUILD_ROOT/%{perl_sitearch}/auto/Image/Magick/Magick.so
+strip --strip-unneeded \
+	$RPM_BUILD_ROOT/%{perl_sitearch}/auto/Image/Magick/Magick.so
 
 gzip -9nf $RPM_BUILD_ROOT/usr/{X11R6/man/man*/*,man/man3/*} \
 	README.txt
@@ -143,10 +165,12 @@ gzip -9nf $RPM_BUILD_ROOT/usr/{X11R6/man/man*/*,man/man3/*} \
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files libs
 %defattr(644,root,root,755)
 %attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
 
+%files
+%defattr(644,root,root,755)
 /usr/X11R6/share/ImageMagick
 
 %attr(755,root,root) /usr/X11R6/bin/animate
@@ -185,6 +209,10 @@ rm -rf $RPM_BUILD_ROOT
 /usr/man/man3/Image::Magick.*
 
 %changelog
+* Thu Apr 22 1999 Artur Frysiak <wiget@pld.org.pl>
+  [4.2.3-1]
+- separated libs to subpackage
+
 * Tue Apr 20 1999 Artur Frysiak <wiget@pld.org.pl>
   [4.2.2-2]
 - compiled on rpm 3 and perl 5.005_03
