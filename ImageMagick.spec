@@ -889,7 +889,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_libdir}/libMagick.so
-%attr(755,root,root) %{_libdir}/libMagick.la
+%{_libdir}/libMagick.la
 %{_includedir}/magick
 
 %{_mandir}/man[45]/*
@@ -918,7 +918,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Magick++-config
-%attr(755,root,root) %{_libdir}/libMagick++.la
+%{_libdir}/libMagick++.la
 %attr(755,root,root) %{_libdir}/libMagick++.so
 %{_prefix}/include/Magick++
 %{_prefix}/include/Magick++.h
