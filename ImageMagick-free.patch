@@ -1,0 +1,12 @@
+--- ImageMagick-6.1.8/magick/display.c.orig	2005-01-24 13:04:05.000000000 +0100
++++ ImageMagick-6.1.8/magick/display.c	2005-01-24 13:21:04.000000000 +0100
+@@ -1756,9 +1756,6 @@
+   for ( ; k >= 0; k--) \
+     image_stack[k]=DestroyImageList(image_stack[k]); \
+   image_marker=(unsigned long *) RelinquishMagickMemory(image_marker); \
+-  for (i=0; i < (long) argc; i++) \
+-    argv[i]=(char *) RelinquishMagickMemory(argv[i]); \
+-  argv=(char **) RelinquishMagickMemory(argv); \
+ }
+ #define ThrowDisplayException(asperity,tag,option) \
+ { \
