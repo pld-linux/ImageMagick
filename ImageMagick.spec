@@ -7,7 +7,7 @@
 #
 %include	/usr/lib/rpm/macros.perl
 %define		ver 5.5.3
-#%%define		pver
+%define		pver	2
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es):	Exhibidor, convertidor y manipulador de imágenes bajo X
