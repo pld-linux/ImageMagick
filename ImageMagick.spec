@@ -6,8 +6,8 @@
 %bcond_without	cxx	# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.0.1
-%define		pver	4
+%define		ver 6.0.2
+%define		pver	1
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -25,7 +25,7 @@ Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
 Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	9ea3a7b3134bf73ea7db91a257c6bd0f
+# Source0-md5:	74b410564d8f6279b4dc10d13537bcfd
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
@@ -36,7 +36,9 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1.8.2
 BuildRequires:	bzip2-devel >= 1.0.1
+BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	freetype-devel >= 2.0.2-2
+BuildRequires:	gd-devel >= 2.0.15
 %{?with_gs:BuildRequires:	ghostscript-devel}
 BuildRequires:	graphviz-devel >= 1.12
 %{?with_jasper:BuildRequires:	jasper-devel >= 1.700.5}
@@ -225,6 +227,7 @@ Summary(pt_BR):	MСdulo perl para uso com o ImageMagick
 Summary(ru):	Библиотеки и модули для доступа к ImageMagick из perl
 Summary(uk):	Б╕бл╕отеки та модул╕ для доступу до ImageMagick з Perl
 Group:		Development/Languages/Perl
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description perl
@@ -790,7 +793,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files coder-dot
 %defattr(644,root,root,755)
-# R: graphviz
+# R: graphviz, gd
 %attr(755,root,root) %{modulesdir}/coders/dot.so
 %{modulesdir}/coders/dot.la
 
