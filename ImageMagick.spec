@@ -6,8 +6,8 @@
 %bcond_without	cxx	# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.0.0
-%define		pver	2
+%define		ver 6.0.1
+%define		pver	4
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -20,12 +20,12 @@ Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Summary(uk):	ðÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ð¦Ä X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
 Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	1314f8e62c8acdc224c55241ae828a6e
+# Source0-md5:	9ea3a7b3134bf73ea7db91a257c6bd0f
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
@@ -33,8 +33,8 @@ Patch2:		%{name}-system-libltdl.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
-BuildRequires:	autoconf >= 2.56
-BuildRequires:	automake >= 1.7
+BuildRequires:	autoconf >= 2.59
+BuildRequires:	automake >= 1.8.2
 BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.0.2-2
 %{?with_gs:BuildRequires:	ghostscript-devel}
@@ -42,7 +42,6 @@ BuildRequires:	graphviz-devel >= 1.12
 %{?with_jasper:BuildRequires:	jasper-devel >= 1.700.5}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
-BuildRequires:	libexif-devel
 %{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libltdl-devel
@@ -50,7 +49,7 @@ BuildRequires:	libplot-devel
 BuildRequires:	libpng >= 1.0.8
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	libtool >= 2:1.4e-0.20021218.3
+BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libwmf-devel >= 0.2.2
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	perl-devel >= 1:5.8.0
@@ -145,7 +144,6 @@ Requires:	XFree86-devel
 Requires:	bzip2-devel
 Requires:	freetype-devel
 Requires:	lcms-devel
-Requires:	libexif-devel
 Requires:	libltdl-devel
 Requires:	zlib-devel
 
@@ -444,18 +442,6 @@ Coder module for MIFF files.
 
 %description coder-miff -l pl
 Modu³ kodera dla plików MIFF.
-
-%package coder-mpeg
-Summary:	Coder module for MPEG files
-Summary(pl):	Modu³ kodera dla plików MPEG
-Group:		X11/Applications/Graphics
-Requires:	%{name} = %{epoch}:%{version}-%{release}
-
-%description coder-mpeg
-Coder module for MPEG files.
-
-%description coder-mpeg -l pl
-Modu³ kodera dla plików MPEG.
 
 %package coder-mpr
 Summary:	Coder module for ImageMagick MPR and MSL files
