@@ -15,9 +15,9 @@ Summary(es):	Exhibidor, convertidor y manipulador de imАgenes bajo X
 Summary(fr):	Visualisation, conversion, et manipulation d'images sous X
 Summary(pl):	NarzЙdzie do wy╤wietlania, konwersji i manipulacji grafikami
 Summary(pt_BR):	Exibidor, conversor e manipulador de imagens sob X
-Summary(ru):	Просмотр, конвертирование, обработка изображений под X Windows
+Summary(ru):	Просмотр, конвертирование, обработка изображений под X Window
 Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
-Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Windows
+Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
 Release:	1
@@ -63,13 +63,13 @@ Obsoletes:	%{name}-coder-mpeg
 
 %description
 ImageMagick is an image display, conversion, and manipulation tool. It
-runs under X windows. It is very powerful in terms of it's ability to
+runs under X Window. It is very powerful in terms of it's ability to
 allow the user to edit images. It can handle many different formats as
 well.
 
 %description -l de
 ImageMagick ist ein Tool zur Bildanzeige, -konvertierung und
-manipulation, -das unter X-Windows lДuft. Es ist enorm leitungsfДhig
+manipulation, -das unter X-Window lДuft. Es ist enorm leitungsfДhig
 in Bezug auf die Grafikmanipulationsfunktionen, die es dem Anwender
 bietet, und auf die Vielfalt der unterstЭtzten Formate.
 
@@ -99,7 +99,7 @@ permite editar imagens, podendo tratar vАrios formatos diferentes.
 
 %description -l ru
 ImageMagick - это утилита для просмотра, конвертирования и обработки
-изображений. Она работает под X Windows. ImageMagick предоставляет
+изображений. Она работает под X Window. ImageMagick предоставляет
 пользователю широкие возможности по обработке изображений в самых
 разнообразных форматах.
 
@@ -111,7 +111,7 @@ resimler Эzerinde deПiЧiklik yapma aГЩsЩndan pek Гok olanak sunar. Bir
 
 %description -l uk
 ImageMagick - це утил╕та для перегляду, конвертування та обробки
-зображень. Вона працю╓ п╕д X Windows. ImageMagick да╓ користувачу
+зображень. Вона працю╓ п╕д X Window. ImageMagick да╓ користувачу
 широк╕ можливост╕ по обробц╕ зображень в р╕зноман╕тних форматах.
 
 %package libs
