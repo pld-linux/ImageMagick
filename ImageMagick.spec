@@ -147,7 +147,7 @@ make
 
 %install
 rm -fr $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/share/man//man3
+install -d $RPM_BUILD_ROOT/usr/share/man/man3
 install -d $RPM_BUILD_ROOT/%{perl_sitearch}
 
 make install DESTDIR=$RPM_BUILD_ROOT \
@@ -213,7 +213,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Fri May  7 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.2.4-1]
-- now package is FHS 2.0 compliat.
+- now package is FHS 2.0 compliant.
 
 * Thu Apr 22 1999 Artur Frysiak <wiget@pld.org.pl>
   [4.2.3-1]
