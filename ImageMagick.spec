@@ -7,7 +7,7 @@
 #
 %include	/usr/lib/rpm/macros.perl
 %define		ver 5.5.5
-%define		pver	2
+%define		pver	3
 %define		QuantumDepth	16
 %define		iver %{ver}-Q%{QuantumDepth}
 Summary:	Image display, conversion, and manipulation under X
