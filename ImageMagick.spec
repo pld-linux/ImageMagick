@@ -619,6 +619,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/caption.la
 %attr(755,root,root) %{modulesdir}/coders/cin.so
 %{modulesdir}/coders/cin.la
+%attr(755,root,root) %{modulesdir}/coders/cip.so
+%{modulesdir}/coders/cip.la
 %attr(755,root,root) %{modulesdir}/coders/clip.so
 %{modulesdir}/coders/clip.la
 %attr(755,root,root) %{modulesdir}/coders/clipboard.so
@@ -705,6 +707,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/ps.la
 %attr(755,root,root) %{modulesdir}/coders/pwp.so
 %{modulesdir}/coders/pwp.la
+%attr(755,root,root) %{modulesdir}/coders/raw.so
+%{modulesdir}/coders/raw.la
 %attr(755,root,root) %{modulesdir}/coders/rgb.so
 %{modulesdir}/coders/rgb.la
 %attr(755,root,root) %{modulesdir}/coders/rla.so
