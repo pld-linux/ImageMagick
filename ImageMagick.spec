@@ -22,7 +22,7 @@ Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
 Release:	1
 Epoch:		1
-License:	Apache-style License
+License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
 # Source0-md5:	0855b4b03aa566a2121d4d12ef810419
@@ -116,6 +116,17 @@ resimler Эzerinde deПiЧiklik yapma aГЩsЩndan pek Гok olanak sunar. Bir
 ImageMagick - це утил╕та для перегляду, конвертування та обробки
 зображень. Вона працю╓ п╕д X Window. ImageMagick да╓ користувачу
 широк╕ можливост╕ по обробц╕ зображень в р╕зноман╕тних форматах.
+
+%package doc
+Summary:	ImageMagick documentation
+Summary(pl):	Dokumentacja do ImageMagick
+Group:		Documentation
+
+%description doc
+Documentation for ImageMagick.
+
+%description doc -l pl
+Dokumentacja do ImageMagick.
 
 %package libs
 Summary:	ImageMagick libraries
@@ -554,7 +565,6 @@ ModuЁ kodera dla plikСw WMF.
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
 
 %build
-rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -786,6 +796,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/montage
 
 %{_mandir}/man1/[Iacdim]*
+
+%files doc
+%defattr(644,root,root,755)
+%doc www
 
 %files libs
 %defattr(644,root,root,755)
