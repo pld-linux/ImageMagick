@@ -31,7 +31,7 @@ URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
-BuildRequires:	automake >= 1.6
+BuildRequires:	automake >= 1.7
 BuildRequires:	bzip2-devel >= 1.0.1
 %{?_with_fpx:BuildRequires:	fpx-devel}
 BuildRequires:	freetype-devel >= 2.0.2-2
