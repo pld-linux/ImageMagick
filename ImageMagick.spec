@@ -355,7 +355,7 @@ Bibliotecas estáticas para desenvolvimento com libMagick++.
 Summary:	Coder module for Postscript files using DPS extension
 Summary(pl):	Modu³ kodera dla plików Postscript u¿ywaj±cy rozszerzenia DPS
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-dps
 Coder module for Postcript files using DPS (Display PostScript)
@@ -369,7 +369,7 @@ PostScript).
 Summary:	Coder module for FlashPIX (FPX) files
 Summary(pl):	Modu³ kodera dla plików FlashPIX (FPX)
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-fpx
 Coder module for FlashPIX (FPX) files.
@@ -381,7 +381,7 @@ Modu³ kodera dla plików FlashPIX (FPX).
 Summary:	Coder module for HDF files
 Summary(pl):	Modu³ kodera dla plików HDF
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-hdf
 Coder module for HDF files.
@@ -393,7 +393,7 @@ Modu³ kodera dla plików HDF.
 Summary:	Coder module for JBIG files
 Summary(pl):	Modu³ kodera dla plików JBIG
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-jbig
 Coder module for JBIG files.
@@ -405,7 +405,7 @@ Modu³ kodera dla plików JBIG.
 Summary:	Coder module for JPEG files
 Summary(pl):	Modu³ kodera dla plików JPEG
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-jpeg
 Coder module for JPEG files.
@@ -417,7 +417,7 @@ Modu³ kodera dla plików JPEG.
 Summary:	Coder module for JPEG-2000 (JP2/JPC) files using JasPer library
 Summary(pl):	Modu³ kodera dla plików JPEG-2000 (JP2/JPC) u¿ywaj±cy biblioteki JasPer
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-jpeg2
 Coder module for JPEG-2000 (JP2/JPC) files using JasPer library.
@@ -430,7 +430,7 @@ JasPer.
 Summary:	Coder module for MIFF files
 Summary(pl):	Modu³ kodera dla plików MIFF
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-miff
 Coder module for MIFF files.
@@ -442,7 +442,7 @@ Modu³ kodera dla plików MIFF.
 Summary:	Coder module for MPEG files
 Summary(pl):	Modu³ kodera dla plików MPEG
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-mpeg
 Coder module for MPEG files.
@@ -454,7 +454,7 @@ Modu³ kodera dla plików MPEG.
 Summary:	Coder module for ImageMagick MPR and MSL files
 Summary(pl):	Modu³ kodera dla plików MPR i MSL ImageMagick
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-mpr
 Coder module for Magick Persistent Registry (MPR) and Magick Scripting
@@ -468,7 +468,7 @@ Scripting Language (MSL).
 Summary:	Coder module for PDF files
 Summary(pl):	Modu³ kodera dla plików PDF
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-pdf
 Coder module for PDF files.
@@ -480,7 +480,7 @@ Modu³ kodera dla plików PDF.
 Summary:	Coder module for PNG files
 Summary(pl):	Modul kodera dla plików PNG
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-png
 Coder module for PNG files.
@@ -492,7 +492,7 @@ Modu³ kodera dla plików PNG.
 Summary:	Coder module for Postscript Level II & III (PS2/PS3) files
 Summary(pl):	Modu³ kodera dla plików Postscript Level II i III (PS2/PS3)
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-ps2
 Coder module for Postscript Level II & III (PS2/PS3) files.
@@ -504,7 +504,7 @@ Modu³ kodera dla plików Postscript Level II i III (PS2/PS3).
 Summary:	Coder module for SVG (Scalable Vector Graphics) files
 Summary(pl):	Modu³ kodera dla plików SVG (Scalable Vector Graphics)
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-svg
 Coder module for SVG (Scalable Vector Graphics) files.
@@ -516,7 +516,7 @@ Modu³ kodera dla plików SVG (Scalable Vector Graphics).
 Summary:	Coder module for TIFF files
 Summary(pl):	Modu³ kodera dla plików TIFF
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-tiff
 Coder module for TIFF files.
@@ -528,7 +528,7 @@ Modu³ kodera dla plików TIFF.
 Summary:	Coder module for retrieving files via URL
 Summary(pl):	Modu³ kodera ¶ci±gaj±cy pliki o podanym URL
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-url
 Coder module for retrieving files via URL.
@@ -540,7 +540,7 @@ Modu³ kodera ¶ci±gaj±cy pliki o podanym URL.
 Summary:	Coder module for WMF files
 Summary(pl):	Modu³ kodera dla plików WMF
 Group:		X11/Applications/Graphics
-Requires:	%{name}-%{version}
+Requires:	%{name} = %{version}
 
 %description coder-wmf
 Coder module for WMF files.
