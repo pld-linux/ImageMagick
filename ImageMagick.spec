@@ -5,7 +5,7 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
-Version:	5.3.5
+Version:	5.3.6
 Release:	1
 Epoch:		1
 License:	Freeware
@@ -15,9 +15,9 @@ Group(pl):	X11/Aplikacje/Grafika
 Source0:	ftp://ftp.simplesystems.org/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
-Patch2:		%{name}-delegates-destdir.patch
-Patch3:		%{name}-libwmf.patch
-Patch4:		%{name}-perl-link.patch
+Patch2:		%{name}-libwmf.patch
+Patch3:		%{name}-perl-link.patch
+Patch4:		%{name}-DESTDIR.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
@@ -31,7 +31,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libwmf-devel
 BuildRequires:	libtool
 BuildRequires:	perl-devel >= 5.6.1
-#BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	libxml2-devel >= 2.0
 #BuildRequires:	lcms-devel
 #BuildRequires:	fpx-devel
 #BuildRequires:	hdf-devel
