@@ -6,6 +6,8 @@
 # _with_jasper	- with JPEG2000 support through jasper library
 #
 %include	/usr/lib/rpm/macros.perl
+%define		ver 5.5.1
+%define		pver	3
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es):	Exhibidor, convertidor y manipulador de imАgenes bajo X
@@ -16,16 +18,15 @@ Summary(ru):	Просмотр, конвертирование, обработка изображений под X Windows
 Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Windows
 Name:		ImageMagick
-Version:	5.4.8
+Version:	%{ver}%{?pver:.%{pver}}
 Release:	1
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
-Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{version}-2.tar.bz2
+Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{ver}%{?pver:-%{pver}}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-ac.patch
-Patch3:		%{name}-old_am.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
@@ -384,11 +385,10 @@ Bibliotecas estАticas para desenvolvimento com libMagick++
 складу ImageMagick-c++-devel.
 
 %prep
-%setup  -q
+%setup  -q -n %{name}-%{ver}
 %patch0 -p1
 %patch1 -p0
 %patch2 -p1
-%patch3 -p1
 
 # fix lcms.h include path
 perl -pi -e 's@lcms/lcms\.h@lcms.h@' magick/transform.c
@@ -396,14 +396,11 @@ perl -pi -e 's@lcms/lcms\.h@lcms.h@' configure.ac
 
 %build
 rm -f missing
-%{__libtoolize}
-aclocal
+%{__libtoolize} --ltdl
+aclocal -I /usr/share/libtool/libltdl
 %{__autoconf}
 %{__automake}
-if [ -f %{_pkgconfigdir}/libpng12.pc ] ; then
-	CPPFLAGS="`pkg-config libpng12 --cflags`"
-fi
-CPPFLAGS="$CPPFLAGS -I/usr/include/g++"
+CPPFLAGS="-I/usr/include/g++"
 %configure \
 	CPPFLAGS="$CPPFLAGS" \
 	--enable-16bit-pixel \
@@ -414,23 +411,26 @@ CPPFLAGS="$CPPFLAGS -I/usr/include/g++"
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	%{?_with_hdf:--with-hdf} \
 	%{!?_with_jasper:--without-jp2} \
-	--with-magick_plus_plus \
+	--with%{?_without_cxx:out}-magick_plus_plus \
 	--with-perl \
 	--with-threads \
 	--with-ttf \
+	--with-modules \
 	--with-x
 
 %{__make}
-%{__make} -C Magick++
+%{!?_without_cxx:%{__make} -C Magick++}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT 
+	DESTDIR=$RPM_BUILD_ROOT \
+	pkgdocdir=%{_defaultdocdir}/%{name}-devel-%{version}/
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
+rm -f $RPM_BUILD_ROOT/%{_libdir}/ImageMagick-%{ver}/modules/coders/*.a
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -438,24 +438,33 @@ rm -rf $RPM_BUILD_ROOT
 %post   libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
 
+%if %{?_without_cxx:0}%{!?_without_cxx:1}
 %post   c++ -p /sbin/ldconfig
 %postun c++ -p /sbin/ldconfig
+%endif
 
 %files libs
+%doc Copyright.txt
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libMagick.so.*.*
+%attr(755,root,root) %{_libdir}/libMagick-%{ver}.so
 
 %files
 %defattr(644,root,root,755)
-%dir %{_datadir}/ImageMagick
-%{_datadir}/ImageMagick/*.mgk
-%dir %{_libdir}/ImageMagick
-%{_libdir}/ImageMagick/*.mgk
+#%dir %{_datadir}/ImageMagick
+#%{_datadir}/ImageMagick/*.mgk
+%dir %{_libdir}/ImageMagick-%{ver}
+%{_libdir}/ImageMagick-%{ver}/*.mgk
+%dir %{_libdir}/ImageMagick-%{ver}/modules
+%dir %{_libdir}/ImageMagick-%{ver}/modules/coders
+%attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/modules/coders/*.so
+%{_libdir}/ImageMagick-%{ver}/modules/coders/*.la
+%{_libdir}/ImageMagick-%{ver}/modules/coders/*.mgk
 
 %attr(755,root,root) %{_bindir}/animate
 #%attr(755,root,root) %{_bindir}/cgimagick
 %attr(755,root,root) %{_bindir}/composite
 %attr(755,root,root) %{_bindir}/convert
+%attr(755,root,root) %{_bindir}/conjure
 %attr(755,root,root) %{_bindir}/display
 %attr(755,root,root) %{_bindir}/identify
 %attr(755,root,root) %{_bindir}/import
@@ -467,7 +476,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc images www ImageMagick.html README.txt
+#%%doc README.txt
+%doc %{_defaultdocdir}/%{name}-devel-%{version}
 
 %attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_libdir}/libMagick.so
@@ -492,6 +502,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_perlmandir}/man3/Image::Magick.*
 %{_examplesdir}/%{name}-perl
 
+%if %{?_without_cxx:0}%{!?_without_cxx:1}
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++.so.*.*
@@ -508,3 +519,4 @@ rm -rf $RPM_BUILD_ROOT
 %files c++-static
 %defattr(644,root,root,755)
 %{_libdir}/libMagick++.a
+%endif
