@@ -383,7 +383,11 @@ libtoolize --copy --force
 aclocal
 autoconf
 automake -a -c -f
+if [ -f %{_pkgconfigdir}/libpng12.pc ] ; then
+	CPPFLAGS="`pkg-config libpng12 --cflags`"
+fi
 %configure \
+	CPPFLAGS="$CPPFLAGS" \
 	--enable-shared \
 	--enable-lzw \
 	--enable-16bit-pixel \
