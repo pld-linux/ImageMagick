@@ -43,6 +43,7 @@ BuildRequires:	gd-devel >= 2.0.15
 BuildRequires:	graphviz-devel >= 1.12
 %{?with_jasper:BuildRequires:	jasper-devel >= 1.700.5}
 BuildRequires:	jbigkit-devel
+BuildRequires:	libltdl-devel
 BuildRequires:	lcms-devel
 %{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 BuildRequires:	libjpeg-devel
