@@ -128,6 +128,7 @@ Biblioteki ImageMagick.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
