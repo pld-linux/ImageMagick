@@ -57,8 +57,8 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	perl-devel >= 5.6.1
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 Requires:	%{name}-libs = %{version}
-Obsoletes:	%{name}-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	%{name}-coder-mpeg
 
 %description
 ImageMagick is an image display, conversion, and manipulation tool. It
@@ -581,7 +581,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 	pkgdocdir=%{_defaultdocdir}/%{name}-devel-%{version}/
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
-rm -f $RPM_BUILD_ROOT/%{_libdir}/ImageMagick-%{iver}/modules/coders/*.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/ImageMagick-%{iver}/modules/coders/*.a
 
 %clean
 rm -rf $RPM_BUILD_ROOT
