@@ -9,14 +9,12 @@ Summary(ru):	Просмотр, конвертирование, обработка изображений под X Windows
 Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Windows
 Name:		ImageMagick
-%define		ver		5.4.3
-%define 	subver		11
-Version:	%{ver}.%{subver}
-Release:	2
+Version:	5.4.4
+Release:	1
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
-Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{ver}-%{subver}.tar.bz2
+Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 URL:		http://www.imagemagick.org/
@@ -371,7 +369,7 @@ Bibliotecas estАticas para desenvolvimento com libMagick++
 складу ImageMagick-c++-devel.
 
 %prep
-%setup  -q -n %{name}-%{ver}
+%setup  -q
 %patch0 -p1
 %patch1 -p0
 
