@@ -4,8 +4,8 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X.
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
-Version:	4.1.0
-Release:	5
+Version:	4.2.2
+Release:	1
 Copyright:	freeware
 Serial:		1
 Group:		X11/Applications/Graphics
@@ -43,7 +43,7 @@ Window pencereleme sistemi altýnda çalýþýr. Kullanýcýya resimler üzerinde
 deðiþiklik yapma açýsýndan pek çok olanak sunar. Bir çok resim biçimini
 rahatlýkla kullanabilir.
 
-%package	devel
+%package devel
 Summary:	Libraries and header files for ImageMagick development
 Summary(pl):	Biblioteki i pliki nag³ówkowe dla ImageMagick'a
 Group:		X11/Development/Libraries
@@ -75,7 +75,7 @@ programów z wykorzystaniem API jakie udostêpnia ImageMagick.
 Bu paket, ImageMagick uygulama arayüzünü kullanan programlar geliþtirmek
 için gereken baþlýk dosyalarýný ve kitaplýklarý içerir.
 
-%package	static
+%package static
 Summary:	ImageMagick static libraries
 Summary(pl): 	Biblioteki statyczne ImageMagick
 Group:		X11/Development/Libraries
@@ -88,7 +88,7 @@ ImageMagick static libraries.
 %description -l pl devel
 Biblioteki statyczne ImageMagick.
 
-%package	perl
+%package perl
 Summary:	libraries and modules for access to ImageMagick from perl
 Summary(pl):	Biblioteki i modu³y perl dla ImageMagick'a
 Group:		Development/Languages/Perl  
@@ -133,9 +133,8 @@ make install DESTDIR=$RPM_BUILD_ROOT \
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
 strip --strip-debug $RPM_BUILD_ROOT/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
 
-gzip -9nf $RPM_BUILD_ROOT/usr/{X11R6/man/man*/*,man/man3/*}
-
-gzip -9nf ImageMagick.html README.txt
+gzip -9nf $RPM_BUILD_ROOT/usr/{X11R6/man/man*/*,man/man3/*} \
+	README.txt
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -147,7 +146,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
 
-#/usr/X11R6/share/ImageMagick
+/usr/X11R6/share/ImageMagick
 
 %attr(755,root,root) /usr/X11R6/bin/animate
 %attr(755,root,root) /usr/X11R6/bin/combine
@@ -163,9 +162,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc www ImageMagick.html.gz README.txt.gz
+%doc www ImageMagick.html README.txt.gz
 
-#%attr(755,root,root) /usr/X11R6/bin/Magick-config
+%attr(755,root,root) /usr/X11R6/bin/Magick-config
 %attr(755,root,root) /usr/X11R6/lib/lib*.so
 
 /usr/X11R6/include/X11/magick
