@@ -12,7 +12,7 @@ Name:		ImageMagick
 %define		ver		5.4.3
 %define 	subver		11
 Version:	%{ver}.%{subver}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -120,6 +120,11 @@ Requires:	libplot-devel
 Requires:	libwmf-devel
 Requires:	libxml2-devel
 Requires:	mpeg2dec-devel
+Requires:	XFree86-DPS-devel
+Requires:	libtiff-devel
+Requires:	libpng-devel
+Requires:	XFree86-devel
+Requires:	bzip2-devel
 
 %description devel
 This is the ImageMagick development package. It includes header files
