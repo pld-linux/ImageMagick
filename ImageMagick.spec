@@ -280,7 +280,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/mogrify
 %attr(755,root,root) %{_bindir}/montage
 
-%{_mandir}/man[145]/*
+%{_mandir}/man1/[Iacdim]*
 
 %files devel
 %defattr(644,root,root,755)
@@ -290,6 +290,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libMagick.so
 %attr(755,root,root) %{_libdir}/libMagick.la
 %{_includedir}/magick
+
+%{_mandir}/man[45]/*
+%{_mandir}/man1/Magick-config.1*
 
 %files static
 %defattr(644,root,root,755)
@@ -317,6 +320,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libMagick++.so
 %{_prefix}/include/Magick++
 %{_prefix}/include/Magick++.h
+%{_mandir}/man1/Magick++-config.1*
 
 %files c++-static
 %defattr(644,root,root,755)
