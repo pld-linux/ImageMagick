@@ -6,8 +6,8 @@
 %bcond_without	cxx	# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.0.4
-%define		pver	1
+%define		ver 6.0.5
+%define		pver	2
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -25,7 +25,7 @@ Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	41cb70f89a941269c459566e11639188
+# Source0-md5:	45325d113d53e990452ca89ddf2c3aae
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
@@ -116,6 +116,17 @@ resimler Эzerinde deПiЧiklik yapma aГЩsЩndan pek Гok olanak sunar. Bir
 ImageMagick - це утил╕та для перегляду, конвертування та обробки
 зображень. Вона працю╓ п╕д X Window. ImageMagick да╓ користувачу
 широк╕ можливост╕ по обробц╕ зображень в р╕зноман╕тних форматах.
+
+%package doc
+Summary:	ImageMagick documentation
+Summary(pl):	Dokumentacja ImageMagick
+Group:		Documentation
+
+%description doc
+Documentation and user guide for ImageMagick 6.x.
+
+%description doc -l pl
+Dokumentacja i podrЙcznik u©ytkownika ImageMagick 6.x.
 
 %package libs
 Summary:	ImageMagick libraries
@@ -765,6 +776,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/x.la
 %attr(755,root,root) %{modulesdir}/coders/xwd.so
 %{modulesdir}/coders/xwd.la
+%attr(755,root,root) %{modulesdir}/coders/ycbcr.so
+%{modulesdir}/coders/ycbcr.la
 %attr(755,root,root) %{modulesdir}/coders/yuv.so
 %{modulesdir}/coders/yuv.la
 
@@ -784,9 +797,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_mandir}/man1/[Iacdim]*
 
+%files doc
+%defattr(644,root,root,755)
+%doc AUTHORS ChangeLog LICENSE NEWS Magick.pdf
+
 %files libs
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog LICENSE NEWS
 %attr(755,root,root) %{_libdir}/libMagick.so.*.*.*
 %attr(755,root,root) %{_libdir}/libWand.so.*.*.*
 
