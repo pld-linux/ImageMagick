@@ -1,0 +1,57 @@
+--- ImageMagick-5.3.7/coders/Makefile.am.orig	Sun Aug  5 12:52:31 2001
++++ ImageMagick-5.3.7/coders/Makefile.am	Sun Aug  5 13:00:53 2001
+@@ -68,7 +68,7 @@
+ pkgdata_DATA = 
+ 
+ # Modules which are to be built
+-pkg_LTLIBRARIES   = 8bim.la art.la avi.la avs.la bmp.la cmyk.la cut.la \
++pkg_LTLIBRARIES   = bim8.la art.la avi.la avs.la bmp.la cmyk.la cut.la \
+   dcm.la dps.la dpx.la ept.la fax.la fpx.la fits.la gif.la gray.la gradient.la \
+   hdf.la histogram.la html.la icm.la icon.la iptc.la jbig.la jpeg.la jp2.la \
+   label.la logo.la map.la matte.la miff.la mono.la mpc.la mtv.la mvg.la \
+@@ -97,9 +97,9 @@
+ avs_la_LIBADD       = ../magick/libMagick.la
+ 
+ # BIM module
+-8bim_la_SOURCES     = 8bim.c
+-8bim_la_LDFLAGS     = -no-undefined -module -avoid-version
+-8bim_la_LIBADD      = ../magick/libMagick.la
++bim8_la_SOURCES     = 8bim.c
++bim8_la_LDFLAGS     = -no-undefined -module -avoid-version
++bim8_la_LIBADD      = ../magick/libMagick.la
+ 
+ # BMP module
+ bmp_la_SOURCES      = bmp.c
+--- ImageMagick-5.3.7/Makefile.am.orig	Sun Aug  5 12:52:31 2001
++++ ImageMagick-5.3.7/Makefile.am	Sun Aug  5 13:03:07 2001
+@@ -32,7 +32,7 @@
+ #  bug tracking system at http://www.imagemagick.org/ImageMagick/bugs.
+ 
+ # Don't require all the GNU mandated files
+-AUTOMAKE_OPTIONS = 1.4 dist-zip dist-bzip2 foreign
++AUTOMAKE_OPTIONS = 1.4 dist-zip foreign
+ 
+ # Subdirectories to build
+ if WITH_MAGICK_PLUS_PLUS
+--- ImageMagick-5.3.7/utilities/Makefile.am.orig	Wed Jul 25 22:58:53 2001
++++ ImageMagick-5.3.7/utilities/Makefile.am	Sun Aug  5 13:18:35 2001
+@@ -50,7 +50,7 @@
+ X11PROGRAMS =
+ MANPAGES = $(STDMANPAGES)
+ endif
+-bin_PROGRAMS = composite convert identify iptcutil mogrify montage $(X11PROGRAMS)
++bin_PROGRAMS = composite convert identify mogrify montage $(X11PROGRAMS)
+ 
+ # Libtool libraries, dependencies, and linker flags used by most executables
+ if WITH_MODULES
+@@ -85,10 +85,6 @@
+ import_LDFLAGS    = $(COMMONLDFLAGS)
+ import_SOURCES    = import.c
+ 
+-iptcutil_LDADD    = # Don't use ImageMagick LIBS
+-iptcutil_LDFLAGS  = # Don't use ImageMagick LDFLAGS
+-iptcutil_SOURCES  = iptcutil.c
+-
+ mogrify_LDADD     = $(COMMONLDADD)
+ mogrify_LDFLAGS   = $(COMMONLDFLAGS)
+ mogrify_SOURCES   = mogrify.c

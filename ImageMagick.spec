@@ -5,7 +5,7 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
-Version:	5.3.6
+Version:	5.3.7
 Release:	1
 Epoch:		1
 License:	Freeware
@@ -16,8 +16,8 @@ Source0:	ftp://ftp.simplesystems.org/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-libwmf.patch
-Patch3:		%{name}-perl-link.patch
-Patch4:		%{name}-DESTDIR.patch
+Patch3:		%{name}-DESTDIR.patch
+Patch4:		%{name}-amfix.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
@@ -225,8 +225,6 @@ Biblioteka Magick++ w wersji statycznej.
 %patch3 -p1
 %patch4 -p1
 
-# fix typo
-perl -pi -e 's@htmlc\.@html.c@' coders/Makefile.am
 # fix lcms.h include path
 perl -pi -e 's@lcms/lcms\.h@lcms.h@' magick/transform.c
 
@@ -280,13 +278,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ImageMagick/*.mgk
 
 %attr(755,root,root) %{_bindir}/animate
-%attr(755,root,root) %{_bindir}/cgimagick
+#%attr(755,root,root) %{_bindir}/cgimagick
 %attr(755,root,root) %{_bindir}/composite
 %attr(755,root,root) %{_bindir}/convert
 %attr(755,root,root) %{_bindir}/display
 %attr(755,root,root) %{_bindir}/identify
 %attr(755,root,root) %{_bindir}/import
-%attr(755,root,root) %{_bindir}/iptcutil
+#%attr(755,root,root) %{_bindir}/iptcutil
 %attr(755,root,root) %{_bindir}/mogrify
 %attr(755,root,root) %{_bindir}/montage
 
