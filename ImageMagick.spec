@@ -11,6 +11,8 @@ Serial:		1
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
 Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
+Patch0:		ImageMagick-libpath.patch
+Patch1:		ImageMagick-pgm.patch
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
 BuildRequires:	perl => 5.005_61
 BuildRequires:	XFree86-devel
@@ -22,6 +24,11 @@ BuildRequires:	bzip2-devel
 BuildRequires:	freetype-devel
 Requires:	%{name}-libs = %{version}
 Buildroot:	/tmp/%{name}-%{version}-root
+
+%define		_prefix		/usr/X11R6
+%define		_mandir		/usr/X11R6/man
+%define		_includedir	%{_prefix}/include/X11
+%define		_perlmandir	/usr/share/man
 
 %description
 ImageMagick is an image display, conversion, and manipulation tool. It runs
@@ -126,14 +133,13 @@ ImageMagick libraries.
 Biblioteki ImageMagick.
 
 %prep
-%setup -q
+%setup  -q
+%patch0 -p1
+%patch1 -p1
 
 %build
-autoconf
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure  %{_target_platform} \
-	--prefix=/usr/X11R6 \
-	--includedir=/usr/X11R6/include/X11 \
+LDFLAGS="-s"; export LDFLAGS
+%configure \
 	--enable-shared \
 	--enable-lzw \
 	--enable-16bit-pixel \
@@ -147,14 +153,12 @@ make
 rm -fr $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/%{perl_archlib}
 
-make install \
-	DESTDIR=$RPM_BUILD_ROOT 
+make install DESTDIR=$RPM_BUILD_ROOT 
 
-strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
-strip --strip-unneeded \
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* \
 	$RPM_BUILD_ROOT/%{perl_sitearch}/auto/Image/Magick/Magick.so
 
-gzip -9nf $RPM_BUILD_ROOT/usr/{X11R6/share/man/man*/*,share/man/man3/*} \
+gzip -9nf $RPM_BUILD_ROOT{%{_mandir}/man*/*,%{_perlmandir}/man3/*} \
 	README.txt
 
 %post   -p /sbin/ldconfig
@@ -165,36 +169,37 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files
 %defattr(644,root,root,755)
-/usr/X11R6/share/ImageMagick
+%{_datadir}/ImageMagick
 
-%attr(755,root,root) /usr/X11R6/bin/animate
-%attr(755,root,root) /usr/X11R6/bin/combine
-%attr(755,root,root) /usr/X11R6/bin/convert
-%attr(755,root,root) /usr/X11R6/bin/display
-%attr(755,root,root) /usr/X11R6/bin/identify
-%attr(755,root,root) /usr/X11R6/bin/import
-%attr(755,root,root) /usr/X11R6/bin/mogrify
-%attr(755,root,root) /usr/X11R6/bin/montage
-%attr(755,root,root) /usr/X11R6/bin/xtp
+%attr(755,root,root) %{_bindir}/animate
+%attr(755,root,root) %{_bindir}/combine
+%attr(755,root,root) %{_bindir}/convert
+%attr(755,root,root) %{_bindir}/display
+%attr(755,root,root) %{_bindir}/identify
+%attr(755,root,root) %{_bindir}/import
+%attr(755,root,root) %{_bindir}/mogrify
+%attr(755,root,root) %{_bindir}/montage
+%attr(755,root,root) %{_bindir}/xtp
 
-/usr/X11R6/share/man/man[145]/*
+%{_mandir}/man[145]/*
 
 %files devel
 %defattr(644,root,root,755)
 %doc www ImageMagick.html README.txt.gz
 
-%attr(755,root,root) /usr/X11R6/bin/Magick-config
-%attr(755,root,root) /usr/X11R6/lib/lib*.so
+%attr(755,root,root) %{_bindir}/Magick-config
+%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.la
 
-/usr/X11R6/include/X11/magick
+%{_includedir}/magick
 
 %files static
 %defattr(644,root,root,755)
-/usr/X11R6/lib/lib*.a
+%{_libdir}/lib*.a
 
 %files perl
 %defattr(644,root,root,755)
@@ -204,4 +209,4 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_sitearch}/auto/Image/Magick/autosplit.ix
 %{perl_sitearch}/auto/Image/Magick/Magick.bs
 %attr(755,root,root) %{perl_sitearch}/auto/Image/Magick/Magick.so
-%{_mandir}/man3/Image::Magick.*
+%{_perlmandir}/man3/Image::Magick.*
