@@ -14,7 +14,7 @@ Release:	1
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
-Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{version}.tar.gz
+Source0:	http://imagemagick.sourceforge.net/http/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 URL:		http://www.imagemagick.org/
