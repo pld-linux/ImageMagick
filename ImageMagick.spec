@@ -6,7 +6,7 @@
 %bcond_without	cxx	# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.1.9
+%define		ver 6.2.0
 %define		pver	4
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
@@ -25,7 +25,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.gz
-# Source0-md5:	bd9dceaa1b86159b1c2e906e58747ace
+# Source0-md5:	121af7abaa9b0997ab64af1cafc30f6a
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
