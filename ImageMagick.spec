@@ -36,7 +36,7 @@ BuildRequires:	libwmf-devel
 #BuildRequires:	hdf-devel
 #BuildRequires:	jbigkit-devel
 BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:	automake >= 1.4d
 Requires:	%{name}-libs = %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
