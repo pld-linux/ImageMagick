@@ -6,8 +6,8 @@
 %bcond_without	cxx	# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.0.7
-%define		pver	1
+%define		ver 6.1.0
+%define		pver	8
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -20,21 +20,19 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-style License
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	6c9f5bd9afa95b747480040abd456784
+# Source0-md5:	72d7ce3de7c0e4301d36e034761f2ac2
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
-Patch0:		%{name}-libpath.patch
-Patch1:		%{name}-ac.patch
-Patch2:		%{name}-system-libltdl.patch
+Patch0:		%{name}-ac.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake >= 1.8.2
+BuildRequires:	automake >= 1.9
 BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	freetype-devel >= 2.0.2-2
@@ -116,17 +114,6 @@ resimler Эzerinde deПiЧiklik yapma aГЩsЩndan pek Гok olanak sunar. Bir
 ImageMagick - це утил╕та для перегляду, конвертування та обробки
 зображень. Вона працю╓ п╕д X Window. ImageMagick да╓ користувачу
 широк╕ можливост╕ по обробц╕ зображень в р╕зноман╕тних форматах.
-
-%package doc
-Summary:	ImageMagick documentation
-Summary(pl):	Dokumentacja ImageMagick
-Group:		Documentation
-
-%description doc
-Documentation and user guide for ImageMagick 6.x.
-
-%description doc -l pl
-Dokumentacja i podrЙcznik u©ytkownika ImageMagick 6.x.
 
 %package libs
 Summary:	ImageMagick libraries
@@ -559,21 +546,20 @@ ModuЁ kodera dla plikСw WMF.
 %prep
 %setup -q -n %{name}-%{ver}
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
 
 %build
 rm -f missing
 %{__libtoolize}
-%{__aclocal} -I /usr/share/libtool/libltdl
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 %configure \
 	--enable-fast-install \
 	--enable-lzw \
 	--enable-shared \
+	--disable-ltdl-install \
 	--with%{!?with_fpx:out}-fpx \
 	--with%{!?with_gs:out}-gslib \
 	--with%{!?with_jasper:out}-jp2 \
@@ -638,8 +624,6 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/cip.la
 %attr(755,root,root) %{modulesdir}/coders/clip.so
 %{modulesdir}/coders/clip.la
-%attr(755,root,root) %{modulesdir}/coders/clipboard.so
-%{modulesdir}/coders/clipboard.la
 %attr(755,root,root) %{modulesdir}/coders/cmyk.so
 %{modulesdir}/coders/cmyk.la
 %attr(755,root,root) %{modulesdir}/coders/cut.so
@@ -799,12 +783,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_mandir}/man1/[Iacdim]*
 
-%files doc
-%defattr(644,root,root,755)
-%doc AUTHORS ChangeLog LICENSE NEWS Magick.pdf
-
 %files libs
 %defattr(644,root,root,755)
+%doc AUTHORS ChangeLog LICENSE NEWS
 %attr(755,root,root) %{_libdir}/libMagick.so.*.*.*
 %attr(755,root,root) %{_libdir}/libWand.so.*.*.*
 
