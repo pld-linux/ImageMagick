@@ -1,9 +1,9 @@
 #
 # Conditional build:
-%bcond_without fpx    # without FlashPIX module (which uses fpx library)
-%bcond_with    gs     # with PostScript support through ghostscript library (warning: breaks jpeg!)
-%bcond_without jasper # without JPEG2000 module (which uses jasper library)
-%bcond_without cxx    # without Magick++
+%bcond_without	fpx	# without FlashPIX module (which uses fpx library)
+%bcond_with	gs	# with PostScript support through ghostscript library (warning: breaks jpeg!)
+%bcond_without	jasper	# without JPEG2000 module (which uses jasper library)
+%bcond_without	cxx	# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
 %define		ver 5.5.7
