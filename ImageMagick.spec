@@ -391,7 +391,7 @@ Bibliotecas estáticas para desenvolvimento com libMagick++
 %build
 rm -f missing
 %{__libtoolize}
-aclocal
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 #CPPFLAGS="$CPPFLAGS -I/usr/include/g++"
