@@ -1,0 +1,12 @@
+diff -Nru ImageMagick-5.5.7.orig/Magick++/bin/Magick++-config.in ImageMagick-5.5.7/Magick++/bin/Magick++-config.in
+--- ImageMagick-5.5.7.orig/Magick++/bin/Magick++-config.in	2003-05-11 15:52:09.000000000 +0200
++++ ImageMagick-5.5.7/Magick++/bin/Magick++-config.in	2003-11-05 21:20:32.358683144 +0100
+@@ -27,7 +27,7 @@
+       echo @EXEC_PREFIX_DIR@
+       ;;
+     --version)
+-      echo @MAJOR_VERSION@.@MINOR_VERSION@.@MICRO_VERSION@
++      echo @PACKAGE_VERSION@
+       ;;
+     --cppflags)
+       echo "-I@INCLUDE_DIR@ @CPPFLAGS@"
