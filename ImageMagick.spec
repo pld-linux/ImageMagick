@@ -5,7 +5,7 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
-Version:	5.3.9
+Version:	5.4.0
 Release:	1
 Epoch:		1
 License:	Freeware
@@ -16,9 +16,8 @@ Group(pt):	X11/Aplicações/Gráficos
 Source0:	ftp://ftp.simplesystems.org/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
-Patch2:		%{name}-libwmf.patch
-Patch3:		%{name}-DESTDIR.patch
-Patch4:		%{name}-amfix.patch
+Patch2:		%{name}-DESTDIR.patch
+Patch3:		%{name}-amfix.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
@@ -251,7 +250,6 @@ Biblioteka Magick++ w wersji statycznej.
 %patch1 -p0
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 # fix lcms.h include path
 perl -pi -e 's@lcms/lcms\.h@lcms.h@' magick/transform.c
