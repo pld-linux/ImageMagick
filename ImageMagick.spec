@@ -5,7 +5,7 @@ Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	4.1.8
-Release:	1d
+Release:	2d
 Copyright:	freeware
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
@@ -38,7 +38,7 @@ d'édition des images. Il peut aussi gérer de nombreux formats différents.
 %description -l pl
 ImageMagic jest narzêdziem do manipulacji, konwersji i wy¶wietlania. W sk³ad
 pakietu wchodz± zarówno narzêdzia X Window jak i do u¿ywania z linii poleceñ
-umozliwiaj±ce edicjê plików graficznych. Narzêdzia z pakietu ImageMagic
+umozliwiaj±ce edycjê plików graficznych. Narzêdzia z pakietu ImageMagic
 potrafi± obs³u¿yæ wiele ró¿ncyh formatów graficznych.
 
 %description -l tr
@@ -70,8 +70,8 @@ et les en-têtes utilisés pour créer vos propres applications utilisant le
 code d'ImageMagick et/ou ses APIs.
 
 %description -l pl devel
-Pakiet ten zawieraj±cy pliki potrzebne przy kompilowaniu programów
-wykorzystuj±cyh blibbliotekê ImageMagick takie ja pliki nag³ówkowe,
+Pakiet ten zawieraja pliki potrzebne przy kompilowaniu programów
+wykorzystuj±cyh blibliotekê ImageMagick takie ja pliki nag³ówkowe,
 biblioteki statyczne i dokumentacjê niezbêdn± przy pisaniu w³asnych
 programów z wykorzystaniem API jakie udostêpnia ImageMagick.
 
@@ -90,7 +90,7 @@ Requires:	%{name}-devel = %{version}
 ImageMagick static libraries.
 
 %description -l pl devel
-ImageMagick static libraries.
+Biblioteki statyczne ImageMagick.
 
 %package	perl
 Summary:	libraries and modules for access to ImageMagick from perl
@@ -130,6 +130,7 @@ make
 %install
 rm -fr $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/lib/perl5/%{buildarch}-linux/5.00404/
+
 make install \
 	prefix=$RPM_BUILD_ROOT/usr \
 	PREFIX=$RPM_BUILD_ROOT/usr \
@@ -138,11 +139,11 @@ make install \
 	includedir=$RPM_BUILD_ROOT/usr/X11R6/include/X11/magick \
 	INSTALLMAN3DIR=$RPM_BUILD_ROOT/usr/man/man3
 
-chmod 755 $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
 strip --strip-debug $RPM_BUILD_ROOT/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
 
 gzip -9nf $RPM_BUILD_ROOT/usr/man/man{1,3,4,5}/*
+gzip -9nf www/* ImageMagick.html README.txt
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -156,21 +157,13 @@ rm -rf $RPM_BUILD_ROOT
 
 /usr/X11R6/share/ImageMagick
 
-%attr(755,root,root) /usr/bin/animate
-%attr(755,root,root) /usr/bin/combine
-%attr(755,root,root) /usr/bin/convert
-%attr(755,root,root) /usr/bin/display
-%attr(755,root,root) /usr/bin/identify
-%attr(755,root,root) /usr/bin/import
-%attr(755,root,root) /usr/bin/mogrify
-%attr(755,root,root) /usr/bin/montage
-%attr(755,root,root) /usr/bin/xtp
+%attr(755, root, root) /usr/bin/*
 
 %attr(644,root, man) /usr/man/man[145]/*
 
 %files devel
 %defattr(644,root,root,755)
-%doc www ImageMagick.html README.txt
+%doc www ImageMagick.html.gz README.txt.gz
 
 %attr(755,root,root) /usr/bin/Magick-config
 %attr(755,root,root) /usr/X11R6/lib/lib*.so
@@ -193,6 +186,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root, man) /usr/man/man3/Image::Magick.3.gz
 
 %changelog
+* Tue Feb  9 1999 Micha³ Kuratczyk <kurkens@polbox.com
+  [4.1.8-2d]
+- added gzipping documentation
+- fixed pl translations
+- cosmetic changes
+
 * Sun Jan 24 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.1.8-1d]
 - added Group(pl),
