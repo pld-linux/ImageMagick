@@ -1,40 +1,40 @@
-Summary:     Image display, conversion, and manipulation under X
-Summary(de): Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
-Summary(fr): Visualisation, conversion, et manipulation d'images sous X.
-Summary(pl): Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
-Summary(tr): X altýnda resim gösterme, çevirme ve deðiþiklik yapma
-Name:        ImageMagick
-Version:     4.1.7
-Release:     1
-Copyright:   freeware
-Group:       X11/Applications/Graphics
-Source:      ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
-URL:         http://www.wizards.dupont.com/cristy/ImageMagick.html
-Requires:    freetype >= 1.2
-Buildroot:   /tmp/%{name}-%{version}-root
+Summary:	Image display, conversion, and manipulation under X
+Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
+Summary(fr):	Visualisation, conversion, et manipulation d'images sous X.
+Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
+Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
+Name:		ImageMagick
+Version:	4.1.8
+Release:	1d
+Copyright:	freeware
+Group:		X11/Applications/Graphics
+Group(pl):	X11/Aplikacje/grafika
+Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
+URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
+Requires:	freetype = 1.2
+Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
-ImageMagick is an image display, conversion, and manipulation tool.
-It runs under X windows.  It is very powerful in terms of it's 
-ability to allow the user to edit images.  It can handle many 
-different formats as well.
+ImageMagick is an image display, conversion, and manipulation tool. It runs
+under X windows. It is very powerful in terms of it's ability to allow the
+user to edit images.  It can handle many different formats as well.
 
 %description -l de
-ImageMagick ist ein Tool zur Bildanzeige, -konvertierung und 
--manipulation, das unter X-Windows läuft. Es ist enorm leitungsfähig 
-in Bezug auf die Grafikmanipulationsfunktionen, die es dem Anwender 
-bietet, und auf die Vielfalt der unterstützten Formate.
+ImageMagick ist ein Tool zur Bildanzeige, -konvertierung und manipulation,
+-das unter X-Windows läuft. Es ist enorm leitungsfähig in Bezug auf die
+Grafikmanipulationsfunktionen, die es dem Anwender bietet, und auf die
+Vielfalt der unterstützten Formate.
 
 %description -l fr
 ImageMagick est un outil d'affichage, de conversion et de manipulation
-d'images. Il tourne sous X Window et est très puissant en termes
-de capacité d'édition des images. Il peut aussi gérer de nombreux
-formats différents.
+d'images. Il tourne sous X Window et est très puissant en termes de capacité
+d'édition des images. Il peut aussi gérer de nombreux formats différents.
 
 %description -l pl
-ImageMagic jest narzêdziem do manipulacji, konwersji i wy¶wietlania.
-W skk³ad pakietu wchod¿a zarówno narzêdzia X'ami. Jest to narzêdzie potê¿ne ;)
-i u¿yteczne podczas pracy z wieloma formatami graficznymi.
+ImageMagic jest narzêdziem do manipulacji, konwersji i wy¶wietlania. W sk³ad
+pakietu wchodz± zarówno narzêdzia X Window jak i do u¿ywania z linii poleceñ
+umozliwiaj±ce edicjê plików graficznych. Narzêdzia z pakietu ImageMagic
+potrafi± obs³u¿yæ wiele ró¿ncyh formatów graficznych.
 
 %description -l tr
 ImageMagick bir resim gösterme, çevirme ve deðiþiklik yapma programýdýr. X
@@ -43,49 +43,49 @@ deðiþiklik yapma açýsýndan pek çok olanak sunar. Bir çok resim biçimini
 rahatlýkla kullanabilir.
 
 %package  devel
-Summary:     Static libraries and header files for ImageMagick development
-Summary(pl): Biblioteki statyczne i pliki nag³ówkowe dla ImageMagick'a
-Group:       X11/Libraries
-Requires:    %{name} = %{version}
+Summary:	Libraries and header files for ImageMagick development
+Summary(pl):	Biblioteki i pliki nag³ówkowe dla ImageMagick'a
+Group:		X11/Libraries/Development
+Group(pl):	X11/Biblioteki/Programowanie
+Requires:	%{name} = %{version}
 
 %description devel
 This is the ImageMagick development package.  It includes the static
-libraries and header files for use in developing your own applications
-that make use of the ImageMagick code and/or APIs.
+libraries and header files for use in developing your own applications that
+make use of the ImageMagick code and/or APIs.
 
 %description -l de devel
 Dies ist das ImageMagick-Entwicklerpaket. Es enthält die statischen
-Libraries und Header-Dateien zum Entwickeln von Anwendungen,
-die ImageMagick-Code und/oder -APIs nutzen.
+Libraries und Header-Dateien zum Entwickeln von Anwendungen, die
+ImageMagick-Code und/oder -APIs nutzen.
 
 %description -l fr devel
-Paquetage de développement ImageMagick. Contient les bibliothèques
-statiques et les en-têtes utilisés pour créer vos propres applications
-utilisant le code d'ImageMagick et/ou ses APIs.
+Paquetage de développement ImageMagick. Contient les bibliothèques statiques
+et les en-têtes utilisés pour créer vos propres applications utilisant le
+code d'ImageMagick et/ou ses APIs.
 
 %description -l pl devel
 Pakiet ten zawieraj±cy pliki potrzebne przy kompilowaniu programów
-wykorzystuj±cyh blibbliotekê ImageMagick takie ja pliki nag³owkowe,
-biblioteki statyczne i dokumentacjê niezbêddn± przy pisaniu w³±snych
+wykorzystuj±cyh blibbliotekê ImageMagick takie ja pliki nag³ówkowe,
+biblioteki statyczne i dokumentacjê niezbêdn± przy pisaniu w³asnych
 programów z wykorzystaniem API jakie udostêpnia ImageMagick.
 
 %description -l tr devel
 Bu paket, ImageMagick uygulama arayüzünü kullanan programlar geliþtirmek
 için gereken baþlýk dosyalarýný ve kitaplýklarý içerir.
 
-%package  static
-Summary:     Header files for ImageMagick development
-Summary(pl): Pliki nag³ówkowe dla biblioteki ImageMagick
-Group:       X11/Libraries
-Requires:    %{name}-devel = %{version}
+%package static
+Summary:	ImageMagick static libraries
+Summary(pl): 	Biblioteki statyczne ImageMagick
+Group:		X11/Libraries/Development
+Group(pl):	X11/Biblioteki/Programowanie
+Requires:	%{name}-devel = %{version}
 
 %description static
-This package contains header files for use in developing your own
-applications that make use of the ImageMagick code and/or APIs.
+ImageMagick static libraries.
 
 %description -l pl devel
-Pakiet ten zawiera pliki nag³owkowe i dokumentacjê niezbêdn± przy pisaniu
-w³asnych programów z wykorzystaniem API jakie udostêpnia ImageMagick.
+ImageMagick static libraries.
 
 %package  perl
 Summary:     libraries and modules for access to ImageMagick from perl
@@ -134,7 +134,7 @@ make install \
 strip $RPM_BUILD_ROOT/usr/X11R6/lib/lib*.so.*.*
 strip --strip-debug $RPM_BUILD_ROOT/usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
 
-gzip $RPM_BUILD_ROOT/usr/man/man{1,3,4,5}/*
+gzip -9nf $RPM_BUILD_ROOT/usr/man/man{1,3,4,5}/*
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -143,42 +143,51 @@ gzip $RPM_BUILD_ROOT/usr/man/man{1,3,4,5}/*
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644, root, root, 755)
-/usr/X11R6/lib/lib*.so.*.*
+%defattr(644,root,root,755)
+%attr(755,root,root) /usr/X11R6/lib/lib*.so.*.*
+
 /usr/X11R6/share/ImageMagick
-%attr(755, root, root) /usr/bin/animate
-%attr(755, root, root) /usr/bin/combine
-%attr(755, root, root) /usr/bin/convert
-%attr(755, root, root) /usr/bin/display
-%attr(755, root, root) /usr/bin/identify
-%attr(755, root, root) /usr/bin/import
-%attr(755, root, root) /usr/bin/mogrify
-%attr(755, root, root) /usr/bin/montage
-%attr(755, root, root) /usr/bin/xtp
-%attr(644, root,  man) /usr/man/man[145]/*
+
+%attr(755,root,root) /usr/bin/animate
+%attr(755,root,root) /usr/bin/combine
+%attr(755,root,root) /usr/bin/convert
+%attr(755,root,root) /usr/bin/display
+%attr(755,root,root) /usr/bin/identify
+%attr(755,root,root) /usr/bin/import
+%attr(755,root,root) /usr/bin/mogrify
+%attr(755,root,root) /usr/bin/montage
+%attr(755,root,root) /usr/bin/xtp
+%attr(644,root, man) /usr/man/man[145]/*
 
 %files devel
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 %doc www ImageMagick.html README.txt
-%attr(755, root, root) /usr/bin/Magick-config
+%attr(755,root,root) /usr/bin/Magick-config
+%attr(755,root,root) /usr/X11R6/lib/lib*.so
 %dir /usr/X11R6/include/X11/magick
 /usr/X11R6/include/X11/magick/*.h
-/usr/X11R6/lib/lib*.so
 
 %files static
-%attr(644, root, root) /usr/X11R6/lib/lib*.a
+%attr(644,root,root) /usr/X11R6/lib/lib*.a
 
 %files perl
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/lib/perl5/site_perl/*/*/Image
 %dir /usr/lib/perl5/site_perl/*/*/auto/Image
 %dir /usr/lib/perl5/site_perl/*/*/auto/Image/Magick
 /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/autosplit.ix
 /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.bs
-%attr(755, root, root) /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
-%attr(644, root,  man) /usr/man/man3/Image::Magick.3.gz
+%attr(755,root,root) /usr/lib/perl5/site_perl/*/*/auto/Image/Magick/Magick.so
+%attr(644,root, man) /usr/man/man3/Image::Magick.3.gz
 
 %changelog
+* Sun Jan 24 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.1.8-1d]
+- added Group(pl),
+- fixed permission on lib*.so* files (must be 755),
+- changed Requires for freetype (= 1.2),
+- many fixes im pl translations.
+
 * Sat Dec  7 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.1.5-1]
 - added gzipping man pages,
