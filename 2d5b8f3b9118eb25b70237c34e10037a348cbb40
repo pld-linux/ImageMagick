@@ -1,0 +1,4 @@
+- use new rpm automation,
+- workk around in %%install for silly using not released autoconf feactures
+  in IM autoconf suit,
+- spec adapterized and few cosmetics.
