@@ -1,24 +1,38 @@
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
+Summary(es):	Exhibidor, convertidor y manipulador de imАgenes bajo X
 Summary(fr):	Visualisation, conversion, et manipulation d'images sous X
 Summary(pl):	NarzЙdzie do wy╤wietlania, konwersji i manipulacji grafikami
+Summary(pt_BR):	Exibidor, conversor e manipulador de imagens sob X
+Summary(ru):	Просмотр, конвертирование, обработка изображений под X Windows
 Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
+Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Windows
 Name:		ImageMagick
-Version:	5.4.0
-Release:	3
+Version:	5.4.3
+Release:	1
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
+Group(cs):	X11/Aplikace/Grafika
+Group(da):	X11/Programmer/Grafik
 Group(de):	X11/Applikationen/Grafik
+Group(es):	X11/Aplicaciones/GrАficos
+Group(fr):	X11/Applications/Graphiques
+Group(id):	X11/Aplikasi/Grafik
+Group(is):	X11/Forrit/Myndvinnsla
+Group(it):	X11/Applicazioni/Immagini
+Group(ja):	X11/╔╒╔в╔Й╔╠║╪╔╥╔Г╔С/╔╟╔И╔у╔ё╔ц╔╞╔╧
+Group(no):	X11/Applikasjoner/Grafikk
 Group(pl):	X11/Aplikacje/Grafika
 Group(pt):	X11/AplicaГУes/GrАficos
+Group(ru):	X11/Приложения/Графика
+Group(sl):	X11/Programi/Grafika
+Group(sv):	X11/TillДmpningar/Grafik
+Group(uk):	X11/Прикладн╕ Програми/Граф╕ка
 Source0:	ftp://ftp.simplesystems.org/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
-Patch2:		%{name}-DESTDIR.patch
-Patch3:		%{name}-amfix.patch
-Patch4:		%{name}-libwmf.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	bzip2-devel >= 1.0.1
@@ -62,6 +76,12 @@ manipulation, -das unter X-Windows lДuft. Es ist enorm leitungsfДhig
 in Bezug auf die Grafikmanipulationsfunktionen, die es dem Anwender
 bietet, und auf die Vielfalt der unterstЭtzten Formate.
 
+%description -l es
+ImageMagick es una herramienta para manipular, convertir y exhibir
+imАgenes, que funciona bajo X Window. Es una herramienta potente que
+permite editar imАgenes, pudiendo manipular varios formatos
+diferentes.
+
 %description -l fr
 ImageMagick est un outil d'affichage, de conversion et de manipulation
 d'images. Il tourne sous X Window et est trХs puissant en termes de
@@ -75,22 +95,51 @@ linii poleceЯ umo©liwiaj╠ce edycjЙ plikСw graficznych. NarzЙdzia z
 pakietu ImageMagick potrafi╠ obsЁu©yФ wiele rС©nych formatСw
 graficznych.
 
+%description -l pt_BR
+ImageMagick И uma ferramenta para manipular, converter e exibir
+imagens, que funciona sob o X Window. и uma ferramenta poderosa que
+permite editar imagens, podendo tratar vАrios formatos diferentes.
+
+%description -l ru
+ImageMagick - это утилита для просмотра, конвертирования и обработки
+изображений. Она работает под X Windows. ImageMagick предоставляет
+пользователю широкие возможности по обработке изображений в самых
+разнообразных форматах.
+
 %description -l tr
 ImageMagick bir resim gЖsterme, Гevirme ve deПiЧiklik yapma
 programЩdЩr. X Window pencereleme sistemi altЩnda ГalЩЧЩr. KullanЩcЩya
 resimler Эzerinde deПiЧiklik yapma aГЩsЩndan pek Гok olanak sunar. Bir
 Гok resim biГimini rahatlЩkla kullanabilir.
 
+%description -l uk
+ImageMagick - це утил╕та для перегляду, конвертування та обробки
+зображень. Вона працю╓ п╕д X Windows. ImageMagick да╓ користувачу
+широк╕ можливост╕ по обробц╕ зображень в р╕зноман╕тних форматах.
+
 %package devel
 Summary:	Libraries and header files for ImageMagick development
+Summary(es):	Biblioteca estАtica y archivos de inclusiСn para desarrollo con libMagick
 Summary(pl):	Biblioteki i pliki nagЁСwkowe dla ImageMagick
+Summary(pt_BR):	Biblioteca e arquivos de inclusЦo para desenvolvimento com libMagick
+Summary(ru):	Хедеры и библиотеки для программирования с ImageMagick
+Summary(uk):	Хедери та б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Group(de):	X11/Entwicklung/Libraries
+Group(cs):	X11/VЩvojovИ prostЬedky/Knihovny
+Group(da):	X11/Udvikling/Biblioteker
+Group(de):	X11/Entwicklung/Bibliotheken
 Group(es):	X11/Desarrollo/Bibliotecas
 Group(fr):	X11/Development/Librairies
+Group(is):	X11/чrСunartСl/AПgerПasЖfn
+Group(it):	X11/Sviluppo/Librerie
+Group(ja):	X11/Ё╚х╞/╔И╔╓╔ж╔И╔Й
+Group(no):	X11/Applikasjoner/Biblioteker
 Group(pl):	X11/Programowanie/Biblioteki
 Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(pt):	X11/Desenvolvimento/Bibliotecas
 Group(ru):	X11/Разработка/Библиотеки
+Group(sl):	X11/Razvoj/Knji╬nice
+Group(sv):	X11/Utveckling/Bibliotek
 Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 Requires:	jbigkit-devel
@@ -100,51 +149,115 @@ This is the ImageMagick development package. It includes header files
 for use in developing your own applications that make use of the
 ImageMagick code and/or APIs.
 
-%description -l de devel
+%description devel -l de
 Dies ist das ImageMagick-Entwicklerpaket. Es enthДlt Header-Dateien
 zum Entwickeln von Anwendungen, die ImageMagick-Code und/oder -APIs
 nutzen.
 
-%description -l fr devel
+%description devel -l es
+Este es el paquete de desarrollo ImageMagick. Incluye las bibliotecas
+y los archivos de inclusiСn para el desarrollo de sus propias
+aplicaciones que hacen uso del cСdigo ImageMagick y/el APIs.
+
+%description devel -l fr
 Paquetage de dИveloppement ImageMagick. Contient les bibliothХques
 statiques et les en-tЙtes utilisИs pour crИer vos propres applications
 utilisant le code d'ImageMagick et/ou ses APIs.
 
-%description -l pl devel
+%description devel -l pl
 Pakiet ten zawieraja pliki potrzebne przy kompilowaniu programСw
 wykorzystuj╠cych blibliotekЙ ImageMagick takie jak pliki nagЁСwkowe i
 dokumentacjЙ niezbЙdn╠ przy pisaniu wЁasnych programСw z
 wykorzystaniem API jakie udostЙpnia ImageMagick.
 
-%description -l tr devel
+%description devel -l pt_BR
+Este И o pacote de desenvolvimento ImageMagick. Inclui as bibliotecas
+e os arquivos de inclusЦo para o desenvolvimento de suas prСprias
+aplicaГУes que fazem uso do cСdigo ImageMagick e/ou APIs.
+
+%description devel -l ru
+Это пакет разработчика для программирования с ImageMagick. Он включает
+хедеры и библиотеки для использования в программах, которые используют
+код или API ImageMagick.
+
+%description devel -l tr
 Bu paket, ImageMagick uygulama arayЭzЭnЭ kullanan programlar
 geliЧtirmek iГin gereken baЧlЩk dosyalarЩnЩ ve kitaplЩklarЩ iГerir.
 
+%description devel -l uk
+Це пакет для програмування з ImageMagick. В╕н м╕стить хедери та
+б╕бл╕отеки для використання в програмах, що використовують код або API
+ImageMagick.
+
 %package static
 Summary:	ImageMagick static libraries
+Summary(es):	Static libraries for libMagick development
 Summary(pl):	Biblioteki statyczne ImageMagick
+Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com libMagick
+Summary(ru):	Статические библиотеки для программирования с ImageMagick
+Summary(uk):	Статичн╕ б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Group(de):	X11/Entwicklung/Libraries
+Group(cs):	X11/VЩvojovИ prostЬedky/Knihovny
+Group(da):	X11/Udvikling/Biblioteker
+Group(de):	X11/Entwicklung/Bibliotheken
 Group(es):	X11/Desarrollo/Bibliotecas
 Group(fr):	X11/Development/Librairies
+Group(is):	X11/чrСunartСl/AПgerПasЖfn
+Group(it):	X11/Sviluppo/Librerie
+Group(ja):	X11/Ё╚х╞/╔И╔╓╔ж╔И╔Й
+Group(no):	X11/Applikasjoner/Biblioteker
 Group(pl):	X11/Programowanie/Biblioteki
 Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(pt):	X11/Desenvolvimento/Bibliotecas
 Group(ru):	X11/Разработка/Библиотеки
+Group(sl):	X11/Razvoj/Knji╬nice
+Group(sv):	X11/Utveckling/Bibliotek
 Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
 ImageMagick static libraries.
 
-%description -l pl static
+%description static -l es
+Static libraries for libMagick development.
+
+%description static -l pl
 Biblioteki statyczne ImageMagick.
+
+%description static -l pt_BR
+Bibliotecas estАticas para desenvolvimento com libMagick.
+
+%description static -l ru
+Это отдельный пакет со статическими библиотеками, которые больше не
+входят в ImageMagick-devel.
+
+%description static -l uk
+Це окремий пакет з╕ статичними б╕бл╕отеками, як╕ б╕льше не входять до
+складу ImageMagick-devel.
 
 %package perl
 Summary:	Libraries and modules for access to ImageMagick from perl
+Summary(es):	Perl Module to use ImageMagick
 Summary(pl):	Biblioteki i moduЁy perla dla ImageMagick
+Summary(pt_BR):	MСdulo perl para uso com o ImageMagick
+Summary(ru):	Библиотеки и модули для доступа к ImageMagick из perl
+Summary(uk):	Б╕бл╕отеки та модул╕ для доступу до ImageMagick з Perl
 Group:		Development/Languages/Perl
+Group(cs):	VЩvojovИ prostЬedky/ProgramovacМ jazyky/Perl
+Group(da):	Udvikling/Sprog/Perl
 Group(de):	Entwicklung/Sprachen/Perl
+Group(es):	Desarrollo/Lenguajes/Perl
+Group(fr):	Development/Langues/Perl
+Group(is):	чrСunartСl/ForritunarmАl/Perl
+Group(it):	Sviluppo/Linguaggi/Perl
+Group(ja):	Ё╚х╞/╦ю╦Л/Perl
+Group(no):	Utvikling/ProgrammeringssprЕk/Perl
 Group(pl):	Programowanie/JЙzyki/Perl
+Group(pt):	Desenvolvimento/Linguagens/Perl
+Group(ru):	Разработка/Языки/Perl
+Group(sl):	Razvoj/Jeziki/Perl
+Group(sv):	Utveckling/SprЕk/Perl
+Group(uk):	Розробка/Мови/Perl
 Requires:	%{name}-libs = %{version}
 
 %description perl
@@ -152,38 +265,84 @@ This is the ImageMagick perl support package. It perl modules and
 support files for access to ImageMagick library from perl without
 unuseful forking or such.
 
-%description -l pl perl
+%description perl -l es
+This packages provides a perl module to access ImagickMagick functions
+from perl scripts.
+
+%description perl -l pl
 Biblioteki i moduЁy umo©liwiaj╠ce korzystanie z ImageMagick z poziomu
 perla.
 
+%description perl -l pt_BR
+Este pacote fornece um mСdulo perl para acessar funГУes do ImageMagick
+em scripts perl.
+
+%description perl -l ru
+Это пакет ImageMagick для поддержки perl. Он включает модули perl и
+вспомогательные файлы для доступа к библиотеке ImageMagick из perl.
+
+%description perl -l uk
+Це пакет ImageMagick для п╕дтримки Perl. В╕н м╕стить модул╕ Perl та
+додатков╕ файли для доступу до б╕бл╕отеки ImageMagick з Perl.
+
 %package libs
 Summary:	ImageMagick libraries
+Summary(es):	ImageMagick dynamic libraries
 Summary(pl):	Biblioteki ImageMagick
+Summary(pt_BR):	Bibliotecas dinБmicas do ImageMagick
 Group:		X11/Libraries
-Group(de):	X11/Libraries
+Group(cs):	X11/Knihovny
+Group(da):	X11/Biblioteker
+Group(de):	X11/Bibliotheken
 Group(es):	X11/Bibliotecas
 Group(fr):	X11/Librairies
+Group(is):	X11/AПgerПasЖfn
+Group(it):	X11/Librerie
+Group(ja):	X11/╔И╔╓╔ж╔И╔Й
+Group(no):	X11/Biblioteker
 Group(pl):	X11/Biblioteki
 Group(pt_BR):	X11/Bibliotecas
+Group(pt):	X11/Bibliotecas
 Group(ru):	X11/Библиотеки
+Group(sl):	X11/Knji╬nice
+Group(sv):	X11/Bibliotek
 Group(uk):	X11/Б╕бл╕отеки
 
 %description libs
 ImageMagick libraries.
 
-%description -l pl libs
+%description libs -l es
+ImageMagick dynamic libraries.
+
+%description libs -l pl
 Biblioteki ImageMagick.
+
+%description libs -l pt_BR
+Bibliotecas dinБmicas do ImageMagick.
 
 %package c++
 Summary:	ImageMagick Magick++ library
+Summary(es):	ImageMagick dynamic libraries
 Summary(pl):	Biblioteka Magick++
+Summary(pt_BR):	Bibliotecas dinБmicas do ImageMagick
+Summary(ru):	Библиотека Magick++ (C++ интерфейс для ImageMagick'а)
+Summary(uk):	Б╕бл╕отека Magick++ (╕нтерфейс C++ для ImageMagick)
 Group:		X11/Libraries
-Group(de):	X11/Libraries
+Group(cs):	X11/Knihovny
+Group(da):	X11/Biblioteker
+Group(de):	X11/Bibliotheken
 Group(es):	X11/Bibliotecas
 Group(fr):	X11/Librairies
+Group(is):	X11/AПgerПasЖfn
+Group(it):	X11/Librerie
+Group(ja):	X11/╔И╔╓╔ж╔И╔Й
+Group(no):	X11/Biblioteker
 Group(pl):	X11/Biblioteki
 Group(pt_BR):	X11/Bibliotecas
+Group(pt):	X11/Bibliotecas
 Group(ru):	X11/Библиотеки
+Group(sl):	X11/Knji╬nice
+Group(sv):	X11/Bibliotek
 Group(uk):	X11/Б╕бл╕отеки
 Requires:	%{name}-libs = %{version}
 
@@ -194,21 +353,50 @@ ImageMagick graphics manipulation library.
 Install ImageMagick-c++ if you want to use any applications that use
 Magick++.
 
-%description -l pl c++
+%description c++ -l es
+ImageMagick C++ dynamic libraries.
+
+%description c++ -l pl
 Pakiet zawiera bibliotekЙ Magick++ - interfejs w C++ do biblioteki
 ImageMagick. Jest potrzebny do uruchamiania programСw korzystaj╠cych z
 Magick++.
 
+%description c++ -l pt_BR
+Bibliotecas dinБmicas C++ do ImageMagick.
+
+%description c++ -l ru
+Magick++ -- объектно-ориентированная библиотека, представляющая из
+себя C++ API для ImageMagick (библиотеки для просмотра,
+конвертирования и обработки изображений).
+
+%description c++ -l uk
+Magick++ -- об'╓кто-ор╕╓нтована б╕бл╕отека, що явля╓ собою C++ API для
+ImageMagick (б╕бл╕отеки для перегляду, конвертування та обробки
+зображень).
+
 %package c++-devel
 Summary:	C++ bindings for the ImageMagick library
+Summary(es):	Biblioteca estАtica y archivos de inclusiСn para desarrollo con libMagick++
 Summary(pl):	Pliki nagЁСwkowe z interfejsem C++ do ImageMagick
+Summary(pt_BR):	Biblioteca e arquivos de inclusЦo para desenvolvimento com libMagick++
+Summary(ru):	Хедеры и библиотеки для разработок с использованием Magick++ (C++ интерфейс для ImageMagick'а)
+Summary(uk):	Хедери та б╕бл╕отеки для розробок з використанням Magick++ (╕нтерфейсу C++ для ImageMagick)
 Group:		X11/Development/Libraries
-Group(de):	X11/Entwicklung/Libraries
+Group(cs):	X11/VЩvojovИ prostЬedky/Knihovny
+Group(da):	X11/Udvikling/Biblioteker
+Group(de):	X11/Entwicklung/Bibliotheken
 Group(es):	X11/Desarrollo/Bibliotecas
 Group(fr):	X11/Development/Librairies
+Group(is):	X11/чrСunartСl/AПgerПasЖfn
+Group(it):	X11/Sviluppo/Librerie
+Group(ja):	X11/Ё╚х╞/╔И╔╓╔ж╔И╔Й
+Group(no):	X11/Applikasjoner/Biblioteker
 Group(pl):	X11/Programowanie/Biblioteki
 Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(pt):	X11/Desenvolvimento/Bibliotecas
 Group(ru):	X11/Разработка/Библиотеки
+Group(sl):	X11/Razvoj/Knji╬nice
+Group(sv):	X11/Utveckling/Bibliotek
 Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-c++ = %{version}
 Requires:	%{name}-devel = %{version}
@@ -224,20 +412,53 @@ and ImageMagick. You don't need to install it if you just want to use
 ImageMagick, or if you want to develop/compile applications using the
 ImageMagick C interface, however.
 
-%description -l pl c++-devel
+%description c++-devel -l es
+Este es el paquete de desarrollo ImageMagick. Incluye las bibliotecas
+estАticas y los archivos de inclusiСn para el desarrollo de sus
+propias aplicaciones que hacen uso del cСdigo ImageMagick y/el APIs.
+
+%description c++-devel -l pl
 Pakiet zawiera pliki nagЁСwkowe potrzebne do kompilowania programСw
 korzystaj╠cych z Magick++.
 
+%description c++-devel -l pt_BR
+Este И o pacote de desenvolvimento libMagick++. Inclui as bibliotecas
+e os arquivos de inclusЦo para o desenvolvimento de suas prСprias
+aplicaГУes C++ que fazem uso do cСdigo ImageMagick e/ou APIs.
+
+%description c++-devel -l ru
+Это пакет разработчика для программирования с ImageMagick. Он включает
+хедеры и библиотеки для использования в программах, которые используют
+код или API Magick++ (C++ интерфейс для ImageMagick'а).
+
+%description c++-devel -l uk
+Це пакет для програмування з ImageMagick. В╕н м╕стить хедери та
+б╕бл╕отеки для використання в програмах, що використовують код або API
+Magick++ (╕нтерфейс C++ для ImageMagick).
+
 %package c++-static
 Summary:	C++ bindings for the ImageMagick - static library
+Summary(es):	Static libraries for libMagick development
 Summary(pl):	Interfejs C++ do ImageMagick - biblioteka statyczna
+Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com libMagick
+Summary(ru):	Статические библиотеки C++ для программирования с ImageMagick
+Summary(uk):	Статичн╕ б╕бл╕отеки C++ для програмування з ImageMagick
 Group:		X11/Development/Libraries
-Group(de):	X11/Entwicklung/Libraries
+Group(cs):	X11/VЩvojovИ prostЬedky/Knihovny
+Group(da):	X11/Udvikling/Biblioteker
+Group(de):	X11/Entwicklung/Bibliotheken
 Group(es):	X11/Desarrollo/Bibliotecas
 Group(fr):	X11/Development/Librairies
+Group(is):	X11/чrСunartСl/AПgerПasЖfn
+Group(it):	X11/Sviluppo/Librerie
+Group(ja):	X11/Ё╚х╞/╔И╔╓╔ж╔И╔Й
+Group(no):	X11/Applikasjoner/Biblioteker
 Group(pl):	X11/Programowanie/Biblioteki
 Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(pt):	X11/Desenvolvimento/Bibliotecas
 Group(ru):	X11/Разработка/Библиотеки
+Group(sl):	X11/Razvoj/Knji╬nice
+Group(sv):	X11/Utveckling/Bibliotek
 Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-c++-devel = %{version}
 Requires:	%{name}-devel = %{version}
@@ -245,22 +466,34 @@ Requires:	%{name}-devel = %{version}
 %description c++-static
 C++ bindings for the ImageMagick - static library.
 
-%description -l pl c++-static
+%description c++-static -l es
+Static libraries for libMagick++ development
+
+%description c++-static -l pl
 Biblioteka Magick++ w wersji statycznej.
+
+%description c++-static -l pt_BR
+Bibliotecas estАticas para desenvolvimento com libMagick++
+
+%description c++-static -l ru
+Это отдельный пакет со статическими библиотеками, которые больше не
+входят в ImageMagick-c++-devel.
+
+%description c++-static -l uk
+Це окремий пакет з╕ статичними б╕бл╕отеками, як╕ б╕льше не входять до
+складу ImageMagick-c++-devel.
 
 %prep
 %setup  -q
 %patch0 -p1
 %patch1 -p0
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 # fix lcms.h include path
 perl -pi -e 's@lcms/lcms\.h@lcms.h@' magick/transform.c
 perl -pi -e 's@lcms/lcms\.h@lcms.h@' configure.ac
 
 %build
+rm -f missing
 libtoolize --copy --force
 aclocal
 autoconf
