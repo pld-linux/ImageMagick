@@ -1,0 +1,65 @@
+- added using CVS keywords in %%changelog (for automating them).
+
+* Fri May  7 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.2.4-1]
+- now package is FHS 2.0 compliant.
+
+* Thu Apr 22 1999 Artur Frysiak <wiget@pld.org.pl>
+  [4.2.3-1]
+- separated libs to subpackage
+
+* Tue Apr 20 1999 Artur Frysiak <wiget@pld.org.pl>
+  [4.2.2-2]
+- compiled on rpm 3 and perl 5.005_03
+
+* Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.1.0-5]
+- removed man group from man pages,
+- "make install" with using DESTDIR,
+- changed Group in devel and static,
+- downgrade to 4.1.0 - all above versions have buggy conversions tga->gif
+  (maybe more).
+
+* Tue Feb  9 1999 Micha³ Kuratczyk <kurkens@polbox.com
+  [4.1.8-2d]
+- added gzipping documentation
+- fixed pl translations
+- cosmetic changes
+
+* Sun Jan 24 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.1.8-1d]
+- added Group(pl),
+- fixed permission on lib*.so* files (must be 755),
+- changed Requires for freetype (= 1.2),
+- many fixes im pl translations.
+
+* Sat Dec  7 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.1.5-1]
+- added gzipping man pages,
+- %%{_bindir}/Magick-config moved to devel,
+- added /usr/X11R6/share/ImageMagick/delegates.mgk file to main,
+- more man pages on levels 3, 4 and 5,
+- added LDFLAGS="-s" in ./configure enviroment.
+
+* Sun Nov  1 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.1.3-2]
+- simplification in perl subpackage,
+- man pages in perl subpackage moved to %%{_mandir}/man3,
+- build against perl 5.005 (added also "Requires: perl >= 5.005" in perl).
+
+* Sat Aug  1 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.0.8-1]
+- added rest pl translations in subpackages,
+- added static subpackage.
+
+* Fri Jul 17 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+  [4.0.7-2]
+- added pl translation,
+- build against GNU libc-2.1.
+
+* Sun Jun 14 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [4.0.7-1]
+- added Khimenko Victor <khim@sch57.msk.ru> style modyfication for making
+  separated subpackage perl stuff and all my old modyfication which was
+  prepared and uploaded to contrib before RH 5.1,
+- added "Requires: freetype >= 1.1" for main package.
