@@ -110,7 +110,7 @@ perla.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--prefix=/usr/X11R6 \
 	--includedir=/usr/X11R6/include/X11 \
 	--enable-shared \
@@ -182,9 +182,13 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_sitearch}/auto/Image/Magick/autosplit.ix
 %{perl_sitearch}/auto/Image/Magick/Magick.bs
 %attr(755,root,root) %{perl_sitearch}/auto/Image/Magick/Magick.so
-/usr/man/man3/Image::Magick.3.gz
+/usr/man/man3/Image::Magick.*
 
 %changelog
+* Tue Apr 20 1999 Artur Frysiak <wiget@pld.org.pl>
+  [4.2.2-2]
+- compiled on rpm 3 and perl 5.005_03
+
 * Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.1.0-5]
 - removed man group from man pages,
