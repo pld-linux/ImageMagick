@@ -1,12 +1,12 @@
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
-Summary(fr):	Visualisation, conversion, et manipulation d'images sous X.
+Summary(fr):	Visualisation, conversion, et manipulation d'images sous X
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
 Version:	5.2.5
-Release:	1
+Release:	2
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
@@ -16,7 +16,7 @@ Source0:	ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
-BuildRequires:	perl => 5.005_03-14
+BuildRequires:	perl => 5.6
 BuildRequires:	rpm-perlprov >= 3.0.3-18
 BuildRequires:	XFree86-devel
 BuildRequires:	libjpeg-devel
@@ -180,12 +180,6 @@ install -d $RPM_BUILD_ROOT/usr/src/examples/%{name}-perl
 %{__make} install DESTDIR=$RPM_BUILD_ROOT 
 install PerlMagick/demo/* $RPM_BUILD_ROOT/usr/src/examples/%{name}-perl
 
-(
-  cd $RPM_BUILD_ROOT%{perl_sitearch}/auto/Image/Magick
-  sed -e "s#$RPM_BUILD_ROOT##" .packlist >.packlist.new
-  mv -f .packlist.new .packlist
-)
-
 gzip -9nf README.txt
 
 %post   libs -p /sbin/ldconfig
@@ -232,7 +226,6 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_sitearch}/Image
 %dir %{perl_sitearch}/auto/Image
 %dir %{perl_sitearch}/auto/Image/Magick
-%{perl_sitearch}/auto/Image/Magick/.packlist
 %{perl_sitearch}/auto/Image/Magick/autosplit.ix
 %{perl_sitearch}/auto/Image/Magick/Magick.bs
 %attr(755,root,root) %{perl_sitearch}/auto/Image/Magick/Magick.so
