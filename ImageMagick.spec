@@ -6,10 +6,9 @@
 # _without_cxx          - without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 5.5.6
-#%%define		pver	3
+%define		ver 5.5.7
+%define		pver	10
 %define		QuantumDepth	16
-%define		iver %{ver}-Q%{QuantumDepth}
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es):	Exhibidor, convertidor y manipulador de im·genes bajo X
@@ -21,18 +20,16 @@ Summary(tr):	X alt˝nda resim gˆsterme, Áevirme ve dei˛iklik yapma
 Summary(uk):	≈“≈«Ã—ƒ, ÀœŒ◊≈“‘’◊¡ŒŒ— ‘¡ œ¬“œ¬À¡ ⁄œ¬“¡÷≈Œÿ –¶ƒ X Windows
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	3
+Release:	1
 Epoch:		1
 License:	Freeware
 Group:		X11/Applications/Graphics
 Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}%{?pver:-%{pver}}.tar.bz2
-# Source0-md5:	eac3971f0704059dcf2f7a5737b7daa8
+# Source0-md5:	ae9e708a6f5dc8b77220b00a0f2ae65a
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-perlpaths.patch
 Patch2:		%{name}-ac.patch
 Patch3:		%{name}-system-libltdl.patch
-Patch4:		%{name}-dps.patch
-Patch5:		%{name}-tmp_fix.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
@@ -44,6 +41,7 @@ BuildRequires:	freetype-devel >= 2.0.2-2
 %{!?_without_jasper:BuildRequires:	jasper-devel}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
+BuildRequires:	libexif-devel
 %{!?_without_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libltdl-devel
@@ -62,6 +60,7 @@ Obsoletes:	%{name}-coder-mpeg
 
 # we don't want "-s" here, because it would be added to `Magick*-config --ldflags`
 %define		rpmldflags	%{nil}
+%define		modulesdir	%{_libdir}/ImageMagick-%{ver}/modules-Q%{QuantumDepth}
 
 %description
 ImageMagick is an image display, conversion, and manipulation tool. It
@@ -144,6 +143,7 @@ Requires:	XFree86-devel
 Requires:	bzip2-devel
 Requires:	freetype-devel
 Requires:	lcms-devel
+Requires:	libexif-devel
 Requires:	libltdl-devel
 Requires:	zlib-devel
 
@@ -292,6 +292,7 @@ Summary(uk):	Ë≈ƒ≈“… ‘¡ ¬¶¬Ã¶œ‘≈À… ƒÃ— “œ⁄“œ¬œÀ ⁄ ◊…Àœ“…”‘¡ŒŒ—Õ Magick++ (¶Œ‘≈“∆≈
 Group:		X11/Development/Libraries
 Requires:	%{name}-c++ = %{epoch}:%{version}
 Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	libstdc++-devel
 
 %description c++-devel
 ImageMagick-c++-devel contains header files you'll need to develop
@@ -546,8 +547,6 @@ Modu≥ kodera dla plikÛw WMF.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 %build
 rm -f missing
@@ -555,9 +554,7 @@ rm -f missing
 %{__aclocal} -I /usr/share/libtool/libltdl
 %{__autoconf}
 %{__automake}
-CPPFLAGS="-I/usr/include/g++"
 %configure \
-	CPPFLAGS="$CPPFLAGS" \
 	--enable-fast-install \
 	--enable-lzw \
 	--enable-shared \
@@ -575,7 +572,6 @@ CPPFLAGS="-I/usr/include/g++"
 	--with-x
 
 %{__make}
-%{!?_without_cxx:%{__make} -C Magick++}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -583,10 +579,10 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	pkgdocdir=%{_defaultdocdir}/%{name}-devel-%{version}/
+	pkgdocdir=%{_defaultdocdir}/%{name}-devel-%{version}
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
-rm -f $RPM_BUILD_ROOT%{_libdir}/ImageMagick-%{iver}/modules/coders/*.a
+rm -f $RPM_BUILD_ROOT%{modulesdir}/{coders,filters}/*.a
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -600,164 +596,168 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %doc Copyright.txt
-%attr(755,root,root) %{_libdir}/libMagick-%{iver}.so.*.*
+%attr(755,root,root) %{_libdir}/libMagick.so.*.*.*
 
 %files
 %defattr(644,root,root,755)
-%dir %{_libdir}/ImageMagick-%{iver}
-%{_libdir}/ImageMagick-%{iver}/*.mgk
-%dir %{_libdir}/ImageMagick-%{iver}/modules
-%dir %{_libdir}/ImageMagick-%{iver}/modules/coders
+%dir %{_libdir}/ImageMagick-%{ver}
+%{_libdir}/ImageMagick-%{ver}/*.mgk
+%dir %{modulesdir}
+%{_libdir}/ImageMagick-%{ver}/*.mgk
+%dir %{modulesdir}/coders
+%{modulesdir}/coders/modules.mgk
+%dir %{modulesdir}/filters
 
 # ========= coders without additional deps
-%{_libdir}/ImageMagick-%{iver}/modules/coders/art.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/art.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/avi.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/avi.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/avs.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/avs.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/bmp.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/bmp.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/caption.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/caption.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/cmyk.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/cmyk.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/cut.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/cut.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/dcm.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/dcm.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/dib.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/dib.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/dpx.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/dpx.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/ept.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/ept.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/fax.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/fax.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/fits.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/fits.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/gif.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/gif.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/gradient.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/gradient.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/gray.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/gray.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/histogram.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/histogram.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/html.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/html.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/icon.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/icon.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/label.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/label.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/locale.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/locale.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/logo.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/logo.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/map.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/map.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/mat.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/mat.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/matte.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/matte.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/meta.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/meta.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/mono.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/mono.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/mpc.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/mpc.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/mpeg.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/mpeg.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/mtv.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/mtv.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/mvg.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/mvg.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/null.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/null.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/otb.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/otb.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/palm.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/palm.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/pcd.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/pcd.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/pcl.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/pcl.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/pcx.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/pcx.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/pdb.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/pdb.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/pict.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/pict.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/pix.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/pix.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/plasma.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/plasma.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/pnm.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/pnm.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/preview.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/preview.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/psd.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/psd.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/ps.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/ps.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/pwp.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/pwp.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/rgb.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/rgb.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/rla.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/rla.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/rle.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/rle.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/sct.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/sct.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/sfw.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/sfw.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/sgi.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/sgi.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/stegano.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/stegano.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/sun.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/sun.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/tga.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/tga.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/tile.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/tile.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/tim.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/tim.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/ttf.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/ttf.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/txt.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/txt.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/uil.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/uil.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/uyvy.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/uyvy.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/vicar.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/vicar.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/vid.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/vid.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/viff.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/viff.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/wbmp.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/wbmp.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/wpg.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/wpg.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/xbm.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/xbm.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/xcf.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/xcf.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/xc.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/xc.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/xpm.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/xpm.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/x.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/x.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/xwd.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/xwd.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/yuv.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/yuv.so
+%attr(755,root,root) %{modulesdir}/coders/art.so
+%{modulesdir}/coders/art.la
+%attr(755,root,root) %{modulesdir}/coders/avi.so
+%{modulesdir}/coders/avi.la
+%attr(755,root,root) %{modulesdir}/coders/avs.so
+%{modulesdir}/coders/avs.la
+%attr(755,root,root) %{modulesdir}/coders/bmp.so
+%{modulesdir}/coders/bmp.la
+%attr(755,root,root) %{modulesdir}/coders/caption.so
+%{modulesdir}/coders/caption.la
+%attr(755,root,root) %{modulesdir}/coders/cmyk.so
+%{modulesdir}/coders/cmyk.la
+%attr(755,root,root) %{modulesdir}/coders/cut.so
+%{modulesdir}/coders/cut.la
+%attr(755,root,root) %{modulesdir}/coders/dcm.so
+%{modulesdir}/coders/dcm.la
+%attr(755,root,root) %{modulesdir}/coders/dib.so
+%{modulesdir}/coders/dib.la
+%attr(755,root,root) %{modulesdir}/coders/dpx.so
+%{modulesdir}/coders/dpx.la
+%attr(755,root,root) %{modulesdir}/coders/ept.so
+%{modulesdir}/coders/ept.la
+%attr(755,root,root) %{modulesdir}/coders/fax.so
+%{modulesdir}/coders/fax.la
+%attr(755,root,root) %{modulesdir}/coders/fits.so
+%{modulesdir}/coders/fits.la
+%attr(755,root,root) %{modulesdir}/coders/gif.so
+%{modulesdir}/coders/gif.la
+%attr(755,root,root) %{modulesdir}/coders/gradient.so
+%{modulesdir}/coders/gradient.la
+%attr(755,root,root) %{modulesdir}/coders/gray.so
+%{modulesdir}/coders/gray.la
+%attr(755,root,root) %{modulesdir}/coders/histogram.so
+%{modulesdir}/coders/histogram.la
+%attr(755,root,root) %{modulesdir}/coders/html.so
+%{modulesdir}/coders/html.la
+%attr(755,root,root) %{modulesdir}/coders/icon.so
+%{modulesdir}/coders/icon.la
+%attr(755,root,root) %{modulesdir}/coders/label.so
+%{modulesdir}/coders/label.la
+%attr(755,root,root) %{modulesdir}/coders/magick.so
+%{modulesdir}/coders/magick.la
+%attr(755,root,root) %{modulesdir}/coders/map.so
+%{modulesdir}/coders/map.la
+%attr(755,root,root) %{modulesdir}/coders/mat.so
+%{modulesdir}/coders/mat.la
+%attr(755,root,root) %{modulesdir}/coders/matte.so
+%{modulesdir}/coders/matte.la
+%attr(755,root,root) %{modulesdir}/coders/meta.so
+%{modulesdir}/coders/meta.la
+%attr(755,root,root) %{modulesdir}/coders/mono.so
+%{modulesdir}/coders/mono.la
+%attr(755,root,root) %{modulesdir}/coders/mpc.so
+%{modulesdir}/coders/mpc.la
+%attr(755,root,root) %{modulesdir}/coders/mpeg.so
+%{modulesdir}/coders/mpeg.la
+%attr(755,root,root) %{modulesdir}/coders/mtv.so
+%{modulesdir}/coders/mtv.la
+%attr(755,root,root) %{modulesdir}/coders/mvg.so
+%{modulesdir}/coders/mvg.la
+%attr(755,root,root) %{modulesdir}/coders/null.so
+%{modulesdir}/coders/null.la
+%attr(755,root,root) %{modulesdir}/coders/otb.so
+%{modulesdir}/coders/otb.la
+%attr(755,root,root) %{modulesdir}/coders/palm.so
+%{modulesdir}/coders/palm.la
+%attr(755,root,root) %{modulesdir}/coders/pattern.so
+%{modulesdir}/coders/pattern.la
+%attr(755,root,root) %{modulesdir}/coders/pcd.so
+%{modulesdir}/coders/pcd.la
+%attr(755,root,root) %{modulesdir}/coders/pcl.so
+%{modulesdir}/coders/pcl.la
+%attr(755,root,root) %{modulesdir}/coders/pcx.so
+%{modulesdir}/coders/pcx.la
+%attr(755,root,root) %{modulesdir}/coders/pdb.so
+%{modulesdir}/coders/pdb.la
+%attr(755,root,root) %{modulesdir}/coders/pict.so
+%{modulesdir}/coders/pict.la
+%attr(755,root,root) %{modulesdir}/coders/pix.so
+%{modulesdir}/coders/pix.la
+%attr(755,root,root) %{modulesdir}/coders/plasma.so
+%{modulesdir}/coders/plasma.la
+%attr(755,root,root) %{modulesdir}/coders/pnm.so
+%{modulesdir}/coders/pnm.la
+%attr(755,root,root) %{modulesdir}/coders/preview.so
+%{modulesdir}/coders/preview.la
+%attr(755,root,root) %{modulesdir}/coders/psd.so
+%{modulesdir}/coders/psd.la
+%attr(755,root,root) %{modulesdir}/coders/ps.so
+%{modulesdir}/coders/ps.la
+%attr(755,root,root) %{modulesdir}/coders/pwp.so
+%{modulesdir}/coders/pwp.la
+%attr(755,root,root) %{modulesdir}/coders/rgb.so
+%{modulesdir}/coders/rgb.la
+%attr(755,root,root) %{modulesdir}/coders/rla.so
+%{modulesdir}/coders/rla.la
+%attr(755,root,root) %{modulesdir}/coders/rle.so
+%{modulesdir}/coders/rle.la
+%attr(755,root,root) %{modulesdir}/coders/sct.so
+%{modulesdir}/coders/sct.la
+%attr(755,root,root) %{modulesdir}/coders/sfw.so
+%{modulesdir}/coders/sfw.la
+%attr(755,root,root) %{modulesdir}/coders/sgi.so
+%{modulesdir}/coders/sgi.la
+%attr(755,root,root) %{modulesdir}/coders/stegano.so
+%{modulesdir}/coders/stegano.la
+%attr(755,root,root) %{modulesdir}/coders/sun.so
+%{modulesdir}/coders/sun.la
+%attr(755,root,root) %{modulesdir}/coders/tga.so
+%{modulesdir}/coders/tga.la
+%attr(755,root,root) %{modulesdir}/coders/tile.so
+%{modulesdir}/coders/tile.la
+%attr(755,root,root) %{modulesdir}/coders/tim.so
+%{modulesdir}/coders/tim.la
+%attr(755,root,root) %{modulesdir}/coders/ttf.so
+%{modulesdir}/coders/ttf.la
+%attr(755,root,root) %{modulesdir}/coders/txt.so
+%{modulesdir}/coders/txt.la
+%attr(755,root,root) %{modulesdir}/coders/uil.so
+%{modulesdir}/coders/uil.la
+%attr(755,root,root) %{modulesdir}/coders/uyvy.so
+%{modulesdir}/coders/uyvy.la
+%attr(755,root,root) %{modulesdir}/coders/vicar.so
+%{modulesdir}/coders/vicar.la
+%attr(755,root,root) %{modulesdir}/coders/vid.so
+%{modulesdir}/coders/vid.la
+%attr(755,root,root) %{modulesdir}/coders/viff.so
+%{modulesdir}/coders/viff.la
+%attr(755,root,root) %{modulesdir}/coders/wbmp.so
+%{modulesdir}/coders/wbmp.la
+%attr(755,root,root) %{modulesdir}/coders/wpg.so
+%{modulesdir}/coders/wpg.la
+%attr(755,root,root) %{modulesdir}/coders/xbm.so
+%{modulesdir}/coders/xbm.la
+%attr(755,root,root) %{modulesdir}/coders/xcf.so
+%{modulesdir}/coders/xcf.la
+%attr(755,root,root) %{modulesdir}/coders/xc.so
+%{modulesdir}/coders/xc.la
+%attr(755,root,root) %{modulesdir}/coders/xpm.so
+%{modulesdir}/coders/xpm.la
+%attr(755,root,root) %{modulesdir}/coders/x.so
+%{modulesdir}/coders/x.la
+%attr(755,root,root) %{modulesdir}/coders/xwd.so
+%{modulesdir}/coders/xwd.la
+%attr(755,root,root) %{modulesdir}/coders/yuv.so
+%{modulesdir}/coders/yuv.la
 
-%{_libdir}/ImageMagick-%{iver}/modules/coders/*.mgk
+%attr(755,root,root) %{modulesdir}/filters/analyze.so
+%{modulesdir}/filters/analyze.la
 
 %attr(755,root,root) %{_bindir}/animate
 %attr(755,root,root) %{_bindir}/composite
@@ -774,105 +774,104 @@ rm -rf $RPM_BUILD_ROOT
 %files coder-dps
 %defattr(644,root,root,755)
 # R: XFree86-DPS (libdps.so)
-%{_libdir}/ImageMagick-%{iver}/modules/coders/dps.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/dps.so
+%attr(755,root,root) %{modulesdir}/coders/dps.so
+%{modulesdir}/coders/dps.la
 
 %if %{?_without_fpx:0}%{!?_without_fpx:1}
 %files coder-fpx
 %defattr(644,root,root,755)
 # R: fpx
-%{_libdir}/ImageMagick-%{iver}/modules/coders/fpx.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/fpx.so
+%attr(755,root,root) %{modulesdir}/coders/fpx.so
+%{modulesdir}/coders/fpx.la
 %endif
 
 %files coder-jbig
 %defattr(644,root,root,755)
 # R: jbigkit (libjbig.so)
-%{_libdir}/ImageMagick-%{iver}/modules/coders/jbig.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/jbig.so
+%attr(755,root,root) %{modulesdir}/coders/jbig.so
+%{modulesdir}/coders/jbig.la
 
 %files coder-jpeg
 %defattr(644,root,root,755)
 # R: libjpeg
-%{_libdir}/ImageMagick-%{iver}/modules/coders/jpeg.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/jpeg.so
+%attr(755,root,root) %{modulesdir}/coders/jpeg.so
+%{modulesdir}/coders/jpeg.la
 
 %if %{?_without_jasper:0}%{!?_without_jasper:1}
 %files coder-jpeg2
 %defattr(644,root,root,755)
 # R: jasper, libjpeg
-%{_libdir}/ImageMagick-%{iver}/modules/coders/jp2.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/jp2.so
+%attr(755,root,root) %{modulesdir}/coders/jp2.so
+%{modulesdir}/coders/jp2.la
 %endif
 
 %files coder-miff
 %defattr(644,root,root,755)
 # R: libjpeg, zlib, libbz2
-%{_libdir}/ImageMagick-%{iver}/modules/coders/miff.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/miff.so
+%attr(755,root,root) %{modulesdir}/coders/miff.so
+%{modulesdir}/coders/miff.la
 
 %files coder-mpr
 %defattr(644,root,root,755)
 # R: libxml2
-%{_libdir}/ImageMagick-%{iver}/modules/coders/mpr.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/mpr.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/msl.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/msl.so
+%attr(755,root,root) %{modulesdir}/coders/mpr.so
+%{modulesdir}/coders/mpr.la
+%attr(755,root,root) %{modulesdir}/coders/msl.so
+%{modulesdir}/coders/msl.la
 
 %files coder-pdf
 %defattr(644,root,root,755)
 # R: libtiff, libjpeg
-%{_libdir}/ImageMagick-%{iver}/modules/coders/pdf.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/pdf.so
+%attr(755,root,root) %{modulesdir}/coders/pdf.so
+%{modulesdir}/coders/pdf.la
 
 %files coder-png
 %defattr(644,root,root,755)
 # R: libpng
-%{_libdir}/ImageMagick-%{iver}/modules/coders/png.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/png.so
+%attr(755,root,root) %{modulesdir}/coders/png.so
+%{modulesdir}/coders/png.la
 
 %files coder-ps2
 %defattr(644,root,root,755)
 # R: libtiff, libjpeg
-%{_libdir}/ImageMagick-%{iver}/modules/coders/ps2.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/ps2.so
-%{_libdir}/ImageMagick-%{iver}/modules/coders/ps3.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/ps3.so
+%attr(755,root,root) %{modulesdir}/coders/ps2.so
+%{modulesdir}/coders/ps2.la
+%attr(755,root,root) %{modulesdir}/coders/ps3.so
+%{modulesdir}/coders/ps3.la
 
 %files coder-svg
 %defattr(644,root,root,755)
 # R: libxml2
-%{_libdir}/ImageMagick-%{iver}/modules/coders/svg.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/svg.so
+%attr(755,root,root) %{modulesdir}/coders/svg.so
+%{modulesdir}/coders/svg.la
 
 %files coder-tiff
 %defattr(644,root,root,755)
 # R: libtiff, libjpeg
-%{_libdir}/ImageMagick-%{iver}/modules/coders/tiff.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/tiff.so
+%attr(755,root,root) %{modulesdir}/coders/tiff.so
+%{modulesdir}/coders/tiff.la
 
 %files coder-url
 %defattr(644,root,root,755)
 # R: libxml2
-%{_libdir}/ImageMagick-%{iver}/modules/coders/url.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/url.so
+%attr(755,root,root) %{modulesdir}/coders/url.so
+%{modulesdir}/coders/url.la
 
 %files coder-wmf
 %defattr(644,root,root,755)
 # R: libwmf, expat, libjpeg, libpng
-%{_libdir}/ImageMagick-%{iver}/modules/coders/wmf.la
-%attr(755,root,root) %{_libdir}/ImageMagick-%{iver}/modules/coders/wmf.so
+%attr(755,root,root) %{modulesdir}/coders/wmf.so
+%{modulesdir}/coders/wmf.la
 
 %files devel
 %defattr(644,root,root,755)
 #%%doc README.txt
 %doc %{_defaultdocdir}/%{name}-devel-%{version}
-
 %attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_libdir}/libMagick.so
 %{_libdir}/libMagick.la
 %{_includedir}/magick
-
+%{_pkgconfigdir}/ImageMagick.pc
 %{_mandir}/man[45]/*
 %{_mandir}/man1/Magick-config.1*
 
@@ -894,7 +893,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{?_without_cxx:0}%{!?_without_cxx:1}
 %files c++
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libMagick++-%{iver}.so.*.*
+%attr(755,root,root) %{_libdir}/libMagick++.so.*.*.*
 
 %files c++-devel
 %defattr(644,root,root,755)
@@ -903,6 +902,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libMagick++.so
 %{_includedir}/Magick++
 %{_includedir}/Magick++.h
+%{_pkgconfigdir}/ImageMagick++.pc
 %{_mandir}/man1/Magick++-config.1*
 
 %files c++-static

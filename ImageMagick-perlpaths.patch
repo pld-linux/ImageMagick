@@ -88,352 +88,352 @@ diff -Naur ImageMagick-5.5.6.orig/PerlMagick/demo/tree.pl ImageMagick-5.5.6/Perl
  require "lsys.pl";
  
  %rule = (
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/blob.t ImageMagick-5.5.6/PerlMagick/t/blob.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/blob.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/blob.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/blob.t ImageMagick-5.5.7/PerlMagick/t/blob.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/blob.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/blob.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test image blobs.
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/bzlib/read.t ImageMagick-5.5.6/PerlMagick/t/bzlib/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/bzlib/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/bzlib/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/bzlib/read.t ImageMagick-5.5.7/PerlMagick/t/bzlib/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/bzlib/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/bzlib/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading an image which uses BZip compression
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/bzlib/write.t ImageMagick-5.5.6/PerlMagick/t/bzlib/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/bzlib/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/bzlib/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/bzlib/write.t ImageMagick-5.5.7/PerlMagick/t/bzlib/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/bzlib/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/bzlib/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test writing files using bzlib-based compression
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/cgm/read.t ImageMagick-5.5.6/PerlMagick/t/cgm/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/cgm/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/cgm/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/cgm/read.t ImageMagick-5.5.7/PerlMagick/t/cgm/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/cgm/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/cgm/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading CGM files
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/filter.t ImageMagick-5.5.6/PerlMagick/t/filter.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/filter.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/filter.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/filter.t ImageMagick-5.5.7/PerlMagick/t/filter.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/filter.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/filter.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test image filter.
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/fpx/read.t ImageMagick-5.5.6/PerlMagick/t/fpx/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/fpx/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/fpx/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/fpx/read.t ImageMagick-5.5.7/PerlMagick/t/fpx/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/fpx/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/fpx/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading FPX images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/fpx/write.t ImageMagick-5.5.6/PerlMagick/t/fpx/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/fpx/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/fpx/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/fpx/write.t ImageMagick-5.5.7/PerlMagick/t/fpx/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/fpx/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/fpx/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test writing FPX images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/getattribute.t ImageMagick-5.5.6/PerlMagick/t/getattribute.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/getattribute.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/getattribute.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/getattribute.t ImageMagick-5.5.7/PerlMagick/t/getattribute.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/getattribute.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/getattribute.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test getting attributes.
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/hdf/read.t ImageMagick-5.5.6/PerlMagick/t/hdf/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/hdf/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/hdf/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/hdf/read.t ImageMagick-5.5.7/PerlMagick/t/hdf/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/hdf/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/hdf/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading HDF images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/hdf/write.t ImageMagick-5.5.6/PerlMagick/t/hdf/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/hdf/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/hdf/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/hdf/write.t ImageMagick-5.5.7/PerlMagick/t/hdf/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/hdf/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/hdf/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test writing HDF images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/hpgl/read.t ImageMagick-5.5.6/PerlMagick/t/hpgl/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/hpgl/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/hpgl/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/hpgl/read.t ImageMagick-5.5.7/PerlMagick/t/hpgl/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/hpgl/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/hpgl/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test Reading HP GL images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/jbig/read.t ImageMagick-5.5.6/PerlMagick/t/jbig/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/jbig/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/jbig/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/jbig/read.t ImageMagick-5.5.7/PerlMagick/t/jbig/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/jbig/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/jbig/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test read image method on JBIG image
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/jbig/write.t ImageMagick-5.5.6/PerlMagick/t/jbig/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/jbig/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/jbig/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/jbig/write.t ImageMagick-5.5.7/PerlMagick/t/jbig/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/jbig/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/jbig/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test write image method on JBIG image
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/jpeg/read.t ImageMagick-5.5.6/PerlMagick/t/jpeg/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/jpeg/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/jpeg/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/jpeg/read.t ImageMagick-5.5.7/PerlMagick/t/jpeg/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/jpeg/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/jpeg/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test read image method on non-interlaced JPEG.
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/jpeg/write.t ImageMagick-5.5.6/PerlMagick/t/jpeg/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/jpeg/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/jpeg/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/jpeg/write.t ImageMagick-5.5.7/PerlMagick/t/jpeg/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/jpeg/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/jpeg/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading JPEG images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/montage.t ImageMagick-5.5.6/PerlMagick/t/montage.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/montage.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/montage.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/montage.t ImageMagick-5.5.7/PerlMagick/t/montage.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/montage.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/montage.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test montage method.
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/mpeg/read.t ImageMagick-5.5.6/PerlMagick/t/mpeg/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/mpeg/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/mpeg/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/mpeg/read.t ImageMagick-5.5.7/PerlMagick/t/mpeg/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/mpeg/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/mpeg/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading MPEG files
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/png/read-16.t ImageMagick-5.5.6/PerlMagick/t/png/read-16.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/png/read-16.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/png/read-16.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/png/read-16.t ImageMagick-5.5.7/PerlMagick/t/png/read-16.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/png/read-16.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/png/read-16.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading PNG images when 16bit support is enabled
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/png/read.t ImageMagick-5.5.6/PerlMagick/t/png/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/png/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/png/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/png/read.t ImageMagick-5.5.7/PerlMagick/t/png/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/png/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/png/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading PNG images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/png/write-16.t ImageMagick-5.5.6/PerlMagick/t/png/write-16.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/png/write-16.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/png/write-16.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/png/write-16.t ImageMagick-5.5.7/PerlMagick/t/png/write-16.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/png/write-16.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/png/write-16.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test writing PNG images when 16bit support is enabled
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/png/write.t ImageMagick-5.5.6/PerlMagick/t/png/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/png/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/png/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/png/write.t ImageMagick-5.5.7/PerlMagick/t/png/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/png/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/png/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test writing PNG images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/ps/read.t ImageMagick-5.5.6/PerlMagick/t/ps/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/ps/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/ps/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/ps/read.t ImageMagick-5.5.7/PerlMagick/t/ps/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/ps/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/ps/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test Reading Postscript images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/ps/write.t ImageMagick-5.5.6/PerlMagick/t/ps/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/ps/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/ps/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/ps/write.t ImageMagick-5.5.7/PerlMagick/t/ps/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/ps/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/ps/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test writing Postscript images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/rad/read.t ImageMagick-5.5.6/PerlMagick/t/rad/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/rad/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/rad/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/rad/read.t ImageMagick-5.5.7/PerlMagick/t/rad/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/rad/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/rad/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading Radiance file format
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/rad/write.t ImageMagick-5.5.6/PerlMagick/t/rad/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/rad/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/rad/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/rad/write.t ImageMagick-5.5.7/PerlMagick/t/rad/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/rad/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/rad/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test writing Radiance file format
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/read.t ImageMagick-5.5.6/PerlMagick/t/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/read.t ImageMagick-5.5.7/PerlMagick/t/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading formats supported directly by ImageMagick
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/setattribute.t ImageMagick-5.5.6/PerlMagick/t/setattribute.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/setattribute.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/setattribute.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/setattribute.t ImageMagick-5.5.7/PerlMagick/t/setattribute.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/setattribute.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/setattribute.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test setting & getting attributes.
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/tiff/read.t ImageMagick-5.5.6/PerlMagick/t/tiff/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/tiff/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/tiff/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/tiff/read.t ImageMagick-5.5.7/PerlMagick/t/tiff/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/tiff/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/tiff/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading TIFF images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/tiff/write.t ImageMagick-5.5.6/PerlMagick/t/tiff/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/tiff/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/tiff/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/tiff/write.t ImageMagick-5.5.7/PerlMagick/t/tiff/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/tiff/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/tiff/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test writing TIFF images
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/ttf/read.t ImageMagick-5.5.6/PerlMagick/t/ttf/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/ttf/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/ttf/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/ttf/read.t ImageMagick-5.5.7/PerlMagick/t/ttf/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/ttf/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/ttf/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test read image method on TrueType font
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/wmf/read.t ImageMagick-5.5.6/PerlMagick/t/wmf/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/wmf/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/wmf/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/wmf/read.t ImageMagick-5.5.7/PerlMagick/t/wmf/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/wmf/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/wmf/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading WMF files
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/write.t ImageMagick-5.5.6/PerlMagick/t/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/write.t ImageMagick-5.5.7/PerlMagick/t/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test writing formats supported directly by ImageMagick
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/x/read.t ImageMagick-5.5.6/PerlMagick/t/x/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/x/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/x/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/x/read.t ImageMagick-5.5.7/PerlMagick/t/x/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/x/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/x/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test accessing X11 server
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/x/write.t ImageMagick-5.5.6/PerlMagick/t/x/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/x/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/x/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/x/write.t ImageMagick-5.5.7/PerlMagick/t/x/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/x/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/x/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test accessing X11 server
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/xfig/read.t ImageMagick-5.5.6/PerlMagick/t/xfig/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/xfig/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/xfig/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/xfig/read.t ImageMagick-5.5.7/PerlMagick/t/xfig/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/xfig/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/xfig/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test Reading Xfig files
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/zlib/read.t ImageMagick-5.5.6/PerlMagick/t/zlib/read.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/zlib/read.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/zlib/read.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/zlib/read.t ImageMagick-5.5.7/PerlMagick/t/zlib/read.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/zlib/read.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/zlib/read.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test reading an image which uses Zip compression
  #
-diff -Naur ImageMagick-5.5.6.orig/PerlMagick/t/zlib/write.t ImageMagick-5.5.6/PerlMagick/t/zlib/write.t
---- ImageMagick-5.5.6.orig/PerlMagick/t/zlib/write.t	Sat Jun 14 17:16:03 2003
-+++ ImageMagick-5.5.6/PerlMagick/t/zlib/write.t	Sat Jun 14 17:49:46 2003
+diff -Naur ImageMagick-5.5.7.orig/PerlMagick/t/zlib/write.t ImageMagick-5.5.7/PerlMagick/t/zlib/write.t
+--- ImageMagick-5.5.7.orig/PerlMagick/t/zlib/write.t	Sat Jun 14 17:16:03 2003
++++ ImageMagick-5.5.7/PerlMagick/t/zlib/write.t	Sat Jun 14 17:49:46 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/perl
 +#!/usr/bin/perl
  #
  # Test writing files using zlib-based compression
  #
-diff -Naur ImageMagick-5.5.6.orig/www/perl.html ImageMagick-5.5.6/www/perl.html
---- ImageMagick-5.5.6.orig/www/perl.html	Sat Jun 14 17:16:04 2003
-+++ ImageMagick-5.5.6/www/perl.html	Sat Jun 14 17:49:46 2003
-@@ -240,10 +240,10 @@
-               </dl>
-               <blockquote>
-                 <dl>
--                <pre>&nbsp;&nbsp;&nbsp; #!/usr/local/bin/perl<br>&nbsp;&nbsp;&nbsp; use Image::Magick;<br><br>&nbsp;&nbsp;&nbsp; my($image, $x);<br><br>&nbsp;&nbsp;&nbsp; $image = Image::Magick-&gt;new;<br>&nbsp;&nbsp;&nbsp; $x = $image-&gt;Read('girl.png', 'logo.png', 'rose.png');<br>&nbsp;&nbsp;&nbsp; warn "$x" if "$x";<br><br>&nbsp;&nbsp;&nbsp; $x = $image-&gt;Crop(geometry=&gt;'100x100"+1"00"+1"00');<br>&nbsp;&nbsp;&nbsp; warn "$x" if "$x";<br><br>&nbsp;&nbsp;&nbsp; $x = $image-&gt;Write('x.png');<br>&nbsp;&nbsp;&nbsp; warn "$x" if "$x";</pre>
-+                <pre>&nbsp;&nbsp;&nbsp; #!/usr/bin/perl<br>&nbsp;&nbsp;&nbsp; use Image::Magick;<br><br>&nbsp;&nbsp;&nbsp; my($image, $x);<br><br>&nbsp;&nbsp;&nbsp; $image = Image::Magick-&gt;new;<br>&nbsp;&nbsp;&nbsp; $x = $image-&gt;Read('girl.png', 'logo.png', 'rose.png');<br>&nbsp;&nbsp;&nbsp; warn "$x" if "$x";<br><br>&nbsp;&nbsp;&nbsp; $x = $image-&gt;Crop(geometry=&gt;'100x100"+1"00"+1"00');<br>&nbsp;&nbsp;&nbsp; warn "$x" if "$x";<br><br>&nbsp;&nbsp;&nbsp; $x = $image-&gt;Write('x.png');<br>&nbsp;&nbsp;&nbsp; warn "$x" if "$x";</pre>
- The script reads three images, crops them, and writes a single image as a
- GIF animation sequence. In many cases you may want to access individual images
--of a sequence. The next example illustrates how this is done: <pre>&nbsp;&nbsp;&nbsp; #!/usr/local/bin/perl<br>&nbsp;&nbsp;&nbsp; use Image::Magick;<br><br>&nbsp;&nbsp;&nbsp; my($image, $p, $q);<br><br>&nbsp;&nbsp;&nbsp; $image = new Image::Magick;<br>&nbsp;&nbsp;&nbsp; $image-&gt;Read('x1.png');<br>&nbsp;&nbsp;&nbsp; $image-&gt;Read('j*.jpg');<br>&nbsp;&nbsp;&nbsp; $image-&gt;Read('k.miff[1, 5, 3]');<br>&nbsp;&nbsp;&nbsp; $image-&gt;Contrast();<br>&nbsp;&nbsp;&nbsp; for ($x = 0; $image-&gt;[x]; $x++)<br>&nbsp;&nbsp;&nbsp; {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $image-&gt;[x]-&gt;Frame('100x200') if $image-&gt;[x]-&gt;Get('magick') eq 'GIF';<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; undef $image-&gt;[x] if $image-&gt;[x]-&gt;Get('columns') &lt; 100;<br>&nbsp;&nbsp;&nbsp; }<br>&nbsp;&nbsp;&nbsp; $p = $image-&gt;[1];<br>&nbsp;&nbsp;&nbsp; $p-&gt;Draw(stroke=&gt;'red', primitive=&gt;'rectangle', points=&gt;20,20 100,100');<br>&nbsp;&nbsp;&nbsp; $q = $p-&gt;Montage();<br>&nbsp;&nbsp;&nbsp; undef $image;<br>&nbsp;&nbsp;&nbsp; $q-&gt;Write('x.miff');</pre>
-+of a sequence. The next example illustrates how this is done: <pre>&nbsp;&nbsp;&nbsp; #!/usr/bin/perl<br>&nbsp;&nbsp;&nbsp; use Image::Magick;<br><br>&nbsp;&nbsp;&nbsp; my($image, $p, $q);<br><br>&nbsp;&nbsp;&nbsp; $image = new Image::Magick;<br>&nbsp;&nbsp;&nbsp; $image-&gt;Read('x1.png');<br>&nbsp;&nbsp;&nbsp; $image-&gt;Read('j*.jpg');<br>&nbsp;&nbsp;&nbsp; $image-&gt;Read('k.miff[1, 5, 3]');<br>&nbsp;&nbsp;&nbsp; $image-&gt;Contrast();<br>&nbsp;&nbsp;&nbsp; for ($x = 0; $image-&gt;[x]; $x++)<br>&nbsp;&nbsp;&nbsp; {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $image-&gt;[x]-&gt;Frame('100x200') if $image-&gt;[x]-&gt;Get('magick') eq 'GIF';<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; undef $image-&gt;[x] if $image-&gt;[x]-&gt;Get('columns') &lt; 100;<br>&nbsp;&nbsp;&nbsp; }<br>&nbsp;&nbsp;&nbsp; $p = $image-&gt;[1];<br>&nbsp;&nbsp;&nbsp; $p-&gt;Draw(stroke=&gt;'red', primitive=&gt;'rectangle', points=&gt;20,20 100,100');<br>&nbsp;&nbsp;&nbsp; $q = $p-&gt;Montage();<br>&nbsp;&nbsp;&nbsp; undef $image;<br>&nbsp;&nbsp;&nbsp; $q-&gt;Write('x.miff');</pre>
- Suppose you want to start out with a 100 by 100 pixel white canvas with a
- red pixel in the center. Try <pre>&nbsp;&nbsp;&nbsp; $image = Image::Magick-&gt;new;<br>&nbsp;&nbsp;&nbsp; $image-&gt;Set(size=&gt;'100x100');<br>&nbsp;&nbsp;&nbsp; $image-&gt;ReadImage('xc:white');<br>&nbsp;&nbsp;&nbsp; $image-&gt;Set('pixel[49,49]'=&gt;'red');</pre>
- Or suppose you want to convert your color image to grayscale: <pre>&nbsp;&nbsp;&nbsp; $image-&gt;Quantize(colorspace=&gt;'gray');</pre>
+--- ImageMagick-5.5.7/www/perl.html.orig	2003-05-12 05:13:02.000000000 +0200
++++ ImageMagick-5.5.7/www/perl.html	2003-07-18 08:37:34.000000000 +0200
+@@ -166,11 +166,11 @@
+ <p>
+ 
+ <pre>
+-    #!/usr/local/bin/perl<br>    use Image::Magick;<br><br>    my($image, $x);<br><br>    $image = Image::Magick-&gt;new;<br>    $x = $image-&gt;Read('girl.png', 'logo.png', 'rose.png');<br>    warn "$x" if "$x";<br><br>    $x = $image-&gt;Crop(geometry=&gt;'100x100"+100"+100');<br>    warn "$x" if "$x";<br><br>    $x = $image-&gt;Write('x.png');<br>    warn "$x" if "$x";
++    #!/usr/bin/perl<br>    use Image::Magick;<br><br>    my($image, $x);<br><br>    $image = Image::Magick-&gt;new;<br>    $x = $image-&gt;Read('girl.png', 'logo.png', 'rose.png');<br>    warn "$x" if "$x";<br><br>    $x = $image-&gt;Crop(geometry=&gt;'100x100"+100"+100');<br>    warn "$x" if "$x";<br><br>    $x = $image-&gt;Write('x.png');<br>    warn "$x" if "$x";
+ </pre>
+ The script reads three images, crops them, and writes a single image as a GIF animation sequence. In many cases you may want to access individual images of a sequence. The next example illustrates how this is done: 
+ <pre>
+-    #!/usr/local/bin/perl<br>    use Image::Magick;<br><br>    my($image, $p, $q);<br><br>    $image = new Image::Magick;<br>    $image-&gt;Read('x1.png');<br>    $image-&gt;Read('j*.jpg');<br>    $image-&gt;Read('k.miff[1, 5, 3]');<br>    $image-&gt;Contrast();<br>    for ($x = 0; $image-&gt;[x]; $x++)<br>    {<br>      $image-&gt;[x]-&gt;Frame('100x200') if $image-&gt;[x]-&gt;Get('magick') eq 'GIF';<br>      undef $image-&gt;[x] if $image-&gt;[x]-&gt;Get('columns') &lt; 100;<br>    }<br>    $p = $image-&gt;[1];<br>    $p-&gt;Draw(stroke=&gt;'red', primitive=&gt;'rectangle', points=&gt;20,20 100,100');<br>    $q = $p-&gt;Montage();<br>    undef $image;<br>    $q-&gt;Write('x.miff');
++    #!/usr/bin/perl<br>    use Image::Magick;<br><br>    my($image, $p, $q);<br><br>    $image = new Image::Magick;<br>    $image-&gt;Read('x1.png');<br>    $image-&gt;Read('j*.jpg');<br>    $image-&gt;Read('k.miff[1, 5, 3]');<br>    $image-&gt;Contrast();<br>    for ($x = 0; $image-&gt;[x]; $x++)<br>    {<br>      $image-&gt;[x]-&gt;Frame('100x200') if $image-&gt;[x]-&gt;Get('magick') eq 'GIF';<br>      undef $image-&gt;[x] if $image-&gt;[x]-&gt;Get('columns') &lt; 100;<br>    }<br>    $p = $image-&gt;[1];<br>    $p-&gt;Draw(stroke=&gt;'red', primitive=&gt;'rectangle', points=&gt;20,20 100,100');<br>    $q = $p-&gt;Montage();<br>    undef $image;<br>    $q-&gt;Write('x.miff');
+ </pre>
+ Suppose you want to start out with a 100 by 100 pixel white canvas with a red pixel in the center. Try 
+ <pre>
