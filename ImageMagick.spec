@@ -247,7 +247,7 @@ rm -rf $RPM_BUILD_ROOT
 * Sat Dec  7 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [4.1.5-1]
 - added gzipping man pages,
-- /usr/bin/Magick-config moved to devel,
+- %{_bindir}/Magick-config moved to devel,
 - added /usr/X11R6/share/ImageMagick/delegates.mgk file to main,
 - more man pages on levels 3, 4 and 5,
 - added LDFLAGS="-s" in ./configure enviroment.
