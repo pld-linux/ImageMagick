@@ -22,7 +22,7 @@ Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
 Release:	2
 Epoch:		1
-License:	Freeware
+License:	Apache-style License
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
 # Source0-md5:	6c9f5bd9afa95b747480040abd456784
