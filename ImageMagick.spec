@@ -4,14 +4,13 @@ Summary(fr):	Visualisation, conversion, et manipulation d'images sous X.
 Summary(pl):	Narzêdzie do wy¶wietlania, konwersji i manipulacji grafikami
 Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Name:		ImageMagick
-Version:	4.2.4
+Version:	4.2.7
 Release:	1
 Copyright:	freeware
 Serial:		1
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
 Source:		ftp://ftp.wizards.dupont.com/pub/ImageMagick/%{name}-%{version}.tar.gz
-Patch:		ImageMagick-libpath.patch
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
 BuildPrereq:	perl
 BuildPrereq:	XFree86-devel
@@ -128,7 +127,6 @@ Biblioteki ImageMagick.
 
 %prep
 %setup -q
-%patch -p1
 
 %build
 autoconf
