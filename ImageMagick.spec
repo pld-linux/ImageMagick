@@ -8,11 +8,15 @@ Version:	4.1.8
 Release:	1d
 Copyright:	freeware
 Group:		X11/Applications/Graphics
-Group(pl):	X11/Aplikacje/grafika
+Group(pl):	X11/Aplikacje/Grafika
 #########	ftp://ftp.wizards.dupont.com/pub/ImageMagick
 Source:		%{name}-%{version}.tar.gz
 URL:		http://www.wizards.dupont.com/cristy/ImageMagick.html
 Requires:	freetype = 1.2
+Requires:	libtiff
+Requires:	libpng
+Requires:	libjpeg
+Requires:	XFree86-libs
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -175,7 +179,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/X11R6/include/X11/magick/*.h
 
 %files static
-%attr(644,root,root) /usr/X11R6/lib/lib*.a
+%defattr(644,root,root,755)
+/usr/X11R6/lib/lib*.a
 
 %files perl
 %defattr(644,root,root,755)
