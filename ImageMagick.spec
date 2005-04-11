@@ -35,7 +35,7 @@ Patch3:		%{name}-free.patch
 Patch4:		%{name}-dot.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	X11-DPS-devel
-BuildRequires11-devel
+BuildRequires:	X11-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bzip2-devel >= 1.0.1
