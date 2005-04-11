@@ -34,8 +34,8 @@ Patch2:		%{name}-system-libltdl.patch
 Patch3:		%{name}-free.patch
 Patch4:		%{name}-dot.patch
 URL:		http://www.imagemagick.org/
-BuildRequires:	XFree86-DPS-devel
-BuildRequires:	XFree86-devel
+BuildRequires:	X11-DPS-devel
+BuildRequires11-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bzip2-devel >= 1.0.1
@@ -156,7 +156,7 @@ Summary(ru):	Хедеры и библиотеки для программирования с ImageMagick
 Summary(uk):	Хедери та б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	XFree86-devel
+Requires:	X11-devel
 Requires:	bzip2-devel
 Requires:	freetype-devel
 Requires:	lcms-devel
@@ -826,7 +826,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files coder-dps
 %defattr(644,root,root,755)
-# R: XFree86-DPS (libdps.so)
+# R: X11-DPS (libdps.so)
 %attr(755,root,root) %{modulesdir}/coders/dps.so
 %{modulesdir}/coders/dps.la
 
