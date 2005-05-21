@@ -1,3 +1,5 @@
+# TODO
+# - http://security.gentoo.org/glsa/glsa-200505-16.xml
 #
 # Conditional build:
 %bcond_without	fpx		# without FlashPIX module (which uses fpx library)
