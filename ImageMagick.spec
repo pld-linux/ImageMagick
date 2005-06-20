@@ -1,5 +1,3 @@
-# TODO
-# - http://security.gentoo.org/glsa/glsa-200505-16.xml
 #
 # Conditional build:
 %bcond_without	fpx		# without FlashPIX module (which uses fpx library)
@@ -9,7 +7,7 @@
 %bcond_without	cxx		# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.2.1
+%define		ver 6.2.3
 %define		pver	2
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
@@ -28,7 +26,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	b7cf4e8b0b3118c65379d434124d5065
+# Source0-md5:	0f2c3588d5967da17c55c4657ae2e55e
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
@@ -931,7 +929,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/wand
 %{_pkgconfigdir}/ImageMagick.pc
 %{_pkgconfigdir}/Wand.pc
-%{_mandir}/man[45]/*
 %{_mandir}/man1/Magick-config.1*
 %{_mandir}/man1/Wand-config.1*
 
