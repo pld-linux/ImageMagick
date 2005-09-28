@@ -7,8 +7,8 @@
 %bcond_without	cxx		# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.2.3
-%define		pver	2
+%define		ver 6.2.4
+%define		pver	6
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -21,12 +21,12 @@ Summary(tr):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk):	ğÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ğ¦Ä X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	0.1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	0f2c3588d5967da17c55c4657ae2e55e
+# Source0-md5:	82cb623a5e2e01991d22d33c624ad12d
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
@@ -564,9 +564,9 @@ Modu³ kodera dla plików WMF.
 %setup -q -n %{name}-%{ver}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
+#%patch2 -p1		# fixme!!!
 %patch3 -p1
-%patch4 -p1
+#%patch4 -p1		# fixme!!!
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
@@ -580,6 +580,8 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 %{__autoconf}
 %{__automake}
 %configure \
+	CFLAGS="-I/usr/X11R6/include" \
+	LDFLAGS="-L/usr/X11R6/%{_lib}" \
 	--enable-fast-install \
 	--enable-lzw \
 	--enable-shared \
