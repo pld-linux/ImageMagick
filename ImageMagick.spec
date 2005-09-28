@@ -21,7 +21,7 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -32,7 +32,6 @@ Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
 Patch2:		%{name}-system-libltdl.patch
 Patch3:		%{name}-free.patch
-Patch4:		%{name}-dot.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
@@ -564,9 +563,8 @@ ModuЁ kodera dla plikСw WMF.
 %setup -q -n %{name}-%{ver}
 %patch0 -p1
 %patch1 -p1
-#%patch2 -p1		# fixme!!!
+%patch2 -p1
 %patch3 -p1
-#%patch4 -p1		# fixme!!!
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
