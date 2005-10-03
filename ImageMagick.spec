@@ -577,8 +577,9 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 %{__aclocal}
 %{__autoconf}
 %{__automake}
+# XXX: what requires these CFLAGS/LDFLAGS?
 %configure \
-	CFLAGS="-I/usr/X11R6/include" \
+	CFLAGS="%{rpmcflags} -I/usr/X11R6/include" \
 	LDFLAGS="-L/usr/X11R6/%{_lib}" \
 	--enable-fast-install \
 	--enable-lzw \
@@ -677,6 +678,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/html.la
 %attr(755,root,root) %{modulesdir}/coders/icon.so
 %{modulesdir}/coders/icon.la
+%attr(755,root,root) %{modulesdir}/coders/info.so
+%{modulesdir}/coders/info.la
 %attr(755,root,root) %{modulesdir}/coders/label.so
 %{modulesdir}/coders/label.la
 %attr(755,root,root) %{modulesdir}/coders/magick.so
