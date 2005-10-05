@@ -577,10 +577,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-# XXX: what requires these CFLAGS/LDFLAGS?
 %configure \
-	CFLAGS="%{rpmcflags} -I/usr/X11R6/include" \
-	LDFLAGS="-L/usr/X11R6/%{_lib}" \
 	--enable-fast-install \
 	--enable-lzw \
 	--enable-shared \
