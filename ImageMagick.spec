@@ -75,8 +75,8 @@ well.
 
 %description -l de
 ImageMagick ist ein Tool zur Bildanzeige, -konvertierung und
-manipulation, -das unter X-Window läuft. Es ist enorm leitungsfähig
-in Bezug auf die Grafikmanipulationsfunktionen, die es dem Anwender
+manipulation, -das unter X-Window läuft. Es ist enorm leitungsfähig in
+Bezug auf die Grafikmanipulationsfunktionen, die es dem Anwender
 bietet, und auf die Vielfalt der unterstützten Formate.
 
 %description -l es
@@ -159,8 +159,8 @@ Requires:	XFree86-devel
 Requires:	bzip2-devel
 Requires:	freetype-devel
 Requires:	lcms-devel
-Requires:	libltdl-devel
 Requires:	libjpeg-devel
+Requires:	libltdl-devel
 Requires:	libtiff-devel
 Requires:	zlib-devel
 
@@ -311,6 +311,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-c++ = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	libstdc++-devel
+Requires:	pkgconfig
 
 %description c++-devel
 ImageMagick-c++-devel contains header files you'll need to develop
