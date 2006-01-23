@@ -311,7 +311,6 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-c++ = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	libstdc++-devel
-Requires:	pkgconfig
 
 %description c++-devel
 ImageMagick-c++-devel contains header files you'll need to develop
