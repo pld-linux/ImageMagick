@@ -32,8 +32,6 @@ Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
 Patch2:		%{name}-system-libltdl.patch
 URL:		http://www.imagemagick.org/
-BuildRequires:	XFree86-DPS-devel
-BuildRequires:	XFree86-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bzip2-devel >= 1.0.1
@@ -58,6 +56,9 @@ BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 # only checked for, but only supplied scripts/txt2html is used
 #BuildRequires:	txt2html
+BuildRequires:	xorg-lib-libSM
+BuildRequires:	xorg-lib-libXext
+BuildRequires:	xorg-lib-libXt
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	ImageMagick-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -154,13 +155,15 @@ Summary(ru):	Хедеры и библиотеки для программирования с ImageMagick
 Summary(uk):	Хедери та б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	XFree86-devel
 Requires:	bzip2-devel
 Requires:	freetype-devel
 Requires:	lcms-devel
 Requires:	libjpeg-devel
 Requires:	libltdl-devel
 Requires:	libtiff-devel
+BuildRequires:	xorg-lib-libSM-devel
+BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-lib-libXt-devel
 Requires:	zlib-devel
 
 %description devel
