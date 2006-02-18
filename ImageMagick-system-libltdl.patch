@@ -1,6 +1,32 @@
---- ImageMagick-5.5.1/configure.ac.orig	Fri Nov  1 14:37:40 2002
-+++ ImageMagick-5.5.1/configure.ac	Fri Nov  1 14:41:30 2002
-@@ -148,7 +148,7 @@
+--- ./ltdl/Makefile.am.org	2005-09-28 17:06:38.000000000 +0000
++++ ./ltdl/Makefile.am	2005-09-28 17:07:54.000000000 +0000
+@@ -28,12 +28,8 @@
+ #endif
+ 
+ if WITH_LTDL
+-  LIBLTDL=ltdl/libltdl.la
+-if INSTALL_LTDL
+-  LTDL_INSTALLHEADERS =  $(LTDL_HDRS)
+-else
++  LIBLTDL=-lltdl
+   LTDL_NOINST_HDRS = $(LTDL_HDRS)
+-endif # INSTALL_LTDL
+ else
+   LIBLTDL=
+ endif # WITH_LTDL
+--- ./Makefile.am.org	2005-09-28 17:04:01.000000000 +0000
++++ ./Makefile.am	2005-09-28 17:05:13.000000000 +0000
+@@ -113,7 +113,6 @@
+ 	$(WAND_EXTRA_DIST)
+ 
+ lib_LTLIBRARIES = $(LIBMAGICK) $(LIBWAND) $(LIBMAGICKPP)
+-noinst_LTLIBRARIES = $(LIBLTDL)
+ 
+ check_PROGRAMS = \
+ 	$(TESTS_CHECK_PGRMS) \
+--- ./configure.ac.org	2005-09-28 17:05:32.000000000 +0000
++++ ./configure.ac	2005-09-28 17:06:18.000000000 +0000
+@@ -293,7 +293,7 @@
  
  # Configure libltdl
  #AC_CONFIG_SUBDIRS(ltdl)
@@ -8,15 +34,4 @@
 +AC_LIBLTDL_INSTALLABLE(ltdl)
  AC_LIB_LTDL
  # Substitute INCLTDL and LIBLTDL in the Makefiles
- AC_SUBST(INCLTDL)
---- ImageMagick-5.5.1/utilities/Makefile.am.orig	Fri Oct 11 22:07:21 2002
-+++ ImageMagick-5.5.1/utilities/Makefile.am	Fri Nov  1 15:11:18 2002
-@@ -58,7 +58,7 @@
- 
- # Libtool libraries, dependencies, and linker flags used by most executables
- if WITH_MODULES
--COMMONLDADD	= $(MAGICK_LIB) $(top_builddir)/ltdl/libltdlc.la
-+COMMONLDADD	= $(MAGICK_LIB)
- COMMONLDFLAGS	= @LDFLAGS@ @DLLDFLAGS@
- else
- COMMONLDADD	= $(MAGICK_LIB)
+ #AC_SUBST(INCLTDL)
