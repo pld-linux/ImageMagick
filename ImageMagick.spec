@@ -1,5 +1,6 @@
 #
 # Conditional build:
+%bcond_with	dps		# build DPS coder (uses libdps removed from X11R7)
 %bcond_without	fpx		# without FlashPIX module (which uses fpx library)
 %bcond_without	graphviz	# without Graphviz support
 %bcond_with	gs		# with PostScript support through ghostscript library (warning: breaks jpeg!)
@@ -32,6 +33,7 @@ Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
 Patch2:		%{name}-system-libltdl.patch
 URL:		http://www.imagemagick.org/
+%{?with_dps:BuildRequires:	XFree86-DPS-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bzip2-devel >= 1.0.1
@@ -161,9 +163,9 @@ Requires:	lcms-devel
 Requires:	libjpeg-devel
 Requires:	libltdl-devel
 Requires:	libtiff-devel
-BuildRequires:	xorg-lib-libSM-devel
-BuildRequires:	xorg-lib-libXext-devel
-BuildRequires:	xorg-lib-libXt-devel
+Requires:	xorg-lib-libSM-devel
+Requires:	xorg-lib-libXext-devel
+Requires:	xorg-lib-libXt-devel
 Requires:	zlib-devel
 
 %description devel
@@ -825,11 +827,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/dot.so
 %{modulesdir}/coders/dot.la
 
+%if %{with dps}
 %files coder-dps
 %defattr(644,root,root,755)
 # R: XFree86-DPS (libdps.so)
 %attr(755,root,root) %{modulesdir}/coders/dps.so
 %{modulesdir}/coders/dps.la
+%endif
 
 %if %{with fpx}
 %files coder-fpx
