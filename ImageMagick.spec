@@ -7,8 +7,8 @@
 %bcond_without	cxx		# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.2.4
-%define		pver	6
+%define		ver 6.2.5
+%define		pver	5
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -21,18 +21,17 @@ Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Summary(uk):	ðÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ð¦Ä X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	82cb623a5e2e01991d22d33c624ad12d
+# Source0-md5:	eaee90992c8cf36f1f5fc6c887d73897
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
 Patch2:		%{name}-system-libltdl.patch
 Patch3:		%{name}-free.patch
-Patch4:		%{name}-dot.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
@@ -43,7 +42,7 @@ BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	freetype-devel >= 2.0.2-2
 BuildRequires:	gd-devel >= 2.0.15
 %{?with_gs:BuildRequires:	ghostscript-devel}
-%{?with_graphviz:BuildRequires:	graphviz-devel >= 1.12}
+%{?with_graphviz:BuildRequires:	graphviz-devel >= 2.6}
 %{?with_jasper:BuildRequires:	jasper-devel >= 1.700.5}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
@@ -564,9 +563,8 @@ Modu³ kodera dla plików WMF.
 %setup -q -n %{name}-%{ver}
 %patch0 -p1
 %patch1 -p1
-#%patch2 -p1		# fixme!!!
+%patch2 -p1
 %patch3 -p1
-#%patch4 -p1		# fixme!!!
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
@@ -580,8 +578,6 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 %{__autoconf}
 %{__automake}
 %configure \
-	CFLAGS="-I/usr/X11R6/include" \
-	LDFLAGS="-L/usr/X11R6/%{_lib}" \
 	--enable-fast-install \
 	--enable-lzw \
 	--enable-shared \
@@ -679,6 +675,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/html.la
 %attr(755,root,root) %{modulesdir}/coders/icon.so
 %{modulesdir}/coders/icon.la
+%attr(755,root,root) %{modulesdir}/coders/info.so
+%{modulesdir}/coders/info.la
 %attr(755,root,root) %{modulesdir}/coders/label.so
 %{modulesdir}/coders/label.la
 %attr(755,root,root) %{modulesdir}/coders/magick.so
