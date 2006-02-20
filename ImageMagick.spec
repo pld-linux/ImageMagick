@@ -5,6 +5,7 @@
 %bcond_without	graphviz	# without Graphviz support
 %bcond_with	gs		# with PostScript support through ghostscript library (warning: breaks jpeg!)
 %bcond_without	jasper		# without JPEG2000 module (which uses jasper library)
+%bcond_without	wmf		# without WMF module (which uses libwmf library)
 %bcond_without	cxx		# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
@@ -52,7 +53,7 @@ BuildRequires:	libpng-devel >= 1.0.8
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:1.5
-BuildRequires:	libwmf-devel >= 2:0.2.2
+%{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
@@ -590,6 +591,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with%{!?with_gs:out}-gslib \
 	--with%{!?with_jasper:out}-jp2 \
 	--with%{!?with_cxx:out}-magick_plus_plus \
+	--with%{!?with_wmf:out}-wmf \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-modules \
 	--with-perl=%{__perl} \
@@ -915,11 +917,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/url.so
 %{modulesdir}/coders/url.la
 
+%if %{with wmf}
 %files coder-wmf
 %defattr(644,root,root,755)
 # R: libwmf, expat, libjpeg, libpng
 %attr(755,root,root) %{modulesdir}/coders/wmf.so
 %{modulesdir}/coders/wmf.la
+%endif
 
 %files devel
 %defattr(644,root,root,755)
