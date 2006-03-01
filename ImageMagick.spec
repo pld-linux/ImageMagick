@@ -61,6 +61,7 @@ BuildRequires:	xorg-lib-libSM
 BuildRequires:	xorg-lib-libXext
 BuildRequires:	xorg-lib-libXt
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Obsoletes:	ImageMagick-coder-dps
 Obsoletes:	ImageMagick-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -570,6 +571,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--enable-lzw \
 	--enable-shared \
 	--disable-ltdl-install \
+	--without-dps \
 	--with%{!?with_graphviz:out}-dot \
 	--with%{!?with_fpx:out}-fpx \
 	--with%{!?with_gs:out}-gslib \
