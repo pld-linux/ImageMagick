@@ -32,8 +32,9 @@ Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
 Patch2:		%{name}-system-libltdl.patch
+Patch3:		%{name}-link.patch
 URL:		http://www.imagemagick.org/
-BuildRequires:	autoconf >= 2.59
+BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	expat-devel >= 1.95.7
@@ -57,9 +58,7 @@ BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 # only checked for, but only supplied scripts/txt2html is used
 #BuildRequires:	txt2html
-BuildRequires:	xorg-lib-libSM
 BuildRequires:	xorg-lib-libXext
-BuildRequires:	xorg-lib-libXt
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	ImageMagick-coder-dps
 Obsoletes:	ImageMagick-coder-mpeg
@@ -163,9 +162,7 @@ Requires:	lcms-devel
 Requires:	libjpeg-devel
 Requires:	libltdl-devel
 Requires:	libtiff-devel
-Requires:	xorg-lib-libSM-devel
 Requires:	xorg-lib-libXext-devel
-Requires:	xorg-lib-libXt-devel
 Requires:	zlib-devel
 
 %description devel
@@ -554,6 +551,7 @@ Modu³ kodera dla plików WMF.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
