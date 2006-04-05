@@ -4,11 +4,12 @@
 %bcond_without	graphviz	# without Graphviz support
 %bcond_with	gs		# with PostScript support through ghostscript library (warning: breaks jpeg!)
 %bcond_without	jasper		# without JPEG2000 module (which uses jasper library)
+%bcond_without	wmf		# without WMF module (which uses libwmf library)
 %bcond_without	cxx		# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.2.4
-%define		pver	6
+%define		ver 6.2.6
+%define		pver	8
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -21,18 +22,16 @@ Summary(tr):	X altýnda resim gösterme, çevirme ve deðiþiklik yapma
 Summary(uk):	ðÅÒÅÇÌÑÄ, ËÏÎ×ÅÒÔÕ×ÁÎÎÑ ÔÁ ÏÂÒÏÂËÁ ÚÏÂÒÁÖÅÎØ Ð¦Ä X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	82cb623a5e2e01991d22d33c624ad12d
+# Source0-md5:	20728cfc1920843cc5758937f07fb562
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
 Patch2:		%{name}-system-libltdl.patch
-Patch3:		%{name}-free.patch
-Patch4:		%{name}-dot.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
@@ -43,7 +42,7 @@ BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	freetype-devel >= 2.0.2-2
 BuildRequires:	gd-devel >= 2.0.15
 %{?with_gs:BuildRequires:	ghostscript-devel}
-%{?with_graphviz:BuildRequires:	graphviz-devel >= 1.12}
+%{?with_graphviz:BuildRequires:	graphviz-devel >= 2.6}
 %{?with_jasper:BuildRequires:	jasper-devel >= 1.700.5}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms-devel
@@ -54,7 +53,7 @@ BuildRequires:	libpng-devel >= 1.0.8
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:1.5
-BuildRequires:	libwmf-devel >= 2:0.2.2
+%{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
@@ -564,9 +563,7 @@ Modu³ kodera dla plików WMF.
 %setup -q -n %{name}-%{ver}
 %patch0 -p1
 %patch1 -p1
-#%patch2 -p1		# fixme!!!
-%patch3 -p1
-#%patch4 -p1		# fixme!!!
+%patch2 -p1
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
@@ -580,8 +577,6 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 %{__autoconf}
 %{__automake}
 %configure \
-	CFLAGS="-I/usr/X11R6/include" \
-	LDFLAGS="-L/usr/X11R6/%{_lib}" \
 	--enable-fast-install \
 	--enable-lzw \
 	--enable-shared \
@@ -591,6 +586,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with%{!?with_gs:out}-gslib \
 	--with%{!?with_jasper:out}-jp2 \
 	--with%{!?with_cxx:out}-magick_plus_plus \
+	--with%{!?with_wmf:out}-wmf \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-modules \
 	--with-perl=%{__perl} \
@@ -679,6 +675,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/html.la
 %attr(755,root,root) %{modulesdir}/coders/icon.so
 %{modulesdir}/coders/icon.la
+%attr(755,root,root) %{modulesdir}/coders/info.so
+%{modulesdir}/coders/info.la
 %attr(755,root,root) %{modulesdir}/coders/label.so
 %{modulesdir}/coders/label.la
 %attr(755,root,root) %{modulesdir}/coders/magick.so
@@ -912,11 +910,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/url.so
 %{modulesdir}/coders/url.la
 
+%if %{with wmf}
 %files coder-wmf
 %defattr(644,root,root,755)
 # R: libwmf, expat, libjpeg, libpng
 %attr(755,root,root) %{modulesdir}/coders/wmf.so
 %{modulesdir}/coders/wmf.la
+%endif
 
 %files devel
 %defattr(644,root,root,755)
