@@ -65,7 +65,7 @@ Obsoletes:	ImageMagick-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # we don't want "-s" here, because it would be added to `Magick*-config --ldflags`
-%define		rpmldflags	%{nil}
+%define		filterout_ld	(-Wl,)?-s (-Wl,)?--strip-all
 %define		modulesdir	%{_libdir}/ImageMagick-%{ver}/modules-Q%{QuantumDepth}
 
 %description
