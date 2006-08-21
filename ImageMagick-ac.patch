@@ -3,7 +3,7 @@
 @@ -737,16 +737,16 @@
  #
  have_fpx='no'
- LIB_FPX=''
+ FPX_LIBS=''
 +AC_LANG_PUSH(C++)
 +AC_REQUIRE_CPP
  if test "$with_fpx" != 'no'
@@ -28,10 +28,10 @@
  AC_SUBST(LIB_FPX)
  
 @@ -1935,7 +1935,6 @@
-         then
-           CPPFLAGS="$CPPFLAGS -I${xml2_prefix}/include/libxml2"
-         fi
--        LDFLAGS="$LDFLAGS -L${xml2_prefix}/lib"
-      fi
-     failed=0;
-     passed=0;
+     then
+       CPPFLAGS="$CPPFLAGS -I${xml2_prefix}/include/libxml2"
+     fi
+-    LDFLAGS="$LDFLAGS -L${xml2_prefix}/lib"
+    fi
+   failed=0;
+   passed=0;
