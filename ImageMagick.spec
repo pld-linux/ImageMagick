@@ -8,8 +8,8 @@
 %bcond_without	cxx		# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.2.6
-%define		pver	8
+%define		ver 6.2.9
+%define		pver	1
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -27,11 +27,12 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	20728cfc1920843cc5758937f07fb562
+# Source0-md5:	44cdd1e43b91c0def38edf4a0b8a01ed
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
 Patch2:		%{name}-system-libltdl.patch
+Patch3:		%{name}-link.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
@@ -75,8 +76,8 @@ well.
 
 %description -l de
 ImageMagick ist ein Tool zur Bildanzeige, -konvertierung und
-manipulation, -das unter X-Window läuft. Es ist enorm leitungsfähig
-in Bezug auf die Grafikmanipulationsfunktionen, die es dem Anwender
+manipulation, -das unter X-Window läuft. Es ist enorm leitungsfähig in
+Bezug auf die Grafikmanipulationsfunktionen, die es dem Anwender
 bietet, und auf die Vielfalt der unterstützten Formate.
 
 %description -l es
@@ -159,8 +160,8 @@ Requires:	XFree86-devel
 Requires:	bzip2-devel
 Requires:	freetype-devel
 Requires:	lcms-devel
-Requires:	libltdl-devel
 Requires:	libjpeg-devel
+Requires:	libltdl-devel
 Requires:	libtiff-devel
 Requires:	zlib-devel
 
@@ -564,6 +565,7 @@ Modu³ kodera dla plików WMF.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
