@@ -22,7 +22,7 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -246,6 +246,7 @@ Summary(uk):	Б╕бл╕отеки та модул╕ для доступу до ImageMagick з Perl
 Group:		Development/Languages/Perl
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	perl-dirs
 
 %description perl
 This is the ImageMagick Perl support package. It perl modules and
@@ -925,8 +926,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files perl
 %defattr(644,root,root,755)
-%{perl_vendorarch}/Image
-%dir %{perl_vendorarch}/auto/Image
+%{perl_vendorarch}/Image/*
 %dir %{perl_vendorarch}/auto/Image/Magick
 %{perl_vendorarch}/auto/Image/Magick/autosplit.ix
 %{perl_vendorarch}/auto/Image/Magick/Magick.bs
