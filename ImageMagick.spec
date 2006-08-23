@@ -8,8 +8,8 @@
 %bcond_without	cxx		# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.2.6
-%define		pver	8
+%define		ver 6.2.9
+%define		pver	1
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -22,19 +22,21 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	4
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	20728cfc1920843cc5758937f07fb562
+# Source0-md5:	44cdd1e43b91c0def38edf4a0b8a01ed
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
 Patch2:		%{name}-system-libltdl.patch
 Patch3:		%{name}-link.patch
 URL:		http://www.imagemagick.org/
-BuildRequires:	autoconf >= 2.59-9
+BuildRequires:	XFree86-DPS-devel
+BuildRequires:	XFree86-devel
+BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bzip2-devel >= 1.0.1
 BuildRequires:	expat-devel >= 1.95.7
@@ -56,17 +58,14 @@ BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
-BuildRequires:	rpmbuild(macros) >= 1.315
 # only checked for, but only supplied scripts/txt2html is used
 #BuildRequires:	txt2html
-BuildRequires:	xorg-lib-libXext
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Obsoletes:	ImageMagick-coder-dps
 Obsoletes:	ImageMagick-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # we don't want "-s" here, because it would be added to `Magick*-config --ldflags`
-%define		filterout_ld	(-Wl,)?-s (-Wl,)?--strip-all
+%define		rpmldflags	%{nil}
 %define		modulesdir	%{_libdir}/ImageMagick-%{ver}/modules-Q%{QuantumDepth}
 
 %description
@@ -157,13 +156,13 @@ Summary(ru):	Хедеры и библиотеки для программирования с ImageMagick
 Summary(uk):	Хедери та б╕бл╕отеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	XFree86-devel
 Requires:	bzip2-devel
 Requires:	freetype-devel
 Requires:	lcms-devel
 Requires:	libjpeg-devel
 Requires:	libltdl-devel
 Requires:	libtiff-devel
-Requires:	xorg-lib-libXext-devel
 Requires:	zlib-devel
 
 %description devel
@@ -246,6 +245,7 @@ Summary(uk):	Б╕бл╕отеки та модул╕ для доступу до ImageMagick з Perl
 Group:		Development/Languages/Perl
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	perl-dirs
 
 %description perl
 This is the ImageMagick Perl support package. It perl modules and
@@ -387,6 +387,20 @@ Coder module for GraphViz DOT files.
 
 %description coder-dot -l pl
 ModuЁ kodera dla plikСw GraphViz DOT.
+
+%package coder-dps
+Summary:	Coder module for Postscript files using DPS extension
+Summary(pl):	ModuЁ kodera dla plikСw Postscript u©ywaj╠cy rozszerzenia DPS
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-dps
+Coder module for Postcript files using DPS (Display PostScript)
+extension.
+
+%description coder-dps -l pl
+ModuЁ kodera dla plikСw Postscript u©ywaj╠cy rozszerzenia DPS (Display
+PostScript).
 
 %package coder-fpx
 Summary:	Coder module for FlashPIX (FPX) files
@@ -570,7 +584,6 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--enable-lzw \
 	--enable-shared \
 	--disable-ltdl-install \
-	--without-dps \
 	--with%{!?with_graphviz:out}-dot \
 	--with%{!?with_fpx:out}-fpx \
 	--with%{!?with_gs:out}-gslib \
@@ -814,6 +827,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/dot.so
 %{modulesdir}/coders/dot.la
 
+%files coder-dps
+%defattr(644,root,root,755)
+# R: XFree86-DPS (libdps.so)
+%attr(755,root,root) %{modulesdir}/coders/dps.so
+%{modulesdir}/coders/dps.la
+
 %if %{with fpx}
 %files coder-fpx
 %defattr(644,root,root,755)
@@ -925,8 +944,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files perl
 %defattr(644,root,root,755)
-%{perl_vendorarch}/Image
-%dir %{perl_vendorarch}/auto/Image
+%{perl_vendorarch}/Image/*
 %dir %{perl_vendorarch}/auto/Image/Magick
 %{perl_vendorarch}/auto/Image/Magick/autosplit.ix
 %{perl_vendorarch}/auto/Image/Magick/Magick.bs
