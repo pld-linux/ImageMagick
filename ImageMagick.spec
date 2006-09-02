@@ -595,7 +595,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	pkgdocdir=%{_defaultdocdir}/%{name}-devel-%{version}
+	pkgdocdir=%{_docdir}/%{name}-devel-%{version}
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 rm -f $RPM_BUILD_ROOT%{modulesdir}/{coders,filters}/*.a
@@ -905,7 +905,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc %{_defaultdocdir}/%{name}-devel-%{version}
+%doc %{_docdir}/%{name}-devel-%{version}
 %attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_bindir}/Wand-config
 %attr(755,root,root) %{_libdir}/libMagick.so
