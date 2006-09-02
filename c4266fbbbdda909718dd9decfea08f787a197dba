@@ -1,0 +1,6 @@
+- rel 3
+- added security patch (no 5)
+  CVE: CAN-2003-0455
+  BUG(sectrack):
+  A vulnerability was reported in ImageMagick. A local user may be able to obtain
+  elevated privileges on the system.
