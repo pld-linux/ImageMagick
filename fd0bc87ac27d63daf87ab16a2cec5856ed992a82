@@ -1,0 +1,3 @@
+- R: (for ImageMagick-deve)
+  [undefine@sv1 undefine]$ Magick-config --libs
+  -lMagick -llcms -ltiff -lfreetype -ljpeg -lXext -lSM -lICE -lX11 -lXt -lbz2 -lz -lpthread -lm -lpthread
