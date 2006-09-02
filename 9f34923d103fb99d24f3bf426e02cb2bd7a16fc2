@@ -1,0 +1,7 @@
+- updated to 5.5.1-3
+- removed outdated old_am.patch
+- removed libpng hack
+- added --without cxx bcond (Magick++ need fixes for gcc 3.2)
+- build with dlopened modules support (now is possible to split this package
+  into small subpackages)
+  TODO: Move to HEAD before cleanup and tests.
