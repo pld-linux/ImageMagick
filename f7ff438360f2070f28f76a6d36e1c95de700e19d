@@ -1,0 +1,2 @@
+- version 5.4.7, release 1
+- BR: automake >= 1.6 (hopefully not 1.6.2 - %patch4)
