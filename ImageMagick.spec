@@ -22,7 +22,7 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	3
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -469,6 +469,7 @@ Summary:	Coder module for PDF files
 Summary(pl):	ModuЁ kodera dla plikСw PDF
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	ghostscript
 
 %description coder-pdf
 Coder module for PDF files.
