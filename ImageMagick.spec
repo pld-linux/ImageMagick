@@ -29,9 +29,10 @@ Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
 # Source0-md5:	e3b3392e7510fc4b73ec244f5c7d3c84
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
-Patch1:		%{name}-ac.patch
-Patch2:		%{name}-system-libltdl.patch
-Patch3:		%{name}-link.patch
+Patch0:		%{name}-ac.patch
+Patch1:		%{name}-system-libltdl.patch
+Patch2:		%{name}-link.patch
+Patch3:		%{name}-libpath.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
@@ -550,6 +551,7 @@ Modu³ kodera dla plików WMF.
 
 %prep
 %setup -q -n %{name}-%{ver}
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
