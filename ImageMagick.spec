@@ -8,8 +8,8 @@
 %bcond_without	cxx		# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.2.9
-%define		pver	8
+%define		ver 6.3.1
+%define		pver	4
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -22,12 +22,12 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	3
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	683b37415e4fc914f21c138205d4d451
+# Source0-md5:	e3b3392e7510fc4b73ec244f5c7d3c84
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch1:		%{name}-ac.patch
 Patch2:		%{name}-system-libltdl.patch
@@ -562,8 +562,9 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	--enable-fast-install \
@@ -619,6 +620,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/ImageMagick-%{ver}
 %dir %{_datadir}/ImageMagick-%{ver}/config
 %{_datadir}/ImageMagick-%{ver}/config/*.xml
+%{_datadir}/ImageMagick-%{ver}/config/sRGB.icm
 
 # ========= coders without additional deps
 %attr(755,root,root) %{modulesdir}/coders/art.so
@@ -795,8 +797,20 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/import
 %attr(755,root,root) %{_bindir}/mogrify
 %attr(755,root,root) %{_bindir}/montage
+%attr(755,root,root) %{_bindir}/stream
 
-%{_mandir}/man1/[Iacdim]*
+%{_mandir}/man1/ImageMagick.1*
+%{_mandir}/man1/animate.1*
+%{_mandir}/man1/compare.1*
+%{_mandir}/man1/composite.1*
+%{_mandir}/man1/convert.1*
+%{_mandir}/man1/conjure.1*
+%{_mandir}/man1/display.1*
+%{_mandir}/man1/identify.1*
+%{_mandir}/man1/import.1*
+%{_mandir}/man1/mogrify.1*
+%{_mandir}/man1/montage.1*
+%{_mandir}/man1/stream.1*
 
 %files doc
 %defattr(644,root,root,755)
