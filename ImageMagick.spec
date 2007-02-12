@@ -12,14 +12,14 @@
 %define		pver	4
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
-Summary(de.UTF-8):   Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
-Summary(es.UTF-8):   Exhibidor, convertidor y manipulador de imágenes bajo X
-Summary(fr.UTF-8):   Visualisation, conversion, et manipulation d'images sous X
-Summary(pl.UTF-8):   Narzędzie do wyświetlania, konwersji i manipulacji grafikami
-Summary(pt_BR.UTF-8):   Exibidor, conversor e manipulador de imagens sob X
-Summary(ru.UTF-8):   Просмотр, конвертирование, обработка изображений под X Window
-Summary(tr.UTF-8):   X altında resim gösterme, çevirme ve değişiklik yapma
-Summary(uk.UTF-8):   Перегляд, конвертування та обробка зображень під X Window
+Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
+Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
+Summary(fr.UTF-8):	Visualisation, conversion, et manipulation d'images sous X
+Summary(pl.UTF-8):	Narzędzie do wyświetlania, konwersji i manipulacji grafikami
+Summary(pt_BR.UTF-8):	Exibidor, conversor e manipulador de imagens sob X
+Summary(ru.UTF-8):	Просмотр, конвертирование, обработка изображений под X Window
+Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
+Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
 Release:	1
@@ -124,7 +124,7 @@ ImageMagick - це утиліта для перегляду, конвертув�
 
 %package doc
 Summary:	ImageMagick documentation
-Summary(pl.UTF-8):   Dokumentacja do ImageMagick
+Summary(pl.UTF-8):	Dokumentacja do ImageMagick
 Group:		Documentation
 
 %description doc
@@ -135,8 +135,8 @@ Dokumentacja do ImageMagick.
 
 %package libs
 Summary:	ImageMagick libraries
-Summary(pl.UTF-8):   Biblioteki ImageMagick
-Summary(pt_BR.UTF-8):   Bibliotecas dinâmicas do ImageMagick
+Summary(pl.UTF-8):	Biblioteki ImageMagick
+Summary(pt_BR.UTF-8):	Bibliotecas dinâmicas do ImageMagick
 Group:		X11/Libraries
 
 %description libs
@@ -150,11 +150,11 @@ Bibliotecas dinâmicas do ImageMagick.
 
 %package devel
 Summary:	Libraries and header files for ImageMagick development
-Summary(es.UTF-8):   Biblioteca estática y archivos de inclusión para desarrollo con libMagick
-Summary(pl.UTF-8):   Biblioteki i pliki nagłówkowe dla ImageMagick
-Summary(pt_BR.UTF-8):   Biblioteca e arquivos de inclusão para desenvolvimento com libMagick
-Summary(ru.UTF-8):   Хедеры и библиотеки для программирования с ImageMagick
-Summary(uk.UTF-8):   Хедери та бібліотеки для програмування з ImageMagick
+Summary(es.UTF-8):	Biblioteca estática y archivos de inclusión para desarrollo con libMagick
+Summary(pl.UTF-8):	Biblioteki i pliki nagłówkowe dla ImageMagick
+Summary(pt_BR.UTF-8):	Biblioteca e arquivos de inclusão para desenvolvimento com libMagick
+Summary(ru.UTF-8):	Хедеры и библиотеки для программирования с ImageMagick
+Summary(uk.UTF-8):	Хедери та бібліотеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	bzip2-devel
@@ -213,10 +213,10 @@ ImageMagick.
 
 %package static
 Summary:	ImageMagick static libraries
-Summary(pl.UTF-8):   Biblioteki statyczne ImageMagick
-Summary(pt_BR.UTF-8):   Bibliotecas estáticas para desenvolvimento com libMagick
-Summary(ru.UTF-8):   Статические библиотеки для программирования с ImageMagick
-Summary(uk.UTF-8):   Статичні бібліотеки для програмування з ImageMagick
+Summary(pl.UTF-8):	Biblioteki statyczne ImageMagick
+Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento com libMagick
+Summary(ru.UTF-8):	Статические библиотеки для программирования с ImageMagick
+Summary(uk.UTF-8):	Статичні бібліотеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
@@ -239,10 +239,10 @@ Bibliotecas estáticas para desenvolvimento com libMagick.
 
 %package perl
 Summary:	Libraries and modules for access to ImageMagick from Perl
-Summary(pl.UTF-8):   Biblioteki i moduły Perla dla ImageMagick
-Summary(pt_BR.UTF-8):   Módulo perl para uso com o ImageMagick
-Summary(ru.UTF-8):   Библиотеки и модули для доступа к ImageMagick из perl
-Summary(uk.UTF-8):   Бібліотеки та модулі для доступу до ImageMagick з Perl
+Summary(pl.UTF-8):	Biblioteki i moduły Perla dla ImageMagick
+Summary(pt_BR.UTF-8):	Módulo perl para uso com o ImageMagick
+Summary(ru.UTF-8):	Библиотеки и модули для доступа к ImageMagick из perl
+Summary(uk.UTF-8):	Бібліотеки та модулі для доступу до ImageMagick з Perl
 Group:		Development/Languages/Perl
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -271,10 +271,10 @@ em scripts Perl.
 
 %package c++
 Summary:	ImageMagick Magick++ library
-Summary(pl.UTF-8):   Biblioteka Magick++
-Summary(pt_BR.UTF-8):   Bibliotecas dinâmicas do ImageMagick
-Summary(ru.UTF-8):   Библиотека Magick++ (C++ интерфейс для ImageMagick'а)
-Summary(uk.UTF-8):   Бібліотека Magick++ (інтерфейс C++ для ImageMagick)
+Summary(pl.UTF-8):	Biblioteka Magick++
+Summary(pt_BR.UTF-8):	Bibliotecas dinâmicas do ImageMagick
+Summary(ru.UTF-8):	Библиотека Magick++ (C++ интерфейс для ImageMagick'а)
+Summary(uk.UTF-8):	Бібліотека Magick++ (інтерфейс C++ для ImageMagick)
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 
@@ -305,11 +305,11 @@ ImageMagick (бібліотеки для перегляду, конвертув�
 
 %package c++-devel
 Summary:	C++ bindings for the ImageMagick library
-Summary(es.UTF-8):   Biblioteca estática y archivos de inclusión para desarrollo con libMagick++
-Summary(pl.UTF-8):   Pliki nagłówkowe z interfejsem C++ do ImageMagick
-Summary(pt_BR.UTF-8):   Biblioteca e arquivos de inclusão para desenvolvimento com libMagick++
-Summary(ru.UTF-8):   Хедеры и библиотеки для разработок с использованием Magick++ (C++ интерфейс для ImageMagick'а)
-Summary(uk.UTF-8):   Хедери та бібліотеки для розробок з використанням Magick++ (інтерфейсу C++ для ImageMagick)
+Summary(es.UTF-8):	Biblioteca estática y archivos de inclusión para desarrollo con libMagick++
+Summary(pl.UTF-8):	Pliki nagłówkowe z interfejsem C++ do ImageMagick
+Summary(pt_BR.UTF-8):	Biblioteca e arquivos de inclusão para desenvolvimento com libMagick++
+Summary(ru.UTF-8):	Хедеры и библиотеки для разработок с использованием Magick++ (C++ интерфейс для ImageMagick'а)
+Summary(uk.UTF-8):	Хедери та бібліотеки для розробок з використанням Magick++ (інтерфейсу C++ для ImageMagick)
 Group:		X11/Development/Libraries
 Requires:	%{name}-c++ = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
@@ -352,10 +352,10 @@ Magick++ (інтерфейс C++ для ImageMagick).
 
 %package c++-static
 Summary:	C++ bindings for the ImageMagick - static library
-Summary(pl.UTF-8):   Interfejs C++ do ImageMagick - biblioteka statyczna
-Summary(pt_BR.UTF-8):   Bibliotecas estáticas para desenvolvimento com libMagick
-Summary(ru.UTF-8):   Статические библиотеки C++ для программирования с ImageMagick
-Summary(uk.UTF-8):   Статичні бібліотеки C++ для програмування з ImageMagick
+Summary(pl.UTF-8):	Interfejs C++ do ImageMagick - biblioteka statyczna
+Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento com libMagick
+Summary(ru.UTF-8):	Статические библиотеки C++ для программирования с ImageMagick
+Summary(uk.UTF-8):	Статичні бібліотеки C++ для програмування з ImageMagick
 Group:		X11/Development/Libraries
 Requires:	%{name}-c++-devel = %{epoch}:%{version}-%{release}
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
@@ -379,7 +379,7 @@ Bibliotecas estáticas para desenvolvimento com libMagick++.
 
 %package coder-dot
 Summary:	Coder module for GraphViz DOT files
-Summary(pl.UTF-8):   Moduł kodera dla plików GraphViz DOT
+Summary(pl.UTF-8):	Moduł kodera dla plików GraphViz DOT
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -391,7 +391,7 @@ Moduł kodera dla plików GraphViz DOT.
 
 %package coder-fpx
 Summary:	Coder module for FlashPIX (FPX) files
-Summary(pl.UTF-8):   Moduł kodera dla plików FlashPIX (FPX)
+Summary(pl.UTF-8):	Moduł kodera dla plików FlashPIX (FPX)
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -403,7 +403,7 @@ Moduł kodera dla plików FlashPIX (FPX).
 
 %package coder-jbig
 Summary:	Coder module for JBIG files
-Summary(pl.UTF-8):   Moduł kodera dla plików JBIG
+Summary(pl.UTF-8):	Moduł kodera dla plików JBIG
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -415,7 +415,7 @@ Moduł kodera dla plików JBIG.
 
 %package coder-jpeg
 Summary:	Coder module for JPEG files
-Summary(pl.UTF-8):   Moduł kodera dla plików JPEG
+Summary(pl.UTF-8):	Moduł kodera dla plików JPEG
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -427,7 +427,7 @@ Moduł kodera dla plików JPEG.
 
 %package coder-jpeg2
 Summary:	Coder module for JPEG-2000 (JP2/JPC) files using JasPer library
-Summary(pl.UTF-8):   Moduł kodera dla plików JPEG-2000 (JP2/JPC) używający biblioteki JasPer
+Summary(pl.UTF-8):	Moduł kodera dla plików JPEG-2000 (JP2/JPC) używający biblioteki JasPer
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -440,7 +440,7 @@ JasPer.
 
 %package coder-miff
 Summary:	Coder module for MIFF files
-Summary(pl.UTF-8):   Moduł kodera dla plików MIFF
+Summary(pl.UTF-8):	Moduł kodera dla plików MIFF
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -452,7 +452,7 @@ Moduł kodera dla plików MIFF.
 
 %package coder-mpr
 Summary:	Coder module for ImageMagick MPR and MSL files
-Summary(pl.UTF-8):   Moduł kodera dla plików MPR i MSL ImageMagick
+Summary(pl.UTF-8):	Moduł kodera dla plików MPR i MSL ImageMagick
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -466,7 +466,7 @@ Scripting Language (MSL).
 
 %package coder-pdf
 Summary:	Coder module for PDF files
-Summary(pl.UTF-8):   Moduł kodera dla plików PDF
+Summary(pl.UTF-8):	Moduł kodera dla plików PDF
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	ghostscript
@@ -479,7 +479,7 @@ Moduł kodera dla plików PDF.
 
 %package coder-png
 Summary:	Coder module for PNG files
-Summary(pl.UTF-8):   Modul kodera dla plików PNG
+Summary(pl.UTF-8):	Modul kodera dla plików PNG
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -491,7 +491,7 @@ Moduł kodera dla plików PNG.
 
 %package coder-ps2
 Summary:	Coder module for Postscript Level II & III (PS2/PS3) files
-Summary(pl.UTF-8):   Moduł kodera dla plików Postscript Level II i III (PS2/PS3)
+Summary(pl.UTF-8):	Moduł kodera dla plików Postscript Level II i III (PS2/PS3)
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -503,7 +503,7 @@ Moduł kodera dla plików Postscript Level II i III (PS2/PS3).
 
 %package coder-svg
 Summary:	Coder module for SVG (Scalable Vector Graphics) files
-Summary(pl.UTF-8):   Moduł kodera dla plików SVG (Scalable Vector Graphics)
+Summary(pl.UTF-8):	Moduł kodera dla plików SVG (Scalable Vector Graphics)
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -515,7 +515,7 @@ Moduł kodera dla plików SVG (Scalable Vector Graphics).
 
 %package coder-tiff
 Summary:	Coder module for TIFF files
-Summary(pl.UTF-8):   Moduł kodera dla plików TIFF
+Summary(pl.UTF-8):	Moduł kodera dla plików TIFF
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -527,7 +527,7 @@ Moduł kodera dla plików TIFF.
 
 %package coder-url
 Summary:	Coder module for retrieving files via URL
-Summary(pl.UTF-8):   Moduł kodera ściągający pliki o podanym URL
+Summary(pl.UTF-8):	Moduł kodera ściągający pliki o podanym URL
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -539,7 +539,7 @@ Moduł kodera ściągający pliki o podanym URL.
 
 %package coder-wmf
 Summary:	Coder module for WMF files
-Summary(pl.UTF-8):   Moduł kodera dla plików WMF
+Summary(pl.UTF-8):	Moduł kodera dla plików WMF
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
