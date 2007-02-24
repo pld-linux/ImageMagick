@@ -8,8 +8,8 @@
 %bcond_without	cxx		# without Magick++
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.3.1
-%define		pver	4
+%define		ver 6.3.2
+%define		pver	8
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -27,7 +27,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	e3b3392e7510fc4b73ec244f5c7d3c84
+# Source0-md5:	315a12569ae8c88979bd36e3f872ab37
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-system-libltdl.patch
@@ -747,6 +747,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/sun.la
 %attr(755,root,root) %{modulesdir}/coders/tga.so
 %{modulesdir}/coders/tga.la
+%attr(755,root,root) %{modulesdir}/coders/thumbnail.so
+%{modulesdir}/coders/thumbnail.la
 %attr(755,root,root) %{modulesdir}/coders/tile.so
 %{modulesdir}/coders/tile.la
 %attr(755,root,root) %{modulesdir}/coders/tim.so
