@@ -1,5 +1,6 @@
 #
 # Conditional build:
+%bcond_without	djvu		# without DJVU module
 %bcond_without	fpx		# without FlashPIX module (which uses fpx library)
 %bcond_without	graphviz	# without Graphviz support
 %bcond_with	gs		# with PostScript support through ghostscript library (warning: breaks jpeg!)
@@ -37,6 +38,7 @@ URL:		http://www.imagemagick.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bzip2-devel >= 1.0.1
+%{?with_djvu:BuildRequires:	djvulibre-devel}
 BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	freetype-devel >= 2.0.2-2
 BuildRequires:	gd-devel >= 2.0.15
@@ -377,6 +379,18 @@ Bibliotecas estáticas para desenvolvimento com libMagick++.
 Це окремий пакет зі статичними бібліотеками, які більше не входять до
 складу ImageMagick-c++-devel.
 
+%package coder-djvu
+Summary:	Coder module for DJVU files
+Summary(pl.UTF-8):	Moduł kodera dla plików DJVU
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-djvu
+Coder module for DJVU files.
+
+%description coder-djvu -l pl
+Moduł kodera dla plików DJVU.
+
 %package coder-dot
 Summary:	Coder module for GraphViz DOT files
 Summary(pl.UTF-8):	Moduł kodera dla plików GraphViz DOT
@@ -574,6 +588,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--enable-shared \
 	--disable-ltdl-install \
 	--without-dps \
+	--with%{!?with_graphviz:out}-djvu \
 	--with%{!?with_graphviz:out}-dot \
 	--with%{!?with_fpx:out}-fpx \
 	--with%{!?with_gs:out}-gslib \
@@ -825,6 +840,14 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog LICENSE NEWS
 %attr(755,root,root) %{_libdir}/libMagick.so.*.*.*
 %attr(755,root,root) %{_libdir}/libWand.so.*.*.*
+
+%if %{with djvu}
+%files coder-dot
+%defattr(644,root,root,755)
+# R: djvulibre
+%attr(755,root,root) %{modulesdir}/coders/djvu.so
+%{modulesdir}/coders/djvu.la
+%endif
 
 %files coder-dot
 %defattr(644,root,root,755)
