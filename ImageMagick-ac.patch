@@ -1,6 +1,6 @@
 --- ImageMagick-5.4.5/configure.ac.old	Mon Jul  1 22:29:23 2002
 +++ ImageMagick-5.4.5/configure.ac	Mon Jul  1 22:30:03 2002
-@@ -737,16 +737,16 @@
+@@ -1370,16 +1370,16 @@
  #
  have_fpx='no'
  FPX_LIBS=''
@@ -19,19 +19,23 @@
      AC_MSG_CHECKING(if FlashPIX package is complete)
      if test $passed -gt 0
      then
-@@ -765,6 +765,7 @@
+@@ -1399,6 +1399,7 @@
          AC_MSG_RESULT(no)
      fi
  fi
 +AC_LANG_POP
  AM_CONDITIONAL(HasFPX, test "$have_fpx" = 'yes')
- AC_SUBST(LIB_FPX)
+ AC_SUBST(FPX_LIBS)
  
-@@ -1935,7 +1935,6 @@
+@@ -1949,10 +1950,6 @@
      then
        CPPFLAGS="$CPPFLAGS -I${xml2_prefix}/include/libxml2"
      fi
--    LDFLAGS="$LDFLAGS -L${xml2_prefix}/lib"
+-    if test "${xml2_prefix}" != '/usr'
+-    then
+-      LDFLAGS="$LDFLAGS -L${xml2_prefix}/lib"
+-    fi
     fi
    failed=0;
    passed=0;
+
