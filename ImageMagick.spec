@@ -23,7 +23,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -34,6 +34,7 @@ Patch0:		%{name}-ac.patch
 Patch1:		%{name}-system-libltdl.patch
 Patch2:		%{name}-link.patch
 Patch3:		%{name}-libpath.patch
+Patch4:		%{name}-ldflags.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
@@ -67,8 +68,6 @@ Obsoletes:	ImageMagick-coder-dps
 Obsoletes:	ImageMagick-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-# we don't want "-s" here, because it would be added to `Magick*-config --ldflags`
-%define		filterout_ld	(-Wl,)?-s (-Wl,)?--strip-all
 %define		modulesdir	%{_libdir}/ImageMagick-%{ver}/modules-Q%{QuantumDepth}
 
 %description
@@ -569,6 +568,7 @@ Moduł kodera dla plików WMF.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
@@ -842,7 +842,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libWand.so.*.*.*
 
 %if %{with djvu}
-%files coder-dot
+%files coder-djvu
 %defattr(644,root,root,755)
 # R: djvulibre
 %attr(755,root,root) %{modulesdir}/coders/djvu.so
