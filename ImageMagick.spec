@@ -23,7 +23,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	3
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
