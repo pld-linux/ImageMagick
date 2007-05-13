@@ -23,7 +23,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -605,6 +605,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-x
 
 %{__make}
+%{__perl} -pi -e 's,/%{name}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -612,7 +613,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	pkgdocdir=%{_docdir}/%{name}-devel-%{version}
+	pkgdocdir=%{_docdir}/%{name}-doc-%{version}
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 rm -f $RPM_BUILD_ROOT%{modulesdir}/{coders,filters}/*.a
@@ -833,7 +834,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files doc
 %defattr(644,root,root,755)
-%doc www
+%doc %{_defaultdocdir}/%{name}-doc-%{version}
 
 %files libs
 %defattr(644,root,root,755)
@@ -945,7 +946,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc %{_docdir}/%{name}-devel-%{version}
 %attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_bindir}/Wand-config
 %attr(755,root,root) %{_libdir}/libMagick.so
