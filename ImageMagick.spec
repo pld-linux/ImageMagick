@@ -22,7 +22,7 @@ Summary(tr):	X altЩnda resim gЖsterme, Гevirme ve deПiЧiklik yapma
 Summary(uk):	Перегляд, конвертування та обробка зображень п╕д X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	3
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -33,6 +33,7 @@ Patch0:		%{name}-libpath.patch
 Patch1:		%{name}-ac.patch
 Patch2:		%{name}-system-libltdl.patch
 Patch3:		%{name}-link.patch
+Patch4:		%{name}-am110.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	XFree86-DPS-devel
 BuildRequires:	XFree86-devel
@@ -567,6 +568,7 @@ ModuЁ kodera dla plikСw WMF.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
@@ -600,6 +602,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-x
 
 %{__make}
+%{__perl} -pi -e 's,/%{name}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -607,7 +610,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	pkgdocdir=%{_defaultdocdir}/%{name}-devel-%{version}
+	pkgdocdir=%{_defaultdocdir}/%{name}-doc-%{version}
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 rm -f $RPM_BUILD_ROOT%{modulesdir}/{coders,filters}/*.a
@@ -813,7 +816,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files doc
 %defattr(644,root,root,755)
-%doc www
+%doc %{_defaultdocdir}/%{name}-doc-%{version}
 
 %files libs
 %defattr(644,root,root,755)
@@ -923,7 +926,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc %{_defaultdocdir}/%{name}-devel-%{version}
 %attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_bindir}/Wand-config
 %attr(755,root,root) %{_libdir}/libMagick.so
