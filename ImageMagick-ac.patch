@@ -6,19 +6,19 @@
  FPX_LIBS=''
 +AC_LANG_PUSH(C++)
 +AC_REQUIRE_CPP
- if test "$with_fpx" != 'no'
- then
-     AC_MSG_CHECKING(for FlashPIX components )
-     AC_MSG_RESULT()
+ if test "$with_fpx" != 'no'; then
+     AC_MSG_RESULT([-------------------------------------------------------------])
+     AC_MSG_RESULT([Checking for FlashPIX support])
+     AC_MSG_RESULT([-------------------------------------------------------------])
      failed=0;
      passed=0;
 -    AC_LANG_PUSH(C++)
      AC_CHECK_HEADER(fpxlib.h,passed=`expr $passed + 1`,failed=`expr $failed + 1`)
      AC_CHECK_LIB(fpx,FPX_OpenImageByFilename,passed=`expr $passed + 1`,failed=`expr $failed + 1`,)
 -    AC_LANG_POP
-     AC_MSG_CHECKING(if FlashPIX package is complete)
-     if test $passed -gt 0
-     then
+     AC_MSG_CHECKING([if FlashPIX package is complete])
+     if test $passed -gt 0; then
+         if test $failed -gt 0; then
 @@ -1399,6 +1399,7 @@
          AC_MSG_RESULT(no)
      fi
@@ -27,15 +27,13 @@
  AM_CONDITIONAL(HasFPX, test "$have_fpx" = 'yes')
  AC_SUBST(FPX_LIBS)
  
-@@ -1949,10 +1950,6 @@
-     then
-       CPPFLAGS="$CPPFLAGS -I${xml2_prefix}/include/libxml2"
+@@ -1949,9 +1950,6 @@
+         if test -d "${xml2_prefix}/include/libxml2"; then
+             CPPFLAGS="$CPPFLAGS -I${xml2_prefix}/include/libxml2"
+         fi
+-        if test "${xml2_prefix}" != '/usr'; then
+-            LDFLAGS="$LDFLAGS -L${xml2_prefix}/lib"
+-        fi
      fi
--    if test "${xml2_prefix}" != '/usr'
--    then
--      LDFLAGS="$LDFLAGS -L${xml2_prefix}/lib"
--    fi
-    fi
-   failed=0;
-   passed=0;
-
+     failed=0;
+     passed=0;
