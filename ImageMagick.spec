@@ -7,10 +7,11 @@
 %bcond_without	jasper		# without JPEG2000 module (which uses jasper library)
 %bcond_without	wmf		# without WMF module (which uses libwmf library)
 %bcond_without	cxx		# without Magick++
+%bcond_without	exr		# without OpenEXR module
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.3.3
-%define		pver	0
+%define		ver 6.3.5
+%define		pver	9
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -23,12 +24,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	2175f877a8d3a88b72d3ce3074f8f8e5
+# Source0-md5:	d636d2113fbfe7453088bda31aa5ccbc
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-system-libltdl.patch
@@ -36,6 +37,7 @@ Patch2:		%{name}-link.patch
 Patch3:		%{name}-libpath.patch
 Patch4:		%{name}-ldflags.patch
 URL:		http://www.imagemagick.org/
+BuildRequires:	OpenEXR-devel
 BuildRequires:	autoconf >= 2.59-9
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bzip2-devel >= 1.0.1
@@ -52,6 +54,7 @@ BuildRequires:	lcms-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libltdl-devel
 BuildRequires:	libpng-devel >= 1.0.8
+BuildRequires:	librsvg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:1.5
@@ -402,6 +405,18 @@ Coder module for GraphViz DOT files.
 %description coder-dot -l pl.UTF-8
 Moduł kodera dla plików GraphViz DOT.
 
+%package coder-exr
+Summary:	Coder module for ILM EXR files
+Summary(pl.UTF-8):	Moduł kodera dla plików EXR ILM
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-exr
+Coder module for ILM EXR files.
+
+%description coder-exr -l pl.UTF-8
+Moduł kodera dla plików EXR ILM.
+
 %package coder-fpx
 Summary:	Coder module for FlashPIX (FPX) files
 Summary(pl.UTF-8):	Moduł kodera dla plików FlashPIX (FPX)
@@ -595,6 +610,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with%{!?with_jasper:out}-jp2 \
 	--with%{!?with_cxx:out}-magick_plus_plus \
 	--with%{!?with_wmf:out}-wmf \
+	--%{!?with_exr:dis}%{?with_exr:en}able-hdri \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-modules \
 	--with-perl=%{__perl} \
@@ -665,6 +681,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/dcm.la
 %attr(755,root,root) %{modulesdir}/coders/dib.so
 %{modulesdir}/coders/dib.la
+%attr(755,root,root) %{modulesdir}/coders/dng.so
+%{modulesdir}/coders/dng.la
 %attr(755,root,root) %{modulesdir}/coders/dpx.so
 %{modulesdir}/coders/dpx.la
 %attr(755,root,root) %{modulesdir}/coders/ept.so
@@ -687,6 +705,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/icon.la
 %attr(755,root,root) %{modulesdir}/coders/info.so
 %{modulesdir}/coders/info.la
+%attr(755,root,root) %{modulesdir}/coders/ipl.so
+%{modulesdir}/coders/ipl.la
 %attr(755,root,root) %{modulesdir}/coders/label.so
 %{modulesdir}/coders/label.la
 %attr(755,root,root) %{modulesdir}/coders/magick.so
@@ -856,6 +876,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/dot.so
 %{modulesdir}/coders/dot.la
 
+%if %{with exr}
+%files coder-exr
+%defattr(644,root,root,755)
+# R: OpenEXR
+%attr(755,root,root) %{modulesdir}/coders/exr.so
+%{modulesdir}/coders/exr.la
+%endif
+
 %if %{with fpx}
 %files coder-fpx
 %defattr(644,root,root,755)
@@ -920,7 +948,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files coder-svg
 %defattr(644,root,root,755)
-# R: libxml2
+# R: libxml2, librsvg
 %attr(755,root,root) %{modulesdir}/coders/svg.so
 %{modulesdir}/coders/svg.la
 
