@@ -1,12 +1,12 @@
 --- ./ltdl/Makefile.am.org	2005-09-28 17:06:38.000000000 +0000
 +++ ./ltdl/Makefile.am	2005-09-28 17:07:54.000000000 +0000
 @@ -28,12 +28,8 @@
- #endif
+ AUTOMAKE_OPTIONS = no-dependencies foreign
  
  if WITH_LTDL
--  LIBLTDL=ltdl/libltdl.la
+-  LIBLTDL = ltdl/libltdl.la
 -if INSTALL_LTDL
--  LTDL_INSTALLHEADERS =  $(LTDL_HDRS)
+-  LTDL_INSTALLHEADERS = $(LTDL_HDRS)
 -else
 +  LIBLTDL=-lltdl
    LTDL_NOINST_HDRS = $(LTDL_HDRS)
