@@ -1,0 +1,4 @@
+- updated to 6.1.0-8 [fixes CVE-2004-0981]
+- libpath and system-libltdl patches seems to be obsolete now
+- user guide is no longer included in package, doc subpackage removed
+- builds but not tested
