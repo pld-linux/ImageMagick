@@ -1,0 +1,3 @@
+- updated to 6.0.0-2, removed obsolete magickpp-version patch
+- strict internal deps, separated new dot coder (uses graphviz libs)
+[fixes CVE-2005-0759 CVE-2005-0760 CVE-2005-0762]
