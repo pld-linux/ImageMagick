@@ -1,0 +1,4 @@
+- update to version 6.2.0-4
+- this version resolves security problem (for details see
+  http://www.k-otik.com/english/advisories/2005/0227)
+[CVE-2005-0397]
