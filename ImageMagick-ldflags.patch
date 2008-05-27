@@ -1,11 +1,11 @@
---- ImageMagick-6.3.2/configure.ac~	2007-02-25 20:25:43.000000000 +0100
-+++ ImageMagick-6.3.2/configure.ac	2007-02-25 20:28:04.000000000 +0100
-@@ -2763,7 +2763,17 @@
- MAGICK_CXXFLAGS=$CXXFLAGS
+--- ImageMagick-6.4.1/configure.ac.orig	2008-05-27 09:44:58.000000000 +0200
++++ ImageMagick-6.4.1/configure.ac	2008-05-27 09:46:59.000000000 +0200
+@@ -3086,7 +3086,17 @@
+ MAGICK_CXXFLAGS="$CXXFLAGS"
  MAGICK_CPPFLAGS=`echo $MAGICK_CPPFLAGS | sed -e 's/  */ /g'`
  MAGICK_PCFLAGS=`echo $MAGICK_PCFLAGS | sed -e 's/  */ /g'`
 -MAGICK_LDFLAGS="-L$LIB_DIR $LDFLAGS"
-+MAGICK_LDFLAGS=-L$LIB_DIR
++MAGICK_LDFLAGS="-L$LIB_DIR"
 +for flag in $LDFLAGS
 +do
 +  case "$flag" in
@@ -16,6 +16,6 @@
 +      ;;
 +  esac
 +done
- MAGICK_LIBS="-lMagick $MAGICK_DEP_LIBS"
+ MAGICK_LIBS="-lMagickCore $MAGICK_DEP_LIBS $MAGICK_API_LIBLTDL"
  
  AC_SUBST(MAGICK_CFLAGS)
