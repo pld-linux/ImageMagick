@@ -10,8 +10,8 @@
 %bcond_without	exr		# without OpenEXR module
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.3.6
-%define		pver	4
+%define		ver 6.4.1
+%define		pver	3
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -24,18 +24,17 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	4
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	3a1cc470ee49b66ccc913414ba4336f5
+# Source0-md5:	3d1976afe522c572aa5e97cff3029649
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-ac.patch
-Patch1:		%{name}-system-libltdl.patch
-Patch2:		%{name}-link.patch
-Patch3:		%{name}-libpath.patch
-Patch4:		%{name}-ldflags.patch
+Patch1:		%{name}-link.patch
+Patch2:		%{name}-libpath.patch
+Patch3:		%{name}-ldflags.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	OpenEXR-devel
 BuildRequires:	autoconf >= 2.59-9
@@ -583,7 +582,6 @@ Moduł kodera dla plików WMF.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
@@ -830,8 +828,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/animate
 %attr(755,root,root) %{_bindir}/compare
 %attr(755,root,root) %{_bindir}/composite
-%attr(755,root,root) %{_bindir}/convert
 %attr(755,root,root) %{_bindir}/conjure
+%attr(755,root,root) %{_bindir}/convert
 %attr(755,root,root) %{_bindir}/display
 %attr(755,root,root) %{_bindir}/identify
 %attr(755,root,root) %{_bindir}/import
@@ -858,9 +856,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog LICENSE NEWS
-%attr(755,root,root) %{_libdir}/libMagick.so.*.*.*
-%attr(755,root,root) %{_libdir}/libWand.so.*.*.*
+%doc ChangeLog LICENSE
+%attr(755,root,root) %{_libdir}/libMagickCore.so.*.*.*
+%attr(755,root,root) %{_libdir}/libMagickWand.so.*.*.*
 
 %if %{with djvu}
 %files coder-djvu
@@ -976,21 +974,21 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_bindir}/Wand-config
-%attr(755,root,root) %{_libdir}/libMagick.so
-%attr(755,root,root) %{_libdir}/libWand.so
-%{_libdir}/libMagick.la
-%{_libdir}/libWand.la
-%{_includedir}/magick
-%{_includedir}/wand
+%attr(755,root,root) %{_libdir}/libMagickCore.so
+%attr(755,root,root) %{_libdir}/libMagickWand.so
+%{_libdir}/libMagickCore.la
+%{_libdir}/libMagickWand.la
+%{_includedir}/ImageMagick/magick
+%{_includedir}/ImageMagick/wand
 %{_pkgconfigdir}/ImageMagick.pc
 %{_pkgconfigdir}/Wand.pc
-%{_mandir}/man1/Magick-config.1*
-%{_mandir}/man1/Wand-config.1*
+%{_mandir}/man1/MagickCore-config.1*
+%{_mandir}/man1/MagickWand-config.1*
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libMagick.a
-%{_libdir}/libWand.a
+%{_libdir}/libMagickCore.a
+%{_libdir}/libMagickWand.a
 
 %files perl
 %defattr(644,root,root,755)
@@ -1012,8 +1010,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/Magick++-config
 %{_libdir}/libMagick++.la
 %attr(755,root,root) %{_libdir}/libMagick++.so
-%{_includedir}/Magick++
-%{_includedir}/Magick++.h
+%{_includedir}/ImageMagick/Magick++
+%{_includedir}/ImageMagick/Magick++.h
 %{_pkgconfigdir}/ImageMagick++.pc
 %{_mandir}/man1/Magick++-config.1*
 
