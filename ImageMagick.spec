@@ -973,6 +973,8 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Magick-config
+%attr(755,root,root) %{_bindir}/MagickCore-config
+%attr(755,root,root) %{_bindir}/MagickWand-config
 %attr(755,root,root) %{_bindir}/Wand-config
 %attr(755,root,root) %{_libdir}/libMagickCore.so
 %attr(755,root,root) %{_libdir}/libMagickWand.so
@@ -981,9 +983,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/ImageMagick/magick
 %{_includedir}/ImageMagick/wand
 %{_pkgconfigdir}/ImageMagick.pc
-%{_pkgconfigdir}/Wand.pc
+%{_pkgconfigdir}/MagickCore.pc
+%{_pkgconfigdir}/MagickWand.pc
+%{_mandir}/man1/Magick-config.1*
 %{_mandir}/man1/MagickCore-config.1*
 %{_mandir}/man1/MagickWand-config.1*
+%{_mandir}/man1/Wand-config.1*
 
 %files static
 %defattr(644,root,root,755)
@@ -1013,6 +1018,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/ImageMagick/Magick++
 %{_includedir}/ImageMagick/Magick++.h
 %{_pkgconfigdir}/ImageMagick++.pc
+%{_pkgconfigdir}/Magick++.pc
 %{_mandir}/man1/Magick++-config.1*
 
 %files c++-static
