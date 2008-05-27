@@ -37,7 +37,7 @@ Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	OpenEXR-devel
-BuildRequires:	autoconf >= 2.62-1
+BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bzip2-devel >= 1.0.1
 %{?with_djvu:BuildRequires:	djvulibre-devel}
