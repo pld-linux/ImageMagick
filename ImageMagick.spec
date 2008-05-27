@@ -380,6 +380,18 @@ Bibliotecas estáticas para desenvolvimento com libMagick++.
 Це окремий пакет зі статичними бібліотеками, які більше не входять до
 складу ImageMagick-c++-devel.
 
+%package coder-braille
+Summary:	Coder module for braille BRF files
+Summary(pl.UTF-8):	Moduł kodera dla plików braille BRF
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-braille
+Coder module for braille BRF files.
+
+%description coder-braille -l pl
+Moduł kodera dla plików braille BRF.
+
 %package coder-djvu
 Summary:	Coder module for DJVU files
 Summary(pl.UTF-8):	Moduł kodera dla plików DJVU
@@ -391,6 +403,18 @@ Coder module for DJVU files.
 
 %description coder-djvu -l pl
 Moduł kodera dla plików DJVU.
+
+%package coder-dds
+Summary:	Coder module for MS Direct Draw Surface files
+Summary(pl.UTF-8):	Moduł kodera dla plików MS Direct Draw Surface
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-dds
+Coder module for MS Direct Draw Surface files.
+
+%description coder-dds -l pl.UTF-8
+Moduł kodera dla plików MS Direct Draw Surface.
 
 %package coder-dot
 Summary:	Coder module for GraphViz DOT files
@@ -575,6 +599,18 @@ Coder module for WMF files.
 
 %description coder-wmf -l pl.UTF-8
 Moduł kodera dla plików WMF.
+
+%package coder-xps
+Summary:	Coder module for MS XML Paper Specification files
+Summary(pl.UTF-8):	Moduł kodera dla plików MS XML Paper Specification
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-xps
+Coder module for MS XML Paper Specification files.
+
+%description coder-xps -l pl.UTF-8
+Moduł kodera dla plików MS XML Paper Specification.
 
 %prep
 %setup -q -n %{name}-%{ver}
@@ -860,6 +896,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libMagickCore.so.*.*.*
 %attr(755,root,root) %{_libdir}/libMagickWand.so.*.*.*
 
+%files coder-braille
+%defattr(644,root,root,755)
+# R: expat, libjpeg, libtiff, libbz2, libxcb, zlib
+%attr(755,root,root) %{modulesdir}/coders/braille.so
+%{modulesdir}/coders/braille.la
+
 %if %{with djvu}
 %files coder-djvu
 %defattr(644,root,root,755)
@@ -873,6 +915,12 @@ rm -rf $RPM_BUILD_ROOT
 # R: graphviz, gd
 %attr(755,root,root) %{modulesdir}/coders/dot.so
 %{modulesdir}/coders/dot.la
+
+%files coder-dds
+%defattr(644,root,root,755)
+# R: expat, libjpeg, libtiff, libbz2, libxcb, zlib
+%attr(755,root,root) %{modulesdir}/coders/dds.so
+%{modulesdir}/coders/dds.la
 
 %if %{with exr}
 %files coder-exr
@@ -970,6 +1018,12 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/wmf.la
 %endif
 
+%files coder-xps
+%defattr(644,root,root,755)
+# R: expat, libjpeg, libtiff, libbz2, libxcb, zlib
+%attr(755,root,root) %{modulesdir}/coders/xps.so
+%{modulesdir}/coders/xps.la
+
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Magick-config
@@ -985,6 +1039,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/ImageMagick.pc
 %{_pkgconfigdir}/MagickCore.pc
 %{_pkgconfigdir}/MagickWand.pc
+%{_pkgconfigdir}/Wand.pc
 %{_mandir}/man1/Magick-config.1*
 %{_mandir}/man1/MagickCore-config.1*
 %{_mandir}/man1/MagickWand-config.1*
