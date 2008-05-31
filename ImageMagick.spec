@@ -864,7 +864,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE
 %attr(755,root,root) %{_libdir}/libMagickCore.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore.so.1
 %attr(755,root,root) %{_libdir}/libMagickWand.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand.so.1
 
 %if %{with djvu}
 %files coder-djvu
@@ -1017,6 +1019,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libMagick++.so.1
 
 %files c++-devel
 %defattr(644,root,root,755)
