@@ -10,8 +10,8 @@
 %bcond_without	exr		# without OpenEXR module
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.4.1
-%define		pver	3
+%define		ver 6.4.2
+%define		pver	0
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -24,12 +24,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	3
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	3d1976afe522c572aa5e97cff3029649
+# Source0-md5:	f36694c77c87bb3e05dad1278f38718a
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
