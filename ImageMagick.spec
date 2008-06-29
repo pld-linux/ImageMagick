@@ -24,7 +24,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -35,6 +35,7 @@ Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
+Patch4:		%{name}-comment.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	OpenEXR-devel
 BuildRequires:	autoconf >= 2.62
@@ -582,6 +583,7 @@ Moduł kodera dla plików WMF.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
 find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
