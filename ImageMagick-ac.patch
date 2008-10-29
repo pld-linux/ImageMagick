@@ -1,32 +1,5 @@
 --- ImageMagick-6.4.1/configure.ac.orig	2008-05-11 07:11:08.000000000 +0200
 +++ ImageMagick-6.4.1/configure.ac	2008-05-27 09:28:15.000000000 +0200
-@@ -1585,16 +1585,16 @@
- #
- have_fpx='no'
- FPX_LIBS=''
-+AC_LANG_PUSH(C++)
-+AC_REQUIRE_CPP
- if test "$with_fpx" != 'no'; then
-     AC_MSG_RESULT([-------------------------------------------------------------])
-     AC_MSG_RESULT([Checking for FlashPIX support])
-     AC_MSG_RESULT([-------------------------------------------------------------])
-     failed=0
-     passed=0
--    AC_LANG_PUSH(C++)
-     AC_CHECK_HEADER(fpxlib.h,passed=`expr $passed + 1`,failed=`expr $failed + 1`)
-     AC_CHECK_LIB(fpx,FPX_OpenImageByFilename,passed=`expr $passed + 1`,failed=`expr $failed + 1`,)
--    AC_LANG_POP
-     AC_MSG_CHECKING([if FlashPIX package is complete])
-     if test $passed -gt 0; then
-         if test $failed -gt 0; then
-@@ -1611,6 +1611,7 @@
-         AC_MSG_RESULT([no])
-     fi
- fi
-+AC_LANG_POP
- AM_CONDITIONAL(FPX_DELEGATE, test "$have_fpx" = 'yes')
- AC_SUBST(FPX_LIBS)
- 
 @@ -2191,9 +2192,6 @@
          if test -d "${xml2_prefix}/include/libxml2"; then
              CPPFLAGS="$CPPFLAGS -I${xml2_prefix}/include/libxml2"
