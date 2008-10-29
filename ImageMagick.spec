@@ -10,8 +10,8 @@
 %bcond_without	exr		# without OpenEXR module
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.4.2
-%define		pver	4
+%define		ver 6.4.5
+%define		pver	0
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -24,16 +24,16 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	0.1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	bbf95e54acebef136806d1bc5e6b7b7c
+# Source0-md5:	b4dd42fa190ba06627567df6cd33291e
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
-Patch2:		%{name}-libpath.patch
+#Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	OpenEXR-devel
@@ -580,7 +580,7 @@ Moduł kodera dla plików WMF.
 %setup -q -n %{name}-%{ver}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
+#%patch2 -p1
 %patch3 -p1
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
