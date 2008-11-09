@@ -707,6 +707,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/icon.la
 %attr(755,root,root) %{modulesdir}/coders/info.so
 %{modulesdir}/coders/info.la
+%attr(755,root,root) %{modulesdir}/coders/inline.so
+%{modulesdir}/coders/inline.la
 %attr(755,root,root) %{modulesdir}/coders/ipl.so
 %{modulesdir}/coders/ipl.la
 %attr(755,root,root) %{modulesdir}/coders/label.so
