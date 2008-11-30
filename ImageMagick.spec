@@ -10,8 +10,8 @@
 %bcond_without	exr		# without OpenEXR module
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.4.5
-%define		pver	4
+%define		ver 6.4.6
+%define		pver	6
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -29,7 +29,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	4a3e610a6e43c7fd34f68516c6253329
+# Source0-md5:	36c12b9b2c2f5a1e71e1f375828e6a21
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
@@ -577,7 +577,7 @@ Coder module for WMF files.
 Moduł kodera dla plików WMF.
 
 %prep
-%setup -q -n %{name}-%{ver}
+%setup -q -n %{name}-%{ver}-%{pver}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
