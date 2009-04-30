@@ -10,8 +10,8 @@
 %bcond_without	exr		# without OpenEXR module
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.4.9
-%define		pver	6
+%define		ver 6.5.1
+%define		pver	9
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -29,7 +29,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	d65a4cd3cf103d49085a55c90c871854
+# Source0-md5:	b2a0f76a83bfe38fd1cdfc3b8ed44c6e
 #Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
@@ -631,6 +631,10 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
 rm -f $RPM_BUILD_ROOT%{modulesdir}/{coders,filters}/*.a
+rm -f $RPM_BUILD_ROOT%{modulesdir}/coders/dps.{la,so}
+rm -f $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
+rm -f $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
+rm -f $RPM_BUILD_ROOT%{_datadir}/ImageMagick-%{ver}/{ChangeLog,LICENSE,NEWS.txt}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -701,6 +705,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/gray.la
 %attr(755,root,root) %{modulesdir}/coders/histogram.so
 %{modulesdir}/coders/histogram.la
+%attr(755,root,root) %{modulesdir}/coders/hrz.so
+%{modulesdir}/coders/hrz.la
 %attr(755,root,root) %{modulesdir}/coders/html.so
 %{modulesdir}/coders/html.la
 %attr(755,root,root) %{modulesdir}/coders/icon.so
