@@ -11,7 +11,7 @@
 #
 %include	/usr/lib/rpm/macros.perl
 %define		ver 6.5.3
-%define		pver	2
+%define		pver	3
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -29,8 +29,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	eabd6431db7d5c3ef6661b0e5062e238
-#Source0:	http://dl.sourceforge.net/imagemagick/%{name}-%{ver}.tar.bz2
+# Source0-md5:	c6ce6978570d54abae8fa8cc7d65932c
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -671,6 +670,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/braille.la
 %attr(755,root,root) %{modulesdir}/coders/caption.so
 %{modulesdir}/coders/caption.la
+%attr(755,root,root) %{modulesdir}/coders/cals.so
+%{modulesdir}/coders/cals.la
 %attr(755,root,root) %{modulesdir}/coders/cin.so
 %{modulesdir}/coders/cin.la
 %attr(755,root,root) %{modulesdir}/coders/cip.so
@@ -703,6 +704,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/gradient.la
 %attr(755,root,root) %{modulesdir}/coders/gray.so
 %{modulesdir}/coders/gray.la
+%attr(755,root,root) %{modulesdir}/coders/hald.so
+%{modulesdir}/coders/hald.la
 %attr(755,root,root) %{modulesdir}/coders/histogram.so
 %{modulesdir}/coders/histogram.la
 %attr(755,root,root) %{modulesdir}/coders/hrz.so
