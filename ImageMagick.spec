@@ -1,3 +1,5 @@
+# TODO
+# - remove magick/quantum-private.h when koffice 1.6 is fixed not to use it
 #
 # Conditional build:
 %bcond_without	djvu		# without DJVU module
