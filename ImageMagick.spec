@@ -24,7 +24,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -634,6 +634,9 @@ rm -f $RPM_BUILD_ROOT%{modulesdir}/coders/dps.{la,so}
 rm -f $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 rm -f $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 rm -f $RPM_BUILD_ROOT%{_datadir}/ImageMagick-%{ver}/{ChangeLog,LICENSE,NEWS.txt}
+
+# for koffice 1.6
+cp -a magick/quantum-private.h $RPM_BUILD_ROOT%{_includedir}/ImageMagick/magick
 
 %clean
 rm -rf $RPM_BUILD_ROOT
