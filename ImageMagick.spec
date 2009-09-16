@@ -878,7 +878,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%doc ChangeLog LICENSE
+%doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libMagickCore.so.2
 %attr(755,root,root) %{_libdir}/libMagickWand.so.*.*.*
