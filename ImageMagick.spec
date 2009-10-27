@@ -13,7 +13,7 @@
 #
 %include	/usr/lib/rpm/macros.perl
 %define		ver 6.5.7
-%define		pver	1
+%define		pver	2
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -31,7 +31,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	5c1c85c9c25fa10df07999dbeef9606e
+# Source0-md5:	ef5bf61b3778d718ae38b85bf911ece3
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -666,8 +666,6 @@ rm -rf $RPM_BUILD_ROOT
 # ========= coders without additional deps
 %attr(755,root,root) %{modulesdir}/coders/art.so
 %{modulesdir}/coders/art.la
-%attr(755,root,root) %{modulesdir}/coders/avi.so
-%{modulesdir}/coders/avi.la
 %attr(755,root,root) %{modulesdir}/coders/avs.so
 %{modulesdir}/coders/avs.la
 %attr(755,root,root) %{modulesdir}/coders/bmp.so
