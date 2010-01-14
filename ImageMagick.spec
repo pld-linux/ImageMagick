@@ -12,8 +12,8 @@
 %bcond_without	exr		# without OpenEXR module
 #
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.5.8
-%define		pver	10
+%define		ver 6.5.9
+%define		pver	0
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -31,7 +31,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	fc04d56c32bb2eebba7885d0db042f9a
+# Source0-md5:	58130d17863449ad1b7c6d04cee95943
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -881,9 +881,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore.so.2
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore.so.3
 %attr(755,root,root) %{_libdir}/libMagickWand.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand.so.2
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand.so.3
 
 %if %{with djvu}
 %files coder-djvu
@@ -1036,7 +1036,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++.so.2
+%attr(755,root,root) %ghost %{_libdir}/libMagick++.so.3
 
 %files c++-devel
 %defattr(644,root,root,755)
