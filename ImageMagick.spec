@@ -26,7 +26,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	3
+Release:	4
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -760,6 +760,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/pcl.la
 %attr(755,root,root) %{modulesdir}/coders/pcx.so
 %{modulesdir}/coders/pcx.la
+%attr(755,root,root) %{modulesdir}/coders/pes.so
+%{modulesdir}/coders/pes.la
 %attr(755,root,root) %{modulesdir}/coders/pdb.so
 %{modulesdir}/coders/pdb.la
 %attr(755,root,root) %{modulesdir}/coders/pict.so
