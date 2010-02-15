@@ -44,7 +44,6 @@ BuildRequires:	bzip2-devel >= 1.0.1
 %{?with_djvu:BuildRequires:	djvulibre-devel}
 BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	freetype-devel >= 2.0.2-2
-BuildRequires:	gd-devel >= 2.0.15
 %{?with_gs:BuildRequires:	ghostscript-devel}
 %{?with_graphviz:BuildRequires:	graphviz-devel >= 2.6}
 %{?with_jasper:BuildRequires:	jasper-devel >= 1.700.5}
