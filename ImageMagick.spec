@@ -10,7 +10,7 @@
 %bcond_without	wmf		# without WMF module (which uses libwmf library)
 %bcond_without	cxx		# without Magick++
 %bcond_without	exr		# without OpenEXR module
-#
+
 %include	/usr/lib/rpm/macros.perl
 %define		ver 6.6.1
 %define		pver	1
@@ -26,7 +26,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	3
+Release:	4
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -241,7 +241,7 @@ Bibliotecas estáticas para desenvolvimento com libMagick.
 Це окремий пакет зі статичними бібліотеками, які більше не входять до
 складу ImageMagick-devel.
 
-%package perl
+%package -n perl-%{name}
 Summary:	Libraries and modules for access to ImageMagick from Perl
 Summary(pl.UTF-8):	Biblioteki i moduły Perla dla ImageMagick
 Summary(pt_BR.UTF-8):	Módulo perl para uso com o ImageMagick
@@ -251,25 +251,27 @@ Group:		Development/Languages/Perl
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	perl-dirs
+Provides:	ImageMagick-perl = %{epoch}:%{version}-%{release}
+Obsoletes:	ImageMagick-perl
 
-%description perl
+%description -n perl-%{name}
 This is the ImageMagick Perl support package. It perl modules and
 support files for access to ImageMagick library from perl without
 unuseful forking or such.
 
-%description perl -l pl.UTF-8
+%description -n perl-%{name} -l pl.UTF-8
 Biblioteki i moduły umożliwiające korzystanie z ImageMagick z poziomu
 Perla.
 
-%description perl -l pt_BR.UTF-8
+%description -n perl-%{name} -l pt_BR.UTF-8
 Este pacote fornece um módulo perl para acessar funções do ImageMagick
 em scripts Perl.
 
-%description perl -l ru.UTF-8
+%description -n perl-%{name} -l ru.UTF-8
 Это пакет ImageMagick для поддержки perl. Он включает модули perl и
 вспомогательные файлы для доступа к библиотеке ImageMagick из Perl.
 
-%description perl -l uk.UTF-8
+%description -n perl-%{name} -l uk.UTF-8
 Це пакет ImageMagick для підтримки Perl. Він містить модулі Perl та
 додаткові файли для доступу до бібліотеки ImageMagick з Perl.
 
@@ -585,7 +587,7 @@ Moduł kodera dla plików WMF.
 %patch3 -p1
 
 %{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
-find -type f -exec perl -pi -e 's=!/usr/local/bin/perl=!/usr/bin/perl='  {} \;
+find -type f | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
 # avoid rebuilding (broken paths in scripts/Makefile.am)
 touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
@@ -874,7 +876,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files doc
 %defattr(644,root,root,755)
-%doc %{_defaultdocdir}/%{name}-doc-%{version}
+%doc %{_docdir}/%{name}-doc-%{version}
 
 %files libs
 %defattr(644,root,root,755)
@@ -1021,7 +1023,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libMagickCore.a
 %{_libdir}/libMagickWand.a
 
-%files perl
+%files -n perl-%{name}
 %defattr(644,root,root,755)
 %{perl_vendorarch}/Image/*
 %dir %{perl_vendorarch}/auto/Image/Magick
