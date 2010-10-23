@@ -4,7 +4,8 @@
 # Conditional build:
 %bcond_without	djvu		# without DJVU module
 %bcond_without	fpx		# without FlashPIX module (which uses fpx library)
-%bcond_without	graphviz	# without Graphviz support
+%bcond_without	gomp		# without OpenMP support
+%bcond_without	graphviz	# without dot module (which uses GraphViz libraries)
 %bcond_with	gs		# with PostScript support through ghostscript library (warning: breaks jpeg!)
 %bcond_without	jasper		# without JPEG2000 module (which uses jasper library)
 %bcond_without	wmf		# without WMF module (which uses libwmf library)
@@ -12,8 +13,8 @@
 %bcond_without	exr		# without OpenEXR module
 
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.6.2
-%define		pver	9
+%define		ver 6.6.5
+%define		pver	2
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -30,30 +31,36 @@ Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
-Source0:	http://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.bz2
-# Source0-md5:	5353f5ae075d14888455f0802225bf29
+Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
+# Source0-md5:	aae2a0757b9e486f1db0c813fdd6fb3a
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
+Patch4:		%{name}-lt.patch
 URL:		http://www.imagemagick.org/
-BuildRequires:	OpenEXR-devel
+BuildRequires:	OpenEXR-devel >= 1.0.6
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bzip2-devel >= 1.0.1
 %{?with_djvu:BuildRequires:	djvulibre-devel}
 BuildRequires:	expat-devel >= 1.95.7
+BuildRequires:	fftw3-devel >= 3.0
+BuildRequires:	fontconfig-devel >= 2.1.0
 BuildRequires:	freetype-devel >= 2.0.2-2
 %{?with_gs:BuildRequires:	ghostscript-devel}
-%{?with_graphviz:BuildRequires:	graphviz-devel >= 2.6}
+%{?with_graphviz:BuildRequires:	graphviz-devel >= 2.9.0}
 %{?with_jasper:BuildRequires:	jasper-devel >= 1.700.5}
 BuildRequires:	jbigkit-devel
-BuildRequires:	lcms-devel
+%{?with_gomp:BuildRequires:	gcc-c++ >= 6:4.2}
+BuildRequires:	lcms2-devel >= 2.0
 %{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
-BuildRequires:	libjpeg-devel
+%{?with_gomp:BuildRequires:	libgomp-devel}
+BuildRequires:	libjpeg-devel >= 6b
+BuildRequires:	liblqr-devel >= 0.1.0
 BuildRequires:	libltdl-devel
 BuildRequires:	libpng-devel >= 1.0.8
-BuildRequires:	librsvg-devel
+BuildRequires:	librsvg-devel >= 2.9.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:1.5
@@ -63,9 +70,12 @@ BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	rpmbuild(macros) >= 1.315
+BuildRequires:	tar >= 1:1.22
 # only checked for, but only supplied scripts/txt2html is used
 #BuildRequires:	txt2html
 BuildRequires:	xorg-lib-libXext
+BuildRequires:	xz
+BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	ImageMagick-coder-dps
 Obsoletes:	ImageMagick-coder-mpeg
@@ -142,6 +152,8 @@ Summary:	ImageMagick libraries
 Summary(pl.UTF-8):	Biblioteki ImageMagick
 Summary(pt_BR.UTF-8):	Bibliotecas dinâmicas do ImageMagick
 Group:		X11/Libraries
+Requires:	fontconfig-libs >= 2.1.0
+Requires:	liblqr >= 0.1.0
 
 %description libs
 ImageMagick libraries.
@@ -161,10 +173,14 @@ Summary(ru.UTF-8):	Хедеры и библиотеки для программ�
 Summary(uk.UTF-8):	Хедери та бібліотеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	bzip2-devel
-Requires:	freetype-devel
-Requires:	lcms-devel
-Requires:	libjpeg-devel
+Requires:	bzip2-devel >= 1.0.1
+Requires:	fftw3-devel >= 3.0
+Requires:	fontconfig-devel >= 2.1.0
+Requires:	freetype-devel >= 2.0.2
+Requires:	lcms2-devel >= 2.0
+%{?with_gomp:Requires:	libgomp-devel}
+Requires:	libjpeg-devel >= 6b
+Requires:	liblqr-devel >= 0.1.0
 Requires:	libltdl-devel
 Requires:	libtiff-devel
 Requires:	xorg-lib-libXext-devel
@@ -400,6 +416,7 @@ Summary:	Coder module for GraphViz DOT files
 Summary(pl.UTF-8):	Moduł kodera dla plików GraphViz DOT
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	graphviz >= 2.9.0
 
 %description coder-dot
 Coder module for GraphViz DOT files.
@@ -412,6 +429,7 @@ Summary:	Coder module for ILM EXR files
 Summary(pl.UTF-8):	Moduł kodera dla plików EXR ILM
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	OpenEXR >= 1.0.6
 
 %description coder-exr
 Coder module for ILM EXR files.
@@ -536,6 +554,7 @@ Summary:	Coder module for SVG (Scalable Vector Graphics) files
 Summary(pl.UTF-8):	Moduł kodera dla plików SVG (Scalable Vector Graphics)
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	librsvg >= 2.9.0
 
 %description coder-svg
 Coder module for SVG (Scalable Vector Graphics) files.
@@ -585,9 +604,9 @@ Moduł kodera dla plików WMF.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
-%{__perl} -pi -e 's,lib/graphviz,%{_lib}/graphviz,' configure.ac
-find -type f | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
+find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
 # avoid rebuilding (broken paths in scripts/Makefile.am)
 touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
@@ -599,14 +618,16 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 %{__autoheader}
 %{__automake}
 %configure \
-	--enable-fast-install \
-	--enable-lzw \
-	--enable-shared \
 	--disable-ltdl-install \
+	%{!?with_gomp:--disable-openmp} \
+	--disable-silent-rules \
+	--enable-fast-install \
+	--enable-shared \
+	--enable-static \
 	--without-dps \
-	--with%{!?with_graphviz:out}-djvu \
-	--with%{!?with_graphviz:out}-dot \
+	--with%{!?with_djvu:out}-djvu \
 	--with%{!?with_fpx:out}-fpx \
+	--with%{!?with_graphviz:out}-gvc \
 	--with%{!?with_gs:out}-gslib \
 	--with%{!?with_jasper:out}-jp2 \
 	--with%{!?with_cxx:out}-magick_plus_plus \
@@ -618,7 +639,6 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-perl-options="INSTALLDIRS=vendor" \
 	--with-quantum-depth=%{QuantumDepth} \
 	--with-threads \
-	--with-ttf \
 	--with-x
 
 %{__make}
@@ -626,18 +646,16 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pkgdocdir=%{_docdir}/%{name}-doc-%{version}
 
-install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl
-rm -f $RPM_BUILD_ROOT%{modulesdir}/{coders,filters}/*.a
-rm -f $RPM_BUILD_ROOT%{modulesdir}/coders/dps.{la,so}
+install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/ImageMagick-%{ver}/{ChangeLog,LICENSE,NEWS.txt}
 rm -f $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 rm -f $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
-rm -f $RPM_BUILD_ROOT%{_datadir}/ImageMagick-%{ver}/{ChangeLog,LICENSE,NEWS.txt}
 
 # for koffice 1.6
 cp -a magick/quantum-private.h $RPM_BUILD_ROOT%{_includedir}/ImageMagick/magick
@@ -669,6 +687,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/art.la
 %attr(755,root,root) %{modulesdir}/coders/avs.so
 %{modulesdir}/coders/avs.la
+%attr(755,root,root) %{modulesdir}/coders/bgr.so
+%{modulesdir}/coders/bgr.la
 %attr(755,root,root) %{modulesdir}/coders/bmp.so
 %{modulesdir}/coders/bmp.la
 %attr(755,root,root) %{modulesdir}/coders/braille.so
@@ -691,6 +711,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/dcm.la
 %attr(755,root,root) %{modulesdir}/coders/dds.so
 %{modulesdir}/coders/dds.la
+%attr(755,root,root) %{modulesdir}/coders/debug.so
+%{modulesdir}/coders/debug.la
 %attr(755,root,root) %{modulesdir}/coders/dib.so
 %{modulesdir}/coders/dib.la
 %attr(755,root,root) %{modulesdir}/coders/dng.so
@@ -882,9 +904,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore.so.3
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore.so.4
 %attr(755,root,root) %{_libdir}/libMagickWand.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand.so.3
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand.so.4
 
 %if %{with djvu}
 %files coder-djvu
@@ -1025,19 +1047,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n perl-%{name}
 %defattr(644,root,root,755)
-%{perl_vendorarch}/Image/*
+%{perl_vendorarch}/Image/Magick.pm
 %dir %{perl_vendorarch}/auto/Image/Magick
 %{perl_vendorarch}/auto/Image/Magick/autosplit.ix
 %{perl_vendorarch}/auto/Image/Magick/Magick.bs
 %attr(755,root,root) %{perl_vendorarch}/auto/Image/Magick/Magick.so
-%{_mandir}/man3/Image::Magick.*
-%{_examplesdir}/%{name}-perl
+%{_mandir}/man3/Image::Magick.3pm*
+%{_examplesdir}/%{name}-perl-%{version}
 
 %if %{with cxx}
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++.so.3
+%attr(755,root,root) %ghost %{_libdir}/libMagick++.so.4
 
 %files c++-devel
 %defattr(644,root,root,755)

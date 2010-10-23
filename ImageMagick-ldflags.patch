@@ -5,7 +5,7 @@
  MAGICK_CPPFLAGS=`echo $MAGICK_CPPFLAGS | sed -e 's/  */ /g'`
  MAGICK_PCFLAGS=`echo $MAGICK_PCFLAGS | sed -e 's/  */ /g'`
 -MAGICK_LDFLAGS="-L$LIB_DIR $LDFLAGS"
-+MAGICK_LDFLAGS="-L$LIB_DIR"
++MAGICK_LDFLAGS=""
 +for flag in $LDFLAGS
 +do
 +  case "$flag" in
