@@ -13,8 +13,8 @@
 %bcond_without	exr		# without OpenEXR module
 
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.6.5
-%define		pver	2
+%define		ver 6.6.6
+%define		pver	7
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -27,12 +27,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	aae2a0757b9e486f1db0c813fdd6fb3a
+# Source0-md5:	894a9a5b0656430fc0c21b50b4349669
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -48,11 +48,11 @@ BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	fftw3-devel >= 3.0
 BuildRequires:	fontconfig-devel >= 2.1.0
 BuildRequires:	freetype-devel >= 2.0.2-2
+%{?with_gomp:BuildRequires:	gcc-c++ >= 6:4.2}
 %{?with_gs:BuildRequires:	ghostscript-devel}
 %{?with_graphviz:BuildRequires:	graphviz-devel >= 2.9.0}
 %{?with_jasper:BuildRequires:	jasper-devel >= 1.700.5}
 BuildRequires:	jbigkit-devel
-%{?with_gomp:BuildRequires:	gcc-c++ >= 6:4.2}
 BuildRequires:	lcms2-devel >= 2.0
 %{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 %{?with_gomp:BuildRequires:	libgomp-devel}
@@ -654,8 +654,8 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/ImageMagick-%{ver}/{ChangeLog,LICENSE,NEWS.txt}
-rm -f $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
-rm -f $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
+%{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
+%{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 
 # for koffice 1.6
 cp -a magick/quantum-private.h $RPM_BUILD_ROOT%{_includedir}/ImageMagick/magick
