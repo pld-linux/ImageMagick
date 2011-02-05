@@ -408,7 +408,7 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 %description coder-djvu
 Coder module for DJVU files.
 
-%description coder-djvu -l pl
+%description coder-djvu -l pl.UTF-8
 Moduł kodera dla plików DJVU.
 
 %package coder-dot
