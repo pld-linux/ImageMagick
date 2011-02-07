@@ -13,8 +13,8 @@
 %bcond_without	exr		# without OpenEXR module
 
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.6.6
-%define		pver	7
+%define		ver 6.6.7
+%define		pver	5
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -32,7 +32,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	894a9a5b0656430fc0c21b50b4349669
+# Source0-md5:	b30b8032b2f8dd5dc003b56fbfbb92c4
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -683,6 +683,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/ImageMagick-%{ver}/config/sRGB.icm
 
 # ========= coders without additional deps
+%attr(755,root,root) %{modulesdir}/coders/aai.so
+%{modulesdir}/coders/aai.la
 %attr(755,root,root) %{modulesdir}/coders/art.so
 %{modulesdir}/coders/art.la
 %attr(755,root,root) %{modulesdir}/coders/avs.so
@@ -749,6 +751,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/ipl.la
 %attr(755,root,root) %{modulesdir}/coders/label.so
 %{modulesdir}/coders/label.la
+%attr(755,root,root) %{modulesdir}/coders/mac.so
+%{modulesdir}/coders/mac.la
 %attr(755,root,root) %{modulesdir}/coders/magick.so
 %{modulesdir}/coders/magick.la
 %attr(755,root,root) %{modulesdir}/coders/map.so
