@@ -641,14 +641,14 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-threads \
 	--with-x
 
-%{__make}
+%{__make} -j 1
 %{__perl} -pi -e 's,/%{name}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 
-%{__make} install \
+%{__make} -j 1 install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pkgdocdir=%{_docdir}/%{name}-doc-%{version}
 
