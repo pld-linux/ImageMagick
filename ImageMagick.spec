@@ -13,8 +13,8 @@
 %bcond_without	exr		# without OpenEXR module
 
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.6.7
-%define		pver	5
+%define		ver 6.6.9
+%define		pver	4
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -32,7 +32,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	b30b8032b2f8dd5dc003b56fbfbb92c4
+# Source0-md5:	e9355aa38daa1d2c42d7e37108bc0dfa
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -653,9 +653,10 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 	pkgdocdir=%{_docdir}/%{name}-doc-%{version}
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/ImageMagick-%{ver}/{ChangeLog,LICENSE,NEWS.txt}
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/doc/ImageMagick-%{ver}/{ChangeLog,LICENSE,NEWS.txt}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 # for koffice 1.6
 cp -a magick/quantum-private.h $RPM_BUILD_ROOT%{_includedir}/ImageMagick/magick
@@ -672,15 +673,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %dir %{_libdir}/ImageMagick-%{ver}
-%dir %{_libdir}/ImageMagick-%{ver}/config
-%{_libdir}/ImageMagick-%{ver}/config/*.xml
 %dir %{modulesdir}
 %dir %{modulesdir}/coders
 %dir %{modulesdir}/filters
 %dir %{_datadir}/ImageMagick-%{ver}
-%dir %{_datadir}/ImageMagick-%{ver}/config
-%{_datadir}/ImageMagick-%{ver}/config/*.xml
-%{_datadir}/ImageMagick-%{ver}/config/sRGB.icm
+%{_datadir}/ImageMagick-%{ver}/*.xml
+%dir %{_sysconfdir}/ImageMagick
+%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) %{_sysconfdir}/ImageMagick/*.xml
+%{_sysconfdir}/ImageMagick/sRGB.icm
 
 # ========= coders without additional deps
 %attr(755,root,root) %{modulesdir}/coders/aai.so
@@ -735,6 +735,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/gray.la
 %attr(755,root,root) %{modulesdir}/coders/hald.so
 %{modulesdir}/coders/hald.la
+%attr(755,root,root) %{modulesdir}/coders/hdr.so
+%{modulesdir}/coders/hdr.la
 %attr(755,root,root) %{modulesdir}/coders/histogram.so
 %{modulesdir}/coders/histogram.la
 %attr(755,root,root) %{modulesdir}/coders/hrz.so
@@ -1031,8 +1033,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libMagickCore.so
 %attr(755,root,root) %{_libdir}/libMagickWand.so
 %dir %{_includedir}/ImageMagick
-%{_libdir}/libMagickCore.la
-%{_libdir}/libMagickWand.la
 %{_includedir}/ImageMagick/magick
 %{_includedir}/ImageMagick/wand
 %{_pkgconfigdir}/ImageMagick.pc
@@ -1068,7 +1068,6 @@ rm -rf $RPM_BUILD_ROOT
 %files c++-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Magick++-config
-%{_libdir}/libMagick++.la
 %attr(755,root,root) %{_libdir}/libMagick++.so
 %{_includedir}/ImageMagick/Magick++
 %{_includedir}/ImageMagick/Magick++.h
