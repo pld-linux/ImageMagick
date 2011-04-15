@@ -1,0 +1,4 @@
+- updated to 6.6.9-4
+- some configs have been moved to /etc/ImageMagick
+- new coder: hdr
+- drop libtool files
