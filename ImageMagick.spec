@@ -40,8 +40,8 @@ Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	OpenEXR-devel >= 1.0.6
-BuildRequires:	autoconf >= 2.62
-BuildRequires:	automake >= 1:1.9
+BuildRequires:	autoconf >= 2.64
+BuildRequires:	automake >= 1:1.11
 BuildRequires:	bzip2-devel >= 1.0.1
 %{?with_djvu:BuildRequires:	djvulibre-devel}
 BuildRequires:	expat-devel >= 1.95.7
@@ -64,6 +64,7 @@ BuildRequires:	librsvg-devel >= 2.9.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:1.5
+BuildRequires:	libwebp-devel
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	perl-devel >= 1:5.8.0
@@ -75,6 +76,7 @@ BuildRequires:	tar >= 1:1.22
 #BuildRequires:	txt2html
 BuildRequires:	xorg-lib-libXext
 BuildRequires:	xz
+BuildRequires:	xz-devel
 BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	ImageMagick-coder-dps
@@ -586,6 +588,18 @@ Coder module for retrieving files via URL.
 %description coder-url -l pl.UTF-8
 Moduł kodera ściągający pliki o podanym URL.
 
+%package coder-webp
+Summary:	Coder module for WebP files
+Summary(pl.UTF-8):	Moduł kodera dla plików WebP
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-webp
+Coder module for WebP files.
+
+%description coder-webp -l pl.UTF-8
+Moduł kodera dla plików WebP.
+
 %package coder-wmf
 Summary:	Coder module for WMF files
 Summary(pl.UTF-8):	Moduł kodera dla plików WMF
@@ -1015,6 +1029,12 @@ rm -rf $RPM_BUILD_ROOT
 # R: libxml2
 %attr(755,root,root) %{modulesdir}/coders/url.so
 %{modulesdir}/coders/url.la
+
+%files coder-webp
+%defattr(644,root,root,755)
+# R: libwebp
+%attr(755,root,root) %{modulesdir}/coders/webp.so
+%{modulesdir}/coders/webp.la
 
 %if %{with wmf}
 %files coder-wmf
