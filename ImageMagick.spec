@@ -27,7 +27,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -693,7 +693,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/ImageMagick-%{ver}
 %{_datadir}/ImageMagick-%{ver}/*.xml
 %dir %{_sysconfdir}/ImageMagick
-%config(noreplace) %verify(not md5 mtime size) %attr(640,root,root) %{_sysconfdir}/ImageMagick/*.xml
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ImageMagick/*.xml
 %{_sysconfdir}/ImageMagick/sRGB.icm
 
 # ========= coders without additional deps
