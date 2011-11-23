@@ -13,8 +13,8 @@
 %bcond_without	exr		# without OpenEXR module
 
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.7.2
-%define		pver	3
+%define		ver 6.7.3
+%define		pver	7
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -32,7 +32,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	a289ca1500e74b9f79b523cc36a5c0ee
+# Source0-md5:	6a2c37a8fbd271d40139cf14d7bcf872
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -667,7 +667,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 	pkgdocdir=%{_docdir}/%{name}-doc-%{version}
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/doc/ImageMagick-%{ver}/{ChangeLog,LICENSE,NEWS.txt}
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/doc/ImageMagick/{ChangeLog,LICENSE,NEWS.txt}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
@@ -694,7 +694,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/ImageMagick-%{ver}/*.xml
 %dir %{_sysconfdir}/ImageMagick
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ImageMagick/*.xml
-%{_sysconfdir}/ImageMagick/sRGB.icm
+%{_sysconfdir}/ImageMagick/sRGB.icc
 
 # ========= coders without additional deps
 %attr(755,root,root) %{modulesdir}/coders/aai.so
@@ -924,9 +924,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore.so.4
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore.so.5
 %attr(755,root,root) %{_libdir}/libMagickWand.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand.so.4
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand.so.5
 
 %if %{with djvu}
 %files coder-djvu
@@ -1083,7 +1083,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++.so.4
+%attr(755,root,root) %ghost %{_libdir}/libMagick++.so.5
 
 %files c++-devel
 %defattr(644,root,root,755)
