@@ -686,7 +686,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%dir %{_libdir}/ImageMagick-%{ver}
 %dir %{modulesdir}
 %dir %{modulesdir}/coders
 %dir %{modulesdir}/filters
@@ -927,6 +926,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libMagickCore.so.5
 %attr(755,root,root) %{_libdir}/libMagickWand.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libMagickWand.so.5
+%dir %{_libdir}/ImageMagick-%{ver}
+%dir %{_libdir}/ImageMagick-%{ver}/config
+%{_libdir}/ImageMagick-%{ver}/config/configure.xml
 
 %if %{with djvu}
 %files coder-djvu
