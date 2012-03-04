@@ -40,7 +40,7 @@ Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	OpenEXR-devel >= 1.0.6
-BuildRequires:	autoconf >= 2.64
+BuildRequires:	autoconf >= 2.67
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	bzip2-devel >= 1.0.1
 %{?with_djvu:BuildRequires:	djvulibre-devel}
