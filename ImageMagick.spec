@@ -63,7 +63,7 @@ BuildRequires:	libpng-devel >= 1.0.8
 BuildRequires:	librsvg-devel >= 2.9.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
-BuildRequires:	libtool >= 2:1.5
+BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libwebp-devel
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
