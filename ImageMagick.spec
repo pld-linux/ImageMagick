@@ -1,6 +1,12 @@
 # TODO
 # - remove magick/quantum-private.h when koffice 1.6 is fixed not to use it
-# - bundles sRGB.icc (Microsoft ICM Color Profile), suggest shared-color-profiles instead?
+# - unpackaged:
+#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/fd.la
+#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/fd.so
+#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/jnx.la
+#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/jnx.so
+#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/pango.la
+#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/pango.so
 #
 # Conditional build:
 %bcond_without	djvu		# without DJVU module
@@ -14,8 +20,8 @@
 %bcond_without	exr		# without OpenEXR module
 
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.7.5
-%define		pver	9
+%define		ver 6.7.9
+%define		pver	10
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -28,18 +34,18 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	4
+Release:	0.1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
-Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	d1bf4638d244569f4b2c9c458fb568a8
+Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/legacy/%{name}-%{ver}-%{pver}.tar.xz
+# Source0-md5:	e6c4da963f7651674dca48f2b9f575bb
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
-Patch5:		 agread-param.patch
+Patch5:		agread-param.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	OpenEXR-devel >= 1.0.6
 BuildRequires:	autoconf >= 2.67
@@ -81,6 +87,7 @@ BuildRequires:	xz
 BuildRequires:	xz-devel
 BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Suggests:	shared-color-profiles
 Obsoletes:	ImageMagick-coder-dps
 Obsoletes:	ImageMagick-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -667,19 +674,18 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-threads \
 	--with-x
 
-%{__make} -j 1
-%{__perl} -pi -e 's,/%{name}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
+%{__make} -j1
+%{__sed} -i -e 's,/%{name}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 
-%{__make} -j 1 install \
+%{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pkgdocdir=%{_docdir}/%{name}-doc-%{version}
 
-install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/ImageMagick/{ChangeLog,LICENSE,NEWS.txt}
+cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
@@ -705,7 +711,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/ImageMagick-%{ver}/*.xml
 %dir %{_sysconfdir}/ImageMagick
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ImageMagick/*.xml
-%{_sysconfdir}/ImageMagick/sRGB.icc
 
 # ========= coders without additional deps
 %attr(755,root,root) %{modulesdir}/coders/aai.so
