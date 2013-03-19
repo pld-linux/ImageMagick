@@ -672,7 +672,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with%{!?with_jasper:out}-jp2 \
 	--with%{!?with_cxx:out}-magick_plus_plus \
 	--with%{!?with_wmf:out}-wmf \
-	--%{!?with_exr:dis}%{?with_exr:en}able-hdri \
+	--with%{!?with_exr:out}-openexr \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-modules \
 	--with-perl=%{__perl} \
