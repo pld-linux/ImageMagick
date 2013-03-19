@@ -3,6 +3,17 @@
 # - pango (subpackage) DT_NEEDED: libpangocairo-1.0.so.0 libcairo.so.2 libpango-1.0.so.0 libgobject-2.0.so.0
 #        %{modulesdir}/coders/pango.la
 #        %{modulesdir}/coders/pango.so
+# - possible to separate this dep?
+#   ImageMagick-libs-6.7.5.9-4.i686: required "libOpenCL.so.1" is provided by the following packages:
+#   a) Mesa-libOpenCL-9.0.2-1.i686
+#   b) xorg-driver-video-fglrx-legacy-12.x-libs-12.6-34.i686
+#   c) xorg-driver-video-fglrx-libs-12.10-26.i686
+#   d) xorg-driver-video-nvidia-libs-310.32-19.i686
+#   Which one do you want to install ('Q' to abort)? [Mesa-libOpenCL-9.0.2-1.i686]
+#    ImageMagick-libs-6.7.5.9-4.i686 marks Mesa-libOpenCL-9.0.2-1.i686 (cap libOpenCL.so.1)
+#     Mesa-libOpenCL-9.0.2-1.i686 marks llvm-libclc-0.0.1-0.20130101.1.i686 (cap llvm-libclc)
+#   $ grep -r libOpenCL ../BUILD.x86_64-linux/ImageMagick-6.7.9-10/
+#   Binary file ../BUILD.x86_64-linux/ImageMagick-6.7.9-10/magick/.libs/libMagickCore.so.5.0.0 matches
 #
 # Conditional build:
 %bcond_without	djvu		# without DJVU module
