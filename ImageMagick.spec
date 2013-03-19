@@ -39,6 +39,7 @@ Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
+Patch5:		 agread-param.patch
 URL:		http://www.imagemagick.org/
 BuildRequires:	OpenEXR-devel >= 1.0.6
 BuildRequires:	autoconf >= 2.67
@@ -629,6 +630,7 @@ Moduł kodera dla plików WMF.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
