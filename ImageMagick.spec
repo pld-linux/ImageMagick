@@ -1,5 +1,4 @@
 # TODO
-# - remove magick/quantum-private.h when koffice 1.6 is fixed not to use it
 # - unpackaged:
 # - pango (subpackage) DT_NEEDED: libpangocairo-1.0.so.0 libcairo.so.2 libpango-1.0.so.0 libgobject-2.0.so.0
 #        %{modulesdir}/coders/pango.la
@@ -687,9 +686,6 @@ cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
-
-# for koffice 1.6
-cp -a magick/quantum-private.h $RPM_BUILD_ROOT%{_includedir}/ImageMagick/magick
 
 %clean
 rm -rf $RPM_BUILD_ROOT
