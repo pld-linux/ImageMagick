@@ -1,5 +1,6 @@
 # TODO
 # - remove magick/quantum-private.h when koffice 1.6 is fixed not to use it
+# - bundles sRGB.icc (Microsoft ICM Color Profile), suggest shared-color-profiles instead?
 #
 # Conditional build:
 %bcond_without	djvu		# without DJVU module
@@ -27,7 +28,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	3
+Release:	4
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -401,6 +402,15 @@ Bibliotecas estáticas para desenvolvimento com libMagick++.
 Це окремий пакет зі статичними бібліотеками, які більше не входять до
 складу ImageMagick-c++-devel.
 
+%package coder-caption
+Summary:	Coder module for CAPTION image files
+Group:		X11/Applications/Graphics
+URL:		http://www.imagemagick.org/Usage/text/#caption
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-caption
+Coder module to Read Text Caption.
+
 %package coder-djvu
 Summary:	Coder module for DJVU files
 Summary(pl.UTF-8):	Moduł kodera dla plików DJVU
@@ -667,7 +677,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 	pkgdocdir=%{_docdir}/%{name}-doc-%{version}
 
 install PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/doc/ImageMagick/{ChangeLog,LICENSE,NEWS.txt}
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/ImageMagick/{ChangeLog,LICENSE,NEWS.txt}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
@@ -708,8 +718,6 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/bmp.la
 %attr(755,root,root) %{modulesdir}/coders/braille.so
 %{modulesdir}/coders/braille.la
-%attr(755,root,root) %{modulesdir}/coders/caption.so
-%{modulesdir}/coders/caption.la
 %attr(755,root,root) %{modulesdir}/coders/cals.so
 %{modulesdir}/coders/cals.la
 %attr(755,root,root) %{modulesdir}/coders/cin.so
@@ -929,6 +937,13 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config
 %{_libdir}/ImageMagick-%{ver}/config/configure.xml
+
+%files coder-caption
+%defattr(644,root,root,755)
+# R: pango, fontconfig
+%defattr(644,root,root,755)
+%attr(755,root,root) %{modulesdir}/coders/caption.so
+%{modulesdir}/coders/caption.la
 
 %if %{with djvu}
 %files coder-djvu
