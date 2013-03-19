@@ -1,12 +1,9 @@
 # TODO
 # - remove magick/quantum-private.h when koffice 1.6 is fixed not to use it
 # - unpackaged:
-#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/fd.la
-#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/fd.so
-#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/jnx.la
-#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/jnx.so
-#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/pango.la
-#        /usr/lib64/ImageMagick-6.7.9/modules-Q16/coders/pango.so
+# - pango (subpackage) DT_NEEDED: libpangocairo-1.0.so.0 libcairo.so.2 libpango-1.0.so.0 libgobject-2.0.so.0
+#        %{modulesdir}/coders/pango.la
+#        %{modulesdir}/coders/pango.so
 #
 # Conditional build:
 %bcond_without	djvu		# without DJVU module
@@ -686,6 +683,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 	pkgdocdir=%{_docdir}/%{name}-doc-%{version}
 
 cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{ver}/{ChangeLog,LICENSE,NEWS.txt}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
@@ -753,6 +751,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/ept.la
 %attr(755,root,root) %{modulesdir}/coders/fax.so
 %{modulesdir}/coders/fax.la
+%attr(755,root,root) %{modulesdir}/coders/fd.so
+%{modulesdir}/coders/fd.la
 %attr(755,root,root) %{modulesdir}/coders/fits.so
 %{modulesdir}/coders/fits.la
 %attr(755,root,root) %{modulesdir}/coders/gif.so
@@ -779,6 +779,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/inline.la
 %attr(755,root,root) %{modulesdir}/coders/ipl.so
 %{modulesdir}/coders/ipl.la
+%attr(755,root,root) %{modulesdir}/coders/jnx.so
+%{modulesdir}/coders/jnx.la
 %attr(755,root,root) %{modulesdir}/coders/label.so
 %{modulesdir}/coders/label.la
 %attr(755,root,root) %{modulesdir}/coders/mac.so
