@@ -3,28 +3,20 @@
 # - pango (subpackage) DT_NEEDED: libpangocairo-1.0.so.0 libcairo.so.2 libpango-1.0.so.0 libgobject-2.0.so.0
 #        %{modulesdir}/coders/pango.la
 #        %{modulesdir}/coders/pango.so
-# - possible to separate this dep?
-#   ImageMagick-libs-6.7.5.9-4.i686: required "libOpenCL.so.1" is provided by the following packages:
-#   a) Mesa-libOpenCL-9.0.2-1.i686
-#   b) xorg-driver-video-fglrx-legacy-12.x-libs-12.6-34.i686
-#   c) xorg-driver-video-fglrx-libs-12.10-26.i686
-#   d) xorg-driver-video-nvidia-libs-310.32-19.i686
-#   Which one do you want to install ('Q' to abort)? [Mesa-libOpenCL-9.0.2-1.i686]
-#    ImageMagick-libs-6.7.5.9-4.i686 marks Mesa-libOpenCL-9.0.2-1.i686 (cap libOpenCL.so.1)
-#     Mesa-libOpenCL-9.0.2-1.i686 marks llvm-libclc-0.0.1-0.20130101.1.i686 (cap llvm-libclc)
-#   $ grep -r libOpenCL ../BUILD.x86_64-linux/ImageMagick-6.7.9-10/
-#   Binary file ../BUILD.x86_64-linux/ImageMagick-6.7.9-10/magick/.libs/libMagickCore.so.5.0.0 matches
 #
 # Conditional build:
-%bcond_without	djvu		# without DJVU module
-%bcond_without	fpx		# without FlashPIX module (which uses fpx library)
-%bcond_without	gomp		# without OpenMP support
-%bcond_without	graphviz	# without dot module (which uses GraphViz libraries)
-%bcond_with	gs		# with PostScript support through ghostscript library (warning: breaks jpeg!)
-%bcond_without	jasper		# without JPEG2000 module (which uses jasper library)
-%bcond_without	wmf		# without WMF module (which uses libwmf library)
-%bcond_without	cxx		# without Magick++
-%bcond_without	exr		# without OpenEXR module
+# - features:
+%bcond_without	cxx		# Magick++ library
+%bcond_without	gomp		# OpenMP support
+%bcond_without	opencl		# OpenCL support
+%bcond_with	gs		# PostScript support through ghostscript library (warning: breaks jpeg!)
+# - modules:
+%bcond_without	djvu		# DJVU module
+%bcond_without	exr		# OpenEXR module
+%bcond_without	fpx		# FlashPIX module (which uses fpx library)
+%bcond_without	graphviz	# dot module (which uses GraphViz libraries)
+%bcond_without	jasper		# JPEG2000 module (which uses jasper library)
+%bcond_without	wmf		# WMF module (which uses libwmf library)
 
 %include	/usr/lib/rpm/macros.perl
 %define		ver 6.7.9
@@ -54,6 +46,7 @@ Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
 Patch5:		agread-param.patch
 URL:		http://www.imagemagick.org/
+%{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
 BuildRequires:	autoconf >= 2.67
 BuildRequires:	automake >= 1:1.11
@@ -191,6 +184,7 @@ Summary(ru.UTF-8):	Хедеры и библиотеки для программ�
 Summary(uk.UTF-8):	Хедери та бібліотеки для програмування з ImageMagick
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+%{?with_opencl:Requires:	OpenCL-devel}
 Requires:	bzip2-devel >= 1.0.1
 Requires:	fftw3-devel >= 3.0
 Requires:	fontconfig-devel >= 2.1.0
@@ -663,6 +657,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 %{__automake}
 %configure \
 	--disable-ltdl-install \
+	%{!?with_opencl:--disable-opencl} \
 	%{!?with_gomp:--disable-openmp} \
 	--disable-silent-rules \
 	--enable-fast-install \
