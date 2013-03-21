@@ -964,8 +964,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files coder-caption
 %defattr(644,root,root,755)
-# R: pango, fontconfig
-%defattr(644,root,root,755)
 %attr(755,root,root) %{modulesdir}/coders/caption.so
 %{modulesdir}/coders/caption.la
 
