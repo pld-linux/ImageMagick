@@ -1,8 +1,3 @@
-# TODO
-# - unpackaged:
-# - pango (subpackage) DT_NEEDED: libpangocairo-1.0.so.0 libcairo.so.2 libpango-1.0.so.0 libgobject-2.0.so.0
-#        %{modulesdir}/coders/pango.la
-#        %{modulesdir}/coders/pango.so
 #
 # Conditional build:
 # - features:
@@ -75,6 +70,7 @@ BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libwebp-devel
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-perlprov >= 4.1-13
@@ -536,6 +532,19 @@ Language (MSL) files.
 %description coder-mpr -l pl.UTF-8
 Moduł kodera dla plików Magick Persistent Registry (MPR) i Magick
 Scripting Language (MSL).
+
+%package coder-pango
+Summary:	Coder module to read pango markup language format
+Summary(pl.UTF-8):	Moduł kodera do odczytu formatu języka znaczników pango
+Group:		X11/Applications/Graphics
+URL:		http://www.imagemagick.org/Usage/text/#pango
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-pango
+Coder module to read pango markup language format.
+
+%description coder-pango -l pl.UTF-8
+Moduł kodera do odczytu formatu języka znaczników pango.
 
 %package coder-pdf
 Summary:	Coder module for PDF files
@@ -1023,6 +1032,12 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/mpr.la
 %attr(755,root,root) %{modulesdir}/coders/msl.so
 %{modulesdir}/coders/msl.la
+
+%files coder-pango
+%defattr(644,root,root,755)
+# R: cairo, pango
+%attr(755,root,root) %{modulesdir}/coders/pango.so
+%{modulesdir}/coders/pango.la
 
 %files coder-pdf
 %defattr(644,root,root,755)
