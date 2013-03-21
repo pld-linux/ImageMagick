@@ -418,13 +418,17 @@ Bibliotecas estáticas para desenvolvimento com libMagick++.
 складу ImageMagick-c++-devel.
 
 %package coder-caption
-Summary:	Coder module for CAPTION image files
+Summary:	Coder module to read CAPTION images
+Summary(pl.UTF-8):	Moduł kodera do odczytu obrazów CAPTION
 Group:		X11/Applications/Graphics
 URL:		http://www.imagemagick.org/Usage/text/#caption
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description coder-caption
 Coder module to Read Text Caption.
+
+%description coder-caption -l pl.UTF-8
+Moduł kodera do odczytu podpisów tekstowych (typu caption).
 
 %package coder-djvu
 Summary:	Coder module for DJVU files
