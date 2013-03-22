@@ -2,9 +2,11 @@
 # Conditional build:
 # - features:
 %bcond_without	cxx		# Magick++ library
-%bcond_without	gomp		# OpenMP support
-%bcond_without	opencl		# OpenCL support
-%bcond_with	gs		# PostScript support through ghostscript library (warning: breaks jpeg!)
+%bcond_without	gomp		# OpenMP computing support
+%bcond_without	opencl		# OpenCL computing support
+%bcond_with	hdri		# HDRI support
+%bcond_with	gs		# PostScript support through ghostscript library
+#				  (warning: breaks jpeg (and possibly tiff) because of symbol clashes!)
 # - modules:
 %bcond_without	djvu		# DJVU module
 %bcond_without	exr		# OpenEXR module
@@ -12,9 +14,11 @@
 %bcond_without	graphviz	# dot module (which uses GraphViz libraries)
 %bcond_without	jasper		# JPEG2000 module (which uses jasper library)
 %bcond_without	wmf		# WMF module (which uses libwmf library)
+# - module feautres:
+%bcond_without	autotrace	# Autotrace support in SVG module
 
 %include	/usr/lib/rpm/macros.perl
-%define		ver 6.7.9
+%define		ver	6.7.9
 %define		pver	10
 %define		QuantumDepth	16
 Summary:	Image display, conversion, and manipulation under X
@@ -43,8 +47,9 @@ Patch5:		agread-param.patch
 URL:		http://www.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
-BuildRequires:	autoconf >= 2.67
-BuildRequires:	automake >= 1:1.11
+BuildRequires:	autoconf >= 2.69
+BuildRequires:	automake >= 1:1.12
+%{?with_autotrace:BuildRequires:	autotrace-devel >= 0.31.1}
 BuildRequires:	bzip2-devel >= 1.0.1
 %{?with_djvu:BuildRequires:	djvulibre-devel}
 BuildRequires:	expat-devel >= 1.95.7
@@ -80,7 +85,7 @@ BuildRequires:	tar >= 1:1.22
 #BuildRequires:	txt2html
 BuildRequires:	xorg-lib-libXext
 BuildRequires:	xz
-BuildRequires:	xz-devel
+BuildRequires:	xz-devel >= 2.9.0
 BuildRequires:	zlib-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Suggests:	shared-color-profiles
@@ -670,19 +675,21 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	%{!?with_gomp:--disable-openmp} \
 	--disable-silent-rules \
 	--enable-fast-install \
+	%{?with_hdri:--enable-hdri} \
 	--enable-shared \
 	--enable-static \
-	--without-dps \
-	--with%{!?with_djvu:out}-djvu \
-	--with%{!?with_fpx:out}-fpx \
-	--with%{!?with_graphviz:out}-gvc \
-	--with%{!?with_gs:out}-gslib \
-	--with%{!?with_jasper:out}-jp2 \
-	--with%{!?with_cxx:out}-magick_plus_plus \
-	--with%{!?with_wmf:out}-wmf \
-	--with%{!?with_exr:out}-openexr \
-	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-modules \
+	--with-autotrace%{!?with_autotrace:=no} \
+	--with-djvu%{!?with_djvu:=no} \
+	--with-dps=no \
+	--with-fpx%{!?with_fpx:=no} \
+	--with-gslib%{!?with_gs:=no} \
+	--with-gvc%{!?with_graphviz:=no} \
+	--with-jp2%{!?with_jasper:=no} \
+	--with-magick_plus_plus%{!?with_cxx:=no} \
+	--with-openexr%{!?with_exr:=no} \
+	--with-wmf%{!?with_wmf:=no} \
+	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-perl=%{__perl} \
 	--with-perl-options="INSTALLDIRS=vendor" \
 	--with-quantum-depth=%{QuantumDepth} \
@@ -1059,7 +1066,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files coder-svg
 %defattr(644,root,root,755)
-# R: libxml2, librsvg
+# R: libxml2, librsvg, %{?with_autotrace:autotrace}
 %attr(755,root,root) %{modulesdir}/coders/svg.so
 %{modulesdir}/coders/svg.la
 
