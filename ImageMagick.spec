@@ -18,9 +18,8 @@
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %include	/usr/lib/rpm/macros.perl
-%define		ver	6.7.9
-%define		pver	10
-%define		QuantumDepth	16
+%define		ver	6.8.4
+%define		pver	8
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -36,14 +35,13 @@ Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
-Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/legacy/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	e6c4da963f7651674dca48f2b9f575bb
+Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
+# Source0-md5:	880879dbf6e3c6e8fe610e98a229b9c4
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
-Patch5:		agread-param.patch
 URL:		http://www.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
@@ -76,7 +74,7 @@ BuildRequires:	libwebp-devel
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	pango-devel >= 1:1.28.1
-BuildRequires:	perl-devel >= 1:5.8.0
+BuildRequires:	perl-devel >= 1:5.8.1
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	rpmbuild(macros) >= 1.315
@@ -93,7 +91,9 @@ Obsoletes:	ImageMagick-coder-dps
 Obsoletes:	ImageMagick-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		modulesdir	%{_libdir}/ImageMagick-%{ver}/modules-Q%{QuantumDepth}
+%define		QuantumDepth	16
+%define		abisuf		Q%{QuantumDepth}%{?with_hdri:HDRI}
+%define		modulesdir	%{_libdir}/ImageMagick-%{ver}/modules-%{abisuf}
 
 %description
 ImageMagick is an image display, conversion, and manipulation tool. It
@@ -656,7 +656,6 @@ Moduł kodera dla plików WMF.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -670,7 +669,6 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 %{__autoheader}
 %{__automake}
 %configure \
-	--disable-ltdl-install \
 	%{!?with_opencl:--disable-opencl} \
 	%{!?with_gomp:--disable-openmp} \
 	--disable-silent-rules \
@@ -694,7 +692,8 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-perl-options="INSTALLDIRS=vendor" \
 	--with-quantum-depth=%{QuantumDepth} \
 	--with-threads \
-	--with-x
+	--with-x \
+	--with-webp
 
 %{__make} -j1
 %{__sed} -i -e 's,/%{name}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
@@ -708,10 +707,12 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 	pkgdocdir=%{_docdir}/%{name}-doc-%{version}
 
 cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{ver}/{ChangeLog,LICENSE,NEWS.txt}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+# packaged as %doc
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-6/{ChangeLog,LICENSE,NEWS.txt}
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -727,10 +728,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{modulesdir}
 %dir %{modulesdir}/coders
 %dir %{modulesdir}/filters
-%dir %{_datadir}/ImageMagick-%{ver}
-%{_datadir}/ImageMagick-%{ver}/*.xml
-%dir %{_sysconfdir}/ImageMagick
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ImageMagick/*.xml
+%dir %{_datadir}/ImageMagick-6
+%{_datadir}/ImageMagick-6/*.xml
+%dir %{_sysconfdir}/ImageMagick-6
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/ImageMagick-6/*.xml
 
 # ========= coders without additional deps
 %attr(755,root,root) %{modulesdir}/coders/aai.so
@@ -811,6 +812,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/magick.la
 %attr(755,root,root) %{modulesdir}/coders/map.so
 %{modulesdir}/coders/map.la
+%attr(755,root,root) %{modulesdir}/coders/mask.so
+%{modulesdir}/coders/mask.la
 %attr(755,root,root) %{modulesdir}/coders/mat.so
 %{modulesdir}/coders/mat.la
 %attr(755,root,root) %{modulesdir}/coders/matte.so
@@ -929,6 +932,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/filters/analyze.so
 %{modulesdir}/filters/analyze.la
 
+%dir %{_libdir}/ImageMagick-%{ver}/bin-%{abisuf}
+%attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/bin-%{abisuf}/*
+
 %attr(755,root,root) %{_bindir}/animate
 %attr(755,root,root) %{_bindir}/compare
 %attr(755,root,root) %{_bindir}/composite
@@ -961,13 +967,13 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
-%attr(755,root,root) %{_libdir}/libMagickCore.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore.so.5
-%attr(755,root,root) %{_libdir}/libMagickWand.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand.so.5
+%attr(755,root,root) %{_libdir}/libMagickCore-6.%{abisuf}.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore-6.%{abisuf}.so.1
+%attr(755,root,root) %{_libdir}/libMagickWand-6.%{abisuf}.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand-6.%{abisuf}.so.1
 %dir %{_libdir}/ImageMagick-%{ver}
-%dir %{_libdir}/ImageMagick-%{ver}/config
-%{_libdir}/ImageMagick-%{ver}/config/configure.xml
+%dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
+%{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
 
 %files coder-caption
 %defattr(644,root,root,755)
@@ -1102,14 +1108,18 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/MagickCore-config
 %attr(755,root,root) %{_bindir}/MagickWand-config
 %attr(755,root,root) %{_bindir}/Wand-config
-%attr(755,root,root) %{_libdir}/libMagickCore.so
-%attr(755,root,root) %{_libdir}/libMagickWand.so
-%dir %{_includedir}/ImageMagick
-%{_includedir}/ImageMagick/magick
-%{_includedir}/ImageMagick/wand
+%attr(755,root,root) %{_libdir}/libMagickCore-6.%{abisuf}.so
+%attr(755,root,root) %{_libdir}/libMagickWand-6.%{abisuf}.so
+%dir %{_includedir}/ImageMagick-6
+%{_includedir}/ImageMagick-6/magick
+%{_includedir}/ImageMagick-6/wand
+%{_pkgconfigdir}/ImageMagick-6.%{abisuf}.pc
 %{_pkgconfigdir}/ImageMagick.pc
+%{_pkgconfigdir}/MagickCore-6.%{abisuf}.pc
 %{_pkgconfigdir}/MagickCore.pc
+%{_pkgconfigdir}/MagickWand-6.%{abisuf}.pc
 %{_pkgconfigdir}/MagickWand.pc
+%{_pkgconfigdir}/Wand-6.%{abisuf}.pc
 %{_pkgconfigdir}/Wand.pc
 %{_mandir}/man1/Magick-config.1*
 %{_mandir}/man1/MagickCore-config.1*
@@ -1118,36 +1128,45 @@ rm -rf $RPM_BUILD_ROOT
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libMagickCore.a
-%{_libdir}/libMagickWand.a
+%{_libdir}/libMagickCore-6.%{abisuf}.a
+%{_libdir}/libMagickWand-6.%{abisuf}.a
 
 %files -n perl-%{name}
 %defattr(644,root,root,755)
 %{perl_vendorarch}/Image/Magick.pm
+%dir %{perl_vendorarch}/Image/Magick
+%{perl_vendorarch}/Image/Magick/%{abisuf}.pm
 %dir %{perl_vendorarch}/auto/Image/Magick
 %{perl_vendorarch}/auto/Image/Magick/autosplit.ix
 %{perl_vendorarch}/auto/Image/Magick/Magick.bs
 %attr(755,root,root) %{perl_vendorarch}/auto/Image/Magick/Magick.so
+%dir %{perl_vendorarch}/auto/Image/Magick/%{abisuf}
+%{perl_vendorarch}/auto/Image/Magick/%{abisuf}/autosplit.ix
+%{perl_vendorarch}/auto/Image/Magick/%{abisuf}/%{abisuf}.bs
+%attr(755,root,root) %{perl_vendorarch}/auto/Image/Magick/%{abisuf}/%{abisuf}.so
 %{_mandir}/man3/Image::Magick.3pm*
+%{_mandir}/man3/Image::Magick::%{abisuf}.3pm*
 %{_examplesdir}/%{name}-perl-%{version}
 
 %if %{with cxx}
 %files c++
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libMagick++.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++.so.5
+%attr(755,root,root) %{_libdir}/libMagick++-6.%{abisuf}.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libMagick++-6.%{abisuf}.so.1
 
 %files c++-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Magick++-config
-%attr(755,root,root) %{_libdir}/libMagick++.so
-%{_includedir}/ImageMagick/Magick++
-%{_includedir}/ImageMagick/Magick++.h
+%attr(755,root,root) %{_libdir}/libMagick++-6.%{abisuf}.so
+%{_includedir}/ImageMagick-6/Magick++
+%{_includedir}/ImageMagick-6/Magick++.h
+%{_pkgconfigdir}/ImageMagick++-6.%{abisuf}.pc
 %{_pkgconfigdir}/ImageMagick++.pc
+%{_pkgconfigdir}/Magick++-6.%{abisuf}.pc
 %{_pkgconfigdir}/Magick++.pc
 %{_mandir}/man1/Magick++-config.1*
 
 %files c++-static
 %defattr(644,root,root,755)
-%{_libdir}/libMagick++.a
+%{_libdir}/libMagick++-6.%{abisuf}.a
 %endif
