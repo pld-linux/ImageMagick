@@ -691,9 +691,10 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-perl=%{__perl} \
 	--with-perl-options="INSTALLDIRS=vendor" \
 	--with-quantum-depth=%{QuantumDepth} \
+	--with-rsvg \
 	--with-threads \
-	--with-x \
-	--with-webp
+	--with-webp \
+	--with-x
 
 %{__make} -j1
 %{__sed} -i -e 's,/%{name}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
@@ -705,6 +706,10 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	pkgdocdir=%{_docdir}/%{name}-doc-%{version}
+
+# for coders development
+install -d $RPM_BUILD_ROOT%{_includedir}/ImageMagick-6/private/magick
+cp -p magick/{blob,blob-private,exception-private,image-private,monitor-private,quantum-private,static,studio}.h $RPM_BUILD_ROOT%{_includedir}/ImageMagick-6/private/magick
 
 cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
@@ -1112,6 +1117,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libMagickWand-6.%{abisuf}.so
 %dir %{_includedir}/ImageMagick-6
 %{_includedir}/ImageMagick-6/magick
+%{_includedir}/ImageMagick-6/private
 %{_includedir}/ImageMagick-6/wand
 %{_pkgconfigdir}/ImageMagick-6.%{abisuf}.pc
 %{_pkgconfigdir}/ImageMagick.pc
