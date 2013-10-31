@@ -16,6 +16,6 @@
 +      ;;
 +  esac
 +done
- MAGICK_LIBS="-lMagickCore $MAGICK_DEP_LIBS"
+ MAGICK_LIBS="$MAGICK_DEP_LIBS"
  
  AC_SUBST(MAGICK_CFLAGS)

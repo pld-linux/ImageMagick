@@ -18,8 +18,8 @@
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %include	/usr/lib/rpm/macros.perl
-%define		ver	6.8.4
-%define		pver	8
+%define		ver	6.8.7
+%define		pver	3
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -31,12 +31,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	3
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	880879dbf6e3c6e8fe610e98a229b9c4
+# Source0-md5:	b4653beb2f2b3cc33ea26490af567700
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -873,6 +873,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/raw.la
 %attr(755,root,root) %{modulesdir}/coders/rgb.so
 %{modulesdir}/coders/rgb.la
+%attr(755,root,root) %{modulesdir}/coders/rgf.so
+%{modulesdir}/coders/rgf.la
 %attr(755,root,root) %{modulesdir}/coders/rla.so
 %{modulesdir}/coders/rla.la
 %attr(755,root,root) %{modulesdir}/coders/rle.so
@@ -936,9 +938,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{modulesdir}/filters/analyze.so
 %{modulesdir}/filters/analyze.la
-
-%dir %{_libdir}/ImageMagick-%{ver}/bin-%{abisuf}
-%attr(755,root,root) %{_libdir}/ImageMagick-%{ver}/bin-%{abisuf}/*
 
 %attr(755,root,root) %{_bindir}/animate
 %attr(755,root,root) %{_bindir}/compare
@@ -1158,7 +1157,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++-6.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++-6.%{abisuf}.so.1
+%attr(755,root,root) %ghost %{_libdir}/libMagick++-6.%{abisuf}.so.3
 
 %files c++-devel
 %defattr(644,root,root,755)
