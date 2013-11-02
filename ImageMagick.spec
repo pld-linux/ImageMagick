@@ -16,6 +16,7 @@
 %bcond_without	wmf		# WMF module (which uses libwmf library)
 # - module feautres:
 %bcond_without	autotrace	# Autotrace support in SVG module
+%bcond_with	mupdf		# MuPDF support in XPS module (not really used)
 
 %include	/usr/lib/rpm/macros.perl
 %define		ver	6.8.7
@@ -42,6 +43,7 @@ Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
+Patch5:		%{name}-mupdf.patch
 URL:		http://www.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
@@ -73,6 +75,7 @@ BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libwebp-devel
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
+%{?with_mupdf:BuildRequires:	mupdf-devel}
 BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
 BuildRequires:	pkgconfig
@@ -656,6 +659,7 @@ Moduł kodera dla plików WMF.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -685,6 +689,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-gvc%{!?with_graphviz:=no} \
 	--with-jp2%{!?with_jasper:=no} \
 	--with-magick_plus_plus%{!?with_cxx:=no} \
+	--with-mupdf%{!?with_mupdf:=no} \
 	--with-openexr%{!?with_exr:=no} \
 	--with-wmf%{!?with_wmf:=no} \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
