@@ -20,7 +20,7 @@
 
 %include	/usr/lib/rpm/macros.perl
 %define		ver	6.8.7
-%define		pver	3
+%define		pver	6
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -37,7 +37,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	b4653beb2f2b3cc33ea26490af567700
+# Source0-md5:	9370a8f672fd1fab779ea9acbd6b0ad4
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
