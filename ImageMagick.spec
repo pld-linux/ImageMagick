@@ -1148,11 +1148,9 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorarch}/Image/Magick/%{abisuf}.pm
 %dir %{perl_vendorarch}/auto/Image/Magick
 %{perl_vendorarch}/auto/Image/Magick/autosplit.ix
-%{perl_vendorarch}/auto/Image/Magick/Magick.bs
 %attr(755,root,root) %{perl_vendorarch}/auto/Image/Magick/Magick.so
 %dir %{perl_vendorarch}/auto/Image/Magick/%{abisuf}
 %{perl_vendorarch}/auto/Image/Magick/%{abisuf}/autosplit.ix
-%{perl_vendorarch}/auto/Image/Magick/%{abisuf}/%{abisuf}.bs
 %attr(755,root,root) %{perl_vendorarch}/auto/Image/Magick/%{abisuf}/%{abisuf}.so
 %{_mandir}/man3/Image::Magick.3pm*
 %{_mandir}/man3/Image::Magick::%{abisuf}.3pm*
