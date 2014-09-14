@@ -32,7 +32,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	3
+Release:	4
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -94,7 +94,9 @@ Obsoletes:	ImageMagick-coder-dps
 Obsoletes:	ImageMagick-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%{!?QuantumDepth:	%define		QuantumDepth	16}
+%if %{!?QuantumDepth:0}%{?QuantumDepth:1}
+%define		QuantumDepth	16
+%endif
 %define		abisuf		Q%{QuantumDepth}%{?with_hdri:HDRI}
 %define		modulesdir	%{_libdir}/ImageMagick-%{ver}/modules-%{abisuf}
 
