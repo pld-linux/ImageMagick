@@ -94,7 +94,7 @@ Obsoletes:	ImageMagick-coder-dps
 Obsoletes:	ImageMagick-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%if %{!?QuantumDepth:0}%{?QuantumDepth:1}
+%if %{!?QuantumDepth:1}%{?QuantumDepth:0}
 %define		QuantumDepth	16
 %endif
 %define		abisuf		Q%{QuantumDepth}%{?with_hdri:HDRI}
