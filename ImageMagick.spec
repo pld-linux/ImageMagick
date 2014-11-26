@@ -16,11 +16,10 @@
 %bcond_without	wmf		# WMF module (which uses libwmf library)
 # - module feautres:
 %bcond_without	autotrace	# Autotrace support in SVG module
-%bcond_with	mupdf		# MuPDF support in XPS module (not really used)
 
 %include	/usr/lib/rpm/macros.perl
-%define		ver	6.8.7
-%define		pver	6
+%define		ver	6.9.0
+%define		pver	0
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -32,18 +31,18 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	6
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	9370a8f672fd1fab779ea9acbd6b0ad4
+# Source0-md5:	3714e7d5d248c13aee95a7f54970349f
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
-Patch5:		%{name}-mupdf.patch
+
 URL:		http://www.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
@@ -75,7 +74,6 @@ BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libwebp-devel
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
-%{?with_mupdf:BuildRequires:	mupdf-devel}
 BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
 BuildRequires:	pkgconfig
@@ -661,7 +659,6 @@ Moduł kodera dla plików WMF.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -691,7 +688,6 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-gvc%{!?with_graphviz:=no} \
 	--with-jp2%{!?with_jasper:=no} \
 	--with-magick_plus_plus%{!?with_cxx:=no} \
-	--with-mupdf%{!?with_mupdf:=no} \
 	--with-openexr%{!?with_exr:=no} \
 	--with-wmf%{!?with_wmf:=no} \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
@@ -812,6 +808,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/info.la
 %attr(755,root,root) %{modulesdir}/coders/inline.so
 %{modulesdir}/coders/inline.la
+%attr(755,root,root) %{modulesdir}/coders/json.so
+%{modulesdir}/coders/json.la
 %attr(755,root,root) %{modulesdir}/coders/ipl.so
 %{modulesdir}/coders/ipl.la
 %attr(755,root,root) %{modulesdir}/coders/jnx.so
@@ -894,6 +892,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/sfw.la
 %attr(755,root,root) %{modulesdir}/coders/sgi.so
 %{modulesdir}/coders/sgi.la
+%attr(755,root,root) %{modulesdir}/coders/sixel.so
+%{modulesdir}/coders/sixel.la
 %attr(755,root,root) %{modulesdir}/coders/stegano.so
 %{modulesdir}/coders/stegano.la
 %attr(755,root,root) %{modulesdir}/coders/sun.so
@@ -920,6 +920,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/vid.la
 %attr(755,root,root) %{modulesdir}/coders/viff.so
 %{modulesdir}/coders/viff.la
+%attr(755,root,root) %{modulesdir}/coders/vips.so
+%{modulesdir}/coders/vips.la
 %attr(755,root,root) %{modulesdir}/coders/wbmp.so
 %{modulesdir}/coders/wbmp.la
 %attr(755,root,root) %{modulesdir}/coders/wpg.so
@@ -979,9 +981,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-6.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-6.%{abisuf}.so.1
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore-6.%{abisuf}.so.2
 %attr(755,root,root) %{_libdir}/libMagickWand-6.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand-6.%{abisuf}.so.1
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand-6.%{abisuf}.so.2
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
 %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
@@ -1162,7 +1164,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++-6.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++-6.%{abisuf}.so.3
+%attr(755,root,root) %ghost %{_libdir}/libMagick++-6.%{abisuf}.so.5
 
 %files c++-devel
 %defattr(644,root,root,755)
