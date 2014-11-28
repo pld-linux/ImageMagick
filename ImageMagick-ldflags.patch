@@ -1,21 +1,27 @@
 --- ImageMagick-6.8.4-8/configure.ac.orig	2013-04-09 15:47:16.713625903 +0200
 +++ ImageMagick-6.8.4-8/configure.ac	2013-04-09 15:49:29.416956473 +0200
-@@ -3903,7 +3903,17 @@
+@@ -3903,7 +3903,23 @@
  MAGICK_CXXFLAGS="$CXXFLAGS"
  MAGICK_CPPFLAGS=`echo $MAGICK_CPPFLAGS | sed -e 's/  */ /g'`
  MAGICK_PCFLAGS=`echo $MAGICK_PCFLAGS | sed -e 's/  */ /g'`
 -MAGICK_LDFLAGS="-L$LIB_DIR $LDFLAGS"
 +MAGICK_LDFLAGS=""
++new_LDFLAGS=
 +for flag in $LDFLAGS
 +do
 +  case "$flag" in
-+    -s|-Wl,-s|--strip-all|-Wl,--strip-all|-Wl,--as-needed)
++    -L/usr/lib|-L/usr/lib64)
++      ;;
++    -s|-Wl,-s|--strip-all|-Wl,--strip-all|-Wl,--as-needed|-Wl,--no-copy-dt-needed-entries)
++      new_LDFLAGS="$new_LDFLAGS $flag"
 +      ;;
 +    *)
 +      MAGICK_LDFLAGS="$MAGICK_LDFLAGS $flag"
++      new_LDFLAGS="$new_LDFLAGS $flag"
 +      ;;
 +  esac
 +done
++LDFLAGS="$new_LDFLAGS"
  MAGICK_LIBS="$MAGICK_DEP_LIBS"
  
  AC_SUBST(MAGICK_CFLAGS)

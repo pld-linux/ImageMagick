@@ -12,7 +12,7 @@
 %bcond_without	exr		# OpenEXR module
 %bcond_without	fpx		# FlashPIX module (which uses fpx library)
 %bcond_without	graphviz	# dot module (which uses GraphViz libraries)
-%bcond_without	jasper		# JPEG2000 module (which uses jasper library)
+%bcond_without	openjpeg	# JPEG2000 module (which uses openjpeg 2 library)
 %bcond_without	wmf		# WMF module (which uses libwmf library)
 # - module feautres:
 %bcond_without	autotrace	# Autotrace support in SVG module
@@ -58,7 +58,6 @@ BuildRequires:	freetype-devel >= 2.0.2-2
 %{?with_gomp:BuildRequires:	gcc-c++ >= 6:4.2}
 %{?with_gs:BuildRequires:	ghostscript-devel}
 %{?with_graphviz:BuildRequires:	graphviz-devel >= 2.9.0}
-%{?with_jasper:BuildRequires:	jasper-devel >= 1.700.5}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms2-devel >= 2.0
 %{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
@@ -74,6 +73,7 @@ BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libwebp-devel
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
+%{?with_openjpeg:BuildRequires:	openjpeg2-devel >= 2.1.0}
 BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
 BuildRequires:	pkgconfig
@@ -686,9 +686,9 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-fpx%{!?with_fpx:=no} \
 	--with-gslib%{!?with_gs:=no} \
 	--with-gvc%{!?with_graphviz:=no} \
-	--with-jp2%{!?with_jasper:=no} \
 	--with-magick_plus_plus%{!?with_cxx:=no} \
 	--with-openexr%{!?with_exr:=no} \
+	--with-openjp2%{!?with_openjpeg:=no} \
 	--with-wmf%{!?with_wmf:=no} \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-perl=%{__perl} \
@@ -1035,10 +1035,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/jpeg.so
 %{modulesdir}/coders/jpeg.la
 
-%if %{with jasper}
+%if %{with openjpeg}
 %files coder-jpeg2
 %defattr(644,root,root,755)
-# R: jasper, libjpeg
+# R: openjpeg2, libjpeg
 %attr(755,root,root) %{modulesdir}/coders/jp2.so
 %{modulesdir}/coders/jp2.la
 %endif
