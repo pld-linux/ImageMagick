@@ -19,7 +19,7 @@
 
 %include	/usr/lib/rpm/macros.perl
 %define		ver	6.9.0
-%define		pver	0
+%define		pver	10
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -31,12 +31,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	3714e7d5d248c13aee95a7f54970349f
+# Source0-md5:	906193d9da1205542a17f77b9541783d
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -938,6 +938,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/xps.la
 %attr(755,root,root) %{modulesdir}/coders/x.so
 %{modulesdir}/coders/x.la
+%attr(755,root,root) %{modulesdir}/coders/xtrn.so
+%{modulesdir}/coders/xtrn.la
 %attr(755,root,root) %{modulesdir}/coders/xwd.so
 %{modulesdir}/coders/xwd.la
 %attr(755,root,root) %{modulesdir}/coders/ycbcr.so
@@ -1164,7 +1166,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++-6.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++-6.%{abisuf}.so.5
+%attr(755,root,root) %ghost %{_libdir}/libMagick++-6.%{abisuf}.so.6
 
 %files c++-devel
 %defattr(644,root,root,755)
