@@ -31,7 +31,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	3
+Release:	4
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -712,7 +712,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 
 # for coders development
 install -d $RPM_BUILD_ROOT%{_includedir}/ImageMagick-6/private/magick
-cp -p magick/{blob,blob-private,exception-private,image-private,monitor-private,quantum-private,static,studio}.h $RPM_BUILD_ROOT%{_includedir}/ImageMagick-6/private/magick
+cp -p magick/{blob,blob-private,delegate-private,exception-private,image-private,monitor-private,nt-base-private,quantum-private,static,studio}.h $RPM_BUILD_ROOT%{_includedir}/ImageMagick-6/private/magick
 
 cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
