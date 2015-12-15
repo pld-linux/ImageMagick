@@ -17,9 +17,9 @@
 # - module feautres:
 %bcond_without	autotrace	# Autotrace support in SVG module
 
+%define		ver	6.9.2
+%define		pver	8
 %include	/usr/lib/rpm/macros.perl
-%define		ver	6.9.0
-%define		pver	10
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -31,18 +31,16 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	6
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	906193d9da1205542a17f77b9541783d
-Patch0:		%{name}-ac.patch
+# Source0-md5:	04bbc6be413549b8cf1c786d1f541064
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
-
 URL:		http://www.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
@@ -81,6 +79,7 @@ BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	rpmbuild(macros) >= 1.315
 BuildRequires:	tar >= 1:1.22
 # only checked for, but only supplied scripts/txt2html is used
+BuildRequires:	tar >= 1:1.22
 #BuildRequires:	txt2html
 BuildRequires:	xorg-lib-libXext
 BuildRequires:	xz
@@ -654,7 +653,6 @@ Moduł kodera dla plików WMF.
 
 %prep
 %setup -q -n %{name}-%{ver}-%{pver}
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -713,7 +711,8 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 
 # for coders development
 install -d $RPM_BUILD_ROOT%{_includedir}/ImageMagick-6/private/magick
-cp -p magick/{blob,blob-private,delegate-private,exception-private,image-private,monitor-private,nt-base-private,quantum-private,static,studio}.h $RPM_BUILD_ROOT%{_includedir}/ImageMagick-6/private/magick
+cp -p magick/{blob,blob-private,delegate-private,exception-private,image-private,monitor-private,nt-base-private,quantum-private,static,studio}.h \
+	$RPM_BUILD_ROOT%{_includedir}/ImageMagick-6/private/magick
 
 cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
