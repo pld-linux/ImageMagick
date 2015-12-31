@@ -10,7 +10,7 @@
 +for flag in $LDFLAGS
 +do
 +  case "$flag" in
-+    -L/usr/lib|-L/usr/lib64)
++    -L/usr/lib|-L/usr/lib64|-L/usr/libx32)
 +      ;;
 +    -s|-Wl,-s|--strip-all|-Wl,--strip-all|-Wl,--as-needed|-Wl,--no-copy-dt-needed-entries)
 +      new_LDFLAGS="$new_LDFLAGS $flag"
