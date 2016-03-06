@@ -2,8 +2,8 @@
 # Conditional build:
 # - features:
 %bcond_without	cxx		# Magick++ library
-%bcond_without	gomp		# OpenMP computing support
 %bcond_without	opencl		# OpenCL computing support
+%bcond_without	openmp		# OpenMP computing support
 %bcond_with	hdri		# HDRI support
 %bcond_with	gs		# PostScript support through ghostscript library
 #				  (warning: breaks jpeg (and possibly tiff) because of symbol clashes!)
@@ -53,13 +53,13 @@ BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	fftw3-devel >= 3.0
 BuildRequires:	fontconfig-devel >= 2.1.0
 BuildRequires:	freetype-devel >= 2.0.2-2
-%{?with_gomp:BuildRequires:	gcc-c++ >= 6:4.2}
+%{?with_openmp:BuildRequires:	gcc-c++ >= 6:4.2}
 %{?with_gs:BuildRequires:	ghostscript-devel}
 %{?with_graphviz:BuildRequires:	graphviz-devel >= 2.9.0}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms2-devel >= 2.0
 %{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
-%{?with_gomp:BuildRequires:	libgomp-devel}
+%{?with_openmp:BuildRequires:	libgomp-devel}
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	liblqr-devel >= 0.1.0
 BuildRequires:	libltdl-devel
@@ -193,7 +193,7 @@ Requires:	fftw3-devel >= 3.0
 Requires:	fontconfig-devel >= 2.1.0
 Requires:	freetype-devel >= 2.0.2
 Requires:	lcms2-devel >= 2.0
-%{?with_gomp:Requires:	libgomp-devel}
+%{?with_openmp:Requires:	libgomp-devel}
 Requires:	libjpeg-devel >= 6b
 Requires:	liblqr-devel >= 0.1.0
 Requires:	libltdl-devel
@@ -672,7 +672,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 %configure \
 	--with-gcc-arch=no \
 	%{!?with_opencl:--disable-opencl} \
-	%{!?with_gomp:--disable-openmp} \
+	%{!?with_openmp:--disable-openmp} \
 	--disable-silent-rules \
 	--enable-fast-install \
 	%{?with_hdri:--enable-hdri} \
