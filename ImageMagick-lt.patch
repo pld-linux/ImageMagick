@@ -1,11 +1,9 @@
---- ImageMagick-6.6.6-7/configure.ac~	2010-12-27 13:27:17.432375100 +0100
-+++ ImageMagick-6.6.6-7/configure.ac	2010-12-27 13:30:28.809041767 +0100
---- configure.ac~	2014-11-26 10:14:50.000000000 +0100
-+++ configure.ac	2014-11-26 10:15:09.968560186 +0100
-@@ -512,10 +512,6 @@
+--- ImageMagick-6.9.3-6/configure.ac.orig	2016-03-06 18:30:04.449575381 +0100
++++ ImageMagick-6.9.3-6/configure.ac	2016-03-06 18:35:39.416227990 +0100
+@@ -489,10 +489,6 @@
          CFLAGS="$CFLAGS $DEF_THREAD"
          CXXFLAGS="$CXXFLAGS $DEF_THREAD"
-         THREAD_LIBS="$PTHREAD_LIBS"
+ 	THREAD_LIBS="$PTHREAD_LIBS"
 -        if test "$CC" != "$PTHREAD_CC"; then
 -            AC_MSG_WARN([Replacing compiler $CC with compiler $PTHREAD_CC to support pthreads.])
 -            CC="$PTHREAD_CC"
@@ -13,4 +11,3 @@
          AC_DEFINE(THREAD_SUPPORT,1,[Define if you have POSIX threads libraries and header files.])
      fi
  fi
-
