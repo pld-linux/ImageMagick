@@ -1,3 +1,6 @@
+# TODO
+# - create sane default policy file:
+#   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
 #
 # Conditional build:
 # - features:
@@ -14,7 +17,7 @@
 %bcond_without	graphviz	# dot module (which uses GraphViz libraries)
 %bcond_without	openjpeg	# JPEG2000 module (which uses openjpeg 2 library)
 %bcond_without	wmf		# WMF module (which uses libwmf library)
-# - module feautres:
+# - module features:
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %define		ver	6.9.3
