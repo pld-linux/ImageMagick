@@ -680,7 +680,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	%{!?with_openmp:--disable-openmp} \
 	--disable-silent-rules \
 	--enable-fast-install \
-	%{?with_hdri:--enable-hdri} \
+	%{__enable_disable hdri} \
 	--enable-shared \
 	--enable-static \
 	--with-modules \
