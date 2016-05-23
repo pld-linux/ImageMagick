@@ -7,9 +7,8 @@
 %bcond_without	cxx		# Magick++ library
 %bcond_without	opencl		# OpenCL computing support
 %bcond_without	openmp		# OpenMP computing support
-%bcond_with	hdri		# HDRI support
-%bcond_with	gs		# PostScript support through ghostscript library
-#				  (warning: breaks jpeg (and possibly tiff) because of symbol clashes!)
+%bcond_with	hdri		# HDRI support (accurately represent the wide range of intensity levels found in real scenes)
+%bcond_with	gs		# PostScript support through ghostscript library (warning: breaks jpeg (and possibly tiff) because of symbol clashes!)
 # - modules:
 %bcond_without	djvu		# DJVU module
 %bcond_without	exr		# OpenEXR module
