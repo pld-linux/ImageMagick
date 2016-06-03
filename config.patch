@@ -1,14 +1,17 @@
---- ImageMagick-6.9.4-1/config/policy.xml	2016-05-09 20:28:58.000000000 +0300
-+++ ImageMagick-6.9.4-1/config/policy.xml.new	2016-05-26 17:37:36.934136236 +0300
-@@ -61,7 +57,18 @@
+--- ImageMagick-6.9.4-6/config/policy.xml~	2016-06-01 01:23:05.000000000 +0300
++++ ImageMagick-6.9.4-6/config/policy.xml	2016-06-03 11:11:07.863179689 +0300
+@@ -61,9 +61,19 @@
    <!-- <policy domain="resource" name="throttle" value="0"/> -->
    <!-- <policy domain="resource" name="time" value="3600"/> -->
    <!-- <policy domain="system" name="precision" value="6"/> -->
--  <!-- <policy domain="coder" rights="none" pattern="HTTPS" /> -->
--  <!-- <policy domain="path" rights="none" pattern="@*" /> -->
+-  <!-- <policy domain="coder" rights="none" pattern="MVG" /> -->
+-  <!-- <policy domain="delegate" rights="none" pattern="HTTPS" /> -->
+-	<!-- <policy domain="path" rights="none" pattern="@*" /> -->
+-  <!-- <policy domain="path" rights="none" pattern="|*" /> -->
 +  <policy domain="coder" rights="none" pattern="EPHEMERAL" />
 +  <policy domain="coder" rights="none" pattern="URL" />
 +  <policy domain="coder" rights="none" pattern="HTTPS" />
++  <policy domain="delegate" rights="none" pattern="HTTPS" />
 +  <policy domain="coder" rights="none" pattern="HTTP" />
 +  <policy domain="coder" rights="none" pattern="FTP" />
 +  <policy domain="coder" rights="none" pattern="MVG" />
@@ -19,5 +22,5 @@
 +  <policy domain="coder" rights="none" pattern="PLT" />
 +  <policy domain="path" rights="none" pattern="@*" />
 +  <policy domain="path" rights="none" pattern="|*" />
-   <policy domain="cache" name="shared-secret" value="passphrase"/>
+   <policy domain="cache" name="shared-secret" value="passphrase" stealth="true"/>
  </policymap>
