@@ -33,7 +33,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -44,6 +44,7 @@ Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
+Patch5:		%{name}-configure.patch
 URL:		http://www.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
@@ -663,6 +664,7 @@ Moduł kodera dla plików WMF.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -681,6 +683,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	%{!?with_openmp:--disable-openmp} \
 	--disable-silent-rules \
 	--enable-fast-install \
+	--enable-indirect-reads \
 	%{__enable_disable hdri} \
 	--enable-shared \
 	--enable-static \
