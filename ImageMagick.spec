@@ -20,7 +20,7 @@
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %define		ver	6.9.4
-%define		pver	6
+%define		pver	8
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -33,18 +33,17 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	a4453b03f16c98a6e56e1066799f4b5f
+# Source0-md5:	f8e8f81761756803ee7babc8e31e4753
 Patch0:		config.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
-Patch5:		%{name}-configure.patch
 URL:		http://www.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
@@ -664,7 +663,6 @@ Moduł kodera dla plików WMF.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -683,7 +681,6 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	%{!?with_openmp:--disable-openmp} \
 	--disable-silent-rules \
 	--enable-fast-install \
-	--enable-indirect-reads \
 	%{__enable_disable hdri} \
 	--enable-shared \
 	--enable-static \
