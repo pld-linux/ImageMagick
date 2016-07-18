@@ -1135,7 +1135,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/%{pname}/magick
 %{_includedir}/%{pname}/wand
 %{_includedir}/%{pname}/private
-%{_pkgconfigdir}/%{pname}.%{abisuf}.pc
+%{_pkgconfigdir}/ImageMagick-%{mver}.%{abisuf}.pc
 %{_pkgconfigdir}/ImageMagick.pc
 %{_pkgconfigdir}/MagickCore-%{mver}.%{abisuf}.pc
 %{_pkgconfigdir}/MagickCore.pc
