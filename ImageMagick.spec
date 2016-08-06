@@ -1,4 +1,6 @@
 # TODO
+# - flif (flif.h, flif_create_decoder in libflif)
+# - raqm (raqm.pc)
 # - create sane default policy file:
 #   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
 #
@@ -19,8 +21,8 @@
 # - module features:
 %bcond_without	autotrace	# Autotrace support in SVG module
 
-%define		ver	7.0.1
-%define		pver	6
+%define		ver	7.0.2
+%define		pver	5
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -38,7 +40,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	bd5518550befd5f9158b02b818bb9be6
+# Source0-md5:	c2b3a8f3050232eb82bc42c3415e306f
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
@@ -50,7 +52,7 @@ BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake >= 1:1.12
 %{?with_autotrace:BuildRequires:	autotrace-devel >= 0.31.1}
 BuildRequires:	bzip2-devel >= 1.0.1
-%{?with_djvu:BuildRequires:	djvulibre-devel}
+%{?with_djvu:BuildRequires:	djvulibre-devel >= 3.5.0}
 BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	fftw3-devel >= 3.0
 BuildRequires:	fontconfig-devel >= 2.1.0
@@ -76,17 +78,18 @@ BuildRequires:	libxml2-devel >= 2.0
 %{?with_openjpeg:BuildRequires:	openjpeg2-devel >= 2.1.0}
 BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
-BuildRequires:	pkgconfig
+BuildRequires:	pkgconfig >= 1:0.20
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	rpmbuild(macros) >= 1.315
 BuildRequires:	tar >= 1:1.22
 # only checked for, but only supplied scripts/txt2html is used
 BuildRequires:	tar >= 1:1.22
 #BuildRequires:	txt2html
-BuildRequires:	xorg-lib-libXext
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xz
 BuildRequires:	xz-devel >= 2.9.0
-BuildRequires:	zlib-devel
+BuildRequires:	zlib-devel >= 1.0.0
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Suggests:	shared-color-profiles
 Obsoletes:	ImageMagick-coder-dps
@@ -172,6 +175,7 @@ Summary(pt_BR.UTF-8):	Bibliotecas dinâmicas do ImageMagick
 Group:		X11/Libraries
 Requires:	fontconfig-libs >= 2.1.0
 Requires:	liblqr >= 0.1.0
+Requires:	zlib >= 1.0.0
 
 %description libs
 ImageMagick libraries.
@@ -203,7 +207,7 @@ Requires:	liblqr-devel >= 0.1.0
 Requires:	libltdl-devel
 Requires:	libtiff-devel
 Requires:	xorg-lib-libXext-devel
-Requires:	zlib-devel
+Requires:	zlib-devel >= 1.0.0
 
 %description devel
 This is the ImageMagick development package. It includes header files
@@ -436,6 +440,7 @@ Summary:	Coder module for DJVU files
 Summary(pl.UTF-8):	Moduł kodera dla plików DJVU
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	djvulibre >= 3.5.0}
 
 %description coder-djvu
 Coder module for DJVU files.
@@ -550,6 +555,7 @@ Summary(pl.UTF-8):	Moduł kodera do odczytu formatu języka znaczników pango
 Group:		X11/Applications/Graphics
 URL:		http://www.imagemagick.org/Usage/text/#pango
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	pango >= 1:1.28.1
 
 %description coder-pango
 Coder module to read pango markup language format.
@@ -872,8 +878,6 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/plasma.la
 %attr(755,root,root) %{modulesdir}/coders/pnm.so
 %{modulesdir}/coders/pnm.la
-#%attr(755,root,root) %{modulesdir}/coders/preview.so
-#%{modulesdir}/coders/preview.la
 %attr(755,root,root) %{modulesdir}/coders/psd.so
 %{modulesdir}/coders/psd.la
 %attr(755,root,root) %{modulesdir}/coders/ps.so
@@ -1129,28 +1133,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_bindir}/MagickCore-config
 %attr(755,root,root) %{_bindir}/MagickWand-config
-#%attr(755,root,root) %{_bindir}/Wand-config
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so
 %dir %{_includedir}/%{pname}
 %{_includedir}/%{pname}/MagickCore
 %{_includedir}/%{pname}/MagickWand
-#%{_includedir}/%{pname}/private
-%{_pkgconfigdir}/%{pname}.%{abisuf}.pc
+%{_pkgconfigdir}/ImageMagick-%{mver}.%{abisuf}.pc
 %{_pkgconfigdir}/ImageMagick.pc
 %{_pkgconfigdir}/MagickCore-%{mver}.%{abisuf}.pc
 %{_pkgconfigdir}/MagickCore.pc
 %{_pkgconfigdir}/MagickWand-%{mver}.%{abisuf}.pc
 %{_pkgconfigdir}/MagickWand.pc
-#%{_pkgconfigdir}/Wand-%{mver}.%{abisuf}.pc
-#%{_pkgconfigdir}/Wand.pc
-#%{_mandir}/man1/Magick-config.1*
 %{_mandir}/man1/MagickCore-config.1*
 %{_mandir}/man1/MagickWand-config.1*
-#%{_mandir}/man1/Wand-config.1*
 
 %files static
 %defattr(644,root,root,755)
@@ -1184,8 +1181,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so
 %{_includedir}/%{pname}/Magick++
 %{_includedir}/%{pname}/Magick++.h
-#%{_pkgconfigdir}/ImageMagick++-%{mver}.%{abisuf}.pc
-#%{_pkgconfigdir}/ImageMagick++.pc
 %{_pkgconfigdir}/Magick++-%{mver}.%{abisuf}.pc
 %{_pkgconfigdir}/Magick++.pc
 %{_mandir}/man1/Magick++-config.1*
