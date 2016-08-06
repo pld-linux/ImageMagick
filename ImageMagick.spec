@@ -440,7 +440,7 @@ Summary:	Coder module for DJVU files
 Summary(pl.UTF-8):	Moduł kodera dla plików DJVU
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	djvulibre >= 3.5.0}
+Requires:	djvulibre >= 3.5.0
 
 %description coder-djvu
 Coder module for DJVU files.
