@@ -19,8 +19,8 @@
 # - module features:
 %bcond_without	autotrace	# Autotrace support in SVG module
 
-%define		ver	6.9.6
-%define		pver	6
+%define		ver	7.0.3
+%define		pver	8
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -38,7 +38,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	a57f7e35655b556f16ed01daf38b8b82
+# Source0-md5:	1a715a2fec3af2b71ed58456dca273e1
 Patch0:		config.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -99,8 +99,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %endif
 %define		abisuf		Q%{QuantumDepth}%{?with_hdri:HDRI}
 %define		modulesdir	%{_libdir}/ImageMagick-%{ver}/modules-%{abisuf}
-%define		mver		6
-%define		pname		ImageMagick-6
+%define		mver		7
+%define		pname		ImageMagick-7
 
 %description
 ImageMagick is an image display, conversion, and manipulation tool. It
@@ -717,7 +717,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 
 # for coders development
 install -d $RPM_BUILD_ROOT%{_includedir}/%{pname}/private/magick
-cp -p magick/{blob,blob-private,delegate-private,exception-private,image-private,monitor-private,nt-base-private,quantum-private,static,studio}.h \
+cp -p MagickCore/{blob,blob-private,delegate-private,exception-private,image-private,monitor-private,nt-base-private,quantum-private,static,studio}.h \
 	$RPM_BUILD_ROOT%{_includedir}/%{pname}/private/magick
 
 cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
@@ -872,8 +872,6 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/plasma.la
 %attr(755,root,root) %{modulesdir}/coders/pnm.so
 %{modulesdir}/coders/pnm.la
-%attr(755,root,root) %{modulesdir}/coders/preview.so
-%{modulesdir}/coders/preview.la
 %attr(755,root,root) %{modulesdir}/coders/psd.so
 %{modulesdir}/coders/psd.la
 %attr(755,root,root) %{modulesdir}/coders/ps.so
@@ -964,6 +962,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/display
 %attr(755,root,root) %{_bindir}/identify
 %attr(755,root,root) %{_bindir}/import
+%attr(755,root,root) %{_bindir}/magick
+%attr(755,root,root) %{_bindir}/magick-script
 %attr(755,root,root) %{_bindir}/mogrify
 %attr(755,root,root) %{_bindir}/montage
 %attr(755,root,root) %{_bindir}/stream
@@ -977,6 +977,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/display.1*
 %{_mandir}/man1/identify.1*
 %{_mandir}/man1/import.1*
+%{_mandir}/man1/magick.1*
+%{_mandir}/man1/magick-script.1*
 %{_mandir}/man1/mogrify.1*
 %{_mandir}/man1/montage.1*
 %{_mandir}/man1/stream.1*
@@ -989,9 +991,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.2
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.0
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.2
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.0
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
 %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
@@ -1125,15 +1127,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/Magick-config
 %attr(755,root,root) %{_bindir}/MagickCore-config
 %attr(755,root,root) %{_bindir}/MagickWand-config
-%attr(755,root,root) %{_bindir}/Wand-config
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so
 %dir %{_includedir}/%{pname}
-%{_includedir}/%{pname}/magick
-%{_includedir}/%{pname}/wand
+%{_includedir}/%{pname}/MagickCore
+%{_includedir}/%{pname}/MagickWand
 %{_includedir}/%{pname}/private
 %{_pkgconfigdir}/ImageMagick-%{mver}.%{abisuf}.pc
 %{_pkgconfigdir}/ImageMagick.pc
@@ -1141,12 +1141,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/MagickCore.pc
 %{_pkgconfigdir}/MagickWand-%{mver}.%{abisuf}.pc
 %{_pkgconfigdir}/MagickWand.pc
-%{_pkgconfigdir}/Wand-%{mver}.%{abisuf}.pc
-%{_pkgconfigdir}/Wand.pc
-%{_mandir}/man1/Magick-config.1*
 %{_mandir}/man1/MagickCore-config.1*
 %{_mandir}/man1/MagickWand-config.1*
-%{_mandir}/man1/Wand-config.1*
 
 %files static
 %defattr(644,root,root,755)
@@ -1172,7 +1168,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.6
+%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.0
 
 %files c++-devel
 %defattr(644,root,root,755)
@@ -1180,8 +1176,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so
 %{_includedir}/%{pname}/Magick++
 %{_includedir}/%{pname}/Magick++.h
-%{_pkgconfigdir}/ImageMagick++-%{mver}.%{abisuf}.pc
-%{_pkgconfigdir}/ImageMagick++.pc
 %{_pkgconfigdir}/Magick++-%{mver}.%{abisuf}.pc
 %{_pkgconfigdir}/Magick++.pc
 %{_mandir}/man1/Magick++-config.1*
