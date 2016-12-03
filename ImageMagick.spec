@@ -1,4 +1,6 @@
 # TODO
+# - flif (flif.h, flif_create_decoder in libflif)
+# - raqm (raqm.pc)
 # - create sane default policy file:
 #   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
 #
@@ -51,7 +53,7 @@ BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake >= 1:1.12
 %{?with_autotrace:BuildRequires:	autotrace-devel >= 0.31.1}
 BuildRequires:	bzip2-devel >= 1.0.1
-%{?with_djvu:BuildRequires:	djvulibre-devel}
+%{?with_djvu:BuildRequires:	djvulibre-devel >= 3.5.0}
 BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	fftw3-devel >= 3.0
 BuildRequires:	fontconfig-devel >= 2.1.0
@@ -77,24 +79,25 @@ BuildRequires:	libxml2-devel >= 2.0
 %{?with_openjpeg:BuildRequires:	openjpeg2-devel >= 2.1.0}
 BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
-BuildRequires:	pkgconfig
+BuildRequires:	pkgconfig >= 1:0.20
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	rpmbuild(macros) >= 1.315
 BuildRequires:	tar >= 1:1.22
 # only checked for, but only supplied scripts/txt2html is used
 BuildRequires:	tar >= 1:1.22
 #BuildRequires:	txt2html
+BuildRequires:	xorg-lib-libX11
 BuildRequires:	xorg-lib-libXext
 BuildRequires:	xz
 BuildRequires:	xz-devel >= 2.9.0
-BuildRequires:	zlib-devel
+BuildRequires:	zlib-devel >= 1.0.0
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Suggests:	shared-color-profiles
 Obsoletes:	ImageMagick-coder-dps
 Obsoletes:	ImageMagick-coder-mpeg
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%if %{!?QuantumDepth:1}%{?QuantumDepth:0}
+%if 0%{!?QuantumDepth:1}
 %define		QuantumDepth	16
 %endif
 %define		abisuf		Q%{QuantumDepth}%{?with_hdri:HDRI}
@@ -173,6 +176,7 @@ Summary(pt_BR.UTF-8):	Bibliotecas dinâmicas do ImageMagick
 Group:		X11/Libraries
 Requires:	fontconfig-libs >= 2.1.0
 Requires:	liblqr >= 0.1.0
+Requires:	zlib >= 1.0.0
 
 %description libs
 ImageMagick libraries.
@@ -204,7 +208,7 @@ Requires:	liblqr-devel >= 0.1.0
 Requires:	libltdl-devel
 Requires:	libtiff-devel
 Requires:	xorg-lib-libXext-devel
-Requires:	zlib-devel
+Requires:	zlib-devel >= 1.0.0
 
 %description devel
 This is the ImageMagick development package. It includes header files
@@ -437,6 +441,7 @@ Summary:	Coder module for DJVU files
 Summary(pl.UTF-8):	Moduł kodera dla plików DJVU
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	djvulibre >= 3.5.0
 
 %description coder-djvu
 Coder module for DJVU files.
@@ -551,6 +556,7 @@ Summary(pl.UTF-8):	Moduł kodera do odczytu formatu języka znaczników pango
 Group:		X11/Applications/Graphics
 URL:		http://www.imagemagick.org/Usage/text/#pango
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	pango >= 1:1.28.1
 
 %description coder-pango
 Coder module to read pango markup language format.
