@@ -21,6 +21,7 @@
 # - module features:
 %bcond_without	autotrace	# Autotrace support in SVG module
 
+%define		origname	ImageMagick
 %define		ver	6.9.7
 %define		pver	0
 %include	/usr/lib/rpm/macros.perl
@@ -33,19 +34,19 @@ Summary(pt_BR.UTF-8):	Exibidor, conversor e manipulador de imagens sob X
 Summary(ru.UTF-8):	Просмотр, конвертирование, обработка изображений под X Window
 Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
-Name:		ImageMagick
+Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
 Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
-Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
+Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{origname}-%{ver}-%{pver}.tar.xz
 # Source0-md5:	98358e387587e102e7ecc5d3c465865a
 Patch0:		config.patch
-Patch1:		%{name}-link.patch
-Patch2:		%{name}-libpath.patch
-Patch3:		%{name}-ldflags.patch
-Patch4:		%{name}-lt.patch
+Patch1:		%{origname}-link.patch
+Patch2:		%{origname}-libpath.patch
+Patch3:		%{origname}-ldflags.patch
+Patch4:		%{origname}-lt.patch
 Patch5:		perlmagick.patch
 URL:		http://www.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
@@ -664,7 +665,7 @@ Coder module for WMF files.
 Moduł kodera dla plików WMF.
 
 %prep
-%setup -q -n %{name}-%{ver}-%{pver}
+%setup -q -n %{origname}-%{ver}-%{pver}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -713,7 +714,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-x
 
 %{__make} -j1
-%{__sed} -i -e 's,/%{name}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
+%{__sed} -i -e 's,/%{origname}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -732,7 +733,7 @@ cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 # packaged as %doc
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{mver}/{ChangeLog,LICENSE,NEWS.txt}
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{origname}-%{mver}/{ChangeLog,LICENSE,NEWS.txt}
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 
