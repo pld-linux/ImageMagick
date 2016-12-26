@@ -46,6 +46,7 @@ Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
+Patch5:		perlmagick.patch
 URL:		http://www.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
@@ -669,6 +670,7 @@ Moduł kodera dla plików WMF.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -1165,8 +1167,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{perl_vendorarch}/Image/Magick
 %{perl_vendorarch}/Image/Magick/%{abisuf}.pm
 %dir %{perl_vendorarch}/auto/Image/Magick
-#%{perl_vendorarch}/auto/Image/Magick/autosplit.ix
-#%attr(755,root,root) %{perl_vendorarch}/auto/Image/Magick/Magick.so
+%{perl_vendorarch}/auto/Image/Magick/autosplit.ix
+%attr(755,root,root) %{perl_vendorarch}/auto/Image/Magick/Magick.so
 %dir %{perl_vendorarch}/auto/Image/Magick/%{abisuf}
 %{perl_vendorarch}/auto/Image/Magick/%{abisuf}/autosplit.ix
 %attr(755,root,root) %{perl_vendorarch}/auto/Image/Magick/%{abisuf}/%{abisuf}.so
