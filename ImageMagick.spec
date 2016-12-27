@@ -36,7 +36,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -724,6 +724,19 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 	DESTDIR=$RPM_BUILD_ROOT \
 	pkgdocdir=%{_docdir}/%{name}-doc-%{version}
 
+for f in Magick Wand MagickCore MagickWand Magick++; do
+  %{__mv} $RPM_BUILD_ROOT%{_bindir}/$f{,6}-config
+  %{__mv} $RPM_BUILD_ROOT%{_mandir}/man1/$f{,6}-config.1
+done
+for f in ImageMagick MagickCore MagickWand Wand ImageMagick++ Magick++; do
+  %{__mv} $RPM_BUILD_ROOT%{_pkgconfigdir}/$f{,6}.pc
+done
+for f in animate compare composite conjure convert display identify import mogrify montage stream ; do
+  %{__mv} $RPM_BUILD_ROOT%{_bindir}/$f{,6}
+  %{__mv} $RPM_BUILD_ROOT%{_mandir}/man1/$f{,6}.1
+done
+%{__mv} $RPM_BUILD_ROOT%{_mandir}/man1/ImageMagick{,6}.1
+
 # for coders development
 install -d $RPM_BUILD_ROOT%{_includedir}/%{pname}/private/magick
 cp -p magick/{blob,blob-private,delegate-private,exception-private,image-private,monitor-private,nt-base-private,quantum-private,static,studio}.h \
@@ -965,30 +978,30 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/filters/analyze.so
 %{modulesdir}/filters/analyze.la
 
-%attr(755,root,root) %{_bindir}/animate
-%attr(755,root,root) %{_bindir}/compare
-%attr(755,root,root) %{_bindir}/composite
-%attr(755,root,root) %{_bindir}/conjure
-%attr(755,root,root) %{_bindir}/convert
-%attr(755,root,root) %{_bindir}/display
-%attr(755,root,root) %{_bindir}/identify
-%attr(755,root,root) %{_bindir}/import
-%attr(755,root,root) %{_bindir}/mogrify
-%attr(755,root,root) %{_bindir}/montage
-%attr(755,root,root) %{_bindir}/stream
+%attr(755,root,root) %{_bindir}/animate6
+%attr(755,root,root) %{_bindir}/compare6
+%attr(755,root,root) %{_bindir}/composite6
+%attr(755,root,root) %{_bindir}/conjure6
+%attr(755,root,root) %{_bindir}/convert6
+%attr(755,root,root) %{_bindir}/display6
+%attr(755,root,root) %{_bindir}/identify6
+%attr(755,root,root) %{_bindir}/import6
+%attr(755,root,root) %{_bindir}/mogrify6
+%attr(755,root,root) %{_bindir}/montage6
+%attr(755,root,root) %{_bindir}/stream6
 
-%{_mandir}/man1/ImageMagick.1*
-%{_mandir}/man1/animate.1*
-%{_mandir}/man1/compare.1*
-%{_mandir}/man1/composite.1*
-%{_mandir}/man1/convert.1*
-%{_mandir}/man1/conjure.1*
-%{_mandir}/man1/display.1*
-%{_mandir}/man1/identify.1*
-%{_mandir}/man1/import.1*
-%{_mandir}/man1/mogrify.1*
-%{_mandir}/man1/montage.1*
-%{_mandir}/man1/stream.1*
+%{_mandir}/man1/ImageMagick6.1*
+%{_mandir}/man1/animate6.1*
+%{_mandir}/man1/compare6.1*
+%{_mandir}/man1/composite6.1*
+%{_mandir}/man1/convert6.1*
+%{_mandir}/man1/conjure6.1*
+%{_mandir}/man1/display6.1*
+%{_mandir}/man1/identify6.1*
+%{_mandir}/man1/import6.1*
+%{_mandir}/man1/mogrify6.1*
+%{_mandir}/man1/montage6.1*
+%{_mandir}/man1/stream6.1*
 
 %files doc
 %defattr(644,root,root,755)
@@ -1134,10 +1147,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/Magick-config
-%attr(755,root,root) %{_bindir}/MagickCore-config
-%attr(755,root,root) %{_bindir}/MagickWand-config
-%attr(755,root,root) %{_bindir}/Wand-config
+%attr(755,root,root) %{_bindir}/Magick6-config
+%attr(755,root,root) %{_bindir}/MagickCore6-config
+%attr(755,root,root) %{_bindir}/MagickWand6-config
+%attr(755,root,root) %{_bindir}/Wand6-config
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so
 %dir %{_includedir}/%{pname}
@@ -1145,17 +1158,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/%{pname}/wand
 %{_includedir}/%{pname}/private
 %{_pkgconfigdir}/ImageMagick-%{mver}.%{abisuf}.pc
-%{_pkgconfigdir}/ImageMagick.pc
+%{_pkgconfigdir}/ImageMagick6.pc
 %{_pkgconfigdir}/MagickCore-%{mver}.%{abisuf}.pc
-%{_pkgconfigdir}/MagickCore.pc
+%{_pkgconfigdir}/MagickCore6.pc
 %{_pkgconfigdir}/MagickWand-%{mver}.%{abisuf}.pc
-%{_pkgconfigdir}/MagickWand.pc
+%{_pkgconfigdir}/MagickWand6.pc
 %{_pkgconfigdir}/Wand-%{mver}.%{abisuf}.pc
-%{_pkgconfigdir}/Wand.pc
-%{_mandir}/man1/Magick-config.1*
-%{_mandir}/man1/MagickCore-config.1*
-%{_mandir}/man1/MagickWand-config.1*
-%{_mandir}/man1/Wand-config.1*
+%{_pkgconfigdir}/Wand6.pc
+%{_mandir}/man1/Magick6-config.1*
+%{_mandir}/man1/MagickCore6-config.1*
+%{_mandir}/man1/MagickWand6-config.1*
+%{_mandir}/man1/Wand6-config.1*
 
 %files static
 %defattr(644,root,root,755)
@@ -1185,15 +1198,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files c++-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/Magick++-config
+%attr(755,root,root) %{_bindir}/Magick++6-config
 %attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so
 %{_includedir}/%{pname}/Magick++
 %{_includedir}/%{pname}/Magick++.h
 %{_pkgconfigdir}/ImageMagick++-%{mver}.%{abisuf}.pc
-%{_pkgconfigdir}/ImageMagick++.pc
+%{_pkgconfigdir}/ImageMagick++6.pc
 %{_pkgconfigdir}/Magick++-%{mver}.%{abisuf}.pc
-%{_pkgconfigdir}/Magick++.pc
-%{_mandir}/man1/Magick++-config.1*
+%{_pkgconfigdir}/Magick++6.pc
+%{_mandir}/man1/Magick++6-config.1*
 
 %files c++-static
 %defattr(644,root,root,755)
