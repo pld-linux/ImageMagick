@@ -36,7 +36,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	3
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -48,6 +48,7 @@ Patch2:		%{origname}-libpath.patch
 Patch3:		%{origname}-ldflags.patch
 Patch4:		%{origname}-lt.patch
 Patch5:		perlmagick.patch
+Patch6:		magick6.patch
 URL:		http://www.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
@@ -672,6 +673,7 @@ Moduł kodera dla plików WMF.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
