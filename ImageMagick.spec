@@ -1,6 +1,9 @@
 # TODO
 # - create sane default policy file:
 #   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
+# - unpackaged:
+#   /usr/lib64/ImageMagick-7.0.5/modules-Q16/coders/pgx.la
+#   /usr/lib64/ImageMagick-7.0.5/modules-Q16/coders/pgx.so
 #
 # Conditional build:
 # - features:
@@ -33,7 +36,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	3
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -991,7 +994,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.1
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.2
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.0
 %dir %{_libdir}/ImageMagick-%{ver}
@@ -1166,7 +1169,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.1
+%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.2
 
 %files c++-devel
 %defattr(644,root,root,755)
