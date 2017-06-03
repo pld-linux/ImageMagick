@@ -52,7 +52,7 @@ BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake >= 1:1.12
 %{?with_autotrace:BuildRequires:	autotrace-devel >= 0.31.1}
 BuildRequires:	bzip2-devel >= 1.0.1
-%{?with_djvu:BuildRequires:	djvulibre-devel}
+%{?with_djvu:BuildRequires:	djvulibre-devel >= 3.5.0}
 BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	fftw3-devel >= 3.0
 BuildRequires:	flif-devel
@@ -80,17 +80,17 @@ BuildRequires:	libxml2-devel >= 2.0
 %{?with_openjpeg:BuildRequires:	openjpeg2-devel >= 2.1.0}
 BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
-BuildRequires:	pkgconfig
+BuildRequires:	pkgconfig >= 1:0.20
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	rpmbuild(macros) >= 1.315
 BuildRequires:	tar >= 1:1.22
-# only checked for, but only supplied scripts/txt2html is used
-BuildRequires:	tar >= 1:1.22
+# just checked for, actually supplied scripts/txt2html is used
 #BuildRequires:	txt2html
-BuildRequires:	xorg-lib-libXext
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xz
 BuildRequires:	xz-devel >= 2.9.0
-BuildRequires:	zlib-devel
+BuildRequires:	zlib-devel >= 1.0.0
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Suggests:	shared-color-profiles
 Obsoletes:	ImageMagick-coder-dps
@@ -176,6 +176,7 @@ Summary(pt_BR.UTF-8):	Bibliotecas dinâmicas do ImageMagick
 Group:		X11/Libraries
 Requires:	fontconfig-libs >= 2.1.0
 Requires:	liblqr >= 0.1.0
+Requires:	zlib >= 1.0.0
 
 %description libs
 ImageMagick libraries.
@@ -440,6 +441,7 @@ Summary:	Coder module for DJVU files
 Summary(pl.UTF-8):	Moduł kodera dla plików DJVU
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	djvulibre >= 3.5.0
 
 %description coder-djvu
 Coder module for DJVU files.
