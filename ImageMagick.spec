@@ -1,6 +1,4 @@
 # TODO
-# - flif (flif.h, flif_create_decoder in libflif)
-# - raqm (raqm.pc)
 # - create sane default policy file:
 #   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
 #
@@ -11,6 +9,7 @@
 %bcond_without	openmp		# OpenMP computing support
 %bcond_with	hdri		# HDRI support (accurately represent the wide range of intensity levels found in real scenes)
 %bcond_with	gs		# PostScript support through ghostscript library (warning: breaks jpeg (and possibly tiff) because of symbol clashes!)
+%bcond_without	raqm		# RAQM support in annotate
 # - modules:
 %bcond_without	djvu		# DJVU module
 %bcond_without	exr		# OpenEXR module
@@ -22,8 +21,8 @@
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %define		origname	ImageMagick
-%define		ver	6.9.7
-%define		pver	0
+%define		ver	6.9.8
+%define		pver	9
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -41,7 +40,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{origname}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	98358e387587e102e7ecc5d3c465865a
+# Source0-md5:	08905a13d33101f349ad34837ff8d5a7
 Patch0:		config.patch
 Patch1:		%{origname}-link.patch
 Patch2:		%{origname}-libpath.patch
@@ -59,6 +58,7 @@ BuildRequires:	bzip2-devel >= 1.0.1
 %{?with_djvu:BuildRequires:	djvulibre-devel >= 3.5.0}
 BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	fftw3-devel >= 3.0
+BuildRequires:	flif-devel
 BuildRequires:	fontconfig-devel >= 2.1.0
 BuildRequires:	freetype-devel >= 2.0.2-2
 %{?with_openmp:BuildRequires:	gcc-c++ >= 6:4.2}
@@ -72,6 +72,7 @@ BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	liblqr-devel >= 0.1.0
 BuildRequires:	libltdl-devel
 BuildRequires:	libpng-devel >= 1.0.8
+%{?with_raqm:BuildRequires:	libraqm-devel}
 BuildRequires:	librsvg-devel >= 2.9.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
@@ -87,10 +88,9 @@ BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	rpmbuild(macros) >= 1.315
 BuildRequires:	tar >= 1:1.22
 # only checked for, but only supplied scripts/txt2html is used
-BuildRequires:	tar >= 1:1.22
 #BuildRequires:	txt2html
-BuildRequires:	xorg-lib-libX11
-BuildRequires:	xorg-lib-libXext
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xz
 BuildRequires:	xz-devel >= 2.9.0
 BuildRequires:	zlib-devel >= 1.0.0
@@ -478,6 +478,18 @@ Coder module for ILM EXR files.
 %description coder-exr -l pl.UTF-8
 Moduł kodera dla plików EXR ILM.
 
+%package coder-flif
+Summary:	Coder module for FLIF (Free Lossless Image Format) files
+Summary(pl.UTF-8):	Moduł kodera dla plików FLIF (Free Lossless Image Format)
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-flif
+Coder module for FLIF (Free Lossless Image Format) files.
+
+%description coder-flif -l pl.UTF-8
+Moduł kodera dla plików FLIF (Free Lossless Image Format).
+
 %package coder-fpx
 Summary:	Coder module for FlashPIX (FPX) files
 Summary(pl.UTF-8):	Moduł kodera dla plików FlashPIX (FPX)
@@ -700,19 +712,20 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-djvu%{!?with_djvu:=no} \
 	--with-dps=no \
 	--with-fpx%{!?with_fpx:=no} \
+	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-gslib%{!?with_gs:=no} \
 	--with-gvc%{!?with_graphviz:=no} \
 	--with-magick_plus_plus%{!?with_cxx:=no} \
 	--with-openexr%{!?with_exr:=no} \
 	--with-openjp2%{!?with_openjpeg:=no} \
-	--with-wmf%{!?with_wmf:=no} \
-	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-perl=%{__perl} \
 	--with-perl-options="INSTALLDIRS=vendor" \
 	--with-quantum-depth=%{QuantumDepth} \
+	--with-raqm%{!?with_raqm:=no} \
 	--with-rsvg \
 	--with-threads \
 	--with-webp \
+	--with-wmf%{!?with_wmf:=no} \
 	--with-x
 
 %{__make} -j1
@@ -888,6 +901,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/pes.la
 %attr(755,root,root) %{modulesdir}/coders/pdb.so
 %{modulesdir}/coders/pdb.la
+%attr(755,root,root) %{modulesdir}/coders/pgx.so
+%{modulesdir}/coders/pgx.la
 %attr(755,root,root) %{modulesdir}/coders/pict.so
 %{modulesdir}/coders/pict.la
 %attr(755,root,root) %{modulesdir}/coders/pix.so
@@ -1013,9 +1028,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.3
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.4
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.3
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.4
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
 %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
@@ -1046,6 +1061,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/exr.so
 %{modulesdir}/coders/exr.la
 %endif
+
+%files coder-flif
+%defattr(644,root,root,755)
+# R: flif
+%attr(755,root,root) %{modulesdir}/coders/flif.so
+%{modulesdir}/coders/flif.la
 
 %if %{with fpx}
 %files coder-fpx
