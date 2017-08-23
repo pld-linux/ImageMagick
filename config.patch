@@ -1,15 +1,15 @@
---- ImageMagick-7.0.5-5/config/policy.xml~	2017-04-24 20:18:37.000000000 +0300
-+++ ImageMagick-7.0.5-5/config/policy.xml	2017-05-03 18:23:29.877606299 +0300
-@@ -77,10 +77,21 @@
+--- ImageMagick-7.0.6-9/config/policy.xml~	2017-08-21 03:31:20.000000000 +0300
++++ ImageMagick-7.0.6-9/config/policy.xml	2017-08-23 15:30:03.625671866 +0300
+@@ -70,10 +70,21 @@
+   <!-- <policy domain="resource" name="thread" value="4"/> -->
    <!-- <policy domain="resource" name="throttle" value="0"/> -->
-   <!-- <policy domain="resource" name="time" value="3600"/> -->
    <!-- <policy domain="resource" name="time" value="3600"/> -->
 -  <!-- <policy domain="coder" rights="none" pattern="MVG" /> -->
 -  <!-- <policy domain="delegate" rights="none" pattern="HTTPS" /> -->
 -  <!-- <policy domain="path" rights="none" pattern="@*" /> -->
    <!-- <policy domain="cache" name="memory-map" value="anonymous"/> -->
    <!-- <policy domain="cache" name="synchronize" value="True"/> -->
-   <policy domain="cache" name="shared-secret" value="passphrase" stealth="true"/>
+   <!-- <policy domain="cache" name="shared-secret" value="passphrase" stealth="true"/> -->
 +  <policy domain="coder" rights="none" pattern="EPHEMERAL" />
 +  <policy domain="coder" rights="none" pattern="URL" />
 +  <policy domain="coder" rights="none" pattern="HTTPS" />
