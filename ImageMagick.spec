@@ -1012,9 +1012,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.2
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.3
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.0
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.3
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
 %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
@@ -1193,7 +1193,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.2
+%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.3
 
 %files c++-devel
 %defattr(644,root,root,755)
