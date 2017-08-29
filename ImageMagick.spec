@@ -59,6 +59,7 @@ BuildRequires:	flif-devel
 BuildRequires:	fontconfig-devel >= 2.1.0
 BuildRequires:	freetype-devel >= 2.0.2-2
 %{?with_openmp:BuildRequires:	gcc-c++ >= 6:4.2}
+BuildRequires:	gettext-devel
 %{?with_gs:BuildRequires:	ghostscript-devel}
 %{?with_graphviz:BuildRequires:	graphviz-devel >= 2.9.0}
 BuildRequires:	jbigkit-devel
