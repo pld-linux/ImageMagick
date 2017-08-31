@@ -34,12 +34,14 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	5
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
 # Source0-md5:	29031b3cc7a6e44b2334ad6692ba1736
+Patch100:	https://github.com/ImageMagick/ImageMagick/commit/ef6cee1bcf144b7c9285787920361a53296e7907.patch
+# Patch100-md5:	751551990038f49a136c4e39336907ee
 Patch0:		config.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -676,6 +678,7 @@ Moduł kodera dla plików WMF.
 
 %prep
 %setup -q -n %{name}-%{ver}-%{pver}
+%patch100 -p1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
