@@ -21,8 +21,8 @@
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %define		origname	ImageMagick
-%define		ver	6.9.8
-%define		pver	9
+%define		ver	6.9.9
+%define		pver	26
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -35,12 +35,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{origname}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	08905a13d33101f349ad34837ff8d5a7
+# Source0-md5:	af553c3dfad841748a6b49f44e354ba7
 Patch0:		config.patch
 Patch1:		%{origname}-link.patch
 Patch2:		%{origname}-libpath.patch
@@ -48,7 +48,7 @@ Patch3:		%{origname}-ldflags.patch
 Patch4:		%{origname}-lt.patch
 Patch5:		perlmagick.patch
 Patch6:		magick6.patch
-URL:		http://www.imagemagick.org/
+URL:		https://legacy.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
 BuildRequires:	autoconf >= 2.69
@@ -1028,9 +1028,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.4
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.5
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.4
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.5
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
 %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
@@ -1217,7 +1217,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.7
+%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.8
 
 %files c++-devel
 %defattr(644,root,root,755)

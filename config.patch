@@ -1,13 +1,15 @@
---- ImageMagick-6.9.8-9/config/policy.xml.orig	2017-06-03 21:42:26.347928053 +0200
-+++ ImageMagick-6.9.8-9/config/policy.xml	2017-06-03 21:46:36.687925194 +0200
-@@ -69,10 +69,20 @@
+--- ImageMagick-6.9.9-26/config/policy.xml~	2017-12-06 03:32:01.000000000 +0200
++++ ImageMagick-6.9.9-26/config/policy.xml	2017-12-14 19:34:37.097613554 +0200
+@@ -71,10 +71,21 @@
    <!-- <policy domain="resource" name="thread" value="4"/> -->
    <!-- <policy domain="resource" name="throttle" value="0"/> -->
    <!-- <policy domain="resource" name="time" value="3600"/> -->
--  <!-- <policy domain="resource" name="time" value="3600"/> -->
 -  <!-- <policy domain="coder" rights="none" pattern="MVG" /> -->
 -  <!-- <policy domain="delegate" rights="none" pattern="HTTPS" /> -->
 -  <!-- <policy domain="path" rights="none" pattern="@*" /> -->
+   <!-- <policy domain="cache" name="memory-map" value="anonymous"/> -->
+   <!-- <policy domain="cache" name="synchronize" value="True"/> -->
+   <!-- <policy domain="cache" name="shared-secret" value="passphrase" stealth="true"/> -->
 +  <policy domain="coder" rights="none" pattern="EPHEMERAL" />
 +  <policy domain="coder" rights="none" pattern="URL" />
 +  <policy domain="coder" rights="none" pattern="HTTPS" />
@@ -22,6 +24,4 @@
 +  <policy domain="coder" rights="none" pattern="PLT" />
 +  <policy domain="path" rights="none" pattern="|*"/>
 +  <policy domain="path" rights="none" pattern="@*"/>  <!-- indirect reads not permitted -->
-   <!-- <policy domain="cache" name="memory-map" value="anonymous"/> -->
-   <!-- <policy domain="cache" name="synchronize" value="True"/> -->
-   <policy domain="cache" name="shared-secret" value="passphrase" stealth="true"/>
+ </policymap>
