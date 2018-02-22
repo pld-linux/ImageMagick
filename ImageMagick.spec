@@ -21,7 +21,7 @@
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %define		ver	7.0.7
-%define		pver	22
+%define		pver	23
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -39,7 +39,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	980c249173d0e97cb62c21e15c89e52a
+# Source0-md5:	e016b49bb861bd16803828b92cb0f486
 Patch0:		config.patch
 
 Patch2:		%{name}-libpath.patch
