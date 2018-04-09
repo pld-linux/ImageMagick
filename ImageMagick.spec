@@ -21,7 +21,7 @@
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %define		ver	7.0.7
-%define		pver	23
+%define		pver	28
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -39,7 +39,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	e016b49bb861bd16803828b92cb0f486
+# Source0-md5:	15907fe499f0377ff28eeafb5905510a
 Patch0:		config.patch
 
 Patch2:		%{name}-libpath.patch
@@ -64,6 +64,7 @@ BuildRequires:	gettext-devel
 %{?with_graphviz:BuildRequires:	graphviz-devel >= 2.9.0}
 BuildRequires:	jbigkit-devel
 BuildRequires:	lcms2-devel >= 2.0
+BuildRequires:	libde265-devel
 %{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 %{?with_openmp:BuildRequires:	libgomp-devel}
 BuildRequires:	libjpeg-devel >= 6b
@@ -807,8 +808,6 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/ept.la
 %attr(755,root,root) %{modulesdir}/coders/fax.so
 %{modulesdir}/coders/fax.la
-%attr(755,root,root) %{modulesdir}/coders/fd.so
-%{modulesdir}/coders/fd.la
 %attr(755,root,root) %{modulesdir}/coders/fits.so
 %{modulesdir}/coders/fits.la
 %attr(755,root,root) %{modulesdir}/coders/gif.so
@@ -1034,11 +1033,13 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/djvu.la
 %endif
 
+%if %{with graphviz}
 %files coder-dot
 %defattr(644,root,root,755)
 # R: graphviz, gd
 %attr(755,root,root) %{modulesdir}/coders/dot.so
 %{modulesdir}/coders/dot.la
+%endif
 
 %if %{with exr}
 %files coder-exr
