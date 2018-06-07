@@ -20,6 +20,8 @@
 # - module features:
 %bcond_without	autotrace	# Autotrace support in SVG module
 
+%define	libpng_ver 1.6.34
+
 %define		ver	7.0.7
 %define		pver	35
 %include	/usr/lib/rpm/macros.perl
@@ -34,7 +36,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -71,7 +73,7 @@ BuildRequires:	libheif-devel
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	liblqr-devel >= 0.1.0
 BuildRequires:	libltdl-devel
-BuildRequires:	libpng-devel >= 1.0.8
+BuildRequires:	libpng-devel >= %{libpng_ver}
 %{?with_raqm:BuildRequires:	libraqm-devel}
 BuildRequires:	librsvg-devel >= 2.9.0
 BuildRequires:	libstdc++-devel
@@ -596,6 +598,7 @@ Summary:	Coder module for PNG files
 Summary(pl.UTF-8):	Modul kodera dla plików PNG
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libpng >= %{libpng_ver}
 
 %description coder-png
 Coder module for PNG files.
@@ -669,6 +672,7 @@ Summary:	Coder module for WMF files
 Summary(pl.UTF-8):	Moduł kodera dla plików WMF
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libpng >= %{libpng_ver}
 
 %description coder-wmf
 Coder module for WMF files.
