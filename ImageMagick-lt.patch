@@ -1,9 +1,9 @@
---- ImageMagick-6.9.3-6/configure.ac.orig	2016-03-06 18:30:04.449575381 +0100
-+++ ImageMagick-6.9.3-6/configure.ac	2016-03-06 18:35:39.416227990 +0100
-@@ -489,10 +489,6 @@
+--- ImageMagick-6.9.10-19/configure.ac.orig	2018-12-21 07:12:50.451777763 +0100
++++ ImageMagick-6.9.10-19/configure.ac	2018-12-21 07:16:16.398442079 +0100
+@@ -488,10 +488,6 @@
          CFLAGS="$CFLAGS $DEF_THREAD"
          CXXFLAGS="$CXXFLAGS $DEF_THREAD"
- 	THREAD_LIBS="$PTHREAD_LIBS"
+         THREAD_LIBS="$PTHREAD_LIBS"
 -        if test "$CC" != "$PTHREAD_CC"; then
 -            AC_MSG_WARN([Replacing compiler $CC with compiler $PTHREAD_CC to support pthreads.])
 -            CC="$PTHREAD_CC"

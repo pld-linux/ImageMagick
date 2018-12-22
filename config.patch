@@ -1,10 +1,11 @@
---- ImageMagick-6.9.9-26/config/policy.xml~	2017-12-06 03:32:01.000000000 +0200
-+++ ImageMagick-6.9.9-26/config/policy.xml	2017-12-14 19:34:37.097613554 +0200
-@@ -71,10 +71,21 @@
+--- ImageMagick-6.9.10-19/config/policy.xml.orig	2018-12-21 06:58:42.388454113 +0100
++++ ImageMagick-6.9.10-19/config/policy.xml	2018-12-21 07:02:29.218451524 +0100
+@@ -68,11 +68,22 @@
    <!-- <policy domain="resource" name="thread" value="4"/> -->
    <!-- <policy domain="resource" name="throttle" value="0"/> -->
    <!-- <policy domain="resource" name="time" value="3600"/> -->
 -  <!-- <policy domain="coder" rights="none" pattern="MVG" /> -->
+   <!-- <policy domain="module" rights="none" pattern="{PS,PDF,XPS}" /> -->
 -  <!-- <policy domain="delegate" rights="none" pattern="HTTPS" /> -->
 -  <!-- <policy domain="path" rights="none" pattern="@*" /> -->
    <!-- <policy domain="cache" name="memory-map" value="anonymous"/> -->

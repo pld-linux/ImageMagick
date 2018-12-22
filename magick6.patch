@@ -39,8 +39,8 @@
        ;;
      *)
        echo "${usage}" 1>&2
---- ImageMagick-6.9.9-26/magick/MagickCore-config.in~	2017-12-14 19:53:01.000000000 +0200
-+++ ImageMagick-6.9.9-26/magick/MagickCore-config.in	2017-12-14 19:53:39.770926527 +0200
+--- ImageMagick-6.9.10-19/magick/MagickCore-config.in.orig	2018-12-20 00:48:40.000000000 +0100
++++ ImageMagick-6.9.10-19/magick/MagickCore-config.in	2018-12-21 07:18:02.941774194 +0100
 @@ -8,11 +8,11 @@
  exec_prefix=@exec_prefix@
  
@@ -59,8 +59,8 @@
        echo '@PACKAGE_VERSION@ Q@QUANTUM_DEPTH@ @MAGICK_HDRI@'
        ;;
      --cflags)
--      @PKG_CONFIG@ -config --cflags MagickCore
-+      @PKG_CONFIG@ -config --cflags MagickCore6
+-      @PKG_CONFIG@ --cflags MagickCore
++      @PKG_CONFIG@ --cflags MagickCore6
        ;;
      --cxxflags)
 -      @PKG_CONFIG@ --cflags MagickCore

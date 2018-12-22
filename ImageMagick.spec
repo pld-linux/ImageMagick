@@ -21,8 +21,8 @@
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %define		origname	ImageMagick
-%define		ver	6.9.9
-%define		pver	26
+%define		ver	6.9.10
+%define		pver	19
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -35,12 +35,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{origname}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	af553c3dfad841748a6b49f44e354ba7
+# Source0-md5:	e23416ba38ac78f8482f74648590544f
 Patch0:		config.patch
 Patch1:		%{origname}-link.patch
 Patch2:		%{origname}-libpath.patch
@@ -48,6 +48,7 @@ Patch3:		%{origname}-ldflags.patch
 Patch4:		%{origname}-lt.patch
 Patch5:		perlmagick.patch
 Patch6:		magick6.patch
+Patch7:		%{origname}-OpenCL.patch
 URL:		https://legacy.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
@@ -68,16 +69,18 @@ BuildRequires:	jbigkit-devel
 BuildRequires:	lcms2-devel >= 2.0
 %{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 %{?with_openmp:BuildRequires:	libgomp-devel}
+BuildRequires:	libheif-devel
 BuildRequires:	libjpeg-devel >= 6b
 BuildRequires:	liblqr-devel >= 0.1.0
 BuildRequires:	libltdl-devel
 BuildRequires:	libpng-devel >= 1.0.8
 %{?with_raqm:BuildRequires:	libraqm-devel}
+BuildRequires:	libraw-devel >= 0.14.8
 BuildRequires:	librsvg-devel >= 2.9.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:2.2
-BuildRequires:	libwebp-devel
+BuildRequires:	libwebp-devel >= 0.4.4
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
 %{?with_openjpeg:BuildRequires:	openjpeg2-devel >= 2.1.0}
@@ -93,6 +96,7 @@ BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xz
 BuildRequires:	xz-devel >= 2.9.0
+BuildRequires:	zstd-devel >= 1.0.0
 BuildRequires:	zlib-devel >= 1.0.0
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Suggests:	shared-color-profiles
@@ -206,10 +210,10 @@ Requires:	fontconfig-devel >= 2.1.0
 Requires:	freetype-devel >= 2.0.2
 Requires:	lcms2-devel >= 2.0
 %{?with_openmp:Requires:	libgomp-devel}
-Requires:	libjpeg-devel >= 6b
 Requires:	liblqr-devel >= 0.1.0
 Requires:	libltdl-devel
-Requires:	libtiff-devel
+%{?with_raqm:Requires:	libraqm-devel}
+Requires:	xorg-lib-libX11-devel
 Requires:	xorg-lib-libXext-devel
 Requires:	zlib-devel >= 1.0.0
 
@@ -452,6 +456,19 @@ Coder module for DJVU files.
 %description coder-djvu -l pl.UTF-8
 Moduł kodera dla plików DJVU.
 
+%package coder-dng
+Summary:	Coder module for DNG files
+Summary(pl.UTF-8):	Moduł kodera dla plików DNG
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libraw >= 0.14.8
+
+%description coder-dng
+Coder module for DNG (Digital Negative) files.
+
+%description coder-dng -l pl.UTF-8
+Moduł kodera dla plików DNG (Digital Negative).
+
 %package coder-dot
 Summary:	Coder module for GraphViz DOT files
 Summary(pl.UTF-8):	Moduł kodera dla plików GraphViz DOT
@@ -501,6 +518,18 @@ Coder module for FlashPIX (FPX) files.
 
 %description coder-fpx -l pl.UTF-8
 Moduł kodera dla plików FlashPIX (FPX).
+
+%package coder-heic
+Summary:	Coder module for HEIC files
+Summary(pl.UTF-8):	Moduł kodera dla plików HEIC
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description coder-heic
+Coder module for HEIC files.
+
+%description coder-heic -l pl.UTF-8
+Moduł kodera dla plików HEIC.
 
 %package coder-jbig
 Summary:	Coder module for JBIG files
@@ -634,6 +663,7 @@ Summary:	Coder module for TIFF files
 Summary(pl.UTF-8):	Moduł kodera dla plików TIFF
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	zstd >= 1.0.0
 
 %description coder-tiff
 Coder module for TIFF files.
@@ -658,6 +688,7 @@ Summary:	Coder module for WebP files
 Summary(pl.UTF-8):	Moduł kodera dla plików WebP
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libwebp >= 0.4.4
 
 %description coder-webp
 Coder module for WebP files.
@@ -686,6 +717,7 @@ Moduł kodera dla plików WMF.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -817,16 +849,12 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/debug.la
 %attr(755,root,root) %{modulesdir}/coders/dib.so
 %{modulesdir}/coders/dib.la
-%attr(755,root,root) %{modulesdir}/coders/dng.so
-%{modulesdir}/coders/dng.la
 %attr(755,root,root) %{modulesdir}/coders/dpx.so
 %{modulesdir}/coders/dpx.la
 %attr(755,root,root) %{modulesdir}/coders/ept.so
 %{modulesdir}/coders/ept.la
 %attr(755,root,root) %{modulesdir}/coders/fax.so
 %{modulesdir}/coders/fax.la
-%attr(755,root,root) %{modulesdir}/coders/fd.so
-%{modulesdir}/coders/fd.la
 %attr(755,root,root) %{modulesdir}/coders/fits.so
 %{modulesdir}/coders/fits.la
 %attr(755,root,root) %{modulesdir}/coders/gif.so
@@ -1028,9 +1056,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.5
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.6
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.5
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.6
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
 %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
@@ -1047,6 +1075,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/djvu.so
 %{modulesdir}/coders/djvu.la
 %endif
+
+%files coder-dng
+%defattr(644,root,root,755)
+# R: libraw
+%attr(755,root,root) %{modulesdir}/coders/dng.so
+%{modulesdir}/coders/dng.la
 
 %files coder-dot
 %defattr(644,root,root,755)
@@ -1075,6 +1109,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/fpx.so
 %{modulesdir}/coders/fpx.la
 %endif
+
+%files coder-heic
+%defattr(644,root,root,755)
+# R: libheif
+%attr(755,root,root) %{modulesdir}/coders/heic.so
+%{modulesdir}/coders/heic.la
 
 %files coder-jbig
 %defattr(644,root,root,755)
@@ -1138,7 +1178,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files coder-svg
 %defattr(644,root,root,755)
-# R: libxml2, librsvg, %{?with_autotrace:autotrace}
+# R: cairo, libxml2, librsvg, %{?with_autotrace:autotrace}
 %attr(755,root,root) %{modulesdir}/coders/svg.so
 %{modulesdir}/coders/svg.la
 

@@ -1,6 +1,6 @@
---- ImageMagick-6.8.4-8/configure.ac.orig	2013-04-09 15:47:16.713625903 +0200
-+++ ImageMagick-6.8.4-8/configure.ac	2013-04-09 15:49:29.416956473 +0200
-@@ -3903,7 +3903,23 @@
+--- ImageMagick-6.9.10-19/configure.ac.orig	2018-12-21 07:11:13.258445539 +0100
++++ ImageMagick-6.9.10-19/configure.ac	2018-12-21 07:12:20.068444776 +0100
+@@ -3937,7 +3937,23 @@
  MAGICK_CXXFLAGS="$CXXFLAGS"
  MAGICK_CPPFLAGS=`echo $MAGICK_CPPFLAGS | sed -e 's/  */ /g'`
  MAGICK_PCFLAGS=`echo $MAGICK_PCFLAGS | sed -e 's/  */ /g'`
@@ -22,6 +22,6 @@
 +  esac
 +done
 +LDFLAGS="$new_LDFLAGS"
- MAGICK_LIBS="$MAGICK_DEP_LIBS"
+ MAGICK_LIBS="$MAGICK_DEP_LIBS $MAGICK_EXTRA_DEP_LIBS"
  
  AC_SUBST(MAGICK_CFLAGS)

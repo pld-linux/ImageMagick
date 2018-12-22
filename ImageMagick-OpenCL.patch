@@ -1,0 +1,11 @@
+--- ImageMagick-6.9.10-19/magick/opencl.c.orig	2018-12-20 00:48:40.000000000 +0100
++++ ImageMagick-6.9.10-19/magick/opencl.c	2018-12-22 14:07:30.767173808 +0100
+@@ -474,7 +474,7 @@
+ #ifdef MAGICKCORE_WINDOWS_SUPPORT
+       library = OsLibraryLoad("OpenCL.dll");
+ #else
+-      library = OsLibraryLoad("libOpenCL.so");
++      library = OsLibraryLoad("libOpenCL.so.1");
+ #endif
+       if (library)
+         status = bindOpenCLFunctions(library);
