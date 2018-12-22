@@ -1,0 +1,113 @@
+--- ImageMagick-7.0.8-19/configure.ac.orig	2018-12-22 17:08:34.543716430 +0100
++++ ImageMagick-7.0.8-19/configure.ac	2018-12-22 17:18:16.820376446 +0100
+@@ -1609,7 +1609,7 @@
+     AC_MSG_CHECKING([for X11])
+     AC_MSG_RESULT([])
+     LDFLAGS="$LDFLAGS $X_LIBS"
+-    X11_LIBS="$X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
++    X11_LIBS="-lX11 $X_EXTRA_LIBS"
+     LIBS="$X11_LIBS $LIBS"
+     CPPFLAGS="$CPPFLAGS $X_CFLAGS"
+ 
+@@ -1636,7 +1636,7 @@
+     #
+     AC_CHECK_LIB([Xext],[XShapeCombineMask],[XEXT_LIBS='-lXext' ; AC_DEFINE(HAVE_SHAPE,1,X11 server supports shape extension)],[],[])
+     AC_CHECK_LIB(Xt,XtSetEventDispatcher,XT_LIBS='-lXt',,)
+-    LIBS="$XEXT_LIBS $XT_LIBS $LIBS"
++    LIBS="$XEXT_LIBS $LIBS"
+ fi
+ if test "$no_x" != 'yes'; then
+   have_x='yes'
+@@ -3915,9 +3915,9 @@
+ #
+ 
+ if test "$build_modules" != 'no'; then
+-    MAGICK_DEP_LIBS="$USER_LIBS $LCMS_LIBS $FREETYPE_LIBS $RAQM_LIBS $LQR_LIBS $FFTW_LIBS $XML_LIBS $FLIF_LIBS $FONTCONFIG_LIBS $XEXT_LIBS $IPC_LIBS $X11_LIBS $XT_LIBS $LZMA_LIBS $BZLIB_LIBS $ZLIB_LIBS $ZSTD_LIBS $LTDL_LIBS $GDI32_LIBS $WS2_32_LIBS $MATH_LIBS $CL_LIBS $UMEM_LIBS $JEMALLOC_LIBS $THREAD_LIBS"
++    MAGICK_DEP_LIBS="$USER_LIBS $LCMS_LIBS $FREETYPE_LIBS $RAQM_LIBS $LQR_LIBS $FFTW_LIBS $XML_LIBS            $FONTCONFIG_LIBS $XEXT_LIBS $IPC_LIBS $X11_LIBS                     $BZLIB_LIBS $ZLIB_LIBS            $LTDL_LIBS $GDI32_LIBS $WS2_32_LIBS $MATH_LIBS          $UMEM_LIBS $JEMALLOC_LIBS $THREAD_LIBS"
+ else
+-    MAGICK_DEP_LIBS="$USER_LIBS $JBIG_LIBS $LCMS_LIBS $TIFF_LIBS $FREETYPE_LIBS $RAQM_LIBS $JPEG_LIBS $GS_LIBS $LQR_LIBS $PNG_LIBS $AUTOTRACE_LIBS $DJVU_LIBS $FFTW_LIBS $FLIF_LIBS $FPX_LIBS $FONTCONFIG_LIBS $HEIF_LIBS $WEBPMUX_LIBS $WEBP_LIBS $WMF_LIBS $DPS_LIBS $XEXT_LIBS $XT_LIBS $IPC_LIBS $X11_LIBS $LZMA_LIBS $BZLIB_LIBS $OPENEXR_LIBS $LIBOPENJP2_LIBS $PANGO_LIBS $RAW_R_LIBS $RSVG_LIBS $XML_LIBS $GVC_LIBS $ZLIB_LIBS $ZSTD_LIBS $LTDL_LIBS $GDI32_LIBS $WS2_32_LIBS $MATH_LIBS $CL_LIBS $UMEM_LIBS $JEMALLOC_LIBS $THREAD_LIBS"
++    MAGICK_DEP_LIBS="$USER_LIBS $JBIG_LIBS $LCMS_LIBS $TIFF_LIBS $FREETYPE_LIBS $RAQM_LIBS $JPEG_LIBS $GS_LIBS $LQR_LIBS $PNG_LIBS $AUTOTRACE_LIBS $DJVU_LIBS $FFTW_LIBS $FLIF_LIBS $FPX_LIBS $FONTCONFIG_LIBS $HEIF_LIBS               $WEBP_LIBS $WMF_LIBS $DPS_LIBS $XEXT_LIBS          $IPC_LIBS $X11_LIBS $LZMA_LIBS $BZLIB_LIBS $OPENEXR_LIBS $LIBOPENJP2_LIBS $PANGO_LIBS $RAW_R_LIBS $RSVG_LIBS $XML_LIBS $GVC_LIBS $ZLIB_LIBS $ZSTD_LIBS            $GDI32_LIBS $WS2_32_LIBS $MATH_LIBS          $UMEM_LIBS $JEMALLOC_LIBS $THREAD_LIBS"
+ fi
+ MAGICK_EXTRA_DEP_LIBS="$GOMP_LIBS"
+ AC_SUBST(MAGICK_DEP_LIBS)
+--- ImageMagick-6.9.10-19/coders/Makefile.am.orig	2018-12-20 00:48:40.000000000 +0100
++++ ImageMagick-6.9.10-19/coders/Makefile.am	2018-12-22 10:26:05.633992165 +0100
+@@ -468,7 +468,7 @@
+ coders_djvu_la_SOURCES     = coders/djvu.c
+ coders_djvu_la_CPPFLAGS    = $(MAGICK_CODER_CPPFLAGS)
+ coders_djvu_la_LDFLAGS     = $(MODULECOMMONFLAGS)
+-coders_djvu_la_LIBADD      = $(MAGICKCORE_LIBS) $(DJVU_LIBS) $(JPEG_LIBS) $(LZMA_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
++coders_djvu_la_LIBADD      = $(MAGICKCORE_LIBS) $(DJVU_LIBS) $(JPEG_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
+ 
+ # DNG coder module
+ coders_dng_la_SOURCES      = coders/dng.c
+@@ -678,7 +678,7 @@
+ coders_mat_la_SOURCES      = coders/mat.c
+ coders_mat_la_CPPFLAGS     = $(MAGICK_CODER_CPPFLAGS)
+ coders_mat_la_LDFLAGS      = $(MODULECOMMONFLAGS)
+-coders_mat_la_LIBADD       = $(MAGICKCORE_LIBS) $(LZMA_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
++coders_mat_la_LIBADD       = $(MAGICKCORE_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
+ 
+ # MATTE coder module
+ coders_matte_la_SOURCES    = coders/matte.c
+@@ -726,7 +726,7 @@
+ coders_msl_la_SOURCES      = coders/msl.c
+ coders_msl_la_CPPFLAGS     = $(MAGICK_CODER_CPPFLAGS)
+ coders_msl_la_LDFLAGS      = $(MODULECOMMONFLAGS)
+-coders_msl_la_LIBADD       = $(MAGICKCORE_LIBS) $(XML_LIBS) $(LZMA_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
++coders_msl_la_LIBADD       = $(MAGICKCORE_LIBS) $(XML_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
+ 
+ # MTV coder module
+ coders_mtv_la_SOURCES      = coders/mtv.c
+@@ -798,7 +798,7 @@
+ coders_pdf_la_SOURCES      = coders/pdf.c
+ coders_pdf_la_CPPFLAGS     = $(MAGICK_CODER_CPPFLAGS)
+ coders_pdf_la_LDFLAGS      = $(MODULECOMMONFLAGS)
+-coders_pdf_la_LIBADD       = $(MAGICKCORE_LIBS) $(JBIG_LIBS) $(JPEG_LIBS) $(LZMA_LIBS) $(ZLIB_LIBS) $(GS_LIBS) $(MATH_LIBS)
++coders_pdf_la_LIBADD       = $(MAGICKCORE_LIBS) $(JBIG_LIBS) $(JPEG_LIBS) $(ZLIB_LIBS) $(GS_LIBS) $(MATH_LIBS)
+ 
+ # PES coder module
+ coders_pes_la_SOURCES      = coders/pes.c
+@@ -828,7 +828,7 @@
+ coders_png_la_SOURCES      = coders/png.c
+ coders_png_la_CPPFLAGS     = $(MAGICK_CODER_CPPFLAGS)
+ coders_png_la_LDFLAGS      = $(MODULECOMMONFLAGS)
+-coders_png_la_LIBADD       = $(MAGICKCORE_LIBS) $(PNG_LIBS) $(JPEG_LIBS) $(LZMA_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
++coders_png_la_LIBADD       = $(MAGICKCORE_LIBS) $(PNG_LIBS) $(JPEG_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
+ 
+ # PLASMA coder module
+ coders_plasma_la_SOURCES   = coders/plasma.c
+@@ -858,13 +858,13 @@
+ coders_ps2_la_SOURCES      = coders/ps2.c
+ coders_ps2_la_CPPFLAGS     = $(MAGICK_CODER_CPPFLAGS)
+ coders_ps2_la_LDFLAGS      = $(MODULECOMMONFLAGS)
+-coders_ps2_la_LIBADD       = $(MAGICKCORE_LIBS) $(JBIG_LIBS) $(JPEG_LIBS) $(LZMA_LIBS) $(ZLIB_LIBS) $(ZSTD_LIBS) $(WEBPMUX_LIBS) $(WEBP_LIBS) $(MATH_LIBS)
++coders_ps2_la_LIBADD       = $(MAGICKCORE_LIBS) $(JBIG_LIBS) $(JPEG_LIBS) $(ZLIB_LIBS) $(WEBPMUX_LIBS) $(WEBP_LIBS) $(MATH_LIBS)
+ 
+ # PS3 coder module
+ coders_ps3_la_SOURCES      = coders/ps3.c
+ coders_ps3_la_CPPFLAGS     = $(MAGICK_CODER_CPPFLAGS)
+ coders_ps3_la_LDFLAGS      = $(MODULECOMMONFLAGS)
+-coders_ps3_la_LIBADD       = $(MAGICKCORE_LIBS) $(JBIG_LIBS) $(JPEG_LIBS) $(LZMA_LIBS) $(ZLIB_LIBS) $(ZSTD_LIBS) $(WEBPMUX_LIBS) $(WEBP_LIBS) $(MATH_LIBS)
++coders_ps3_la_LIBADD       = $(MAGICKCORE_LIBS) $(JBIG_LIBS) $(JPEG_LIBS) $(ZLIB_LIBS) $(WEBPMUX_LIBS) $(WEBP_LIBS) $(MATH_LIBS)
+ 
+ # PSD coder module
+ coders_psd_la_SOURCES      = coders/psd.c coders/psd-private.h
+@@ -954,7 +954,7 @@
+ coders_svg_la_SOURCES      = coders/svg.c
+ coders_svg_la_CPPFLAGS     = $(MAGICK_CODER_CPPFLAGS) $(RSVG_CFLAGS) $(CAIRO_SVG_CFLAGS)
+ coders_svg_la_LDFLAGS      = $(MODULECOMMONFLAGS)
+-coders_svg_la_LIBADD       = $(MAGICKCORE_LIBS) $(AUTOTRACE_LIBS) $(RSVG_LIBS) $(XML_LIBS) $(LZMA_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
++coders_svg_la_LIBADD       = $(MAGICKCORE_LIBS) $(AUTOTRACE_LIBS) $(RSVG_LIBS) $(XML_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
+ 
+ # TGA coder module
+ coders_tga_la_SOURCES      = coders/tga.c
+@@ -1008,7 +1008,7 @@
+ coders_url_la_SOURCES      = coders/url.c
+ coders_url_la_CPPFLAGS     = $(MAGICK_CODER_CPPFLAGS)
+ coders_url_la_LDFLAGS      = $(MODULECOMMONFLAGS)
+-coders_url_la_LIBADD       = $(MAGICKCORE_LIBS) $(XML_LIBS) $(LZMA_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
++coders_url_la_LIBADD       = $(MAGICKCORE_LIBS) $(XML_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
+ 
+ # UYVY coder module
+ coders_uyvy_la_SOURCES     = coders/uyvy.c

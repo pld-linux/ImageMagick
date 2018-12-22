@@ -1,0 +1,11 @@
+--- ImageMagick-7.0.8-19/MagickCore/opencl.c.orig	2018-12-22 17:26:37.420370732 +0100
++++ ImageMagick-7.0.8-19/MagickCore/opencl.c	2018-12-22 17:31:49.203700501 +0100
+@@ -2460,7 +2460,7 @@
+ #ifdef MAGICKCORE_WINDOWS_SUPPORT
+   openCL_library->library=(void *)LoadLibraryA("OpenCL.dll");
+ #else
+-  openCL_library->library=(void *)dlopen("libOpenCL.so", RTLD_NOW);
++  openCL_library->library=(void *)dlopen("libOpenCL.so.1", RTLD_NOW);
+ #endif
+ #define BIND(X) \
+   if ((openCL_library->X=(MAGICKpfn_##X)OsLibraryGetFunctionAddress(openCL_library->library,#X)) == NULL) \
