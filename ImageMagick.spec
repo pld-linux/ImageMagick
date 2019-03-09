@@ -23,7 +23,7 @@
 %define	libpng_ver 2:1.6.34
 
 %define		ver	7.0.8
-%define		pver	24
+%define		pver	32
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -41,7 +41,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	7d525037ee25543b77d9b29596367973
+# Source0-md5:	ef04a7ab79665f8b66991a1859c328bf
 Patch0:		config.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
