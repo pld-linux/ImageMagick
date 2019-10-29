@@ -1,4 +1,5 @@
 # TODO
+# - jxl delegate, BR: brunsli https://github.com/google/brunsli
 # - create sane default policy file:
 #   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
 #
@@ -23,7 +24,7 @@
 %define	libpng_ver 2:1.6.34
 
 %define		ver	7.0.8
-%define		pver	32
+%define		pver	68
 %include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
@@ -36,12 +37,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
-Source0:	https://www.imagemagick.org/download/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	ef04a7ab79665f8b66991a1859c328bf
+Source0:	https://www.imagemagick.org/download/releases/%{name}-%{ver}-%{pver}.tar.xz
+# Source0-md5:	f97e8c077cdc335fc66cf925e64576f9
 Patch0:		config.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -963,6 +964,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/tile.la
 %attr(755,root,root) %{modulesdir}/coders/tim.so
 %{modulesdir}/coders/tim.la
+%attr(755,root,root) %{modulesdir}/coders/tim2.so
+%{modulesdir}/coders/tim2.la
 %attr(755,root,root) %{modulesdir}/coders/ttf.so
 %{modulesdir}/coders/ttf.la
 %attr(755,root,root) %{modulesdir}/coders/txt.so
