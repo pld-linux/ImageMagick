@@ -25,7 +25,6 @@
 
 %define		ver	7.0.8
 %define		pver	68
-%include	/usr/lib/rpm/macros.perl
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
