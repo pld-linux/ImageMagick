@@ -87,7 +87,7 @@ BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
 BuildRequires:	pkgconfig >= 1:0.20
 BuildRequires:	rpm-perlprov >= 4.1-13
-BuildRequires:	rpmbuild(macros) >= 1.315
+BuildRequires:	rpmbuild(macros) >= 1.745
 BuildRequires:	tar >= 1:1.22
 # just checked for, actually supplied scripts/txt2html is used
 #BuildRequires:	txt2html
