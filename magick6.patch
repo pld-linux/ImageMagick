@@ -162,17 +162,6 @@
        ;;
      *)
        echo "${usage}" 1>&2
---- ImageMagick-6.9.7-0/wand/MagickWand.pc.in~	2016-12-18 14:34:45.000000000 +0100
-+++ ImageMagick-6.9.7-0/wand/MagickWand.pc.in	2016-12-27 08:45:54.205764162 +0100
-@@ -9,7 +9,7 @@
- Description: MagickWand - C API for ImageMagick (ABI @MAGICK_ABI_SUFFIX@)
- URL: https://www.imagemagick.org
- Version: @PACKAGE_VERSION@
--Requires: MagickCore
-+Requires: MagickCore6
- Cflags: -I${includearchdir} -I${includedir} @MAGICK_PCFLAGS@
- Libs: -L${libdir} -l${libname} 
- Libs.private: -L${libdir} -l${libname} @MAGICK_LIBS@ @MATH_LIBS@
 --- ImageMagick-6.9.7-0/wand/Wand.pc.in~	2016-12-18 14:34:45.000000000 +0100
 +++ ImageMagick-6.9.7-0/wand/Wand.pc.in	2016-12-27 08:46:32.786803064 +0100
 @@ -9,7 +9,7 @@
@@ -180,7 +169,7 @@
  URL: https://www.imagemagick.org
  Version: @PACKAGE_VERSION@
 -Requires: MagickCore
-+Requires: MagickCore6
++Requires: MagickCore-@MAGICK_MAJOR_VERSION@.@MAGICK_ABI_SUFFIX@
  Cflags: -I${includearchdir} -I${includedir} @MAGICK_PCFLAGS@
  Libs: -L${libdir} -l${libname}
  Libs.private: -L${libdir} -l${libname} @MAGICK_LIBS@ @MATH_LIBS@

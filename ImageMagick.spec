@@ -21,9 +21,8 @@
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %define		origname	ImageMagick
-%define		ver	6.9.10
-%define		pver	32
-%include	/usr/lib/rpm/macros.perl
+%define		ver	6.9.11
+%define		pver	0
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -35,12 +34,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	3
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
-Source0:	ftp://ftp.imagemagick.org/pub/ImageMagick/%{origname}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	6596cbc465858d71548cf4996adf6d79
+Source0:	https://www.imagemagick.org/download/releases/%{origname}-%{ver}-%{pver}.tar.xz
+# Source0-md5:	de247df68cebc0d96cc4947576ea3c0a
 Patch0:		config.patch
 Patch1:		%{origname}-link.patch
 Patch2:		%{origname}-libpath.patch
@@ -88,7 +87,7 @@ BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
 BuildRequires:	pkgconfig >= 1:0.20
 BuildRequires:	rpm-perlprov >= 4.1-13
-BuildRequires:	rpmbuild(macros) >= 1.315
+BuildRequires:	rpmbuild(macros) >= 1.745
 BuildRequires:	tar >= 1:1.22
 # only checked for, but only supplied scripts/txt2html is used
 #BuildRequires:	txt2html
