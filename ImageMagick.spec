@@ -50,7 +50,7 @@ Patch4:		%{name}-lt.patch
 Patch5:		%{name}-OpenCL.patch
 URL:		http://www.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
-BuildRequires:	OpenEXR-devel >= 1.0.6
+%{?with_exr:BuildRequires:	OpenEXR-devel >= 1.0.6}
 BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake >= 1:1.12
 %{?with_autotrace:BuildRequires:	autotrace-devel >= 0.31.1}
