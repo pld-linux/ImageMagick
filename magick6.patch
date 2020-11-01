@@ -55,31 +55,6 @@
        exit 1
  fi
  
-@@ -38,19 +38,19 @@
-       echo '@PACKAGE_VERSION@ Q@QUANTUM_DEPTH@ @MAGICK_HDRI@'
-       ;;
-     --cflags)
--      @PKG_CONFIG@ --cflags MagickCore
-+      @PKG_CONFIG@ --cflags MagickCore6
-       ;;
-     --cxxflags)
--      @PKG_CONFIG@ --cflags MagickCore
-+      @PKG_CONFIG@ --cflags MagickCore6
-       ;;
-     --cppflags)
--      @PKG_CONFIG@ --cflags MagickCore
-+      @PKG_CONFIG@ --cflags MagickCore6
-       ;;
-     --ldflags)
--      @PKG_CONFIG@ --libs MagickCore
-+      @PKG_CONFIG@ --libs MagickCore6
-       ;;
-     --libs)
--      @PKG_CONFIG@ --libs MagickCore
-+      @PKG_CONFIG@ --libs MagickCore6
-       ;;
-     *)
-       echo "${usage}" 1>&2
 --- ImageMagick-6.9.8-9/wand/MagickWand-config.in.orig	2017-06-03 02:38:04.000000000 +0200
 +++ ImageMagick-6.9.8-9/wand/MagickWand-config.in	2017-06-03 21:50:38.584589096 +0200
 @@ -8,11 +8,11 @@
@@ -96,31 +71,6 @@
        exit 1
  fi
  
-@@ -38,19 +38,19 @@
-       echo '@PACKAGE_VERSION@ Q@QUANTUM_DEPTH@ @MAGICK_HDRI@'
-       ;;
-     --cflags)
--      @PKG_CONFIG@ --cflags MagickWand
-+      @PKG_CONFIG@ --cflags MagickWand6
-       ;;
-     --cxxflags)
--      @PKG_CONFIG@ --cflags MagickWand
-+      @PKG_CONFIG@ --cflags MagickWand6
-       ;;
-     --cppflags)
--      @PKG_CONFIG@ --cflags MagickWand
-+      @PKG_CONFIG@ --cflags MagickWand6
-       ;;
-     --ldflags)
--      @PKG_CONFIG@ --libs MagickWand
-+      @PKG_CONFIG@ --libs MagickWand6
-       ;;
-     --libs)
--      @PKG_CONFIG@ --libs MagickWand
-+      @PKG_CONFIG@ --libs MagickWand6
-       ;;
-     *)
-       echo "${usage}" 1>&2
 --- ImageMagick-6.9.7-0/wand/Wand-config.in~	2016-12-18 14:34:45.000000000 +0100
 +++ ImageMagick-6.9.7-0/wand/Wand-config.in	2016-12-27 08:39:14.421666371 +0100
 @@ -8,11 +8,11 @@

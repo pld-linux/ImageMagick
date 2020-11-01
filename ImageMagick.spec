@@ -22,7 +22,7 @@
 
 %define		origname	ImageMagick
 %define		ver	6.9.11
-%define		pver	0
+%define		pver	34
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -39,7 +39,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://www.imagemagick.org/download/releases/%{origname}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	de247df68cebc0d96cc4947576ea3c0a
+# Source0-md5:	fcc7d47c06e9047b1d9383dd624431f3
 Patch0:		config.patch
 Patch1:		%{origname}-link.patch
 Patch2:		%{origname}-libpath.patch
@@ -904,8 +904,6 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/mono.la
 %attr(755,root,root) %{modulesdir}/coders/mpc.so
 %{modulesdir}/coders/mpc.la
-%attr(755,root,root) %{modulesdir}/coders/mpeg.so
-%{modulesdir}/coders/mpeg.la
 %attr(755,root,root) %{modulesdir}/coders/mtv.so
 %{modulesdir}/coders/mtv.la
 %attr(755,root,root) %{modulesdir}/coders/mvg.so
@@ -990,6 +988,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/vicar.la
 %attr(755,root,root) %{modulesdir}/coders/vid.so
 %{modulesdir}/coders/vid.la
+%attr(755,root,root) %{modulesdir}/coders/video.so
+%{modulesdir}/coders/video.la
 %attr(755,root,root) %{modulesdir}/coders/viff.so
 %{modulesdir}/coders/viff.la
 %attr(755,root,root) %{modulesdir}/coders/vips.so
