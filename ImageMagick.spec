@@ -24,7 +24,7 @@
 %define	libpng_ver 2:1.6.34
 
 %define		ver	7.0.10
-%define		pver	0
+%define		pver	35
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -41,14 +41,14 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://www.imagemagick.org/download/releases/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	1ca9a081ebb28a1e7d0daad0fccc747c
+# Source0-md5:	abcb07971017f8fe97b44d7c22ba69ae
 Patch0:		config.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
 Patch5:		%{name}-OpenCL.patch
-URL:		http://www.imagemagick.org/
+URL:		https://imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 %{?with_exr:BuildRequires:	OpenEXR-devel >= 1.0.6}
 BuildRequires:	autoconf >= 2.69
@@ -82,6 +82,7 @@ BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libwebp-devel >= 0.4.4
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	libzip-devel >= 1.0.0
 %{?with_openjpeg:BuildRequires:	openjpeg2-devel >= 2.1.0}
 BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
@@ -593,12 +594,26 @@ Language (MSL) files.
 Moduł kodera dla plików Magick Persistent Registry (MPR) i Magick
 Scripting Language (MSL).
 
+%package coder-ora
+Summary:	Coder module to read OpenRaster image format
+Summary(pl.UTF-8):	Moduł kodera do odczytu formatu obrazów OpenRaster
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libzip >= 1.0.0
+
+%description coder-ora
+Coder module to read OpenRaster image format.
+
+%description coder-ora -l pl.UTF-8
+Moduł kodera do odczytu formatu obrazów OpenRaster.
+
 %package coder-pango
 Summary:	Coder module to read pango markup language format
 Summary(pl.UTF-8):	Moduł kodera do odczytu formatu języka znaczników pango
 Group:		X11/Applications/Graphics
 URL:		http://www.imagemagick.org/Usage/text/#pango
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	pango >= 1:1.28.1
 
 %description coder-pango
 Coder module to read pango markup language format.
@@ -805,6 +820,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/aai.la
 %attr(755,root,root) %{modulesdir}/coders/art.so
 %{modulesdir}/coders/art.la
+%attr(755,root,root) %{modulesdir}/coders/ashlar.so
+%{modulesdir}/coders/ashlar.la
 %attr(755,root,root) %{modulesdir}/coders/avs.so
 %{modulesdir}/coders/avs.la
 %attr(755,root,root) %{modulesdir}/coders/bgr.so
@@ -871,6 +888,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/ipl.la
 %attr(755,root,root) %{modulesdir}/coders/jnx.so
 %{modulesdir}/coders/jnx.la
+%attr(755,root,root) %{modulesdir}/coders/kernel.so
+%{modulesdir}/coders/kernel.la
 %attr(755,root,root) %{modulesdir}/coders/label.so
 %{modulesdir}/coders/label.la
 %attr(755,root,root) %{modulesdir}/coders/mac.so
@@ -891,8 +910,6 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/mono.la
 %attr(755,root,root) %{modulesdir}/coders/mpc.so
 %{modulesdir}/coders/mpc.la
-%attr(755,root,root) %{modulesdir}/coders/mpeg.so
-%{modulesdir}/coders/mpeg.la
 %attr(755,root,root) %{modulesdir}/coders/mtv.so
 %{modulesdir}/coders/mtv.la
 %attr(755,root,root) %{modulesdir}/coders/mvg.so
@@ -977,6 +994,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/vicar.la
 %attr(755,root,root) %{modulesdir}/coders/vid.so
 %{modulesdir}/coders/vid.la
+%attr(755,root,root) %{modulesdir}/coders/video.so
+%{modulesdir}/coders/video.la
 %attr(755,root,root) %{modulesdir}/coders/viff.so
 %{modulesdir}/coders/viff.la
 %attr(755,root,root) %{modulesdir}/coders/vips.so
@@ -1141,6 +1160,12 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/mpr.la
 %attr(755,root,root) %{modulesdir}/coders/msl.so
 %{modulesdir}/coders/msl.la
+
+%files coder-ora
+%defattr(644,root,root,755)
+# R: libzip >= 1.0.0
+%attr(755,root,root) %{modulesdir}/coders/ora.so
+%{modulesdir}/coders/ora.la
 
 %files coder-pango
 %defattr(644,root,root,755)

@@ -1,6 +1,6 @@
---- ImageMagick-7.0.8-19/configure.ac.orig	2018-12-22 17:26:01.383704476 +0100
-+++ ImageMagick-7.0.8-19/configure.ac	2018-12-22 17:26:18.737037609 +0100
-@@ -486,10 +486,6 @@
+--- ImageMagick-7.0.10-35/configure.ac.orig	2020-11-01 08:45:30.469806589 +0100
++++ ImageMagick-7.0.10-35/configure.ac	2020-11-01 09:05:17.360043320 +0100
+@@ -489,10 +489,6 @@
          CFLAGS="$CFLAGS $DEF_THREAD"
          CXXFLAGS="$CXXFLAGS $DEF_THREAD"
          THREAD_LIBS="$PTHREAD_LIBS"
@@ -8,6 +8,6 @@
 -            AC_MSG_WARN([Replacing compiler $CC with compiler $PTHREAD_CC to support pthreads.])
 -            CC="$PTHREAD_CC"
 -        fi
-         AC_DEFINE(THREAD_SUPPORT,1,[Define if you have POSIX threads libraries and header files.])
+         AC_DEFINE([THREAD_SUPPORT],[1],[Define if you have POSIX threads libraries and header files.])
      fi
  fi
