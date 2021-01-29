@@ -24,7 +24,7 @@
 %define	libpng_ver 2:1.6.34
 
 %define		ver	7.0.10
-%define		pver	35
+%define		pver	60
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -41,7 +41,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://www.imagemagick.org/download/releases/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	abcb07971017f8fe97b44d7c22ba69ae
+# Source0-md5:	137f6ec6b6d87a3ab0733fb42dc31c1d
 Patch0:		config.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -856,10 +856,14 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/dpx.la
 %attr(755,root,root) %{modulesdir}/coders/ept.so
 %{modulesdir}/coders/ept.la
+%attr(755,root,root) %{modulesdir}/coders/farbfeld.so
+%{modulesdir}/coders/farbfeld.la
 %attr(755,root,root) %{modulesdir}/coders/fax.so
 %{modulesdir}/coders/fax.la
 %attr(755,root,root) %{modulesdir}/coders/fits.so
 %{modulesdir}/coders/fits.la
+%attr(755,root,root) %{modulesdir}/coders/fl32.so
+%{modulesdir}/coders/fl32.la
 %attr(755,root,root) %{modulesdir}/coders/gif.so
 %{modulesdir}/coders/gif.la
 %attr(755,root,root) %{modulesdir}/coders/gradient.so
@@ -1020,6 +1024,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/xtrn.la
 %attr(755,root,root) %{modulesdir}/coders/xwd.so
 %{modulesdir}/coders/xwd.la
+%attr(755,root,root) %{modulesdir}/coders/yaml.so
+%{modulesdir}/coders/yaml.la
 %attr(755,root,root) %{modulesdir}/coders/ycbcr.so
 %{modulesdir}/coders/ycbcr.la
 %attr(755,root,root) %{modulesdir}/coders/yuv.so
@@ -1065,9 +1071,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.7
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.8
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.7
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.8
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
 %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
