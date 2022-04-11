@@ -1,5 +1,4 @@
 # TODO
-# - jxl delegate, BR: brunsli https://github.com/google/brunsli
 # - create sane default policy file:
 #   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
 #
@@ -16,6 +15,7 @@
 %bcond_without	exr		# OpenEXR module
 %bcond_without	fpx		# FlashPIX module (which uses fpx library)
 %bcond_without	graphviz	# dot module (which uses GraphViz libraries)
+%bcond_with	libjxl		# JPEG-XL module (not ready for 0.6)
 %bcond_without	openjpeg	# JPEG2000 module (which uses openjpeg 2 library)
 %bcond_without	wmf		# WMF module (which uses libwmf library)
 # - module features:
@@ -48,6 +48,8 @@ Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
 Patch5:		%{name}-OpenCL.patch
+Patch6:		%{name}-autotrace.patch
+Patch7:		%{name}-jxl.patch
 URL:		https://imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 %{?with_exr:BuildRequires:	OpenEXR-devel >= 1.0.6}
@@ -70,6 +72,7 @@ BuildRequires:	lcms2-devel >= 2.0
 %{?with_openmp:BuildRequires:	libgomp-devel}
 BuildRequires:	libheif-devel
 BuildRequires:	libjpeg-devel >= 6b
+%{?with_libjxl:BuildRequires:	libjxl-devel >= 0.6.1}
 BuildRequires:	liblqr-devel >= 0.1.0
 BuildRequires:	libltdl-devel
 BuildRequires:	libpng-devel >= %{libpng_ver}
@@ -79,7 +82,7 @@ BuildRequires:	librsvg-devel >= 2.9.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:2.2
-BuildRequires:	libwebp-devel >= 0.4.4
+BuildRequires:	libwebp-devel >= 0.5.0
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libzip-devel >= 1.0.0
@@ -100,8 +103,12 @@ BuildRequires:	zlib-devel >= 1.0.0
 BuildRequires:	zstd-devel >= 1.0.0
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Suggests:	shared-color-profiles
-Obsoletes:	ImageMagick-coder-dps
-Obsoletes:	ImageMagick-coder-mpeg
+Obsoletes:	ImageMagick-coder-braille < 1:6.4.1.3-2
+Obsoletes:	ImageMagick-coder-dds < 1:6.4.1.3-2
+Obsoletes:	ImageMagick-coder-dps < 1:6.2.6.0-3
+Obsoletes:	ImageMagick-coder-hdf < 1:5.5.2.5
+Obsoletes:	ImageMagick-coder-xps < 1:6.4.1.3-2
+Obsoletes:	ImageMagick-coder-mpeg < 1:5.5.2.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %if %{!?QuantumDepth:1}%{?QuantumDepth:0}
@@ -299,7 +306,7 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	perl-dirs
 Provides:	ImageMagick-perl = %{epoch}:%{version}-%{release}
-Obsoletes:	ImageMagick-perl
+Obsoletes:	ImageMagick-perl < 1:6.6.1.1-4
 
 %description -n perl-%{name}
 This is the ImageMagick Perl support package. It perl modules and
@@ -568,6 +575,19 @@ Coder module for JPEG-2000 (JP2/JPC) files using JasPer library.
 Moduł kodera dla plików JPEG-2000 (JP2/JPC) używajacy biblioteki
 JasPer.
 
+%package coder-jxl
+Summary:	Coder module for JPEG-XL files
+Summary(pl.UTF-8):	Moduł kodera dla plików JPEG-XL
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libjxl >= 0.6.1
+
+%description coder-jxl
+Coder module for JPEG-XL files.
+
+%description coder-jxl -l pl.UTF-8
+Moduł kodera dla plików JPEG-XL.
+
 %package coder-miff
 Summary:	Coder module for MIFF files
 Summary(pl.UTF-8):	Moduł kodera dla plików MIFF
@@ -701,7 +721,7 @@ Summary:	Coder module for WebP files
 Summary(pl.UTF-8):	Moduł kodera dla plików WebP
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libwebp >= 0.4.4
+Requires:	libwebp >= 0.5.0
 
 %description coder-webp
 Coder module for WebP files.
@@ -730,6 +750,8 @@ Moduł kodera dla plików WMF.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1 -R
+%patch7 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -759,6 +781,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-gslib%{!?with_gs:=no} \
 	--with-gvc%{!?with_graphviz:=no} \
+	--with-jxl%{!?with_libjxl:=no} \
 	--with-magick_plus_plus%{!?with_cxx:=no} \
 	--with-openexr%{!?with_exr:=no} \
 	--with-openjp2%{!?with_openjpeg:=no} \
@@ -1151,6 +1174,14 @@ rm -rf $RPM_BUILD_ROOT
 # R: openjpeg2, libjpeg
 %attr(755,root,root) %{modulesdir}/coders/jp2.so
 %{modulesdir}/coders/jp2.la
+%endif
+
+%if %{with libjxl}
+%files coder-jxl
+%defattr(644,root,root,755)
+# R: libjxl
+%attr(755,root,root) %{modulesdir}/coders/jxl.so
+%{modulesdir}/coders/jxl.la
 %endif
 
 %files coder-miff

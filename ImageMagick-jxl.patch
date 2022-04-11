@@ -1,0 +1,14 @@
+--- ImageMagick-7.0.10-60/configure.ac.orig	2022-04-11 20:34:59.843577078 +0200
++++ ImageMagick-7.0.10-60/configure.ac	2022-04-11 21:09:37.655653937 +0200
+@@ -2383,11 +2383,6 @@ AC_ARG_WITH([jxl],
+ if test "$with_jxl" != 'yes'; then
+     DISTCHECK_CONFIG_FLAGS="${DISTCHECK_CONFIG_FLAGS} --with-jxl=$with_jxl "
+ fi
+-if test "$enable_static" = 'yes'; then
+-    if test "$with_utilities" = 'yes'; then
+-        with_jxl='no'
+-    fi
+-fi
+ 
+ # Check for the JPEG-XL library.
+ have_jxl='no'
