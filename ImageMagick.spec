@@ -1,4 +1,5 @@
 # TODO
+# - jxl via brunsli (or wait for port to libjxl?)
 # - create sane default policy file:
 #   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
 #
@@ -21,8 +22,8 @@
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %define		origname	ImageMagick
-%define		ver	6.9.11
-%define		pver	34
+%define		ver	6.9.12
+%define		pver	44
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -34,12 +35,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	5
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://www.imagemagick.org/download/releases/%{origname}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	fcc7d47c06e9047b1d9383dd624431f3
+# Source0-md5:	5ac7128caf53b6f742c5acdf63f4bb1a
 Patch0:		config.patch
 Patch1:		%{origname}-link.patch
 Patch2:		%{origname}-libpath.patch
@@ -48,6 +49,7 @@ Patch4:		%{origname}-lt.patch
 Patch5:		perlmagick.patch
 Patch6:		magick6.patch
 Patch7:		%{origname}-OpenCL.patch
+Patch8:		%{origname}-autotrace.patch
 URL:		https://legacy.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
@@ -79,7 +81,7 @@ BuildRequires:	librsvg-devel >= 2.9.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:2.2
-BuildRequires:	libwebp-devel >= 0.4.4
+BuildRequires:	libwebp-devel >= 0.5.0
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
 %{?with_openjpeg:BuildRequires:	openjpeg2-devel >= 2.1.0}
@@ -99,8 +101,12 @@ BuildRequires:	zstd-devel >= 1.0.0
 BuildRequires:	zlib-devel >= 1.0.0
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Suggests:	shared-color-profiles
-Obsoletes:	ImageMagick-coder-dps
-Obsoletes:	ImageMagick-coder-mpeg
+Obsoletes:	ImageMagick-coder-braille < 1:6.4.1.3-2
+Obsoletes:	ImageMagick-coder-dds < 1:6.4.1.3-2
+Obsoletes:	ImageMagick-coder-dps < 1:6.2.6.0-3
+Obsoletes:	ImageMagick-coder-hdf < 1:5.5.2.5
+Obsoletes:	ImageMagick-coder-xps < 1:6.4.1.3-2
+Obsoletes:	ImageMagick-coder-mpeg < 1:5.5.2.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %if 0%{!?QuantumDepth:1}
@@ -298,7 +304,7 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	perl-dirs
 Provides:	ImageMagick-perl = %{epoch}:%{version}-%{release}
-Obsoletes:	ImageMagick-perl
+Obsoletes:	ImageMagick-perl < 1:6.6.1.1-4
 
 %description -n perl-%{name}
 This is the ImageMagick Perl support package. It perl modules and
@@ -687,7 +693,7 @@ Summary:	Coder module for WebP files
 Summary(pl.UTF-8):	Moduł kodera dla plików WebP
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libwebp >= 0.4.4
+Requires:	libwebp >= 0.5.0
 
 %description coder-webp
 Coder module for WebP files.
@@ -717,6 +723,7 @@ Moduł kodera dla plików WMF.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1 -R
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -742,6 +749,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-autotrace%{!?with_autotrace:=no} \
 	--with-djvu%{!?with_djvu:=no} \
 	--with-dps=no \
+	--with-fftw \
 	--with-fpx%{!?with_fpx:=no} \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-gslib%{!?with_gs:=no} \
@@ -792,7 +800,7 @@ cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 # packaged as %doc
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{origname}-%{mver}/{ChangeLog,LICENSE,NEWS.txt}
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{origname}-%{mver}/{ChangeLog.md,LICENSE,NEWS.txt}
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 
@@ -1010,8 +1018,6 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/xps.la
 %attr(755,root,root) %{modulesdir}/coders/x.so
 %{modulesdir}/coders/x.la
-%attr(755,root,root) %{modulesdir}/coders/xtrn.so
-%{modulesdir}/coders/xtrn.la
 %attr(755,root,root) %{modulesdir}/coders/xwd.so
 %{modulesdir}/coders/xwd.la
 %attr(755,root,root) %{modulesdir}/coders/ycbcr.so
@@ -1053,11 +1059,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%doc ChangeLog LICENSE AUTHORS.txt
+%doc ChangeLog.md LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.6
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.7
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.6
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.7
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
 %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
@@ -1256,7 +1262,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.8
+%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.9
 
 %files c++-devel
 %defattr(644,root,root,755)

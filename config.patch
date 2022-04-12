@@ -1,6 +1,6 @@
---- ImageMagick-6.9.10-19/config/policy.xml.orig	2018-12-21 06:58:42.388454113 +0100
-+++ ImageMagick-6.9.10-19/config/policy.xml	2018-12-21 07:02:29.218451524 +0100
-@@ -68,11 +68,22 @@
+--- ImageMagick-6.9.12-44/config/policy.xml.orig	2022-04-12 19:26:30.564436640 +0200
++++ ImageMagick-6.9.12-44/config/policy.xml	2022-04-12 19:39:15.813624263 +0200
+@@ -68,10 +68,7 @@
    <!-- <policy domain="resource" name="thread" value="4"/> -->
    <!-- <policy domain="resource" name="throttle" value="0"/> -->
    <!-- <policy domain="resource" name="time" value="3600"/> -->
@@ -11,6 +11,10 @@
    <!-- <policy domain="cache" name="memory-map" value="anonymous"/> -->
    <!-- <policy domain="cache" name="synchronize" value="True"/> -->
    <!-- <policy domain="cache" name="shared-secret" value="passphrase" stealth="true"/> -->
+@@ -79,4 +76,18 @@
+   <!-- <policy domain="system" name="shred" value="2"/> -->
+   <!-- <policy domain="system" name="precision" value="6"/> -->
+   <!-- <policy domain="system" name="font" value="/path/to/font.ttf"/> -->
 +  <policy domain="coder" rights="none" pattern="EPHEMERAL" />
 +  <policy domain="coder" rights="none" pattern="URL" />
 +  <policy domain="coder" rights="none" pattern="HTTPS" />
