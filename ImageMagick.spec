@@ -15,7 +15,7 @@
 %bcond_without	exr		# OpenEXR module
 %bcond_without	fpx		# FlashPIX module (which uses fpx library)
 %bcond_without	graphviz	# dot module (which uses GraphViz libraries)
-%bcond_with	libjxl		# JPEG-XL module (not ready for 0.6)
+%bcond_without	libjxl		# JPEG-XL module (not ready for 0.6)
 %bcond_without	openjpeg	# JPEG2000 module (which uses openjpeg 2 library)
 %bcond_without	wmf		# WMF module (which uses libwmf library)
 # - module features:
@@ -23,8 +23,8 @@
 
 %define	libpng_ver 2:1.6.34
 
-%define		ver	7.0.10
-%define		pver	60
+%define		ver	7.0.11
+%define		pver	14
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -41,7 +41,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://www.imagemagick.org/download/releases/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	137f6ec6b6d87a3ab0733fb42dc31c1d
+# Source0-md5:	4e380b67b69e04e96fb65f4f25c8cab4
 Patch0:		config.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -777,6 +777,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-autotrace%{!?with_autotrace:=no} \
 	--with-djvu%{!?with_djvu:=no} \
 	--with-dps=no \
+	--with-fftw \
 	--with-fpx%{!?with_fpx:=no} \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-gslib%{!?with_gs:=no} \
@@ -1094,9 +1095,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.8
+%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.10
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.8
+%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.10
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
 %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
@@ -1303,7 +1304,7 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.4
+%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.5
 
 %files c++-devel
 %defattr(644,root,root,755)

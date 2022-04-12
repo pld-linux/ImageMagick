@@ -1,11 +1,11 @@
---- ImageMagick-7.0.8-19/MagickCore/opencl.c.orig	2018-12-22 17:26:37.420370732 +0100
-+++ ImageMagick-7.0.8-19/MagickCore/opencl.c	2018-12-22 17:31:49.203700501 +0100
-@@ -2460,7 +2460,7 @@
+--- ImageMagick-7.0.11-14/MagickCore/opencl.c.orig	2022-04-11 22:18:32.449920499 +0200
++++ ImageMagick-7.0.11-14/MagickCore/opencl.c	2022-04-12 06:23:14.996566315 +0200
+@@ -2509,7 +2509,7 @@ static MagickBooleanType BindOpenCLFunct
  #ifdef MAGICKCORE_WINDOWS_SUPPORT
    openCL_library->library=(void *)LoadLibraryA("OpenCL.dll");
  #else
--  openCL_library->library=(void *)dlopen("libOpenCL.so", RTLD_NOW);
-+  openCL_library->library=(void *)dlopen("libOpenCL.so.1", RTLD_NOW);
+-  openCL_library->library=(void *)dlopen("libOpenCL.so",RTLD_NOW);
++  openCL_library->library=(void *)dlopen("libOpenCL.so.1",RTLD_NOW);
  #endif
  #define BIND(X) \
    if ((openCL_library->X=(MAGICKpfn_##X)OsLibraryGetFunctionAddress(openCL_library->library,#X)) == NULL) \
