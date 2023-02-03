@@ -23,6 +23,7 @@
 %bcond_without	djvu		# DJVU module
 %bcond_without	exr		# OpenEXR module
 %bcond_without	fpx		# FlashPIX module (which uses fpx library)
+%bcond_without	flif		# FLIF (Free Lossless Image Format) module (which uses flif library)
 %bcond_without	graphviz	# dot module (which uses GraphViz libraries)
 %bcond_without	libjxl		# JPEG-XL module (not ready for 0.6)
 %bcond_without	openjpeg	# JPEG2000 module (which uses openjpeg 2 library)
@@ -69,7 +70,7 @@ BuildRequires:	bzip2-devel >= 1.0.1
 %{?with_djvu:BuildRequires:	djvulibre-devel >= 3.5.0}
 BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	fftw3-devel >= 3.0
-BuildRequires:	flif-devel
+%{?with_flif:BuildRequires:	flif-devel}
 BuildRequires:	fontconfig-devel >= 2.1.0
 BuildRequires:	freetype-devel >= 2.0.2-2
 %{?with_openmp:BuildRequires:	gcc-c++ >= 6:4.2}
@@ -788,6 +789,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-dps=no \
 	--with-fftw \
 	--with-fpx%{!?with_fpx:=no} \
+	--with-flif%{!?with_flif:=no} \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-gslib%{!?with_gs:=no} \
 	--with-gvc%{!?with_graphviz:=no} \
@@ -1144,7 +1146,7 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/exr.la
 %endif
 
-%if 0
+%if %{with flif}
 %files coder-flif
 %defattr(644,root,root,755)
 # R: flif
