@@ -23,6 +23,7 @@
 
 %define	libpng_ver 2:1.6.34
 
+# Update to 7.1.x is on dev-7.1.0 branch
 %define		ver	7.0.11
 %define		pver	14
 Summary:	Image display, conversion, and manipulation under X
