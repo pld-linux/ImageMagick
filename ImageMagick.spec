@@ -1053,10 +1053,6 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/xps.la
 %attr(755,root,root) %{modulesdir}/coders/x.so
 %{modulesdir}/coders/x.la
-%if 0
-%attr(755,root,root) %{modulesdir}/coders/xtrn.so
-%{modulesdir}/coders/xtrn.la
-%endif
 %attr(755,root,root) %{modulesdir}/coders/xwd.so
 %{modulesdir}/coders/xwd.la
 %attr(755,root,root) %{modulesdir}/coders/yaml.so
