@@ -1,9 +1,9 @@
---- a/config/policy.xml	2021-01-25 16:04:11.000000000 +0100
-+++ b/config/policy.xml	2021-01-29 08:30:57.090166840 +0100
-@@ -79,4 +79,18 @@
-   <!-- <policy domain="system" name="shred" value="2"/> -->
-   <!-- <policy domain="system" name="precision" value="6"/> -->
+--- ImageMagick-7.1.0-60/config/policy.xml~	2023-01-30 02:02:28.000000000 +0200
++++ ImageMagick-7.1.0-60/config/policy.xml	2023-02-03 14:15:12.880962514 +0200
+@@ -80,4 +80,18 @@
+   <!-- <policy domain="system" name="shred" value="1"/> -->
    <!-- <policy domain="system" name="font" value="/path/to/unicode-font.ttf"/> -->
+   <policy domain="Undefined" rights="none"/>
 +  <policy domain="coder" rights="none" pattern="EPHEMERAL" />
 +  <policy domain="coder" rights="none" pattern="URL" />
 +  <policy domain="coder" rights="none" pattern="HTTPS" />

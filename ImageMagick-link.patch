@@ -30,8 +30,8 @@
  fi
  MAGICK_EXTRA_DEP_LIBS="$GOMP_LIBS"
  AC_SUBST([MAGICK_DEP_LIBS])
---- ImageMagick-6.9.10-19/coders/Makefile.am.orig	2018-12-20 00:48:40.000000000 +0100
-+++ ImageMagick-6.9.10-19/coders/Makefile.am	2018-12-22 10:26:05.633992165 +0100
+--- ImageMagick-7.1.0-60/coders/Makefile.am~	2023-02-03 14:16:08.000000000 +0200
++++ ImageMagick-7.1.0-60/coders/Makefile.am	2023-02-03 14:17:15.705028893 +0200
 @@ -468,7 +468,7 @@
  coders_djvu_la_SOURCES     = coders/djvu.c
  coders_djvu_la_CPPFLAGS    = $(MAGICK_CODER_CPPFLAGS)
@@ -102,12 +102,12 @@
  
  # TGA coder module
  coders_tga_la_SOURCES      = coders/tga.c
-@@ -1008,7 +1008,7 @@
+@@ -1389,7 +1389,7 @@
  coders_url_la_SOURCES      = coders/url.c
  coders_url_la_CPPFLAGS     = $(MAGICK_CODER_CPPFLAGS)
  coders_url_la_LDFLAGS      = $(MODULECOMMONFLAGS)
 -coders_url_la_LIBADD       = $(MAGICKCORE_LIBS) $(XML_LIBS) $(LZMA_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
-+coders_url_la_LIBADD       = $(MAGICKCORE_LIBS) $(XML_LIBS) $(ZLIB_LIBS) $(MATH_LIBS)
- 
- # UYVY coder module
- coders_uyvy_la_SOURCES     = coders/uyvy.c
++coders_url_la_LIBADD       = $(MAGICKCORE_LIBS) $(XML_LIBS) $(LZMA_LIBS) $(ZLIB_LIBS)
+ if WIN32_NATIVE_BUILD
+ coders_url_la_LIBADD += -lurlmon
+ endif

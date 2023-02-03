@@ -1,6 +1,15 @@
 # TODO
 # - create sane default policy file:
 #   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
+# - unpackaged:
+#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/bayer.la
+#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/bayer.so
+#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/ftxt.la
+#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/ftxt.so
+#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/qoi.la
+#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/qoi.so
+#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/strimg.la
+#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/strimg.so
 #
 # Conditional build:
 # - features:
@@ -23,8 +32,8 @@
 
 %define	libpng_ver 2:1.6.34
 
-%define		ver	7.0.11
-%define		pver	14
+%define		ver	7.1.0
+%define		pver	60
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -36,12 +45,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	8
+Release:	0.1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://www.imagemagick.org/download/releases/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	4e380b67b69e04e96fb65f4f25c8cab4
+# Source0-md5:	fbb79241137a6c8f7f161eda29973f62
 Patch0:		config.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -751,7 +760,7 @@ Moduł kodera dla plików WMF.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1 -R
-%patch7 -p1
+#%patch7 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -816,7 +825,7 @@ cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 # packaged as %doc
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{mver}/{ChangeLog,LICENSE,NEWS.txt}
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{mver}/{LICENSE,NEWS.txt}
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 
@@ -1044,8 +1053,10 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/xps.la
 %attr(755,root,root) %{modulesdir}/coders/x.so
 %{modulesdir}/coders/x.la
+%if 0
 %attr(755,root,root) %{modulesdir}/coders/xtrn.so
 %{modulesdir}/coders/xtrn.la
+%endif
 %attr(755,root,root) %{modulesdir}/coders/xwd.so
 %{modulesdir}/coders/xwd.la
 %attr(755,root,root) %{modulesdir}/coders/yaml.so
@@ -1093,7 +1104,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%doc ChangeLog LICENSE AUTHORS.txt
+%doc LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.10
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
@@ -1137,11 +1148,13 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/exr.la
 %endif
 
+%if 0
 %files coder-flif
 %defattr(644,root,root,755)
 # R: flif
 %attr(755,root,root) %{modulesdir}/coders/flif.so
 %{modulesdir}/coders/flif.la
+%endif
 
 %if %{with fpx}
 %files coder-fpx
@@ -1177,12 +1190,14 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/jp2.la
 %endif
 
+%if 0
 %if %{with libjxl}
 %files coder-jxl
 %defattr(644,root,root,755)
 # R: libjxl
 %attr(755,root,root) %{modulesdir}/coders/jxl.so
 %{modulesdir}/coders/jxl.la
+%endif
 %endif
 
 %files coder-miff
