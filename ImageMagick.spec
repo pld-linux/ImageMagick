@@ -1067,19 +1067,21 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/filters/analyze.so
 %{modulesdir}/filters/analyze.la
 
-%attr(755,root,root) %{_bindir}/animate
-%attr(755,root,root) %{_bindir}/compare
-%attr(755,root,root) %{_bindir}/composite
-%attr(755,root,root) %{_bindir}/conjure
-%attr(755,root,root) %{_bindir}/convert
-%attr(755,root,root) %{_bindir}/display
-%attr(755,root,root) %{_bindir}/identify
-%attr(755,root,root) %{_bindir}/import
 %attr(755,root,root) %{_bindir}/magick
-%attr(755,root,root) %{_bindir}/magick-script
-%attr(755,root,root) %{_bindir}/mogrify
-%attr(755,root,root) %{_bindir}/montage
-%attr(755,root,root) %{_bindir}/stream
+
+# Symlinks, no %attr
+%{_bindir}/animate
+%{_bindir}/compare
+%{_bindir}/composite
+%{_bindir}/conjure
+%{_bindir}/convert
+%{_bindir}/display
+%{_bindir}/identify
+%{_bindir}/import
+%{_bindir}/magick-script
+%{_bindir}/mogrify
+%{_bindir}/montage
+%{_bindir}/stream
 
 %{_mandir}/man1/ImageMagick.1*
 %{_mandir}/man1/animate.1*
