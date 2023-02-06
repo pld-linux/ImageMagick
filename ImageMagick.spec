@@ -1,15 +1,6 @@
 # TODO
 # - create sane default policy file:
 #   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
-# - unpackaged:
-#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/bayer.la
-#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/bayer.so
-#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/ftxt.la
-#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/ftxt.so
-#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/qoi.la
-#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/qoi.so
-#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/strimg.la
-#   /usr/lib64/ImageMagick-7.1.0/modules-Q16/coders/strimg.so
 #
 # Conditional build:
 # - features:
@@ -1063,6 +1054,16 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/ycbcr.la
 %attr(755,root,root) %{modulesdir}/coders/yuv.so
 %{modulesdir}/coders/yuv.la
+
+# new modules in 7.1.x
+%attr(755,root,root) %{modulesdir}/coders/bayer.so
+%{modulesdir}/coders/bayer.la
+%attr(755,root,root) %{modulesdir}/coders/ftxt.so
+%{modulesdir}/coders/ftxt.la
+%attr(755,root,root) %{modulesdir}/coders/qoi.so
+%{modulesdir}/coders/qoi.la
+%attr(755,root,root) %{modulesdir}/coders/strimg.so
+%{modulesdir}/coders/strimg.la
 
 %attr(755,root,root) %{modulesdir}/filters/analyze.so
 %{modulesdir}/filters/analyze.la
