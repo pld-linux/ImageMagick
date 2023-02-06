@@ -14,8 +14,9 @@
 %bcond_without	djvu		# DJVU module
 %bcond_without	exr		# OpenEXR module
 %bcond_without	fpx		# FlashPIX module (which uses fpx library)
+%bcond_without	flif		# FLIF (Free Lossless Image Format) module (which uses flif library)
 %bcond_without	graphviz	# dot module (which uses GraphViz libraries)
-%bcond_without	libjxl		# JPEG-XL module (not ready for 0.6)
+%bcond_with	libjxl		# JPEG-XL module (not ready for 0.6)
 %bcond_without	openjpeg	# JPEG2000 module (which uses openjpeg 2 library)
 %bcond_without	wmf		# WMF module (which uses libwmf library)
 # - module features:
@@ -23,9 +24,8 @@
 
 %define	libpng_ver 2:1.6.34
 
-# Update to 7.1.x is on dev-7.1.0 branch
-%define		ver	7.0.11
-%define		pver	14
+%define		ver	7.1.0
+%define		pver	60
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -37,12 +37,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	8
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://www.imagemagick.org/download/releases/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	4e380b67b69e04e96fb65f4f25c8cab4
+# Source0-md5:	fbb79241137a6c8f7f161eda29973f62
 Patch0:		config.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -61,7 +61,7 @@ BuildRequires:	bzip2-devel >= 1.0.1
 %{?with_djvu:BuildRequires:	djvulibre-devel >= 3.5.0}
 BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	fftw3-devel >= 3.0
-BuildRequires:	flif-devel
+%{?with_flif:BuildRequires:	flif-devel}
 BuildRequires:	fontconfig-devel >= 2.1.0
 BuildRequires:	freetype-devel >= 2.0.2-2
 %{?with_openmp:BuildRequires:	gcc-c++ >= 6:4.2}
@@ -73,7 +73,7 @@ BuildRequires:	lcms2-devel >= 2.0
 %{?with_openmp:BuildRequires:	libgomp-devel}
 BuildRequires:	libheif-devel
 BuildRequires:	libjpeg-devel >= 6b
-%{?with_libjxl:BuildRequires:	libjxl-devel >= 0.6.1}
+%{?with_libjxl:BuildRequires:	libjxl-devel >= 0.7.0}
 BuildRequires:	liblqr-devel >= 0.1.0
 BuildRequires:	libltdl-devel
 BuildRequires:	libpng-devel >= %{libpng_ver}
@@ -752,7 +752,7 @@ Moduł kodera dla plików WMF.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1 -R
-%patch7 -p1
+#%patch7 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -780,6 +780,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-dps=no \
 	--with-fftw \
 	--with-fpx%{!?with_fpx:=no} \
+	--with-flif%{!?with_flif:=no} \
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-gslib%{!?with_gs:=no} \
 	--with-gvc%{!?with_graphviz:=no} \
@@ -817,7 +818,7 @@ cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 # packaged as %doc
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{mver}/{ChangeLog,LICENSE,NEWS.txt}
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{mver}/{LICENSE,NEWS.txt}
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 
@@ -1045,8 +1046,6 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/xps.la
 %attr(755,root,root) %{modulesdir}/coders/x.so
 %{modulesdir}/coders/x.la
-%attr(755,root,root) %{modulesdir}/coders/xtrn.so
-%{modulesdir}/coders/xtrn.la
 %attr(755,root,root) %{modulesdir}/coders/xwd.so
 %{modulesdir}/coders/xwd.la
 %attr(755,root,root) %{modulesdir}/coders/yaml.so
@@ -1056,22 +1055,34 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/yuv.so
 %{modulesdir}/coders/yuv.la
 
+# new modules in 7.1.x
+%attr(755,root,root) %{modulesdir}/coders/bayer.so
+%{modulesdir}/coders/bayer.la
+%attr(755,root,root) %{modulesdir}/coders/ftxt.so
+%{modulesdir}/coders/ftxt.la
+%attr(755,root,root) %{modulesdir}/coders/qoi.so
+%{modulesdir}/coders/qoi.la
+%attr(755,root,root) %{modulesdir}/coders/strimg.so
+%{modulesdir}/coders/strimg.la
+
 %attr(755,root,root) %{modulesdir}/filters/analyze.so
 %{modulesdir}/filters/analyze.la
 
-%attr(755,root,root) %{_bindir}/animate
-%attr(755,root,root) %{_bindir}/compare
-%attr(755,root,root) %{_bindir}/composite
-%attr(755,root,root) %{_bindir}/conjure
-%attr(755,root,root) %{_bindir}/convert
-%attr(755,root,root) %{_bindir}/display
-%attr(755,root,root) %{_bindir}/identify
-%attr(755,root,root) %{_bindir}/import
 %attr(755,root,root) %{_bindir}/magick
-%attr(755,root,root) %{_bindir}/magick-script
-%attr(755,root,root) %{_bindir}/mogrify
-%attr(755,root,root) %{_bindir}/montage
-%attr(755,root,root) %{_bindir}/stream
+
+# Symlinks, no %attr
+%{_bindir}/animate
+%{_bindir}/compare
+%{_bindir}/composite
+%{_bindir}/conjure
+%{_bindir}/convert
+%{_bindir}/display
+%{_bindir}/identify
+%{_bindir}/import
+%{_bindir}/magick-script
+%{_bindir}/mogrify
+%{_bindir}/montage
+%{_bindir}/stream
 
 %{_mandir}/man1/ImageMagick.1*
 %{_mandir}/man1/animate.1*
@@ -1094,7 +1105,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%doc ChangeLog LICENSE AUTHORS.txt
+%doc LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.10
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
@@ -1138,11 +1149,13 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/exr.la
 %endif
 
+%if %{with flif}
 %files coder-flif
 %defattr(644,root,root,755)
 # R: flif
 %attr(755,root,root) %{modulesdir}/coders/flif.so
 %{modulesdir}/coders/flif.la
+%endif
 
 %if %{with fpx}
 %files coder-fpx
