@@ -16,7 +16,7 @@
 %bcond_without	fpx		# FlashPIX module (which uses fpx library)
 %bcond_without	flif		# FLIF (Free Lossless Image Format) module (which uses flif library)
 %bcond_without	graphviz	# dot module (which uses GraphViz libraries)
-%bcond_without	libjxl		# JPEG-XL module (not ready for 0.6)
+%bcond_with	libjxl		# JPEG-XL module (not ready for 0.6)
 %bcond_without	openjpeg	# JPEG2000 module (which uses openjpeg 2 library)
 %bcond_without	wmf		# WMF module (which uses libwmf library)
 # - module features:
@@ -73,7 +73,7 @@ BuildRequires:	lcms2-devel >= 2.0
 %{?with_openmp:BuildRequires:	libgomp-devel}
 BuildRequires:	libheif-devel
 BuildRequires:	libjpeg-devel >= 6b
-%{?with_libjxl:BuildRequires:	libjxl-devel >= 0.6.1}
+%{?with_libjxl:BuildRequires:	libjxl-devel >= 0.7.0}
 BuildRequires:	liblqr-devel >= 0.1.0
 BuildRequires:	libltdl-devel
 BuildRequires:	libpng-devel >= %{libpng_ver}
@@ -1191,14 +1191,12 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/jp2.la
 %endif
 
-%if 0
 %if %{with libjxl}
 %files coder-jxl
 %defattr(644,root,root,755)
 # R: libjxl
 %attr(755,root,root) %{modulesdir}/coders/jxl.so
 %{modulesdir}/coders/jxl.la
-%endif
 %endif
 
 %files coder-miff
