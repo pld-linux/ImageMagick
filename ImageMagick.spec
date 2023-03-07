@@ -16,7 +16,7 @@
 %bcond_without	fpx		# FlashPIX module (which uses fpx library)
 %bcond_without	flif		# FLIF (Free Lossless Image Format) module (which uses flif library)
 %bcond_without	graphviz	# dot module (which uses GraphViz libraries)
-%bcond_with	libjxl		# JPEG-XL module (not ready for 0.6)
+%bcond_without	libjxl		# JPEG-XL module
 %bcond_without	openjpeg	# JPEG2000 module (which uses openjpeg 2 library)
 %bcond_without	wmf		# WMF module (which uses libwmf library)
 # - module features:
@@ -37,7 +37,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -50,7 +50,6 @@ Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
 Patch5:		%{name}-OpenCL.patch
 Patch6:		%{name}-autotrace.patch
-Patch7:		%{name}-jxl.patch
 URL:		https://imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 %{?with_exr:BuildRequires:	OpenEXR-devel >= 1.0.6}
@@ -581,7 +580,7 @@ Summary:	Coder module for JPEG-XL files
 Summary(pl.UTF-8):	Moduł kodera dla plików JPEG-XL
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libjxl >= 0.6.1
+Requires:	libjxl >= 0.7.0
 
 %description coder-jxl
 Coder module for JPEG-XL files.
@@ -752,7 +751,6 @@ Moduł kodera dla plików WMF.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1 -R
-#%patch7 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
