@@ -24,8 +24,8 @@
 
 %define	libpng_ver 2:1.6.34
 
-%define		ver	7.1.0
-%define		pver	60
+%define		ver	7.1.1
+%define		pver	4
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -37,12 +37,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://www.imagemagick.org/download/releases/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	fbb79241137a6c8f7f161eda29973f62
+# Source0-md5:	f604c2d74fe0f2f556fa08ac3ed49f26
 Patch0:		config.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
@@ -62,7 +62,7 @@ BuildRequires:	expat-devel >= 1.95.7
 BuildRequires:	fftw3-devel >= 3.0
 %{?with_flif:BuildRequires:	flif-devel}
 BuildRequires:	fontconfig-devel >= 2.1.0
-BuildRequires:	freetype-devel >= 2.0.2-2
+BuildRequires:	freetype-devel >= 1:2.8.0
 %{?with_openmp:BuildRequires:	gcc-c++ >= 6:4.2}
 %{?with_gs:BuildRequires:	ghostscript-devel}
 %{?with_graphviz:BuildRequires:	graphviz-devel >= 2.9.0}
@@ -70,7 +70,7 @@ BuildRequires:	jbigkit-devel
 BuildRequires:	lcms2-devel >= 2.0
 %{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 %{?with_openmp:BuildRequires:	libgomp-devel}
-BuildRequires:	libheif-devel
+BuildRequires:	libheif-devel >= 1.4.0
 BuildRequires:	libjpeg-devel >= 6b
 %{?with_libjxl:BuildRequires:	libjxl-devel >= 0.7.0}
 BuildRequires:	liblqr-devel >= 0.1.0
@@ -214,7 +214,7 @@ Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	bzip2-devel >= 1.0.1
 Requires:	fftw3-devel >= 3.0
 Requires:	fontconfig-devel >= 2.1.0
-Requires:	freetype-devel >= 2.0.2
+Requires:	freetype-devel >= 1:2.8.0
 Requires:	lcms2-devel >= 2.0
 %{?with_openmp:Requires:	libgomp-devel}
 Requires:	liblqr-devel >= 0.1.0
@@ -531,6 +531,7 @@ Summary:	Coder module for HEIC files
 Summary(pl.UTF-8):	Moduł kodera dla plików HEIC
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libheif >= 1.4.0
 
 %description coder-heic
 Coder module for HEIC files.
