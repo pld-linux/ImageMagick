@@ -3,6 +3,7 @@
 #   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
 #
 # Conditional build:
+%bcond_without  tests
 # - features:
 %bcond_without	cxx		# Magick++ library
 %bcond_without	opencl		# OpenCL computing support
@@ -799,6 +800,8 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 
 %{__make} -j1
 %{__sed} -i -e 's,/%{name}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
+
+%{?with_tests:%{__make} check}
 
 %install
 rm -rf $RPM_BUILD_ROOT
