@@ -17,6 +17,7 @@
 %bcond_without	fpx		# FlashPIX module (which uses fpx library)
 %bcond_without	flif		# FLIF (Free Lossless Image Format) module (which uses flif library)
 %bcond_without	graphviz	# dot module (which uses GraphViz libraries)
+%bcond_without	heic		# HEIC module (which uses libheif libheif)
 %bcond_without	libjxl		# JPEG-XL module
 %bcond_without	openjpeg	# JPEG2000 module (which uses openjpeg 2 library)
 %bcond_without	wmf		# WMF module (which uses libwmf library)
@@ -71,7 +72,7 @@ BuildRequires:	jbigkit-devel
 BuildRequires:	lcms2-devel >= 2.0
 %{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 %{?with_openmp:BuildRequires:	libgomp-devel}
-BuildRequires:	libheif-devel >= 1.4.0
+%{?with_heic:BuildRequires:	libheif-devel >= 1.4.0}
 BuildRequires:	libjpeg-devel >= 6b
 %{?with_libjxl:BuildRequires:	libjxl-devel >= 0.7.0}
 BuildRequires:	liblqr-devel >= 0.1.0
@@ -784,6 +785,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-gs-font-dir=%{_fontsdir}/Type1 \
 	--with-gslib%{!?with_gs:=no} \
 	--with-gvc%{!?with_graphviz:=no} \
+	--with-heic%{!?with_heic:=no} \
 	--with-jxl%{!?with_libjxl:=no} \
 	--with-magick_plus_plus%{!?with_cxx:=no} \
 	--with-openexr%{!?with_exr:=no} \
@@ -1167,11 +1169,13 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/fpx.la
 %endif
 
+%if %{with heic}
 %files coder-heic
 %defattr(644,root,root,755)
 # R: libheif
 %attr(755,root,root) %{modulesdir}/coders/heic.so
 %{modulesdir}/coders/heic.la
+%endif
 
 %files coder-jbig
 %defattr(644,root,root,755)
