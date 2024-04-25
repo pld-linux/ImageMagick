@@ -1,6 +1,5 @@
-diff -urNp -x '*.orig' ImageMagick-6.9.11-34.org/magick/Magick-config.in ImageMagick-6.9.11-34/magick/Magick-config.in
---- ImageMagick-6.9.11-34.org/magick/Magick-config.in	2020-10-08 15:25:41.000000000 +0200
-+++ ImageMagick-6.9.11-34/magick/Magick-config.in	2021-05-07 22:46:23.866347708 +0200
+--- ImageMagick-6.9.13-9/magick/Magick-config.in.orig	2024-04-19 20:13:49.000000000 +0200
++++ ImageMagick-6.9.13-9/magick/Magick-config.in	2024-04-24 19:44:35.202800487 +0200
 @@ -8,11 +8,11 @@ prefix=@prefix@
  exec_prefix=@exec_prefix@
  
@@ -15,12 +14,15 @@ diff -urNp -x '*.orig' ImageMagick-6.9.11-34.org/magick/Magick-config.in ImageMa
        exit 1
  fi
  
-@@ -38,19 +38,19 @@ while test $# -gt 0; do
-       echo '@PACKAGE_VERSION@ Q@QUANTUM_DEPTH@ @MAGICK_HDRI@'
+@@ -41,22 +41,22 @@ while test $# -gt 0; do
+       echo '@CC@'
        ;;
      --cflags)
 -      @PKG_CONFIG@ --cflags MagickCore
 +      @PKG_CONFIG@ --cflags MagickCore6
+       ;;
+     --cxx)
+       echo '@CXX@'
        ;;
      --cxxflags)
 -      @PKG_CONFIG@ --cflags MagickCore
@@ -40,11 +42,10 @@ diff -urNp -x '*.orig' ImageMagick-6.9.11-34.org/magick/Magick-config.in ImageMa
        ;;
      *)
        echo "${usage}" 1>&2
-diff -urNp -x '*.orig' ImageMagick-6.9.11-34.org/magick/MagickCore-config.in ImageMagick-6.9.11-34/magick/MagickCore-config.in
---- ImageMagick-6.9.11-34.org/magick/MagickCore-config.in	2020-10-08 15:25:41.000000000 +0200
-+++ ImageMagick-6.9.11-34/magick/MagickCore-config.in	2021-05-07 22:46:23.866347708 +0200
-@@ -8,11 +8,11 @@ prefix=@prefix@
- exec_prefix=@exec_prefix@
+--- ImageMagick-6.9.13-9/magick/MagickCore-config.in.orig	2024-04-24 19:21:15.323717616 +0200
++++ ImageMagick-6.9.13-9/magick/MagickCore-config.in	2024-04-24 19:45:07.235960281 +0200
+@@ -11,11 +11,11 @@ pkgconfigdir=@pkgconfigdir@
+ export PKG_CONFIG_LIBDIR="${pkgconfigdir}"
  
  usage="\
 -Usage: MagickCore-config [--cflags] [--cppflags] [--exec-prefix] [--ldflags] [--libs] [--prefix] [--version]"
@@ -52,16 +53,15 @@ diff -urNp -x '*.orig' ImageMagick-6.9.11-34.org/magick/MagickCore-config.in Ima
  
  if test $# -eq 0; then
        echo "${usage}" 1>&2
--      echo "Example: gcc \`MagickCore-config --cflags --cppflags\` -o core core.c \`Magick-config --ldflags --libs\`" 1>&2
-+      echo "Example: gcc \`MagickCore6-config --cflags --cppflags\` -o core core.c \`Magick6-config --ldflags --libs\`" 1>&2
+-      echo "Example: gcc \`MagickCore-config --cflags --cppflags\` -o core core.c \`MagickCore-config --ldflags --libs\`" 1>&2
++      echo "Example: gcc \`MagickCore6-config --cflags --cppflags\` -o core core.c \`MagickCore6-config --ldflags --libs\`" 1>&2
        exit 1
  fi
  
-diff -urNp -x '*.orig' ImageMagick-6.9.11-34.org/wand/MagickWand-config.in ImageMagick-6.9.11-34/wand/MagickWand-config.in
---- ImageMagick-6.9.11-34.org/wand/MagickWand-config.in	2020-10-08 15:25:41.000000000 +0200
-+++ ImageMagick-6.9.11-34/wand/MagickWand-config.in	2021-05-07 22:46:23.866347708 +0200
-@@ -8,11 +8,11 @@ prefix=@prefix@
- exec_prefix=@exec_prefix@
+--- ImageMagick-6.9.13-9/wand/MagickWand-config.in.orig	2024-04-24 19:21:15.323717616 +0200
++++ ImageMagick-6.9.13-9/wand/MagickWand-config.in	2024-04-24 19:45:37.235797758 +0200
+@@ -11,11 +11,11 @@ pkgconfigdir=@pkgconfigdir@
+ export PKG_CONFIG_LIBDIR="${pkgconfigdir}"
  
  usage="\
 -Usage: MagickWand-config [--cflags] [--cppflags] [--exec-prefix] [--ldflags] [--libs] [--prefix] [--version]"
@@ -74,9 +74,8 @@ diff -urNp -x '*.orig' ImageMagick-6.9.11-34.org/wand/MagickWand-config.in Image
        exit 1
  fi
  
-diff -urNp -x '*.orig' ImageMagick-6.9.11-34.org/wand/Wand-config.in ImageMagick-6.9.11-34/wand/Wand-config.in
---- ImageMagick-6.9.11-34.org/wand/Wand-config.in	2020-10-08 15:25:41.000000000 +0200
-+++ ImageMagick-6.9.11-34/wand/Wand-config.in	2021-05-07 22:46:23.866347708 +0200
+--- ImageMagick-6.9.13-9/wand/Wand-config.in.orig	2024-04-19 20:13:49.000000000 +0200
++++ ImageMagick-6.9.13-9/wand/Wand-config.in	2024-04-24 19:46:04.332317630 +0200
 @@ -8,11 +8,11 @@ prefix=@prefix@
  exec_prefix=@exec_prefix@
  
@@ -91,12 +90,15 @@ diff -urNp -x '*.orig' ImageMagick-6.9.11-34.org/wand/Wand-config.in ImageMagick
        exit 1
  fi
  
-@@ -38,19 +38,19 @@ while test $# -gt 0; do
-       echo '@PACKAGE_VERSION@ Q@QUANTUM_DEPTH@ @MAGICK_HDRI@'
+@@ -41,22 +41,22 @@ while test $# -gt 0; do
+       echo '@CC@'
        ;;
      --cflags)
 -      @PKG_CONFIG@ --cflags MagickWand
 +      @PKG_CONFIG@ --cflags MagickWand6
+       ;;
+     --cxx)
+       echo '@CXX@'
        ;;
      --cxxflags)
 -      @PKG_CONFIG@ --cflags MagickWand

@@ -22,8 +22,8 @@
 %bcond_without	autotrace	# Autotrace support in SVG module
 
 %define		origname	ImageMagick
-%define		ver	6.9.12
-%define		pver	82
+%define		ver	6.9.13
+%define		pver	9
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -35,27 +35,25 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
-Source0:	https://www.imagemagick.org/download/releases/%{origname}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	527efc3d5698e62d5799de84baf1ea4f
-Patch0:		config.patch
+Source0:	https://www.imagemagick.org/archive/releases/%{origname}-%{ver}-%{pver}.tar.lz
+# Source0-md5:	fca6322cd818f4bf5757b4489e6fa467
 Patch1:		%{origname}-link.patch
 Patch2:		%{origname}-libpath.patch
 Patch3:		%{origname}-ldflags.patch
 Patch4:		%{origname}-lt.patch
-Patch5:		perlmagick.patch
+Patch5:		%{origname}-perl.patch
 Patch6:		magick6.patch
 Patch7:		%{origname}-OpenCL.patch
-Patch8:		%{origname}-autotrace.patch
 URL:		https://legacy.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
 BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake >= 1:1.12
-%{?with_autotrace:BuildRequires:	autotrace-devel >= 0.31.1}
+%{?with_autotrace:BuildRequires:	autotrace-devel >= 0.31.2}
 BuildRequires:	bzip2-devel >= 1.0.1
 %{?with_djvu:BuildRequires:	djvulibre-devel >= 3.5.0}
 BuildRequires:	expat-devel >= 1.95.7
@@ -84,6 +82,7 @@ BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libwebp-devel >= 0.5.0
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	lzip
 %{?with_openjpeg:BuildRequires:	openjpeg2-devel >= 2.1.0}
 BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
@@ -95,7 +94,6 @@ BuildRequires:	tar >= 1:1.22
 #BuildRequires:	txt2html
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
-BuildRequires:	xz
 BuildRequires:	xz-devel >= 2.9.0
 BuildRequires:	zstd-devel >= 1.0.0
 BuildRequires:	zlib-devel >= 1.0.0
@@ -655,6 +653,7 @@ Summary:	Coder module for SVG (Scalable Vector Graphics) files
 Summary(pl.UTF-8):	Moduł kodera dla plików SVG (Scalable Vector Graphics)
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+%{?with_autotrace:Requires:	autotrace >= 0.31.2}
 Requires:	librsvg >= 2.9.0
 
 %description coder-svg
@@ -715,7 +714,6 @@ Moduł kodera dla plików WMF.
 
 %prep
 %setup -q -n %{origname}-%{ver}-%{pver}
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -723,7 +721,6 @@ Moduł kodera dla plików WMF.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
-%patch8 -p1 -R
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -1249,8 +1246,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{perl_vendorarch}/Image/Magick
 %{perl_vendorarch}/Image/Magick/%{abisuf}.pm
 %dir %{perl_vendorarch}/auto/Image/Magick
-%{perl_vendorarch}/auto/Image/Magick/autosplit.ix
-%attr(755,root,root) %{perl_vendorarch}/auto/Image/Magick/Magick.so
 %dir %{perl_vendorarch}/auto/Image/Magick/%{abisuf}
 %{perl_vendorarch}/auto/Image/Magick/%{abisuf}/autosplit.ix
 %attr(755,root,root) %{perl_vendorarch}/auto/Image/Magick/%{abisuf}/%{abisuf}.so
