@@ -27,7 +27,7 @@
 %define	libpng_ver 2:1.6.34
 
 %define		ver	7.1.1
-%define		pver	19
+%define		pver	31
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -43,21 +43,20 @@ Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
-Source0:	https://www.imagemagick.org/download/releases/%{name}-%{ver}-%{pver}.tar.xz
-# Source0-md5:	a019ee22b76315cc30813e13561e21d1
-
+Source0:	https://download.imagemagick.org/archive/releases/%{name}-%{ver}-%{pver}.tar.lz
+# Source0-md5:	70ca8d5bed3e99dd9b828571b78825d8
+Patch0:		%{name}-perl.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
 Patch5:		%{name}-OpenCL.patch
-Patch6:		%{name}-autotrace.patch
 URL:		https://imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 %{?with_exr:BuildRequires:	OpenEXR-devel >= 1.0.6}
 BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake >= 1:1.12
-%{?with_autotrace:BuildRequires:	autotrace-devel >= 0.31.1}
+%{?with_autotrace:BuildRequires:	autotrace-devel >= 0.31.2}
 BuildRequires:	bzip2-devel >= 1.0.1
 %{?with_djvu:BuildRequires:	djvulibre-devel >= 3.5.0}
 BuildRequires:	expat-devel >= 1.95.7
@@ -88,6 +87,7 @@ BuildRequires:	libwebp-devel >= 0.5.0
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libzip-devel >= 1.0.0
+BuildRequires:	lzip
 %{?with_openjpeg:BuildRequires:	openjpeg2-devel >= 2.1.0}
 BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
@@ -99,7 +99,6 @@ BuildRequires:	tar >= 1:1.22
 #BuildRequires:	txt2html
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
-BuildRequires:	xz
 BuildRequires:	xz-devel >= 2.9.0
 BuildRequires:	zlib-devel >= 1.0.0
 BuildRequires:	zstd-devel >= 1.0.0
@@ -747,13 +746,12 @@ Moduł kodera dla plików WMF.
 
 %prep
 %setup -q -n %{name}-%{ver}-%{pver}
-
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1 -R
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -822,7 +820,7 @@ cp -p PerlMagick/demo/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-perl-%{version}
 %{__rm} $RPM_BUILD_ROOT%{perl_vendorarch}/auto/Image/Magick/.packlist
 %{__rm} $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 # packaged as %doc
-%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{mver}/{LICENSE,NEWS.txt}
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{mver}/LICENSE
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 

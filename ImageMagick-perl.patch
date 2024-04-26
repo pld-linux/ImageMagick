@@ -1,0 +1,13 @@
+Drop INSTALL_BASE so that INSTALLDIRS=vendor has effect
+--- ImageMagick-7.1.1-31/PerlMagick/Makefile.PL.in.orig	2024-04-21 15:36:48.000000000 +0200
++++ ImageMagick-7.1.1-31/PerlMagick/Makefile.PL.in	2024-04-25 21:18:39.450820661 +0200
+@@ -223,9 +223,6 @@ WriteMakefile
+    # Linker flags for building a dynamically loadable module
+    'LDDLFLAGS' => $LDDLFLAGS_magick,
+ 
+-   # Install PerlMagick into ImageMagick prefix
+-   'INSTALL_BASE' => '@PREFIX_DIR@',
+-
+    # Install PerlMagick binary into ImageMagick bin directory
+    'INSTALLBIN'	=> '@BIN_DIR@',
+ 
