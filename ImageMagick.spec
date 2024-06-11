@@ -92,6 +92,7 @@ BuildRequires:	lzip
 BuildRequires:	pango-devel >= 1:1.28.1
 BuildRequires:	perl-devel >= 1:5.8.1
 BuildRequires:	pkgconfig >= 1:0.20
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpm-perlprov >= 4.1-13
 BuildRequires:	rpmbuild(macros) >= 1.745
 BuildRequires:	tar >= 1:1.22
@@ -177,6 +178,7 @@ ImageMagick - це утиліта для перегляду, конвертув�
 Summary:	ImageMagick documentation
 Summary(pl.UTF-8):	Dokumentacja do ImageMagick
 Group:		Documentation
+BuildArch:	noarch
 
 %description doc
 Documentation for ImageMagick.
