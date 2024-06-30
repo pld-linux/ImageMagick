@@ -803,7 +803,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 %{__make} -j1
 %{__sed} -i -e 's,/%{name}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
 
-%{?with_tests:%{__make} check}
+%{?with_tests:%{__make} LOG_COMPILER="%__bash" check}
 
 %install
 rm -rf $RPM_BUILD_ROOT
