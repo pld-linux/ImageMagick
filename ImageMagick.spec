@@ -39,7 +39,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -800,7 +800,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-wmf%{!?with_wmf:=no} \
 	--with-x
 
-%{__make} -j1
+%{__make}
 %{__sed} -i -e 's,/%{name}-%{ver}/,/%{name}-doc-%{version}/,' utilities/*.1
 
 %{?with_tests:%{__make} LOG_COMPILER="%__bash" check}
