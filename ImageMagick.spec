@@ -35,7 +35,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	3
+Release:	4
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -714,13 +714,13 @@ Moduł kodera dla plików WMF.
 
 %prep
 %setup -q -n %{origname}-%{ver}-%{pver}
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
+%patch -P1 -p1
+%patch -P2 -p1
+%patch -P3 -p1
+%patch -P4 -p1
+%patch -P5 -p1
+%patch -P6 -p1
+%patch -P7 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
