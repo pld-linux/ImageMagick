@@ -26,8 +26,8 @@
 
 %define	libpng_ver 2:1.6.34
 
-%define		ver	7.1.1
-%define		pver	31
+%define		ver	7.1.2
+%define		pver	3
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -39,13 +39,13 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	7
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://download.imagemagick.org/archive/releases/%{name}-%{ver}-%{pver}.tar.lz
-# Source0-md5:	70ca8d5bed3e99dd9b828571b78825d8
-Patch0:		%{name}-perl.patch
+# Source0-md5:	7aae65f1d4696e22a8a321b7181e88d5
+
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
@@ -748,7 +748,7 @@ Moduł kodera dla plików WMF.
 
 %prep
 %setup -q -n %{name}-%{ver}-%{pver}
-%patch -P0 -p1
+
 %patch -P1 -p1
 %patch -P2 -p1
 %patch -P3 -p1
@@ -996,6 +996,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/scr.la
 %attr(755,root,root) %{modulesdir}/coders/sct.so
 %{modulesdir}/coders/sct.la
+%attr(755,root,root) %{modulesdir}/coders/sf3.so
+%{modulesdir}/coders/sf3.la
 %attr(755,root,root) %{modulesdir}/coders/sfw.so
 %{modulesdir}/coders/sfw.la
 %attr(755,root,root) %{modulesdir}/coders/sgi.so
