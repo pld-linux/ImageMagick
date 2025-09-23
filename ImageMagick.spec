@@ -23,7 +23,7 @@
 
 %define		origname	ImageMagick
 %define		ver	6.9.13
-%define		pver	9
+%define		pver	29
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -35,18 +35,19 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	5
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://www.imagemagick.org/archive/releases/%{origname}-%{ver}-%{pver}.tar.lz
-# Source0-md5:	fca6322cd818f4bf5757b4489e6fa467
+# Source0-md5:	d4ff578c8ddcc33e5404b2b9339ad431
 Patch1:		%{origname}-link.patch
 Patch2:		%{origname}-libpath.patch
 Patch3:		%{origname}-ldflags.patch
 Patch4:		%{origname}-lt.patch
-Patch5:		%{origname}-perl.patch
+
 Patch6:		magick6.patch
+
 Patch7:		%{origname}-OpenCL.patch
 URL:		https://legacy.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
@@ -719,7 +720,7 @@ Moduł kodera dla plików WMF.
 %patch -P3 -p1
 %patch -P4 -p1
 %patch -P5 -p1
-%patch -P6 -p1
+
 %patch -P7 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
