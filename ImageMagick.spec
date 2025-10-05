@@ -1,6 +1,7 @@
 # TODO
 # - create sane default policy file:
 #   https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=26801
+# - checking for MagickCache >= 0.9.3... no (for DMR delegate)
 #
 # Conditional build:
 %bcond_without  tests
@@ -81,7 +82,7 @@ BuildRequires:	libpng-devel >= %{libpng_ver}
 BuildRequires:	libraw-devel >= 0.14.8
 BuildRequires:	librsvg-devel >= 2.9.0
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtiff-devel
+BuildRequires:	libtiff-devel >= 4.0.0
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libwebp-devel >= 0.5.0
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
@@ -854,6 +855,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/ashlar.la
 %attr(755,root,root) %{modulesdir}/coders/avs.so
 %{modulesdir}/coders/avs.la
+%attr(755,root,root) %{modulesdir}/coders/bayer.so
+%{modulesdir}/coders/bayer.la
 %attr(755,root,root) %{modulesdir}/coders/bgr.so
 %{modulesdir}/coders/bgr.la
 %attr(755,root,root) %{modulesdir}/coders/bmp.so
@@ -894,6 +897,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/fits.la
 %attr(755,root,root) %{modulesdir}/coders/fl32.so
 %{modulesdir}/coders/fl32.la
+%attr(755,root,root) %{modulesdir}/coders/ftxt.so
+%{modulesdir}/coders/ftxt.la
 %attr(755,root,root) %{modulesdir}/coders/gif.so
 %{modulesdir}/coders/gif.la
 %attr(755,root,root) %{modulesdir}/coders/gradient.so
@@ -982,6 +987,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/ps.la
 %attr(755,root,root) %{modulesdir}/coders/pwp.so
 %{modulesdir}/coders/pwp.la
+%attr(755,root,root) %{modulesdir}/coders/qoi.so
+%{modulesdir}/coders/qoi.la
 %attr(755,root,root) %{modulesdir}/coders/raw.so
 %{modulesdir}/coders/raw.la
 %attr(755,root,root) %{modulesdir}/coders/rgb.so
@@ -1006,6 +1013,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/sixel.la
 %attr(755,root,root) %{modulesdir}/coders/stegano.so
 %{modulesdir}/coders/stegano.la
+%attr(755,root,root) %{modulesdir}/coders/strimg.so
+%{modulesdir}/coders/strimg.la
 %attr(755,root,root) %{modulesdir}/coders/sun.so
 %{modulesdir}/coders/sun.la
 %attr(755,root,root) %{modulesdir}/coders/tga.so
@@ -1061,16 +1070,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{modulesdir}/coders/yuv.so
 %{modulesdir}/coders/yuv.la
 
-# new modules in 7.1.x
-%attr(755,root,root) %{modulesdir}/coders/bayer.so
-%{modulesdir}/coders/bayer.la
-%attr(755,root,root) %{modulesdir}/coders/ftxt.so
-%{modulesdir}/coders/ftxt.la
-%attr(755,root,root) %{modulesdir}/coders/qoi.so
-%{modulesdir}/coders/qoi.la
-%attr(755,root,root) %{modulesdir}/coders/strimg.so
-%{modulesdir}/coders/strimg.la
-
 %attr(755,root,root) %{modulesdir}/filters/analyze.so
 %{modulesdir}/filters/analyze.la
 
@@ -1113,9 +1112,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.10
+%ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.10
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.10
+%ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.10
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
 %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
@@ -1289,8 +1288,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/MagickCore-config
 %attr(755,root,root) %{_bindir}/MagickWand-config
-%attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so
-%attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so
+%{_libdir}/libMagickCore-%{mver}.%{abisuf}.so
+%{_libdir}/libMagickWand-%{mver}.%{abisuf}.so
 %dir %{_includedir}/%{pname}
 %{_includedir}/%{pname}/MagickCore
 %{_includedir}/%{pname}/MagickWand
@@ -1326,12 +1325,12 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.5
+%ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.5
 
 %files c++-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Magick++-config
-%attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so
+%{_libdir}/libMagick++-%{mver}.%{abisuf}.so
 %{_includedir}/%{pname}/Magick++
 %{_includedir}/%{pname}/Magick++.h
 %{_pkgconfigdir}/Magick++-%{mver}.%{abisuf}.pc
