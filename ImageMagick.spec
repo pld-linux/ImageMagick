@@ -47,7 +47,6 @@ Patch3:		%{origname}-ldflags.patch
 Patch4:		%{origname}-lt.patch
 
 Patch6:		magick6.patch
-
 Patch7:		%{origname}-OpenCL.patch
 URL:		https://legacy.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
@@ -719,8 +718,7 @@ Moduł kodera dla plików WMF.
 %patch -P2 -p1
 %patch -P3 -p1
 %patch -P4 -p1
-%patch -P5 -p1
-
+%patch -P6 -p1
 %patch -P7 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
@@ -1059,9 +1057,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE AUTHORS.txt
 %attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.7
+%ghost %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so.7
 %attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.7
+%ghost %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so.7
 %dir %{_libdir}/ImageMagick-%{ver}
 %dir %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}
 %{_libdir}/ImageMagick-%{ver}/config-%{abisuf}/configure.xml
@@ -1217,8 +1215,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/MagickCore6-config
 %attr(755,root,root) %{_bindir}/MagickWand6-config
 %attr(755,root,root) %{_bindir}/Wand6-config
-%attr(755,root,root) %{_libdir}/libMagickCore-%{mver}.%{abisuf}.so
-%attr(755,root,root) %{_libdir}/libMagickWand-%{mver}.%{abisuf}.so
+%{_libdir}/libMagickCore-%{mver}.%{abisuf}.so
+%{_libdir}/libMagickWand-%{mver}.%{abisuf}.so
 %dir %{_includedir}/%{pname}
 %{_includedir}/%{pname}/magick
 %{_includedir}/%{pname}/wand
@@ -1258,12 +1256,12 @@ rm -rf $RPM_BUILD_ROOT
 %files c++
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.9
+%ghost %{_libdir}/libMagick++-%{mver}.%{abisuf}.so.9
 
 %files c++-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/Magick++6-config
-%attr(755,root,root) %{_libdir}/libMagick++-%{mver}.%{abisuf}.so
+%{_libdir}/libMagick++-%{mver}.%{abisuf}.so
 %{_includedir}/%{pname}/Magick++
 %{_includedir}/%{pname}/Magick++.h
 %{_pkgconfigdir}/ImageMagick++-%{mver}.%{abisuf}.pc
