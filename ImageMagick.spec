@@ -23,7 +23,7 @@
 
 %define		origname	ImageMagick
 %define		ver	6.9.13
-%define		pver	29
+%define		pver	34
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -35,12 +35,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://www.imagemagick.org/archive/releases/%{origname}-%{ver}-%{pver}.tar.lz
-# Source0-md5:	d4ff578c8ddcc33e5404b2b9339ad431
+# Source0-md5:	30848669febae2d070b5d1e3839540d3
 Patch1:		%{origname}-link.patch
 Patch2:		%{origname}-libpath.patch
 Patch3:		%{origname}-ldflags.patch
