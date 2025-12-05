@@ -21,6 +21,7 @@
 %bcond_without	heif		# HEIC module (which uses libheif library)
 %bcond_without	libjxl		# JPEG-XL module
 %bcond_without	openjpeg	# JPEG2000 module (which uses openjpeg 2 library)
+%bcond_without	uhdr		# uhdr module
 %bcond_without	wmf		# WMF module (which uses libwmf library)
 # - module features:
 %bcond_without	autotrace	# Autotrace support in SVG module
@@ -84,6 +85,7 @@ BuildRequires:	librsvg-devel >= 2.9.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel >= 4.0.0
 BuildRequires:	libtool >= 2:2.2
+%{?with_uhdr:BuildRequires:	libultrahdr-devel >= 1.3.0}
 BuildRequires:	libwebp-devel >= 0.5.0
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
@@ -709,6 +711,19 @@ Coder module for TIFF files.
 %description coder-tiff -l pl.UTF-8
 Moduł kodera dla plików TIFF.
 
+%package coder-uhdr
+Summary:	Coder module for UltraHDR files
+Summary(pl.UTF-8):	Moduł kodera dla plików UltraHDR
+Group:		X11/Applications/Graphics
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	libultrahdr >= 1.3.0
+
+%description coder-uhdr
+Coder module for UltraHDR files.
+
+%description coder-uhdr -l pl.UTF-8
+Moduł kodera dla plików UltraHDR.
+
 %package coder-url
 Summary:	Coder module for retrieving files via URL
 Summary(pl.UTF-8):	Moduł kodera ściągający pliki o podanym URL
@@ -797,6 +812,7 @@ touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 	--with-raqm%{!?with_raqm:=no} \
 	--with-rsvg \
 	--with-threads \
+	--with-uhdr%{!?with_uhdr:=no} \
 	--with-webp \
 	--with-wmf%{!?with_wmf:=no} \
 	--with-x
@@ -1263,6 +1279,14 @@ rm -rf $RPM_BUILD_ROOT
 # R: libtiff, libjpeg
 %attr(755,root,root) %{modulesdir}/coders/tiff.so
 %{modulesdir}/coders/tiff.la
+
+%if %{with uhdr}
+%files coder-uhdr
+%defattr(644,root,root,755)
+# R: libultrahdr
+%attr(755,root,root) %{modulesdir}/coders/uhdr.so
+%{modulesdir}/coders/uhdr.la
+%endif
 
 %files coder-url
 %defattr(644,root,root,755)
