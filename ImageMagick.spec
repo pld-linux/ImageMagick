@@ -47,7 +47,7 @@ License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://download.imagemagick.org/archive/releases/%{name}-%{ver}-%{pver}.tar.lz
 # Source0-md5:	f8fe29feda099c04e1bbd460cc248010
-
+Patch0:		libraw-0.22.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
@@ -765,6 +765,7 @@ Moduł kodera dla plików WMF.
 %prep
 %setup -q -n %{name}-%{ver}-%{pver}
 
+%patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
 %patch -P3 -p1
