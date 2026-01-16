@@ -1,0 +1,23 @@
+From 9adc0fb52cdaceac9824d99b82af2a2f7e5e7881 Mon Sep 17 00:00:00 2001
+From: Dirk Lemstra <dirk@lemstra.org>
+Date: Fri, 16 Jan 2026 10:31:21 +0100
+Subject: [PATCH] Changed version check because a new version of libraw has
+ been released.
+
+---
+ coders/dng.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/coders/dng.c b/coders/dng.c
+index 1bdc3e322..1f7cf8159 100644
+--- a/coders/dng.c
++++ b/coders/dng.c
+@@ -329,7 +329,7 @@ static void SetLibRawParams(const ImageInfo *image_info,Image *image,
+ }
+ 
+ static void LibRawDataError(void *data,const char *magick_unused(file),
+-#if MAGICK_LIBRAW_VERSION_TAIL == 202502
++#if LIBRAW_COMPILE_CHECK_VERSION(0,22)
+   const INT64 offset)
+ #else
+   const int offset)
