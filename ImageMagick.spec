@@ -29,7 +29,7 @@
 %define	libpng_ver 2:1.6.34
 
 %define		ver	7.1.2
-%define		pver	12
+%define		pver	13
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -46,8 +46,7 @@ Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://download.imagemagick.org/archive/releases/%{name}-%{ver}-%{pver}.tar.lz
-# Source0-md5:	10425ac7b20a8cf384e20d4c42533d02
-Patch0:		libraw-0.22.patch
+# Source0-md5:	23d45c6614342404e71525205315fbbb
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
@@ -765,7 +764,6 @@ Moduł kodera dla plików WMF.
 %prep
 %setup -q -n %{name}-%{ver}-%{pver}
 
-%patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
 %patch -P3 -p1
