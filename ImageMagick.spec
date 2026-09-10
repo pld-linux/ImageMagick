@@ -29,7 +29,7 @@
 %define	libpng_ver 2:1.6.34
 
 %define		ver	7.1.2
-%define		pver	16
+%define		pver	31
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -41,12 +41,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
 Source0:	https://download.imagemagick.org/archive/releases/%{name}-%{ver}-%{pver}.tar.lz
-# Source0-md5:	0b4881c74348d9aaddd534fbc2e6d4c5
+# Source0-md5:	5b9dbb3f90b392d92ad2eca07eead422
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
@@ -72,7 +72,7 @@ BuildRequires:	jbigkit-devel
 BuildRequires:	lcms2-devel >= 2.0
 %{?with_fpx:BuildRequires:	libfpx-devel >= 1.2.0.4-3}
 %{?with_openmp:BuildRequires:	libgomp-devel}
-%{?with_heif:BuildRequires:	libheif-devel >= 1.4.0}
+%{?with_heif:BuildRequires:	libheif-devel >= 1.7.0}
 BuildRequires:	libjpeg-devel >= 6b
 %{?with_libjxl:BuildRequires:	libjxl-devel >= 0.7.0}
 BuildRequires:	liblqr-devel >= 0.1.0
@@ -84,7 +84,7 @@ BuildRequires:	librsvg-devel >= 2.9.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel >= 4.0.0
 BuildRequires:	libtool >= 2:2.2
-%{?with_uhdr:BuildRequires:	libultrahdr-devel >= 1.3.0}
+%{?with_uhdr:BuildRequires:	libultrahdr-devel >= 1.4.0}
 BuildRequires:	libwebp-devel >= 0.5.0
 %{?with_wmf:BuildRequires:	libwmf-devel >= 2:0.2.2}
 BuildRequires:	libxml2-devel >= 2.0
@@ -536,7 +536,7 @@ Summary:	Coder module for HEIC files
 Summary(pl.UTF-8):	Moduł kodera dla plików HEIC
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libheif >= 1.4.0
+Requires:	libheif >= 1.7.0
 
 %description coder-heic
 Coder module for HEIC files.
@@ -715,7 +715,7 @@ Summary:	Coder module for UltraHDR files
 Summary(pl.UTF-8):	Moduł kodera dla plików UltraHDR
 Group:		X11/Applications/Graphics
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	libultrahdr >= 1.3.0
+Requires:	libultrahdr >= 1.4.0
 
 %description coder-uhdr
 Coder module for UltraHDR files.
@@ -771,9 +771,6 @@ Moduł kodera dla plików WMF.
 %patch -P5 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
-
-# avoid rebuilding (broken paths in scripts/Makefile.am)
-touch www/Magick++/NEWS.html www/Magick++/ChangeLog.html
 
 %build
 %{__libtoolize}
@@ -868,6 +865,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/art.la
 %attr(755,root,root) %{modulesdir}/coders/ashlar.so
 %{modulesdir}/coders/ashlar.la
+%attr(755,root,root) %{modulesdir}/coders/ase.so
+%{modulesdir}/coders/ase.la
 %attr(755,root,root) %{modulesdir}/coders/avs.so
 %{modulesdir}/coders/avs.la
 %attr(755,root,root) %{modulesdir}/coders/bayer.so
@@ -878,6 +877,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/bmp.la
 %attr(755,root,root) %{modulesdir}/coders/braille.so
 %{modulesdir}/coders/braille.la
+%attr(755,root,root) %{modulesdir}/coders/c2pa.so
+%{modulesdir}/coders/c2pa.la
 %attr(755,root,root) %{modulesdir}/coders/cals.so
 %{modulesdir}/coders/cals.la
 %attr(755,root,root) %{modulesdir}/coders/cin.so
@@ -1060,6 +1061,8 @@ rm -rf $RPM_BUILD_ROOT
 %{modulesdir}/coders/viff.la
 %attr(755,root,root) %{modulesdir}/coders/vips.so
 %{modulesdir}/coders/vips.la
+%attr(755,root,root) %{modulesdir}/coders/wbinfo.so
+%{modulesdir}/coders/wbinfo.la
 %attr(755,root,root) %{modulesdir}/coders/wbmp.so
 %{modulesdir}/coders/wbmp.la
 %attr(755,root,root) %{modulesdir}/coders/wpg.so
@@ -1269,7 +1272,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files coder-svg
 %defattr(644,root,root,755)
-# R: cairo, libxml2, librsvg, %{?with_autotrace:autotrace}
+# R: cairo, libxml2, librsvg, %%{?with_autotrace:autotrace}
 %attr(755,root,root) %{modulesdir}/coders/svg.so
 %{modulesdir}/coders/svg.la
 
