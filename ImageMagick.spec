@@ -23,7 +23,7 @@
 
 %define		origname	ImageMagick
 %define		ver	6.9.13
-%define		pver	37
+%define		pver	56
 Summary:	Image display, conversion, and manipulation under X
 Summary(de.UTF-8):	Darstellen, Konvertieren und Bearbeiten von Grafiken unter X
 Summary(es.UTF-8):	Exhibidor, convertidor y manipulador de imágenes bajo X
@@ -35,12 +35,12 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick6
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	2
+Release:	1
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
-Source0:	https://www.imagemagick.org/archive/releases/%{origname}-%{ver}-%{pver}.tar.lz
-# Source0-md5:	4a34c9bec7402746c58b3cb6160a61a4
+Source0:	https://download.imagemagick.org/archive/releases/%{origname}-%{ver}-%{pver}.tar.lz
+# Source0-md5:	3a6aa7bcc5853bcfd640aa689b2fc27a
 Patch1:		%{origname}-link.patch
 Patch2:		%{origname}-libpath.patch
 Patch3:		%{origname}-ldflags.patch
@@ -48,7 +48,6 @@ Patch4:		%{origname}-lt.patch
 
 Patch6:		magick6.patch
 Patch7:		%{origname}-OpenCL.patch
-Patch8:		ImageMagick6-libraw-0.22.patch
 URL:		https://legacy.imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 BuildRequires:	OpenEXR-devel >= 1.0.6
@@ -721,7 +720,6 @@ Moduł kodera dla plików WMF.
 %patch -P4 -p1
 %patch -P6 -p1
 %patch -P7 -p1
-%patch -P8 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 
@@ -1181,7 +1179,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files coder-svg
 %defattr(644,root,root,755)
-# R: cairo, libxml2, librsvg, %{?with_autotrace:autotrace}
+# R: cairo, libxml2, librsvg, %%{?with_autotrace:autotrace}
 %attr(755,root,root) %{modulesdir}/coders/svg.so
 %{modulesdir}/coders/svg.la
 
