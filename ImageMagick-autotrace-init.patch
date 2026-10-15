@@ -1,0 +1,11 @@
+# autotrace registers its output writers only in autotrace_init(); without it the svg handler lookup fails and a 0-byte file is written
+--- ImageMagick-7.1.2-34/coders/svg.c.orig
++++ ImageMagick-7.1.2-34/coders/svg.c
+@@ -3705,6 +3705,7 @@
+     /*
+       Trace image and write as SVG.
+     */
++    autotrace_init();
+     fitting_options=at_fitting_opts_new();
+     output_options=at_output_opts_new();
+     number_planes=3;

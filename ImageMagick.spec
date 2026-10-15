@@ -41,7 +41,7 @@ Summary(tr.UTF-8):	X altında resim gösterme, çevirme ve değişiklik yapma
 Summary(uk.UTF-8):	Перегляд, конвертування та обробка зображень під X Window
 Name:		ImageMagick
 Version:	%{ver}%{?pver:.%{pver}}
-Release:	1
+Release:	2
 Epoch:		1
 License:	Apache-like
 Group:		X11/Applications/Graphics
@@ -52,6 +52,8 @@ Patch2:		%{name}-libpath.patch
 Patch3:		%{name}-ldflags.patch
 Patch4:		%{name}-lt.patch
 Patch5:		%{name}-OpenCL.patch
+Patch6:		%{name}-autotrace-init.patch
+Patch7:		%{name}-autotrace-quantum.patch
 URL:		https://imagemagick.org/
 %{?with_opencl:BuildRequires:	OpenCL-devel}
 %{?with_exr:BuildRequires:	OpenEXR-devel >= 1.0.6}
@@ -769,6 +771,8 @@ Moduł kodera dla plików WMF.
 %patch -P3 -p1
 %patch -P4 -p1
 %patch -P5 -p1
+%patch -P6 -p1
+%patch -P7 -p1
 
 find -type f | xargs grep -l '/usr/local/bin/perl' | xargs %{__sed} -i -e 's=!/usr/local/bin/perl=!%{__perl}='
 

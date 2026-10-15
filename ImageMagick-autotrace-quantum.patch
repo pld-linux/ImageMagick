@@ -1,0 +1,18 @@
+# at_bitmap holds 8-bit samples; storing a raw Q16 Quantum keeps only its low byte
+--- ImageMagick-7.1.2-34/coders/svg.c.orig
++++ ImageMagick-7.1.2-34/coders/svg.c
+@@ -3720,11 +3720,11 @@
+         break;
+       for (x=0; x < (ssize_t) image->columns; x++)
+       {
+-        trace->bitmap[i++]=GetPixelRed(image,p);
++        trace->bitmap[i++]=ScaleQuantumToChar(GetPixelRed(image,p));
+         if (number_planes == 3)
+           {
+-            trace->bitmap[i++]=GetPixelGreen(image,p);
+-            trace->bitmap[i++]=GetPixelBlue(image,p);
++            trace->bitmap[i++]=ScaleQuantumToChar(GetPixelGreen(image,p));
++            trace->bitmap[i++]=ScaleQuantumToChar(GetPixelBlue(image,p));
+           }
+         p+=(ptrdiff_t) GetPixelChannels(image);
+       }
